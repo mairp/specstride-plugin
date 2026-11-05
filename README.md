@@ -26,12 +26,13 @@ To try it on a ready-made feature first, clone [mairp/specstride-example](https:
 - **Kill the engine mid-run and nothing of it survives.** SIGKILL the engine in the middle of a phase and no engine process is left running. Start it again and the run picks up where it stopped.
 - **Approved means committed.** Every approved phase becomes its own commit. If a commit is blocked, the run never reports success: the engine exits 1 and says so.
 - **A clean stop.** The `stop` verb of the `specstride` CLI that the plugin bundles ends the run at the next safe boundary: the workers finish their pass, the merge check runs, the record closes whole, no survivor.
+- **Stuck phases get unstuck.** A rejection that names new unmet tasks is diagnosed first, in a separate session, and the next attempt is narrowed to those tasks with the diagnosis as its first instruction. The reviewer judges it like any other.
 - **The reviewer can come from any provider your DeepSeek Harness (`dsh`) reaches.**
 - **Secrets held back.** Credentials are redacted from what the reviewer reads, and a credential in the change blocks the commit.
 
 ## A real run
 
-The engine's own output, trimmed, from a stored log: the phase's tests passed, the reviewer still said no, and the run came back and finished.
+The engine's own output, trimmed, from a stored log: the phase's tests passed, the reviewer still said no, the rejection was diagnosed, and the narrowed second attempt was approved.
 
 ```
 ===== PHASE 1 — the overlapping work  (2026-11-04T03:21:24.358Z) =====
@@ -39,7 +40,9 @@ The engine's own output, trimmed, from a stored log: the phase's tests passed, t
 [001-par-overlap] verification: npm test -> passed
 [001-par-overlap] phase 1 attempt 1: rejected
 ----- phase 1 REJECTED on attempt 1/3 -----
+----- diagnostician: phase 1 attempt 1 (unmet set changed) -----
 [001-par-overlap] phase 1 attempt 2: proposer started
+----- accelerator: phase 1 attempt 2/3 (dsh) — acting on the hint for T002,T003 -----
 [001-par-overlap] verification: npm test -> passed
 [001-par-overlap] phase 1 attempt 2: approved
 ===== PHASE 1 APPROVED (attempt 2) =====
@@ -88,7 +91,7 @@ Specstride runs on your machine and has no service of its own: nothing is sent t
 1. The implementer works through the phase's tasks.
 2. The engine runs the tests itself.
 3. The reviewer — a separate session, with no tools — reads the actual change against the tasks and answers with a one-time nonce.
-4. Approved: tasks ticked, one commit, signed record. Rejected: back to the implementer with the reasons, up to 3 attempts.
+4. Approved: tasks ticked, one commit, signed record. Rejected: back to the implementer with the reasons, up to 3 attempts; a rejection with new unmet tasks is diagnosed first and the next attempt is narrowed to them ([details](wiki/How-It-Works.md#when-a-phase-is-stuck)).
 
 ## Who it's for
 
