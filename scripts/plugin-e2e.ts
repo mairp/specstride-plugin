@@ -6,14 +6,11 @@
 import assert from "node:assert/strict";
 import { execFileSync, spawnSync } from "node:child_process";
 import {
-  accessSync,
   chmodSync,
-  constants,
   existsSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
-  readdirSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
@@ -112,9 +109,8 @@ try {
     );
   }
 
-  for (const name of readdirSync(join(built, "plugin", "hooks"))) {
-    if (name.endsWith(".sh")) accessSync(join(built, "plugin", "hooks", name), constants.X_OK);
-  }
+  // The release ships no host hooks (owner ruling 2026-11-05).
+  assert.ok(!existsSync(join(built, "plugin", "hooks")), "the plugin ships no hooks");
 
   const skills = readFileSync(
     join(built, "plugin", "skills", "specstride-run", "SKILL.md"),

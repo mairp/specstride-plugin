@@ -4,16 +4,7 @@
  * is the whole install. Usage: node scripts/build-plugin.ts <out>
  */
 import { execFileSync } from "node:child_process";
-import {
-  chmodSync,
-  copyFileSync,
-  cpSync,
-  mkdirSync,
-  readFileSync,
-  readdirSync,
-  rmSync,
-  writeFileSync,
-} from "node:fs";
+import { copyFileSync, cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -61,26 +52,16 @@ for (const file of ["bin/specstride.mjs", "skills/specstride-doctor/SKILL.md"]) 
   writeFileSync(path, readFileSync(path, "utf8").replaceAll("0.0.0", RELEASE_VERSION));
 }
 
-// Hook paths that survive a space in the install directory.
-const hooks = join(plugin, "hooks", "hooks.json");
-writeFileSync(
-  hooks,
-  readFileSync(hooks, "utf8").replace(
-    /"command": "(\$\{CLAUDE_PLUGIN_ROOT\}[^"]*)"/g,
-    (_, path: string) => `"command": "\\"${path}\\""`,
-  ),
-);
+// The release ships no host hooks (owner ruling 2026-11-05): no run depends on
+// them (`noRunDependsOnAHostHook`), and the directory will accept command hooks
+// only from verified organizations.
+rmSync(join(plugin, "hooks"), { recursive: true, force: true });
 
 execFileSync("npm", ["run", "-s", "pack:cli", "-w", "packages/cli"], {
   cwd: root,
   stdio: "ignore",
 });
 cpSync(join(root, "packages", "cli", ".build", "pack"), join(plugin, "cli"), { recursive: true });
-
-// The host runs a hook by its path, so each one must be executable.
-for (const name of readdirSync(join(plugin, "hooks"))) {
-  if (name.endsWith(".sh")) chmodSync(join(plugin, "hooks", name), 0o755);
-}
 
 for (const file of ["LICENSE", "NOTICE"]) copyFileSync(join(root, file), join(plugin, file));
 copyFileSync(join(here, "plugin-README.md"), join(plugin, "README.md"));
