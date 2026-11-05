@@ -84,5 +84,7 @@ for (const name of readdirSync(join(plugin, "hooks"))) {
 
 for (const file of ["LICENSE", "NOTICE"]) copyFileSync(join(root, file), join(plugin, file));
 copyFileSync(join(here, "plugin-README.md"), join(plugin, "README.md"));
+// The directory listing icon: the specstride.ai mark on a white square, 1024 px (the portal takes it at the first save).
+copyFileSync(join(here, "plugin-icon.png"), join(plugin, ".claude-plugin", "icon.png"));
 
 console.log(`built ${plugin}`);
