@@ -83,6 +83,10 @@ function fixtureOf(): Fixture {
   const workspace = join(root, "workspace");
   mkdirSync(join(workspace, "src"), { recursive: true });
   git(workspace, "init", "--quiet", ".");
+  // The bench commits with its own identity, as the other engine tests do: a runner with no git
+  // identity (CI) must not fail the setup.
+  git(workspace, "config", "user.email", "t@t");
+  git(workspace, "config", "user.name", "t");
   writeFileSync(join(workspace, ".gitignore"), ".specstride/\n");
   for (const name of ["a", "b", "c", "d"]) {
     writeFileSync(join(workspace, "src", `${name}.ts`), `export const ${name} = 1;\n`);

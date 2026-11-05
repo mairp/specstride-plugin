@@ -87,6 +87,10 @@ function benchOf(): Bench {
   mkdirSync(join(workspace, "src"), { recursive: true });
   mkdirSync(join(workspace, "docs"), { recursive: true });
   git(workspace, "init", "--quiet", ".");
+  // The bench commits with its own identity, as the other engine tests do: a runner with no git
+  // identity (CI) must not fail the setup.
+  git(workspace, "config", "user.email", "t@t");
+  git(workspace, "config", "user.name", "t");
   writeFileSync(join(workspace, ".gitignore"), ".specstride/\n");
   writeFileSync(join(workspace, "src", "a.ts"), "export const a = 1;\n");
   writeFileSync(join(workspace, "src", "b.ts"), "export const b = 2;\n");
