@@ -17,6 +17,10 @@ Then, in a git repository with `specs/NAME/tasks.md` and a test script in `packa
 
 > Run Specstride on the feature in this repo.
 
+To try it on a ready-made feature first, clone [mairp/specstride-example](https://github.com/mairp/specstride-example) and say the same sentence there.
+
+![A Specstride run on the example: three phases implemented, tested, reviewed and committed](https://raw.githubusercontent.com/mairp/specstride-example/main/assets/demo.gif)
+
 ## Built for unattended work
 
 - **Kill the engine mid-run and nothing of it survives.** SIGKILL the engine in the middle of a phase and no engine process is left running. Start it again and the run picks up where it stopped.
