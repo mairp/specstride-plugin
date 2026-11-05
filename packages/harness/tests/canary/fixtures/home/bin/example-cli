@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+// The fake CLI of the canary fixture home (T001). Its name is the
+// `detect.executable` of the bundled harness descriptor that is read as
+// `package:harness:example-cli`, so the source `binary` of discovery finds
+// it on the search path. It answers `--version` and `--help` and nothing
+// else, and it records every start in the file given by
+// `EXAMPLE_CLI_STARTED_FILE`, so a test can prove which runs happened.
+import { appendFileSync } from "node:fs";
+
+const startedFile = process.env.EXAMPLE_CLI_STARTED_FILE;
+if (startedFile !== undefined) {
+  appendFileSync(startedFile, `${JSON.stringify(process.argv.slice(1))}\n`);
+}
+
+const arg = process.argv[2];
+if (arg === "--version") {
+  process.stdout.write("example-cli 1.0.0\n");
+  process.exit(0);
+}
+if (arg === "--help") {
+  process.stdout.write("example-cli — the fake CLI of the canary fixture home\n");
+  process.stdout.write("Usage: example-cli --version | --help\n");
+  process.exit(0);
+}
+process.stderr.write("example-cli: this fixture answers --version and --help only\n");
+process.exit(2);

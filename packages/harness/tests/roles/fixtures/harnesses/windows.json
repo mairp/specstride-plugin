@@ -1,0 +1,95 @@
+{
+  "schema": "specstride.fixture-harnesses/1",
+  "feature": "124",
+  "annex": "100, annex C §C.6, field `harnesses`",
+  "note": "T002 — known and unknown context windows. A window that is not known (tokens null, source unknown) fails condition Q4 with `window-unknown` (qualification.json).",
+  "harnesses": [
+    {
+      "id": "window-known",
+      "state": "tested",
+      "origin": "user",
+      "version": "1.4.2",
+      "descriptorHash": "sha256:abababababababababababababababababababababababababababababababab",
+      "resolvedPath": "/usr/local/bin/stub-harness",
+      "kind": "cli",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "local", "provenance": "declared" },
+      "contextWindow": { "tokens": 200000, "source": "declared" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:local-stub",
+        "provenance": "configuration"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "verified:adapter",
+        "version": "descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "probe",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "descriptor",
+        "terms": "terms gate"
+      }
+    },
+    {
+      "id": "window-known-measured",
+      "state": "locally-verified",
+      "origin": "project",
+      "version": "0.9.0",
+      "descriptorHash": "sha256:cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+      "resolvedPath": "./tools/stub-harness.mjs",
+      "kind": "cli",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "local", "provenance": "declared" },
+      "contextWindow": { "tokens": 65536, "source": "measured" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:local-stub",
+        "provenance": "configuration"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "verified:local-preflight",
+        "version": "descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "probe",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "probe",
+        "terms": "terms gate"
+      }
+    },
+    {
+      "id": "window-unknown",
+      "state": "declared",
+      "origin": "user",
+      "version": null,
+      "descriptorHash": "sha256:efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef",
+      "resolvedPath": "https://127.0.0.1:0/v1",
+      "kind": "openai-chat",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "subscription", "provenance": "declared" },
+      "contextWindow": { "tokens": null, "source": "unknown" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:fixture-provider",
+        "provenance": "configuration"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "descriptor",
+        "version": "absent in the descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "descriptor",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "not declared and not shown",
+        "terms": "terms gate"
+      }
+    }
+  ]
+}

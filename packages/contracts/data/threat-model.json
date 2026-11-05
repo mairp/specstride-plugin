@@ -1,0 +1,323 @@
+{
+  "schema": "specstride.threat-model/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex X, §X.9",
+  "controls": [
+    {
+      "Control": "R-1",
+      "Content": "The control plane is outside the proposer's write scope. Approval is a signed record, verified on `resume`"
+    },
+    {
+      "Control": "R-2",
+      "Content": "Containment levels C0 to C3 as a capability of a harness adapter. The strongest available is the default; C0 is an opt-in in user configuration"
+    },
+    {
+      "Control": "R-3",
+      "Content": "One point of redaction, which fails closed. Content is captured whenever traces are on, so this point carries the risk, and its patterns are widened and tested with planted canaries before a release"
+    },
+    {
+      "Control": "R-4",
+      "Content": "Project configuration may narrow a run and never widen it"
+    },
+    {
+      "Control": "R-5",
+      "Content": "Text from outside the runtime is framed as data everywhere"
+    }
+  ],
+  "threats": [
+    {
+      "Id": "T-01",
+      "Threat": "A verdict line planted in phase evidence or in a grounded file",
+      "Control": "A nonce of 64 bits per call; the verdict is parsed only from the reply, as a full line, with exactly one match; MALFORMED is the safe failure",
+      "Owner": "101"
+    },
+    {
+      "Id": "T-02",
+      "Threat": "The proposer forges approval state",
+      "Control": "R-1; the signed approval record bound to verdict, evidence hash, verification result and tree fingerprint; `resume` verifies",
+      "Owner": "101, 102, 100"
+    },
+    {
+      "Id": "T-03",
+      "Threat": "Text persuades the critic to approve",
+      "Control": "The verification gate runs before the critic and cannot be overridden by it; critic diversity; R-5; a critic without tools",
+      "Owner": "105, 117, 124"
+    },
+    {
+      "Id": "T-04",
+      "Threat": "Phase evidence imitates a banner of the runtime",
+      "Control": "Random boundary tokens per call on every section; the boundary pattern is escaped in untrusted text; facts of the runtime stand before untrusted text",
+      "Owner": "117"
+    },
+    {
+      "Id": "T-05",
+      "Threat": "The nonce is written before the call returns",
+      "Control": "Never stored or exported before the return; afterwards only its hash",
+      "Owner": "101, 111"
+    },
+    {
+      "Id": "T-06",
+      "Threat": "Evidence makes the critic reply malformed until the run halts",
+      "Control": "The safe failure is kept; the halt at the MALFORMED limit is a stop that is not retryable (`critic_unavailable`), shown as an attention item; it is not a member of the blocked reasons and emits no `blocked` event",
+      "Owner": "101"
+    },
+    {
+      "Id": "T-07",
+      "Threat": "A proposer with all tools acts on injected instructions",
+      "Control": "R-2; the environment allow-list; the runtime never asserts a sandbox",
+      "Owner": "109, 125, 130, 131, 134, 138, 112"
+    },
+    {
+      "Id": "T-08",
+      "Threat": "An injected critic reply reaches the next phase attempt through feedback",
+      "Control": "Feedback is framed as data; only criterion ids and the text after them are taken, with a cap; the verdict line is removed",
+      "Owner": "101, 103, 117"
+    },
+    {
+      "Id": "T-09",
+      "Threat": "Repository text makes the host model alter the consumer's comment",
+      "Control": "The comment is passed verbatim and stored with its hash before any repository text is printed; the digest shows it",
+      "Owner": "113, 107"
+    },
+    {
+      "Id": "T-10",
+      "Threat": "A comment is read as permission to skip a check",
+      "Control": "Enforcement lives in the runtime; no flag switches off a launch check, the terms gate or a budget cap",
+      "Owner": "107, 147, 110"
+    },
+    {
+      "Id": "T-11",
+      "Threat": "The host model reports a run wrongly",
+      "Control": "The digest is produced by the runtime from events and printed verbatim",
+      "Owner": "123, 113"
+    },
+    {
+      "Id": "T-12",
+      "Threat": "Output of the product injects the host session",
+      "Control": "Default output is terse; untrusted text is never echoed, only named",
+      "Owner": "119, 145, 113"
+    },
+    {
+      "Id": "T-13",
+      "Threat": "Project configuration declares a harness, a critic, a command or an endpoint",
+      "Control": "R-4",
+      "Owner": "110, 109, 146, 112"
+    },
+    {
+      "Id": "T-14",
+      "Threat": "A discovered harness claims falsely that it qualifies as critic",
+      "Control": "Only a mode that the runtime enforces and proves qualifies; the pick is announced and recorded; identity of the provider comes from the endpoint",
+      "Owner": "124, 109, 112"
+    },
+    {
+      "Id": "T-15",
+      "Threat": "An executable shadows a harness on the search path",
+      "Control": "Resolved to an absolute path at launch; paths inside the workspace are refused",
+      "Owner": "109, 146, 112"
+    },
+    {
+      "Id": "T-16",
+      "Threat": "An endpoint points at an attacker",
+      "Control": "Endpoints from user scope only; a secret is bound to its host; unencrypted endpoints are refused except loopback",
+      "Owner": "110, 109, 146"
+    },
+    {
+      "Id": "T-17",
+      "Threat": "A stream imitates terminal records or cost figures",
+      "Control": "Only the harness's own framing is parsed; caps per line",
+      "Owner": "126, 111"
+    },
+    {
+      "Id": "T-18",
+      "Threat": "A harness with unknown cost spends without being counted",
+      "Control": "Budgets by wall clock and count of passes; the doctor says that spend cannot be measured",
+      "Owner": "127"
+    },
+    {
+      "Id": "T-19",
+      "Threat": "The proposer edits what a check reads",
+      "Control": "The check manifest is frozen and hashed at launch; the protected set is fingerprinted before and after every check; a change is a fact for the critic",
+      "Owner": "115, 116, 105"
+    },
+    {
+      "Id": "T-20",
+      "Threat": "The proposer weakens the tests it is measured by",
+      "Control": "Changes to existing tests and suppression markers are facts for the critic",
+      "Owner": "116"
+    },
+    {
+      "Id": "T-21",
+      "Threat": "A check runs repository code with the runtime's environment",
+      "Control": "A scrubbed environment, no provider key, containment, no write access to the control plane, a time limit",
+      "Owner": "105, 148, 115"
+    },
+    {
+      "Id": "T-22",
+      "Threat": "An inner result is taken for a verdict",
+      "Control": "A loop layer holds no writer of the phase gate; the tripwire",
+      "Owner": "115, 101, 149"
+    },
+    {
+      "Id": "T-23",
+      "Threat": "Repair history reaches the critic through files of the proposer",
+      "Control": "Records of the runtime stay in the control plane; grounding refuses state paths; such files are claims",
+      "Owner": "115, 116, 117"
+    },
+    {
+      "Id": "T-24",
+      "Threat": "The proposer overwrites the result the critic will see",
+      "Control": "The result is written by the runtime into the control plane and handed over by the runtime",
+      "Owner": "116"
+    },
+    {
+      "Id": "T-25",
+      "Threat": "A check with huge output or without end",
+      "Control": "Output cap, time limit, end of the process group, the first-failure predicate",
+      "Owner": "105, 148, 118"
+    },
+    {
+      "Id": "T-26",
+      "Threat": "A process record points at an unrelated process",
+      "Control": "The process registry is in the control plane; a signal only when pid, start time and run token match",
+      "Owner": "122, 102"
+    },
+    {
+      "Id": "T-27",
+      "Threat": "A stale or planted lock blocks every run",
+      "Control": "Liveness backed by the kernel; reclaim by rename; the doctor reports a lock without a live holder",
+      "Owner": "122, 112"
+    },
+    {
+      "Id": "T-28",
+      "Threat": "The proposer writes a stop request, a snapshot or a state file",
+      "Control": "R-1; replayed settings are validated against the schema and the trust classes again",
+      "Owner": "102, 122"
+    },
+    {
+      "Id": "T-29",
+      "Threat": "Other users of the machine read the state",
+      "Control": "Permissions for the owner only; the doctor checks",
+      "Owner": "122, 112"
+    },
+    {
+      "Id": "T-30",
+      "Threat": "A link or a path leaves its root",
+      "Control": "Real paths must stay inside their root; links in the control plane are refused",
+      "Owner": "100, 117"
+    },
+    {
+      "Id": "T-31",
+      "Threat": "The event file is edited or cut",
+      "Control": "The event file is in the control plane; `seq` has no gaps; the ledger is chained and signed",
+      "Owner": "111, 103"
+    },
+    {
+      "Id": "T-32",
+      "Threat": "Content leaves the machine on spans",
+      "Control": "R-3; capture can be switched off; the doctor shows the endpoint and whether capture is on",
+      "Owner": "111, 128, 112"
+    },
+    {
+      "Id": "T-33",
+      "Threat": "A secret printed by a tool reaches records",
+      "Control": "R-3; exact-match removal of resolved secrets; the scan before a commit",
+      "Owner": "111, 110, 101"
+    },
+    {
+      "Id": "T-34",
+      "Threat": "The proposer inherits the whole environment",
+      "Control": "The environment allow-list per harness adapter",
+      "Owner": "109, 110"
+    },
+    {
+      "Id": "T-35",
+      "Threat": "A secret is written inline or on a command line",
+      "Control": "References only; passed by environment or standard input",
+      "Owner": "110, 112"
+    },
+    {
+      "Id": "T-36",
+      "Threat": "A telemetry endpoint is set by the project or by the proposer",
+      "Control": "Telemetry endpoints are widening keys",
+      "Owner": "110, 128"
+    },
+    {
+      "Id": "T-37",
+      "Threat": "An exporter blocks or fails",
+      "Control": "Sinks never break the loop",
+      "Owner": "111, 128"
+    },
+    {
+      "Id": "T-38",
+      "Threat": "A viewer in a browser: requests from other origins",
+      "Control": "No component of Wave 1 opens a network listener. The read model renders nothing; a later viewer is read-only, bound to loopback, with a token per session",
+      "Owner": "129 for the read model (Wave 1); the viewer is Wave 2"
+    },
+    {
+      "Id": "T-39",
+      "Threat": "A viewer in a browser: other local users",
+      "Control": "No component of Wave 1 opens a network listener. The read model renders nothing; a later viewer is read-only, bound to loopback, with a token per session",
+      "Owner": "129 for the read model (Wave 1); the viewer is Wave 2"
+    },
+    {
+      "Id": "T-40",
+      "Threat": "A viewer in a browser: script in rendered text",
+      "Control": "No component of Wave 1 opens a network listener. The read model renders nothing; a later viewer is read-only, bound to loopback, with a token per session",
+      "Owner": "129 for the read model (Wave 1); the viewer is Wave 2"
+    },
+    {
+      "Id": "T-41",
+      "Threat": "A viewer in a browser: exported pages",
+      "Control": "No component of Wave 1 opens a network listener. The read model renders nothing; a later viewer is read-only, bound to loopback, with a token per session",
+      "Owner": "129 for the read model (Wave 1); the viewer is Wave 2"
+    },
+    {
+      "Id": "T-42",
+      "Threat": "A viewer in a browser: a listener that outlives the run",
+      "Control": "No component of Wave 1 opens a network listener. The read model renders nothing; a later viewer is read-only, bound to loopback, with a token per session",
+      "Owner": "129 for the read model (Wave 1); the viewer is Wave 2"
+    },
+    {
+      "Id": "T-43",
+      "Threat": "A malicious version is published",
+      "Control": "Publishing from the build on a protected branch, with attestation",
+      "Owner": "100, 113"
+    },
+    {
+      "Id": "T-44",
+      "Threat": "A dependency is compromised",
+      "Control": "Few dependencies, exact versions, no install script, nothing compiled at install",
+      "Owner": "100, 113"
+    },
+    {
+      "Id": "T-45",
+      "Threat": "An impostor package or plugin",
+      "Control": "The documentation and the host package name the exact package; the host package verifies the protocol integer",
+      "Owner": "113"
+    },
+    {
+      "Id": "T-46",
+      "Threat": "The host package installs the CLI silently",
+      "Control": "It detects, reports and prints the command",
+      "Owner": "113, 112"
+    },
+    {
+      "Id": "T-47",
+      "Threat": "The launch bundle is edited between rendering and launch",
+      "Control": "The hash of the launch bundle and of the launcher are verified at launch and at every relaunch",
+      "Owner": "107, 123"
+    },
+    {
+      "Id": "T-48",
+      "Threat": "A critic with read-only tools reads the project by itself",
+      "Control": "A read-only sandbox with the network off; the proposer's notebook, handoff and outbox moved out; the withheld paths denied; the grounding snapshot and the nonce as before. Repository text can still reach this critic without passing the snapshot: a residual risk the owner accepted",
+      "Owner": "109, 117, 124, 131"
+    },
+    {
+      "Id": "T-49",
+      "Threat": "Several workers on one phase",
+      "Control": "Containment C2 by default; a repository of its own per worker; the store unwritable by workers; composition of audited, disjoint deltas; the merge check and the full verification gate on the workspace; neutral integrity kinds",
+      "Owner": "142, 143, 115, 116, 117"
+    }
+  ]
+}

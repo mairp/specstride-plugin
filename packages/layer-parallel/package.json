@@ -1,0 +1,31 @@
+{
+  "name": "@specstride/layer-parallel",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The loop layer `parallel`: the parallel plan, the eight admission checks, the audits of a delta and the merge check, stacked above `micro` behind the loop-layer interface (EP-04). Off by default and off under the `parity` profile",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./data/*": "./data/*"
+  },
+  "files": [
+    "data/",
+    "src/"
+  ],
+  "scripts": {
+    "test": "node ../../tests/isolate.ts node --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@specstride/contracts": "0.0.0",
+    "@specstride/kernel": "0.0.0"
+  },
+  "specstride": {
+    "skeleton": true,
+    "skeletonNote": "The scaffolding marker stays while CT-100-322 holds."
+  }
+}

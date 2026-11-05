@@ -1,0 +1,146 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.invocation-result/1",
+ "title": "Result of an invocation",
+ "description": "Annex B §B.20; logical name pass:<passId>:result. Written once. F126-FR-032. Every other non-null key of the provider terminal and of the extra metrics is copied onto the record, so other properties are allowed. As-is literal specstride-invocation-result/v1 in the compatibility form.",
+ "type": "object",
+ "properties": {
+  "schema": {
+   "const": "specstride.invocation-result/1"
+  },
+  "runId": {
+   "type": "string",
+   "description": "The logical run (as-is run_id)"
+  },
+  "feature": {
+   "type": "string"
+  },
+  "role": {
+   "type": "string",
+   "description": "A role of the role registry"
+  },
+  "harness": {
+   "type": "string",
+   "description": "The harness label (as-is backend). A value only; never tested in control flow (F126-FR-039)"
+  },
+  "phase": {
+   "type": "integer",
+   "minimum": 0
+  },
+  "attempt": {
+   "type": "integer",
+   "minimum": 1
+  },
+  "iteration": {
+   "type": "integer",
+   "minimum": 0,
+   "description": "At least 1 for a proposer or accelerator, at least 0 for a critic (F126-FR-012)"
+  },
+  "invocationId": {
+   "type": "string"
+  },
+  "status": {
+   "enum": [
+    "success",
+    "error",
+    "timeout",
+    "cancelled",
+    "degraded"
+   ]
+  },
+  "is_error": {
+   "type": "boolean"
+  },
+  "reason_code": {
+   "type": "string"
+  },
+  "reason": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "source": {
+   "enum": [
+    "synthesized",
+    "reconciled"
+   ]
+  },
+  "provider_status": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "provider_stop_reason": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "producer_exit_code": {
+   "type": [
+    "integer",
+    "null"
+   ]
+  },
+  "producer_signal": {
+   "type": [
+    "integer",
+    "null"
+   ]
+  },
+  "parser_exit_code": {
+   "type": [
+    "integer",
+    "null"
+   ]
+  },
+  "timed_out": {
+   "type": "boolean"
+  },
+  "duration_ms": {
+   "type": "integer",
+   "minimum": 0
+  },
+  "finalized_at": {
+   "type": "string",
+   "format": "date-time",
+   "description": "UTC, with microseconds"
+  },
+  "noActivity": {
+   "type": "boolean"
+  },
+  "kill_reason": {
+   "type": "string"
+  },
+  "kill_class": {
+   "type": "string"
+  }
+ },
+ "required": [
+  "schema",
+  "runId",
+  "feature",
+  "role",
+  "harness",
+  "phase",
+  "attempt",
+  "iteration",
+  "invocationId",
+  "status",
+  "is_error",
+  "reason_code",
+  "reason",
+  "source",
+  "provider_status",
+  "provider_stop_reason",
+  "producer_exit_code",
+  "producer_signal",
+  "parser_exit_code",
+  "timed_out",
+  "duration_ms",
+  "finalized_at"
+ ],
+ "additionalProperties": true
+}

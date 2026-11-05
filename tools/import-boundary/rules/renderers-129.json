@@ -1,0 +1,17 @@
+{
+  "rule": "renderers-129",
+  "owner": "129",
+  "requirement": "F129-FR-032",
+  "from": [
+    "packages/testkit/src/samples/129/**",
+    "packages/testkit/conformance/view/**"
+  ],
+  "forbid": [
+    "packages/cli/src/status/event-reader.ts",
+    "packages/cli/src/status/state-readers.ts",
+    "packages/cli/src/status/probes.ts",
+    "node:fs",
+    "node:fs/promises"
+  ],
+  "reason": "A renderer takes the JSON of a view and opens no file: it imports no event reader, no state reader and no process probe in place of the view, and touches no file system module (F129-FR-032)."
+}

@@ -1,0 +1,38 @@
+{
+  "name": "@specstride/core",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride core; feature 101 phase 2 fills src/gate/, src/approval/ and src/engine/",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./parallel": "./src/parallel/index.ts",
+    "./parallel/ledger-kinds": "./src/parallel/ledger-kinds.ts",
+    "./parallel/group-executor": "./src/parallel/group-executor.ts",
+    "./parallel/barrier": "./src/parallel/barrier.ts",
+    "./parallel/integrate": "./src/parallel/integrate.ts",
+    "./parallel/resume": "./src/parallel/resume.ts",
+    "./parallel/queue": "./src/parallel/queue.ts",
+    "./parallel/counters": "./src/parallel/counters.ts",
+    "./run-control/counts": "./src/run-control/counts.ts",
+    "./ep18/critic-strategy": "./src/ep18/critic-strategy.ts"
+  },
+  "scripts": {
+    "test": "node ../../tests/isolate.ts node --test \"test/**/*.test.*\"",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@specstride/contracts": "0.0.0",
+    "@specstride/kernel": "0.0.0"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0"
+  },
+  "specstride": {
+    "skeleton": true
+  }
+}

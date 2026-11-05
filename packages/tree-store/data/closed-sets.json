@@ -1,0 +1,53 @@
+{
+  "feature": "143-parallel-engine-services",
+  "sets": [
+    {
+      "name": "worker-outcomes",
+      "annexXRow": 62,
+      "closedBy": "design",
+      "members": [
+        "integrated",
+        "refused",
+        "killed",
+        "paused"
+      ],
+      "unknown": "refused"
+    },
+    {
+      "name": "tree-store-operations",
+      "annexXRow": 64,
+      "closedBy": "design",
+      "members": [
+        "snapshot",
+        "materialize",
+        "changed",
+        "compose",
+        "apply",
+        "release",
+        "sweep"
+      ],
+      "unknown": "the layer is refused at registration"
+    },
+    {
+      "name": "ledger-kinds-parallel",
+      "annexXRow": 184,
+      "closedBy": "design",
+      "members": [
+        "group_planned",
+        "group_started",
+        "worker_started",
+        "worker_ended",
+        "group_barrier",
+        "audit_done",
+        "merge_done",
+        "apply_started",
+        "applied",
+        "ticks_applied",
+        "merge_check_started",
+        "merge_check_finished",
+        "group_closed"
+      ],
+      "unknown": "the ledger is read as invalid inside the group; the layer is off for the phase attempt"
+    }
+  ]
+}

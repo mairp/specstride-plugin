@@ -1,0 +1,140 @@
+type	condition	legacy_target	shape	writer_class	field_map_and_notes
+run.launched		-	none	engine	no as-is equivalent
+run.started		run_start	bash	engine	workdir,phases,feature(explicit),proposer,critic,resume,states,verification,verification_plan; ambient feature first (duplicate key, B-2463)
+run.ended	outcome=all_approved	run_end	bash	engine	outcome,phases (absent when already approved, B-0141)
+run.ended	stopReason set	run_stop	bash	engine	reason,phase, plus per reason: rc,evidence (release_verification, proposer_no_evidence); attempts,streak (critic_unavailable); attempts (gate_oscillation,max_rejects)
+run.paused		-	none	engine	no as-is equivalent
+run.resumed		-	none	engine	no as-is equivalent
+quota.signal		-	none	engine	no as-is equivalent
+harness.error		-	none	engine	no as-is equivalent (iter_error is the pass row)
+fallback.switched		-	none	engine	no as-is equivalent
+fallback.restored		-	none	engine	no as-is equivalent
+fallback.skipped		-	none	engine	no as-is equivalent (type added after the split)
+alert		-	none	engine	no as-is equivalent
+budget.exceeded		-	none	engine	no as-is equivalent
+host.quota_observed		-	none	engine	no as-is equivalent
+blocked		-	none	engine	DV-067
+unblocked		-	none	engine	no as-is equivalent
+source.change_accepted		-	none	engine	no as-is equivalent (type added after the split)
+counters.reset		-	none	engine	no as-is equivalent
+pipeline.started		pipeline launcher log and harness-run record	none	engine	file rows of F100-FR-054; text of 123
+pipeline.ended		pipeline launcher log and harness-run record	none	engine	file rows of F100-FR-054
+stage.started		pipeline launcher log	none	engine	file rows of F100-FR-054
+stage.ended		pipeline launcher log	none	engine	file rows of F100-FR-054
+launch.checked		launch log and report log	none	engine	[MOL-GATE] text of 123
+supervisor.observed		report log	none	engine	[MOL-STATE] text of 123
+supervisor.relaunch		report log	none	engine	[MOL-RELAUNCH] under relaunch.owner root
+supervisor.stopped		report log	none	engine	[MOL-STOP] text of 123
+digest.written		launcher log	none	engine	[DIGEST] text of 123
+phase.started		phase_start	bash	engine	phase,title,total,shape
+phase.ended	outcome=approved	phase_done	bash	engine	phase,attempt,title
+phase.ended	outcome halted, blocked, stopped or crash	-	none	engine	no as-is equivalent (closed set "Outcomes of a phase")
+attempt.started	kind accelerated	accelerator_start	bash	engine	phase,attempt,backend (twice, B-2464 pattern),criteria
+attempt.started	kind other	proposer_start	bash	engine	phase,attempt,backend (ambient label, then proposer: duplicate key, B-2464)
+attempt.ended	endCause rejected, malformed or verification-failed	reject	bash	engine	phase,attempt
+attempt.ended	endCause other	-	none	engine	no as-is equivalent
+attempt.archived		attempt_archived	bash	engine	phase,attempt,dir
+attempt.acceleration_note		acceleration_note	bash	engine	phase,attempt,note
+attempt.tier_bumped		-	none	engine	DV-079
+attempt.tier_bump_skipped		-	none	engine	DV-079
+escalation.skipped		-	none	engine	DV-050
+recovery.triggered		diagnostician_trigger	bash	engine	phase,attempt
+recovery.diagnosis_started		diagnostician_start	python	critic	phase,attempt,provider
+recovery.diagnosis_done		diagnostician_done	python	critic	phase,attempt,bytes,case
+recovery.diagnosis_failed		diagnostician_error	python	critic	phase,attempt,error
+gate.oscillation		gate_oscillation	bash	engine	phase,attempt,criterion,reappears
+pass.started		iter_start	bash	engine	iter,max_iter
+pass.ended	endCause evidence, completed or yield	iter_done	bash	engine	iter,evidence=missing; yielded=true,waited_sec on yield; plugin_restart=true on plugin restart
+pass.ended	endCause error, killed, quota_pause, stopped or crash	iter_error	bash	engine	iter,subtype,consec,reason,kill_class
+pass.ended	endCause hard_cap	iter_cap	bash	engine	iter,reason,elapsed,consec,max
+pass.ended	endCause no_progress	iter_no_progress	bash	engine	iter,consec
+pass.limits_set		proposer_cap	bash	engine	phase,attempt,role,seconds,source,arm,yield_poll,yield_poll_source,yield_poll_arm,tamper_bracket
+pass.killed		pass_killed	bash	engine	iter,reason,class,elapsed,detail,checkpoint
+pass.short		iter_short_pass	bash	engine	iter,elapsed,consec
+pass.halted		run_stop	bash	engine	reason,iter, plus yields,max (proposer_yield_budget) / kill_reason,consec (proposer_cap_exhausted) / subtype,kill_reason,kill_class (proposer_consecutive_errors) / yield,job_pid,job_log (stop_flag during a yield) / consec (proposer_no_progress); as-is keys, filled from yields, killReason, killClass, jobPid, jobLogRef of the type (second run_stop line, B-0607 to B-0616)
+prompt.built		-	none	engine	no as-is equivalent
+prompt.block_dropped		prompt_block_dropped	bash	engine	block,assembled_bytes,block_bytes,budget_bytes
+prompt.block_protected		prompt_block_protected	bash	engine	block,assembled_bytes,block_bytes,budget_bytes
+evidence.present		evidence_present	bash	engine	file,iters
+evidence.written		evidence_written	bash	engine	file,iters
+progress.swept		progress_swept	bash	engine	from,to
+commit.made		git_checkpoint	bash	engine	phase
+checkpoint.accepted		-	none	engine	no as-is equivalent (type added after the split)
+checkpoint.refused		-	none	engine	no as-is equivalent (type added after the split)
+checkpoint.removed		-	none	engine	no as-is equivalent (type added after the split)
+plugin.installed		plugin_installed	bash	engine	iter,profile,plugins
+plugin.install_failed		plugin_install_failed	bash	engine	iter,reason
+plugin.install_denied		plugin_install_denied	bash	engine	iter,reason
+tool.call		agent_tool	python	stream-tap	tool,target,targets,redacted,truncated,original_bytes,retained_bytes,tool_id (tool_id only when the call has an id; target and targets through the accessor; filled from tool, toolId and the four marks of the type; status, category, argsRef, resultRef, durationMs and ok are not projected)
+stream.init		agent_init	python	stream-tap	model,tools,schema_version,session_id,cwd,provider,update
+stream.text		agent_text	python	stream-tap	text (through the accessor),message_key,message_id,content_index,final_fragment,redacted,truncated,original_bytes,retained_bytes
+stream.result	legacy path	agent_result	python	stream-tap	model,is_error,subtype,cost_usd,duration_ms,num_turns,tokens; reason_code,reason when finished by the end of the stream
+stream.result	finalizer path	agent_result	python	stream-tap	status,is_error,reason_code,reason,source,provider_status,provider_stop_reason,producer_exit_code,producer_signal,parser_exit_code,timed_out,duration_ms
+stream.diagnostic		agent_diagnostic	python	stream-tap	code,severity,message,provider_record_type,plus extras
+stream.mode		agent_observability	python	stream-tap	mode,reason,provider_format,role,supported_signals
+stream.evidence_writing		evidence_writing	python	stream-tap	tool,target,match,tool_id
+stream.missing_terminal		-	none	stream-tap	no as-is equivalent (agent_result with reason_code missing_terminal is the result row)
+usage.reported		-	none	engine	no as-is equivalent
+usage.unavailable	reason killed at hard cap	pass_cost_unknown	bash	engine	iter,reason,elapsed
+usage.unavailable	other	-	none	engine	no as-is equivalent
+verification.started		verification_start	bash	engine	phase,attempt,plan
+verification.ended	result pass	verification_passed	bash	engine	phase,attempt,evidence
+verification.ended	result fail	verification_failed	bash	engine	phase,attempt,rc,evidence
+verification.release_passed		verification_release_passed	bash	engine	evidence
+terms.override_used		-	none	engine	no as-is equivalent (type added after the split)
+verification.prestaged		prestage_done	bash	engine	phase,attempt,rc,summary
+check.started		-	none	engine	no as-is equivalent
+check.ended		-	none	engine	no as-is equivalent
+check.admission		-	none	engine	no as-is equivalent (type added after the split)
+check.excluded		-	none	engine	no as-is equivalent (type added after the split)
+check.parallelism_lowered		-	none	engine	no as-is equivalent (type added after the split)
+job.started	kind long	long_job_start	bash	engine	phase,attempt,cmd,log
+job.started	kind yield	yield_job_start	bash	engine	iter,mode,pid,log,sid,argv (launch only)
+job.step		-	none	engine	no as-is equivalent
+job.first_failure		-	none	engine	no as-is equivalent
+job.ended	kind long	long_job_ended	bash	engine	phase,attempt,log
+job.ended	kind yield	-	none	engine	no as-is equivalent
+yield.started		pass_yield	bash	engine	iter,reason,predicate_kind,deadline_sec,job_mode,job_log,yield_index
+yield.waiting		yield_wait	bash	engine	iter,elapsed,predicate_kind,yield_index
+yield.ended	outcome satisfied	yield_resume	bash	engine	iter,waited_sec,job_rc,job_duration_sec,yield_index,predicate_kind
+yield.ended	outcome timeout	yield_timeout	bash	engine	iter,reason,waited_sec,deadline_sec,predicate_kind,job_log
+yield.ended	outcome stop	-	none	engine	the stop is run_stop of pass.halted
+yield.ended	outcome wall_budget	-	none	engine	no as-is equivalent (row 112 of annex X §X.6)
+yield.refused		yield_invalid	bash	engine	iter,reason,artifact,log
+resource.wait		-	none	engine	no as-is equivalent
+microloop.unit		-	none	engine	DV-016
+microloop.inert		-	none	engine	no as-is equivalent (type added after the split)
+task.planned		-	none	engine	no as-is equivalent
+task.ticked		-	none	engine	no as-is equivalent
+tasks.ticked		tasks_ticked	bash	engine	phase,count
+critic.selected		-	none	critic	no as-is equivalent
+critic.started		critic_start	python	critic	phase,attempt,provider
+critic.call		-	none	critic	no as-is equivalent
+critic.grounding_gap		grounding_gap	python	critic	phase,attempt,paths
+critic.grounding_carried		grounding_carried	python	critic	phase,attempt,paths
+critic.citation_unresolved		-	none	critic	no as-is equivalent (type added by feature 117)
+critic.malformed		critic_malformed	bash	engine	phase,attempt,streak,limit
+verdict.recorded	result APPROVED	verdict	python	critic	phase,attempt,result,title
+verdict.recorded	result other	verdict	python	critic	phase,attempt,result,reason,title,max_rejects
+verdict.adjudicated		-	none	critic	no as-is equivalent
+route.decided		-	none	engine	no as-is equivalent
+strategy.selected		-	none	engine	no as-is equivalent (type added after the split)
+integrity.noted		-	none	engine	DV-016 and rulings 41, P8
+integrity.events_changed		events_tampered	bash	engine	phase,attempt,file
+tripwire.raised		-	none	engine	no as-is equivalent (type added after the split)
+tripwire.cleared		-	none	engine	no as-is equivalent (type added after the split)
+learning.observed		learning_observed	bash	engine	phase,path
+learning.knob_adjusted		knob_adjusted	learning	learning	event,ts,knob,phase,from,to,reason,metric,samples,run_id (revert adds reverts_run_id)
+learning.knob_auto_reverted		knob_auto_reverted	learning	learning	event,ts,knob,phase,guardrail,from,to,run_id,reverts_run_id
+learning.knob_evaluated		knob_evaluated	learning	learning	event,ts,knob,phase,label,action,reset,cost_r,cost_mde,wall_r,wall_mde,n_applied,n_baseline,run_id,evaluates_run_id
+telemetry.delivery		telemetry_delivery	python	engine	sink,batch_id,event_count,status,http_status,reason_code (local file only)
+event.dropped		-	none	engine	no as-is equivalent
+redaction.commit_blocked		-	none	engine	no as-is equivalent
+redaction.dropped		-	none	engine	no as-is equivalent
+parallel.plan		-	none	engine	DV-088
+parallel.admission		-	none	engine	DV-088
+parallel.group.started		-	none	engine	DV-088
+parallel.group.ended		-	none	engine	DV-088
+parallel.worker.started		-	none	engine	DV-088
+parallel.worker.ended		-	none	engine	DV-088
+parallel.integration		-	none	engine	DV-088

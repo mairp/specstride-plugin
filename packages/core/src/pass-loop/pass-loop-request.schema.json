@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:internal:103:pass-loop-request/1",
+  "title": "Request of the pass loop for one phase attempt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "workdir",
+    "evidence",
+    "standingPrompt",
+    "harness",
+    "role"
+  ],
+  "properties": {
+    "workdir": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Working directory. Used in its canonical form (F103-FR-002)"
+    },
+    "evidence": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Path of the phase evidence; relative paths resolve against workdir"
+    },
+    "standingPrompt": {
+      "type": "string",
+      "description": "The standing prompt, read once when the phase attempt starts (F103-FR-007)"
+    },
+    "harness": {
+      "type": "string",
+      "description": "Id of a harness of the resolved registry; never tested by name in control flow"
+    },
+    "role": {
+      "enum": [
+        "proposer",
+        "accelerator"
+      ]
+    },
+    "passLimit": {
+      "type": "integer",
+      "default": 30,
+      "description": "Key loop.maxIter. Not checked by the pass loop (F103-FR-003)"
+    },
+    "pauseSec": {
+      "type": "number",
+      "default": 2
+    },
+    "feature": {
+      "type": "string",
+      "default": "default"
+    },
+    "phase": {
+      "type": "integer",
+      "default": 0
+    },
+    "phaseAttempt": {
+      "type": "integer",
+      "default": 1
+    },
+    "invocationBase": {
+      "type": "string",
+      "description": "<run-id>-<role>-phase-<N>-attempt-<M> (F103-FR-009)"
+    },
+    "passTimeLimitSec": {
+      "type": "integer",
+      "description": "Ceiling of one pass; watchdogs are feature 118's"
+    },
+    "yieldPlace": {
+      "const": "feature:<slug>:outbox"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

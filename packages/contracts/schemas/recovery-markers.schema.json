@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.recovery-markers/1",
+  "title": "recovery-markers",
+  "description": "The markers of the recovery cycle of one phase, written by the engine and removed at the approval of the phase. Feature 101 (T002); the field list is the table \"Recovery markers\" of specs/101-gate-and-verdict/data-model.md, and the specification stands where the two differ.",
+  "x-schema-id": "specstride.recovery-markers/1",
+  "x-annex": "feature 101, data-model.md, \"Recovery markers\"",
+  "x-logical-name": "phase:<N>:recovery-markers",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "phase": {
+      "type": "integer",
+      "description": "The phase the markers belong to",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "diagnosed": {
+      "type": ["string", "null"],
+      "description": "The signature for which the diagnostician ran last; written after every call. Null before the first call",
+      "x-type-in-words": "Text, or null",
+      "x-required": "Yes"
+    },
+    "accelerated": {
+      "type": ["string", "null"],
+      "description": "The signature for which an accelerated phase attempt started last; written before its pass. Null before the first one",
+      "x-type-in-words": "Text, or null",
+      "x-required": "Yes"
+    }
+  },
+  "required": ["schema", "phase", "diagnosed", "accelerated"],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

@@ -1,0 +1,110 @@
+{
+  "descriptorVersion": 1,
+  "id": "dsh",
+  "displayName": "dsh",
+  "kind": "cli",
+  "provider": { "id": "dsh", "termsRef": null },
+  "x-terms": {
+    "status": "unknown",
+    "neverDefault": true,
+    "neverAutoPicked": true,
+    "roles": ["proposer", "critic"],
+    "audiences": "every"
+  },
+  "origin": "adapter",
+  "detect": {
+    "executable": "{harnesses.dsh.bin}",
+    "version": { "flag": "--version" },
+    "configHome": { "variable": "DSH_HOME", "default": ".dsh" }
+  },
+  "auth": { "tiers": [1, 2], "credential": null, "scheme": "none" },
+  "models": {
+    "default": null,
+    "window": { "value": null, "source": "user configuration" },
+    "select": "throwaway settings file"
+  },
+  "roles": {
+    "proposer": {
+      "supported": true,
+      "qualifier": { "form": "optional", "label": "provider/model" }
+    },
+    "critic": {
+      "supported": true,
+      "qualifier": { "form": "optional", "label": "provider/model" },
+      "toolless": "config",
+      "readOnlyTools": false,
+      "freshSession": true
+    }
+  },
+  "invoke": {
+    "proposer": {
+      "argv": ["{bin}", "--profile", "{profile}", "{prompt}"],
+      "prompt": "one argument",
+      "promptLimitBytes": 122880,
+      "stdin": "closed",
+      "cwd": "{workdir}",
+      "env": ["DSH_HOME", "DSH_PERMISSION_MODE", "DSH_TELEMETRY_MODE", "TRACEPARENT"],
+      "permissionMode": {
+        "parity": "workspace-write",
+        "default": "workspace-write",
+        "optIn": "danger-full-access only with sandbox.level C0"
+      },
+      "notFound": { "status": 127, "message": "DeepSeek Harness not found: {bin}" }
+    },
+    "critic": {
+      "argv": [
+        "{bin}",
+        "--profile",
+        "{profile}",
+        "--patch",
+        "{file:criticPatch}",
+        "--",
+        "{promptChunks...}"
+      ],
+      "prompt": "chunks split at spaces",
+      "chunkLimitBytes": 122880,
+      "cwd": { "parity": "{workdir}", "default": "{emptyTmp}" },
+      "env": ["DSH_HOME", "DSH_PERMISSION_MODE", "DSH_TELEMETRY_MODE"],
+      "permissionMode": "read-only",
+      "reply": "stdout"
+    }
+  },
+  "stream": { "format": "text", "parityFormat": null },
+  "continuation": { "supported": false },
+  "session": { "continuation": "none" },
+  "failures": {
+    "quota_window": { "code": "QUOTA", "streams": ["stderr", "stdout"] },
+    "rate_limit_transient": { "code": "RATE_LIMIT", "streams": ["stderr", "stdout"] },
+    "context_window": { "code": "CONTEXT_WINDOW_EXCEEDED", "streams": ["stderr", "stdout"] },
+    "auth": { "code": "INVALID_CREDENTIAL", "streams": ["stderr", "stdout"] },
+    "provider_other": {
+      "code": null,
+      "note": "no match of the harness falls here",
+      "streams": ["stderr", "stdout"]
+    }
+  },
+  "cost": { "class": "unknown", "prices": null },
+  "isolation": {
+    "envAllow": ["PATH", "LANG", "LC_*", "DSH_HOME", "DSH_PERMISSION_MODE", "DSH_TELEMETRY_MODE"],
+    "configHome": { "vars": ["DSH_HOME"], "seeds": [] }
+  },
+  "containment": { "ceiling": "C1", "provenance": "adapter", "status": "unverified" },
+  "memory": { "native": "unknown", "switch": null, "status": "unverified (capture 6)" },
+  "x-memory": { "criticRefusedUnlessState": ["off", "absent"], "reason": "memory-not-off" },
+  "x-customisations": {
+    "plugins": { "switch": null },
+    "host-hooks": { "switch": null },
+    "skills": { "switch": null },
+    "tool-servers": { "switch": null },
+    "key": "harnesses.dsh.proposerCustomisations",
+    "status": "unverified (capture 6)"
+  },
+  "telemetry": { "off": { "variable": "DSH_TELEMETRY_MODE", "status": "unverified (capture 5)" } },
+  "x-usageSource": "none",
+  "concurrentSessions": true,
+  "spendLimit": null,
+  "x-capabilities": { "pluginRequests": { "value": true, "onlyWithoutQualifier": true } },
+  "transports": [{ "id": "subprocess", "authTier": [1, 2], "termsRef": null }],
+  "versionRange": "0.1.0-rc.8",
+  "verifiedOn": "2026-09-29"
+}

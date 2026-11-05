@@ -1,0 +1,117 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.reverse-inventory/1",
+ "title": "specstride.reverse-inventory/1",
+ "type": "object",
+ "required": [
+  "schema",
+  "schema_version",
+  "files",
+  "skipped",
+  "src",
+  "walk",
+  "excludes",
+  "limits",
+  "totals",
+  "oversize",
+  "project",
+  "git_head",
+  "git_status",
+  "testautomation",
+  "specify",
+  "units",
+  "fingerprint"
+ ],
+ "properties": {
+  "schema": {
+   "const": "specstride.reverse-inventory/1"
+  },
+  "schema_version": {
+   "const": 1
+  },
+  "walk": {
+   "enum": [
+    "git",
+    "walk"
+   ]
+  },
+  "oversize": {
+   "type": "boolean"
+  },
+  "fingerprint": {
+   "type": "string",
+   "pattern": "^[0-9a-f]{64}$"
+  },
+  "files": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "path",
+     "bytes",
+     "lines",
+     "sha256",
+     "language",
+     "role"
+    ],
+    "properties": {
+     "role": {
+      "enum": [
+       "ci",
+       "test",
+       "schema",
+       "template",
+       "doc",
+       "script",
+       "source",
+       "config",
+       "other"
+      ]
+     }
+    }
+   }
+  },
+  "skipped": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "path",
+     "bytes",
+     "sha256",
+     "reason"
+    ],
+    "properties": {
+     "reason": {
+      "enum": [
+       "binary",
+       "oversize",
+       "symlink-escape"
+      ]
+     }
+    }
+   }
+  },
+  "git_head": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "git_status": {
+   "type": [
+    "array",
+    "null"
+   ],
+   "items": {
+    "type": "string"
+   }
+  },
+  "testautomation": {
+   "type": [
+    "object",
+    "null"
+   ]
+  }
+ }
+}

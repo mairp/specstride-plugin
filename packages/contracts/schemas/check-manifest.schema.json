@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.manifest/1",
+  "title": "check-manifest",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.manifest/1",
+  "x-annex": "annex D, §D.8",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "phase": {
+      "type": "integer",
+      "description": "Phase number",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "hash": {
+      "type": "string",
+      "description": "Hash of the manifest, verified before every check",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "searchPath": {
+      "type": "string",
+      "description": "The search path for executables as it was at launch",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "entries": {
+      "type": "array",
+      "description": "The commands of the phase itself, in the order of the verification plan; the commands of earlier phases are in their own manifests, and the cumulative verification gate takes its commands from the manifests of the phases it covers (F105-FR-020)",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes (may be empty)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Id of the command, stable inside the run",
+            "x-type-in-words": "Text",
+            "x-required": "Yes"
+          },
+          "kind": {
+            "type": "string",
+            "description": "Kind of the identity: `command`, or a registered kind",
+            "x-type-in-words": "Member of an open set",
+            "x-required": "Yes"
+          },
+          "argv": {
+            "type": "array",
+            "description": "The fixed argument list",
+            "x-type-in-words": "List of text",
+            "x-required": "For `command`"
+          },
+          "pin": {
+            "type": "object",
+            "description": "The identity record of the check runner: for `command` the absolute path of the executable with size and hash",
+            "x-type-in-words": "Record",
+            "x-required": "Yes"
+          },
+          "provenance": {
+            "type": "object",
+            "description": "File and line of the declaration",
+            "x-type-in-words": "Record",
+            "x-required": "Yes"
+          },
+          "timeLimit": {
+            "type": "integer",
+            "description": "Time limit of the command",
+            "x-type-in-words": "Whole number of seconds",
+            "x-required": "Yes"
+          },
+          "tasks": {
+            "type": "array",
+            "description": "Tasks the declaration names",
+            "x-type-in-words": "List of text",
+            "x-required": "No"
+          },
+          "steps": {
+            "type": "array",
+            "description": "Steps, for the step runner",
+            "x-type-in-words": "List of records",
+            "x-required": "No"
+          },
+          "reads": {
+            "type": "array",
+            "description": "Declared reads and writes, ignored paths included; or `sideEffects: none` together with `reads: tree`",
+            "x-type-in-words": "Lists of path prefixes",
+            "x-required": "No; undeclared means serial"
+          },
+          "writes": {
+            "type": "array",
+            "description": "Declared reads and writes, ignored paths included; or `sideEffects: none` together with `reads: tree`",
+            "x-type-in-words": "Lists of path prefixes",
+            "x-required": "No; undeclared means serial"
+          },
+          "resource": {
+            "type": "string",
+            "description": "An exclusive resource the command needs",
+            "x-type-in-words": "Text",
+            "x-required": "No"
+          },
+          "inner": {
+            "type": "boolean",
+            "description": "Whether the command belongs to the inner check set. The writer sets it true for every entry: the inner check set is the manifest, and only the runtime takes a command out of it during a phase attempt, with a reason (F105-FR-020; F115-FR-013)",
+            "x-type-in-words": "Truth value",
+            "x-required": "Yes"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "pin",
+          "provenance",
+          "timeLimit",
+          "inner"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "phase",
+    "hash",
+    "searchPath",
+    "entries"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

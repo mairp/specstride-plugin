@@ -1,0 +1,1825 @@
+{
+  "note": "T004 — the two columns of contracts/config-keys.tsv that the tables of spec.md §K.3 to §K.6b do not carry, and the value under `parity` of the two keys that have no row of annex X §X.7. Read by packages/config/tools/config-keys-gen.ts.",
+  "columns": [
+    "key",
+    "proposed_by",
+    "confirmed_or_corrected",
+    "value_under_parity_override",
+    "note"
+  ],
+  "rows": [
+    {
+      "key": "schema",
+      "proposed_by": "101, 106, 107",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "profile",
+      "proposed_by": "130",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "distribution.audience",
+      "proposed_by": "113, 130, 131",
+      "confirmed_or_corrected": "confirmed; layers narrowed to U on 2026-09-30 (ruling 2; F100-FR-028; CQ-205)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "distribution.termsOverride",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "state.dir",
+      "proposed_by": "122",
+      "confirmed_or_corrected": "corrected (old: state.controlRoot)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "engine.executable",
+      "proposed_by": "122",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.harness",
+      "proposed_by": "124",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.model",
+      "proposed_by": "130, 131",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.effort",
+      "proposed_by": "130",
+      "confirmed_or_corrected": "corrected (old: harnesses.dsh.reasoningEffort)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.tier",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.credential",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.timeoutSec",
+      "proposed_by": "106, 118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.idleTimeoutSec",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.progressTimeoutSec",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.repeatLimit",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.repeatIgnore",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.progressPaths",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.maxErrors",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.maxCaps",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.proposer.maxNoProgress",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.<role>.fallback",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.harness",
+      "proposed_by": "124",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.model",
+      "proposed_by": "130, 131",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.effort",
+      "proposed_by": "130",
+      "confirmed_or_corrected": "corrected (old: roles.critic.reasoningEffort)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.tier",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.credential",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.transport",
+      "proposed_by": "109",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.timeoutSec",
+      "proposed_by": "101, 109, 131",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.malformedLimit",
+      "proposed_by": "101",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.grounding",
+      "proposed_by": "117",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.groundingMaxFiles",
+      "proposed_by": "117",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.anchorMaxBytes",
+      "proposed_by": "117",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.contextTokens",
+      "proposed_by": "117",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.debug",
+      "proposed_by": "117",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "critic.autoPick",
+      "proposed_by": "124",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "critic.autoPickMaxUsd",
+      "proposed_by": "124",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "critic.warnSameModel",
+      "proposed_by": "124",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.diagnostician.enabled",
+      "proposed_by": "101",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.accelerator.enabled",
+      "proposed_by": "101",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.diagnostician.harness",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.diagnostician.model",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.accelerator.harness",
+      "proposed_by": "101",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.accelerator.model",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "phases.<N>.proposer.harness",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "phases.<N>.proposer.model",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "phases.<N>.proposer.effort",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "phases.<N>.proposer.timeoutSec",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "phases.<N>.proposer.idleTimeoutSec",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "phases.<N>.critic.harness",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "phases.<N>.critic.model",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "phases.<N>.critic.timeoutSec",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "phases.<N>.budget.*",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.strategy",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.micro.closing_check",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.micro.caps.repairs",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.micro.caps.escalationsPerTask",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "corrected (old: loop.micro.caps.escalations_per_task)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.micro.caps.escalationsPerAttempt",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "corrected (old: loop.micro.caps.escalations_per_attempt)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.micro.caps.proposalMin",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "corrected (old: loop.micro.caps.proposalMinutes; loop.micro.caps.proposal_minutes)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.micro.caps.unitMin",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "corrected (old: loop.micro.caps.unitMinutes; loop.micro.caps.unit_minutes)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.micro.caps.checkMin",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "corrected (old: loop.micro.caps.checkMinutes; loop.micro.caps.check_minutes)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.micro.caps.checkSharePercent",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "corrected (old: loop.micro.caps.check_share_percent)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.micro.caps.cyclesExtra",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "corrected (old: loop.micro.caps.cycles_extra)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.micro.caps.cyclesMin",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "corrected (old: loop.micro.caps.cycles_min)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.micro.caps.unresolvedUnits",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "corrected (old: loop.micro.caps.unresolved_units)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.routing",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.escalation",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.maxRejects",
+      "proposed_by": "101",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.maxIter",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.maxWallMin",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.oscMax",
+      "proposed_by": "101",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.yield.pollSec",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "corrected (old: loop.yield.poll)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.yield.maxPerAttempt",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.yield.countsAsIter",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.yield.allowCommand",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.yield.waitEvery",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.yield.logHead",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.yield.logTail",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.yield.failureLedger",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.yield.failureLedgerMax",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.yield.failurePattern",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.promptMaxBytes",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.promptProtectedBlocks",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.passPauseSec",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.watchdogTickSec",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.shortPass.sec",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.shortPass.nudgeAfter",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.noProgressStructured",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.gitCommits",
+      "proposed_by": "101",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.tickTasks",
+      "proposed_by": "101",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.parallel.units",
+      "proposed_by": "142",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.parallel.workers",
+      "proposed_by": "142",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.parallel.workersMax",
+      "proposed_by": "100 (ruling P5)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.parallel.quota_headroom",
+      "proposed_by": "142",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.parallel.allow_detect",
+      "proposed_by": "142",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.parallel.exclude",
+      "proposed_by": "142",
+      "confirmed_or_corrected": "corrected (old: loop.parallel.tasks.<taskId>.eligible)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.parallel.scopes.<taskId>",
+      "proposed_by": "142",
+      "confirmed_or_corrected": "corrected (old: loop.parallel.tasks.<taskId>.writes)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.parallel.seedPaths",
+      "proposed_by": "142",
+      "confirmed_or_corrected": "corrected (old: loop.parallel.seed_paths)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "loop.parallel.resources.<name>.capacity",
+      "proposed_by": "142",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "attempt.tier_bump",
+      "proposed_by": "149",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "attempt.tier_bump_after",
+      "proposed_by": "149",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.tiers",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.mode",
+      "proposed_by": "105",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.testPlan",
+      "proposed_by": "105",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.generateTests",
+      "proposed_by": "105",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.commands",
+      "proposed_by": "105",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.longJob.phase",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.longJob.cmd",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.parallelism",
+      "proposed_by": "105",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.step_runner",
+      "proposed_by": "148",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.failfast",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.failfast_action",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.failfastGraceSec",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "corrected (old: verification.failfast_grace_sec)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "carry.ledger_handoff",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "carry.index",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "carry.polite_stop",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "carry.continuation",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "carry.politeStopGraceSec",
+      "proposed_by": "118",
+      "confirmed_or_corrected": "corrected (old: carry.polite_stop_grace_sec)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "carry.handoffMaxBytes",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "carry.indexTitleChars",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "carry.maxContinuedPasses",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "carry.contextFillTokens",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "carry.contextFillShare",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "carry.ageFallbackSec",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "prompt.block_set",
+      "proposed_by": "103",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "prompt.critic.block_set",
+      "proposed_by": "117",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "prompt.critic.overWindow",
+      "proposed_by": "117",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "staleness.check_points",
+      "proposed_by": "102",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "integrity.gate_fingerprint",
+      "proposed_by": "148",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "integrity.phase_entry",
+      "proposed_by": "115",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "integrity.manifest_relaunch",
+      "proposed_by": "105",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "toolchains.<id>",
+      "proposed_by": "116",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "not used",
+      "note": "no row of annex X §X.7; the profile names the key and leaves it unused"
+    },
+    {
+      "key": "relaunch.owner",
+      "proposed_by": "123",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.bin",
+      "proposed_by": "109",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.profile",
+      "proposed_by": "138",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.overlay",
+      "proposed_by": "109",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.proposerCustomisations",
+      "proposed_by": "100 (row 131)",
+      "confirmed_or_corrected": "confirmed (further users 130, 138)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.transport",
+      "proposed_by": "109",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.pluginAllowlist",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.pluginTimeoutSec",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.auth.credential",
+      "proposed_by": "131",
+      "confirmed_or_corrected": "corrected (old: harnesses.<id>.credential; harnesses.codex.auth.credential)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "sandbox.level",
+      "proposed_by": "109",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "sandbox.permissionMode",
+      "proposed_by": "125",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "memory.native.proposer",
+      "proposed_by": "109",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "discovery.enabled",
+      "proposed_by": "124",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "discovery.online",
+      "proposed_by": "124",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "budget.run.costUsd",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "budget.role.<role>.costUsd",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "budget.role.<role>.tokens",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "budget.role.<role>.softTokens",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "budget.alerts.thresholds",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "corrected (old: budget.alertThresholds)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "pause.maxTotalMs",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.enabled",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.otel.enabled",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.loki.url",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "corrected (old: telemetry.lokiUrl)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.otel.url",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.content",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.sinkTimeoutMs",
+      "proposed_by": "111",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.otel.legacyMetricNames",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "corrected (old: otel.legacyMetricNames)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "observability.limits.text",
+      "proposed_by": "111",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "observability.limits.toolArguments",
+      "proposed_by": "111",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "observability.limits.toolResult",
+      "proposed_by": "111",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "observability.limits.diagnostic",
+      "proposed_by": "111",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "observability.limits.target",
+      "proposed_by": "111",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "observability.limits.maxTargets",
+      "proposed_by": "111",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "observability.limits.freeText",
+      "proposed_by": "111",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "observability.retention.rawCapture",
+      "proposed_by": "111",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "observability.retention.rawDays",
+      "proposed_by": "111",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "observability.retention.metadataDays",
+      "proposed_by": "111",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "compat.legacyEvents",
+      "proposed_by": "111",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "output.compat",
+      "proposed_by": "119",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "output.live",
+      "proposed_by": "145",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "output.verbose",
+      "proposed_by": "119",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "output.liveDetail",
+      "proposed_by": "145",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "learning.mode",
+      "proposed_by": "106",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "learning.through",
+      "proposed_by": "106",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "spec.format",
+      "proposed_by": "104",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "spec.feature",
+      "proposed_by": "104",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "spec.contextBudget",
+      "proposed_by": "104",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "reverse.contextBudget",
+      "proposed_by": "140",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "reverse.maxFileBytes",
+      "proposed_by": "140",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "reverse.maxTotalBytes",
+      "proposed_by": "140",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "reverse.tasks",
+      "proposed_by": "108",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "derive.judgment.harness",
+      "proposed_by": "107",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "supervise.maxRelaunches",
+      "proposed_by": "107",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "supervise.wallClockSec",
+      "proposed_by": "107",
+      "confirmed_or_corrected": "corrected (old: supervise.wallClockSeconds)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "doctor.staleAfterDays",
+      "proposed_by": "112",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "doctor.online",
+      "proposed_by": "112",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.envAllowlist",
+      "proposed_by": "148",
+      "confirmed_or_corrected": "corrected (old: verification.env_allowlist)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.summary.tailLines",
+      "proposed_by": "105",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "verification.summary.tailErrLines",
+      "proposed_by": "105",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "doctor.probeTimeoutSec",
+      "proposed_by": "112",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "doctor.probeOutputBytes",
+      "proposed_by": "112",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "output.color",
+      "proposed_by": "145",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "output.banner",
+      "proposed_by": "145",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "output.liveRail",
+      "proposed_by": "145",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "output.motion",
+      "proposed_by": "145",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "output.bannerBg",
+      "proposed_by": "145",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "output.ascii",
+      "proposed_by": "145",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "runtime.detach.strategy",
+      "proposed_by": "122",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "runtime.handshake.timeoutSec",
+      "proposed_by": "122",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "runtime.lease.heartbeatSec",
+      "proposed_by": "122",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "runtime.lease.graceSec",
+      "proposed_by": "122",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "runtime.lock.provider",
+      "proposed_by": "122",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.refuseUnknown",
+      "proposed_by": "124",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "critic.catalogueWindowMargin",
+      "proposed_by": "124",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.critic.provider",
+      "proposed_by": "130",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.endpoint.base",
+      "proposed_by": "131",
+      "confirmed_or_corrected": "corrected (old: harnesses.codex.endpoint.base)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.authTier",
+      "proposed_by": "131",
+      "confirmed_or_corrected": "corrected (old: harnesses.codex.authTier)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.contextWindows",
+      "proposed_by": "130",
+      "confirmed_or_corrected": "corrected (old: harnesses.pi.contextWindow; harnesses.dsh.contextWindows)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.<id>.envAllow",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.claude.proposerSkills",
+      "proposed_by": "125",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.claude.subprocessEnvScrub",
+      "proposed_by": "125",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.claude.gitInstructions",
+      "proposed_by": "125",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.claude.disableSubagents",
+      "proposed_by": "125",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.claude.label",
+      "proposed_by": "125",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.dsh.home",
+      "proposed_by": "130",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.dsh.provider",
+      "proposed_by": "130",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.dsh.modelProviders",
+      "proposed_by": "130",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.dsh.critic.proof",
+      "proposed_by": "130",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.prime.launcher",
+      "proposed_by": "138",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "harnesses.prime.tools",
+      "proposed_by": "138",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "not used",
+      "note": "no row of annex X §X.7; the profile names the key and leaves it unused"
+    },
+    {
+      "key": "stream.tap",
+      "proposed_by": "126",
+      "confirmed_or_corrected": "corrected (old: stream.capture)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "stream.tapExecutable",
+      "proposed_by": "126",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "stream.limits.lineBytes",
+      "proposed_by": "126",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "stream.limits.linesPerSecond",
+      "proposed_by": "126",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "stream.noActivityFlag",
+      "proposed_by": "126",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "invocation.recordAllPasses",
+      "proposed_by": "126",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "invocation.idBase",
+      "proposed_by": "126",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "invocation.debug",
+      "proposed_by": "126",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "budget.role.<role>.calls",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "budget.run.tokens",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "budget.run.phaseAttempts",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "budget.run.calls",
+      "proposed_by": "110 (R16)",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "budget.rates",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "pause.marginMs",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "pause.jitterMs",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "pause.probeScheduleMs",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "quota.transientMaxWaitMs",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "quota.overloadRetries",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.<role>.fallbackAfterMs",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "corrected (old: fallback.after)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "roles.<role>.fallbackReturn",
+      "proposed_by": "127",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "status.precompute",
+      "proposed_by": "129",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "status.staleEventSec",
+      "proposed_by": "129",
+      "confirmed_or_corrected": "corrected (old: status.stale_event_sec)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "status.timelineRows",
+      "proposed_by": "129",
+      "confirmed_or_corrected": "corrected (old: status.timeline_rows)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "wait.pollSec",
+      "proposed_by": "129",
+      "confirmed_or_corrected": "corrected (old: wait.poll_sec)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "wait.timeoutSec",
+      "proposed_by": "129",
+      "confirmed_or_corrected": "corrected (old: wait.timeout_sec)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.contentMaxPromptBytes",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "corrected (old: telemetry.content.maxPromptBytes)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.contentMaxReplyBytes",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "corrected (old: telemetry.content.maxReplyBytes)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.otel.traces",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.otel.dialects",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "corrected (old: otel.dialects)",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.loki.timeoutMs",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.otel.timeoutMs",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.loki.maxBatchBytes",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.otel.maxBatchBytes",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.flush.intervalMs",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.queueMaxEvents",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.loki.auth",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    },
+    {
+      "key": "telemetry.otel.auth",
+      "proposed_by": "128",
+      "confirmed_or_corrected": "confirmed",
+      "value_under_parity_override": "",
+      "note": ""
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+// The orphan executable of the canary fixture home (T001): an executable on
+// the search path that no harness descriptor names. The source `binary` of
+// discovery must never start it. If anything does start it, it appends one
+// line to the file given by `ORPHAN_TOOL_STARTED_FILE`, which the canary
+// reads to prove the start happened (and must never happen).
+import { appendFileSync } from "node:fs";
+
+const startedFile = process.env.ORPHAN_TOOL_STARTED_FILE;
+if (startedFile !== undefined) {
+  appendFileSync(startedFile, `${JSON.stringify(process.argv.slice(1))}\n`);
+}
+
+const arg = process.argv[2];
+if (arg === "--version") {
+  process.stdout.write("orphan-tool 0.9.0\n");
+  process.exit(0);
+}
+if (arg === "--help") {
+  process.stdout.write("orphan-tool — the executable that no harness descriptor names\n");
+  process.stdout.write("Usage: orphan-tool --version | --help\n");
+  process.exit(0);
+}
+process.stderr.write("orphan-tool: this fixture answers --version and --help only\n");
+process.exit(2);

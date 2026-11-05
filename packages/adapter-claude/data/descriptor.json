@@ -1,0 +1,104 @@
+{
+  "descriptorVersion": 1,
+  "id": "claude",
+  "displayName": "Claude Code (harness adapter, feature 125)",
+  "kind": "cli",
+  "origin": "adapter",
+  "provider": {
+    "id": "anthropic",
+    "termsRef": "anthropic"
+  },
+  "detect": {
+    "executable": "claude",
+    "versionCommand": ["--version"],
+    "configHomeVariable": "CLAUDE_CONFIG_DIR",
+    "defaultConfigHome": ".claude",
+    "helpNote": "pin claude 2.1.284, floor 2.1.259; checked by claude --help on 2026-09-29 (introspection only)"
+  },
+  "auth": {
+    "tiers": [1, 2],
+    "credential": null
+  },
+  "models": {
+    "data": "models.json",
+    "note": "the ladder, the context windows and the default critic model live in models.json and are read at run time (F125-FR-033, D-14)"
+  },
+  "roles": {
+    "proposer": {
+      "transports": ["subprocess", "sdk-in-process"],
+      "permissionMode": "acceptEdits"
+    },
+    "critic": {
+      "transports": ["subprocess", "direct-call", "sdk-in-process"],
+      "toolless": { "mechanism": "flag", "freshSession": true },
+      "permissionMode": "dontAsk",
+      "maxTurns": 1
+    }
+  },
+  "invoke": {
+    "proposer": {
+      "kind": "subprocess",
+      "promptOnStdin": true,
+      "stdinFileVariable": "SPECSTRIDE_STDIN_FILE",
+      "argumentTable": "argument-table.json",
+      "note": "the argument list is data, never shell text (F125-FR-002)"
+    },
+    "critic": {
+      "kind": "subprocess",
+      "promptOnStdin": true,
+      "argumentTable": "argument-table.json"
+    }
+  },
+  "stream": {
+    "format": "claude",
+    "note": "read by the reader of feature 126"
+  },
+  "continuation": {
+    "supported": true,
+    "idArgument": "--resume",
+    "note": "continuation is in force at auth tier 2 only (F125-FR-014); never with an empty id (F125-FR-004); never --continue"
+  },
+  "failures": {
+    "exit-127": { "signal": "executable-not-found", "exitCodes": [127] },
+    "note": "the typed failures of §C.1 as far as the harness declares them; the rest stays unknown"
+  },
+  "cost": {
+    "tier1": "subscription",
+    "tier2": "metered"
+  },
+  "isolation": {
+    "envAllow": [
+      "PATH",
+      "LANG",
+      "LC_ALL",
+      "HOME",
+      "CLAUDE_CONFIG_DIR",
+      "CLAUDE_CODE_DISABLE_AUTO_MEMORY",
+      "CLAUDE_CODE_SUBPROCESS_ENV_SCRUB",
+      "TRACEPARENT"
+    ]
+  },
+  "containment": {
+    "ceiling": "C1 (adapter)"
+  },
+  "memory": {
+    "native": {
+      "switch": "CLAUDE_CODE_DISABLE_AUTO_MEMORY"
+    }
+  },
+  "telemetry": {
+    "off": {
+      "switch": null,
+      "note": "no telemetry switch of the harness is established; null, not guessed (F125-FR-002)"
+    }
+  },
+  "transports": [{ "id": "subprocess" }, { "id": "direct-call" }, { "id": "sdk-in-process" }],
+  "session": {
+    "persistenceArgument": "--no-session-persistence",
+    "note": "at auth tier 1 no session state is persisted (F125-FR-014); at auth tier 2 the throwaway home is removed with the session state (F125-FR-017)"
+  },
+  "concurrentSessions": null,
+  "spendLimit": null,
+  "versionRange": ">=2.1.259 <=2.1.284",
+  "verifiedOn": "2026-09-29"
+}

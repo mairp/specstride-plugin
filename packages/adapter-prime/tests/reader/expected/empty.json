@@ -1,0 +1,10 @@
+{
+  "events": [],
+  "evidence_tools": [],
+  "output": [],
+  "schema_version": null,
+  "stream": "empty.jsonl",
+  "terminal": null,
+  "turns": 0,
+  "usage": {}
+}

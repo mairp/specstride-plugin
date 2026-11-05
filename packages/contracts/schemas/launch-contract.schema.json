@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.launch-contract/1",
+  "title": "launch-contract",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.launch-contract/1",
+  "x-annex": "annex G, §G.8",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "id": {
+      "description": "The pipeline id",
+      "x-type-in-words": "Lower-case words joined by hyphens",
+      "x-required": "Yes"
+    },
+    "status": {
+      "type": "string",
+      "description": "`draft` or `validated`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "draft",
+        "validated"
+      ]
+    },
+    "generated_by": {
+      "type": "object",
+      "description": "The logical component that wrote the draft, with its version",
+      "x-type-in-words": "Record",
+      "x-required": "No"
+    },
+    "promotion": {
+      "type": "object",
+      "description": "Proof of promotion: the logical component that promoted, and the hash of the canonical launch contract without `status` and `promotion`",
+      "x-type-in-words": "Record",
+      "x-required": "With `validated`"
+    },
+    "repository": {
+      "type": "object",
+      "description": "Root, revision, whether the tree is dirty",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "authorized_roots": {
+      "type": "array",
+      "description": "Paths a stage may touch",
+      "x-type-in-words": "List of text, at least one",
+      "x-required": "Yes"
+    },
+    "features": {
+      "type": "array",
+      "description": "Per feature: path, slug, phases, task count, artifacts present and absent",
+      "x-type-in-words": "List of records",
+      "x-required": "No"
+    },
+    "sources": {
+      "type": "array",
+      "description": "Per source: path, kind, content hash, for a task list also the hash that ignores checkboxes, line count",
+      "x-type-in-words": "List of records, at least one",
+      "x-required": "Yes"
+    },
+    "inventory": {
+      "type": "object",
+      "description": "Tasks, shell candidates, prerequisites, verification documents",
+      "x-type-in-words": "Record",
+      "x-required": "No"
+    },
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "relaunch": {
+          "type": "object",
+          "description": "Relaunch budget: maximum of relaunches (0 to 5, default 2) and wall-clock seconds. It applies to every mode",
+          "x-type-in-words": "Record",
+          "x-required": "No"
+        },
+        "learning": {
+          "type": "object",
+          "description": "The binding of learning: mode, bound of decisions, their hash, effective values, source",
+          "x-type-in-words": "Record",
+          "x-required": "No"
+        },
+        "verification": {
+          "type": "string",
+          "description": "The verification mode the derivation set",
+          "x-type-in-words": "Member of a closed set",
+          "x-required": "Yes"
+        },
+        "comment": {
+          "type": "object",
+          "description": "Hash of the consumer's comment, and what was changed because of it",
+          "x-type-in-words": "Record",
+          "x-required": "No"
+        },
+        "scopes": {
+          "type": "object",
+          "description": "Declared write scopes of tasks, and declared reads and writes of verification commands, each with its source",
+          "x-type-in-words": "Record",
+          "x-required": "No"
+        }
+      },
+      "required": [
+        "verification"
+      ]
+    },
+    "coverage": {
+      "type": "array",
+      "description": "Per coverage obligation: id, source with path, line and anchor, kind (`implementation`, `prerequisite`, `verification`, `decision`, `operation`), timing, producer, disposition (`mapped`, `optional`, `out-of-scope`, `unresolved`, `unsupported`), stage ids, verification ids, rationale, evidence",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes"
+    },
+    "findings": {
+      "type": "array",
+      "description": "Per finding: id, severity (`info`, `warning`, `blocker`), status (`open`, `resolved`, `accepted`), message, source, resolution, and for a judgment the provenance of the answer",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes"
+    },
+    "stages": {
+      "type": "array",
+      "description": "Per stage: id, kind (an id of the registry of stage kinds), dependencies, working directory, action, action on resume, preconditions and postconditions (each a check of the registry, with its timing), recovery, evidence",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "object",
+            "description": "Argument list (at least one entry), environment (a literal, or a value taken from a named variable with whether it is required), time limit in seconds (default 3600)",
+            "x-type-in-words": "Record",
+            "x-required": "For kinds that run a command"
+          },
+          "recovery": {
+            "type": "object",
+            "description": "Maximum of stage attempts (default 1), exit codes to retry, backoff, total time limit, and the reason rule: which stop reasons of the terminal record allow a retry (members of annex E §E.3 that are transient)",
+            "x-type-in-words": "Record",
+            "x-required": "No"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "id",
+    "status",
+    "repository",
+    "authorized_roots",
+    "sources",
+    "coverage",
+    "findings",
+    "stages"
+  ],
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  },
+  "x-unknown-field": "refused, except keys under x-",
+  "x-different-major": "refused (annex B, §B.4)"
+}

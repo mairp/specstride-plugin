@@ -1,0 +1,36 @@
+{
+  "excludedFields": [
+    "count of cycles, repairs, passes or checks",
+    "order of units or of work",
+    "time or duration of work",
+    "output of a check",
+    "earlier result of a check",
+    "model tier",
+    "session",
+    "routing decision",
+    "fingerprint value per row",
+    "workerId",
+    "groupId"
+  ],
+  "namedException": "file modification times of the grounding snapshot",
+  "words": [
+    "group",
+    "worker",
+    "parallel",
+    "merge",
+    "integrat*",
+    "refus*",
+    "snapshot"
+  ],
+  "exemptLiterals": [
+    "## Grounding snapshot"
+  ],
+  "exemptWord": "snapshot",
+  "exemptIn": [
+    "the heading of the grounding snapshot and the lines under it (F117-FR-007)",
+    "the rules of the prompt (F117-FR-021)",
+    "the text of the gap section (F117-FR-014)",
+    "the pin block (F117-FR-031)"
+  ],
+  "exemptNote": "Only the word snapshot is exempt, and only inside these as-is literals (F117-FR-038); the long texts are in as-is-literals.json after T004"
+}

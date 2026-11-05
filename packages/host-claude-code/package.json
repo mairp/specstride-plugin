@@ -1,0 +1,44 @@
+{
+  "name": "@specstride/host-claude-code",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride host package for Claude Code: the plugin as a thin layer over the published package",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./layout": "./src/layout.ts",
+    "./host-facts": "./src/host-facts.ts",
+    "./describe": "./src/describe/index.ts",
+    "./render": "./src/render/index.ts",
+    "./shim": "./src/shim/index.ts",
+    "./skills": "./src/skills.ts",
+    "./skill-run": "./src/skill-run.ts",
+    "./skill-reverse": "./src/skill-reverse.ts",
+    "./skill-doctor": "./src/skill-doctor.ts",
+    "./skill-common": "./src/skill-common.ts",
+    "./skill-budgets": "./src/skill-budgets.ts",
+    "./packaging": "./src/packaging.ts",
+    "./doctor": "./src/doctor.ts",
+    "./publishing": "./src/publishing.ts",
+    "./evals": "./src/evals/index.ts"
+  },
+  "files": [
+    "src/",
+    "plugin/"
+  ],
+  "scripts": {
+    "test": "node ../../tests/isolate.ts node --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@specstride/contracts": "0.0.0"
+  },
+  "specstride": {
+    "skeleton": true,
+    "skeletonNote": "The scaffolding marker stays while CT-100-322 holds."
+  }
+}

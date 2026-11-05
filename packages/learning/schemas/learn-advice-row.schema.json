@@ -1,0 +1,66 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:internal:106:learn-advice-row/1",
+ "title": "learn-advice-row",
+ "description": "One advice row of the report of `learn` (feature 106; a record not of annex B §B.20, so it stays internal to the package, $id in the internal form of row 32 of 'What the other features must follow'). One row per phase with enough work-seconds samples; the rows are written as indented JSON when an output is asked for, and printed one per line otherwise (F106-FR-023).",
+ "x-schema-id": "urn:specstride:schema:internal:106:learn-advice-row/1",
+ "x-annex": "feature 106, data-model.md, 'Advice row'",
+ "type": "object",
+ "properties": {
+  "phase": {
+   "type": "integer",
+   "description": "The phase the row advises on"
+  },
+  "shape": {
+   "type": ["string", "null"],
+   "description": "The phase shape the row was computed under"
+  },
+  "knob": {
+   "type": "string",
+   "description": "A member of the adjustable-knob allowlist (closed set 187)"
+  },
+  "current": {
+   "type": ["integer", "null"],
+   "description": "The value in force (null: the knob has no current value in the fixture)"
+  },
+  "suggested": {
+   "type": ["integer", "null"],
+   "description": "The suggested value, clamped into the hard bounds and rounded to the step; null when the evidence is not enough to suggest"
+  },
+  "target": {
+   "type": ["number", "null"],
+   "description": "The raw target the suggestion was derived from"
+  },
+  "work_sec_p50": {
+   "type": ["number", "null"],
+   "description": "The work seconds of the phase, p50"
+  },
+  "work_sec_p90": {
+   "type": ["number", "null"],
+   "description": "The work seconds of the phase, p90 — the sample of the proposer-timeout suggestion"
+  },
+  "work_sec_samples": {
+   "type": "integer",
+   "description": "The samples behind the percentiles; the denominator the floor checks"
+  },
+  "job_duration_p50": {
+   "type": ["number", "null"],
+   "description": "The yield-job duration of the phase, p50 — the sample of the poll-interval suggestion"
+  },
+  "job_duration_samples": {
+   "type": "integer"
+  },
+  "wait_share_p50": {
+   "type": ["number", "null"]
+  },
+  "hard_cap_kills_with_wait": {
+   "type": "integer"
+  },
+  "reason": {
+   "type": ["string", "null"],
+   "description": "Why a suggestion was or was not made (floor not met, at the hard bound, no sample)"
+  }
+ },
+ "required": ["phase", "knob", "work_sec_samples"],
+ "additionalProperties": true
+}

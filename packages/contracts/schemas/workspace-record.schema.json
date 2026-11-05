@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.layout/1",
+  "title": "workspace-record",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.layout/1",
+  "x-annex": "annex B, §B.6",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "layoutVersion": {
+      "type": "string",
+      "description": "Version of the layout table",
+      "x-type-in-words": "Major and minor, as text",
+      "x-required": "Yes"
+    },
+    "workspaceId": {
+      "type": "string",
+      "description": "Identifier of §B.3",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "realPath": {
+      "type": "string",
+      "description": "Real path of the workspace root at creation",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time of creation",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    },
+    "productVersion": {
+      "type": "string",
+      "description": "Product version that created the record",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "lockProvider": {
+      "type": "object",
+      "description": "Id and version of the lock provider that first acquired the lock",
+      "x-type-in-words": "Record of two texts",
+      "x-required": "Yes"
+    }
+  },
+  "required": [
+    "schema",
+    "layoutVersion",
+    "workspaceId",
+    "realPath",
+    "createdAt",
+    "productVersion",
+    "lockProvider"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

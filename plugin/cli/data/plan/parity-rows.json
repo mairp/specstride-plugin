@@ -1,0 +1,68 @@
+{
+  "schema": "specstride.plan-data/1",
+  "note": "Data of the plan of feature 109. spec.md stands where the two differ.",
+  "addsRow": false,
+  "rows": [
+    {
+      "row": 25,
+      "key": "sandbox.level",
+      "underParity": "As at the baseline: none",
+      "register": ["DV-030"],
+      "requirements": ["F109-FR-026", "F109-FR-027"]
+    },
+    {
+      "row": 27,
+      "key": "harnesses.<id>.transport",
+      "underParity": "subprocess",
+      "register": [],
+      "requirements": ["F109-FR-011"]
+    },
+    {
+      "row": 28,
+      "key": "roles.critic.transport",
+      "underParity": "The as-is transport and mode of each harness",
+      "register": ["DV-001", "DV-081", "DV-090"],
+      "requirements": ["F109-FR-011", "F109-FR-037"]
+    },
+    {
+      "row": 29,
+      "key": "memory.native.proposer",
+      "underParity": "No flag about memory is passed",
+      "register": ["DV-047"],
+      "requirements": ["F109-FR-022"]
+    },
+    {
+      "row": 30,
+      "key": "harnesses.<id>.overlay",
+      "underParity": "Overlay scope none",
+      "register": ["DV-002"],
+      "requirements": ["F109-FR-029", "F109-FR-031"]
+    }
+  ],
+  "settings": [
+    {
+      "key": "harnesses.<id>.overlay",
+      "alias": "SPECSTRIDE_<NAME>_OVERLAY",
+      "spelling": "annex X §X.7 row 30; alias in annex X §X.8"
+    },
+    {
+      "key": "harnesses.<id>.bin",
+      "spelling": "annex X §X.8"
+    },
+    {
+      "key": "roles.critic.timeoutSec",
+      "alias": "SPECSTRIDE_CRITIC_TIMEOUT",
+      "default": 300,
+      "spelling": "key list of feature 110"
+    },
+    {
+      "key": "sandbox.level",
+      "value": "C0",
+      "meaning": "opt-in to no containment",
+      "acceptedFrom": ["user configuration"],
+      "notAcceptedFrom": ["environment", "flag", "project configuration"],
+      "assumption": "CQ-183",
+      "requirements": ["F109-FR-026"]
+    }
+  ]
+}

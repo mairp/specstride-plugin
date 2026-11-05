@@ -1,0 +1,105 @@
+{
+  "schema": "specstride.terms-rows/1",
+  "feature": "125-adapter-claude",
+  "provider": "anthropic",
+  "note": "The facts of the terms rows of Claude and of its SDK transport (F125-FR-005, F125-FR-037). Every row rests on documentation only: unverified, access date 2026-09-29 (R8v), re-read every 30 days (ruling 59). Feature 147 owns the terms gate; this adapter supplies the facts. The quoted sentences, sources and access dates live here, from research/R8v-terms-verification.md rows 1 to 6. The audience `distributed` defaults to auth tier 2.",
+  "rows": [
+    {
+      "id": "anthropic-t1-personal-subprocess",
+      "provider": "anthropic",
+      "authTier": 1,
+      "audience": "personal",
+      "transport": "subprocess",
+      "status": "allowed",
+      "basis": "An end user signing in to the unmodified Claude Code binary with their own subscription; a one-year token from `claude setup-token` for scripts",
+      "source": "research/R8v-terms-verification.md row 1 (consumer terms of claude.ai, use of the Claude Code binary)",
+      "accessDate": "2026-09-29",
+      "verifiedOn": null
+    },
+    {
+      "id": "anthropic-t1-distributed-subprocess",
+      "provider": "anthropic",
+      "authTier": 1,
+      "audience": "distributed",
+      "transport": "subprocess",
+      "status": "personal-only",
+      "basis": "Third parties may not offer claude.ai login or its rate limits in their products unless approved; the carve-out is confirmed for personal use only. Opt-in, marked \"personal use only\", with a warning",
+      "source": "research/R8v-terms-verification.md row 2 (commercial terms, third-party offering clause)",
+      "accessDate": "2026-09-29",
+      "verifiedOn": null
+    },
+    {
+      "id": "anthropic-t2-personal-subprocess-direct-call-sdk",
+      "provider": "anthropic",
+      "authTier": 2,
+      "audience": "personal",
+      "transport": ["subprocess", "direct-call", "sdk-in-process"],
+      "status": "allowed",
+      "basis": "Products that interact with Claude, the Agent SDK included, use API key authentication",
+      "source": "research/R8v-terms-verification.md row 3 (API terms, authentication clause)",
+      "accessDate": "2026-09-29",
+      "verifiedOn": null
+    },
+    {
+      "id": "anthropic-t2-distributed-subprocess-direct-call-sdk",
+      "provider": "anthropic",
+      "authTier": 2,
+      "audience": "distributed",
+      "transport": ["subprocess", "direct-call", "sdk-in-process"],
+      "status": "allowed",
+      "basis": "Products that interact with Claude, the Agent SDK included, use API key authentication",
+      "source": "research/R8v-terms-verification.md row 4 (API terms, authentication clause)",
+      "accessDate": "2026-09-29",
+      "verifiedOn": null
+    },
+    {
+      "id": "anthropic-t3-refused",
+      "provider": "anthropic",
+      "authTier": 3,
+      "audience": "any",
+      "transport": "any",
+      "status": "refused",
+      "basis": "OAuth is for purchasers of the plans and ordinary use of native applications; credentials or session tokens are not to be collected or intermediated",
+      "source": "research/R8v-terms-verification.md row 5 (consumer terms, credential clause)",
+      "accessDate": "2026-09-29",
+      "verifiedOn": null
+    },
+    {
+      "id": "anthropic-t1-sdk-refused",
+      "provider": "anthropic",
+      "authTier": 1,
+      "audience": "any",
+      "transport": "sdk-in-process",
+      "status": "refused",
+      "basis": "The SDK never carries a subscription login (ruling 70)",
+      "source": "research/R8v-terms-verification.md row 6; the owner's ruling 70, stated in terms of the credential (R8v open question 2)",
+      "accessDate": "2026-09-29",
+      "verifiedOn": null
+    }
+  ],
+  "sdkTransport": {
+    "transport": "sdk-in-process",
+    "authTier": 2,
+    "auth": "api-key",
+    "authTiersRefused": [1, 3],
+    "termsRow": "anthropic-t1-sdk-refused",
+    "rowAtTier2": [
+      "anthropic-t2-personal-subprocess-direct-call-sdk",
+      "anthropic-t2-distributed-subprocess-direct-call-sdk"
+    ],
+    "versionRange": ">=0.3.284 <0.4.0",
+    "testedVersion": "0.3.284",
+    "warningOutsideRange": "the installed @anthropic-ai/claude-agent-sdk is outside the tested 0.3 line from 0.3.284; the SDK transport may misbehave",
+    "versionSource": "the installed package's own manifest, read at load time — never guessed (F125-FR-037)",
+    "verifiedOn": "2026-09-29",
+    "note": "Open point reported to the orchestrator: R8v says the provider's pages do not draw the line between `claude -p` and the SDK library that the owner's ruling 70 draws. The rows follow the ruling, which is stated in terms of the credential (R8v open question 2)."
+  },
+  "termsFileHandover": {
+    "handedTo": "feature 147 (EP-11 specstride.terms/1, annex C §C.12) — its shipped terms file terms-rows.tsv and its table evaluator",
+    "rowShape": "TermsRow of @specstride/contracts/ep/terms (provider, authTier, audience, status, source, accessDate, quotedSentence, verifiedOn); the transport is carried alongside as a property of the fact",
+    "audienceAnyExpansion": "an adapter row with the audience `any` is handed over as one row per audience the gate reads (personal, distributed)",
+    "distributedAudienceDefaultAuthTier": 2,
+    "verifiedOn": null,
+    "note": "Feature 147 owns the terms gate and its file; this adapter supplies the facts only (F125-FR-005, F125-FR-037). Handed over by termsRowsForTermsGate() in src/index.ts."
+  }
+}

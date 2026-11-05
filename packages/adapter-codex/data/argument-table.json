@@ -1,0 +1,59 @@
+{
+  "schema": "specstride.harness-arguments/1",
+  "verifiedOn": "2026-09-29",
+  "pin": "codex-cli 0.153.4",
+  "checkedBy": "--help only; no run exists",
+  "shapes": {
+    "proposer-parity": [
+      "exec",
+      "--dangerously-bypass-approvals-and-sandbox",
+      "[--model M]",
+      "{prompt}"
+    ],
+    "proposer-default": [
+      "exec",
+      "--json",
+      "-s",
+      "workspace-write",
+      "-C",
+      "{workdir}",
+      "[-m M]",
+      "--ignore-user-config",
+      "--ignore-rules",
+      "[--ephemeral]",
+      "[--skip-git-repo-check]",
+      "-"
+    ],
+    "proposer-continued": [
+      "exec",
+      "resume",
+      "{sessionId}",
+      "--json",
+      "--ignore-user-config",
+      "--ignore-rules",
+      "-"
+    ],
+    "critic-readonly": [
+      "exec",
+      "--json",
+      "-s",
+      "read-only",
+      "--ephemeral",
+      "--ignore-user-config",
+      "--ignore-rules",
+      "-C",
+      "{workdir}",
+      "-m",
+      "{model}",
+      "-"
+    ],
+    "login-check": ["login", "status"],
+    "version": ["--version"]
+  },
+  "unverified": [
+    "approval policy override",
+    "sandbox mode override on resume",
+    "network setting of read-only mode",
+    "--skip-git-repo-check need"
+  ]
+}

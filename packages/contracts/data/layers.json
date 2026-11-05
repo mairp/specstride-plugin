@@ -1,0 +1,152 @@
+{
+  "schema": "specstride.layers/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex A, §A.1, §A.4",
+  "layers": [
+    {
+      "Layer": "L0",
+      "Name": "State",
+      "What it holds": "The user-level state, the control plane of a workspace, the workspace part, the worker root",
+      "Lifetime": "Files"
+    },
+    {
+      "Layer": "L1",
+      "Name": "Edges",
+      "What it holds": "Implementations of ports: harness adapters, stream adapters, sink adapters, check runners, secret resolvers, detach strategies",
+      "Lifetime": "Called by higher layers through ports"
+    },
+    {
+      "Layer": "L2",
+      "Name": "Ports",
+      "What it holds": "Interfaces owned by the core. No implementation lives in this layer",
+      "Lifetime": "—"
+    },
+    {
+      "Layer": "L3",
+      "Name": "Pass loop",
+      "What it holds": "The pass loop, watchdogs, breakers, yield and detached jobs, the loop layer, the router, the prompt assembler, carry-over",
+      "Lifetime": "Inside the engine process"
+    },
+    {
+      "Layer": "L4",
+      "Name": "Engine",
+      "What it holds": "Run, phase, phase attempt; verification gate, critic, approval record; recovery cycle; attempt planner",
+      "Lifetime": "One engine process per engine start"
+    },
+    {
+      "Layer": "L5",
+      "Name": "Runtime root",
+      "What it holds": "The pipeline stage executor, lock and lease, the relaunch classifier, the owner of run state, the terminal digest",
+      "Lifetime": "One detached process per launch"
+    },
+    {
+      "Layer": "L6",
+      "Name": "CLI",
+      "What it holds": "Short-lived commands. Readers of run state",
+      "Lifetime": "One process per command"
+    },
+    {
+      "Layer": "L7",
+      "Name": "Hosts",
+      "What it holds": "Host packages: host skills, host hook shims, the entry shim, skill-trigger eval suites",
+      "Lifetime": "Inside the host"
+    }
+  ],
+  "extensionPoints": [
+    {
+      "EP": "EP-01",
+      "Id and version": "`specstride.host/1`",
+      "Annex and section": "H §H.1; the CLI protocol in G §G.1"
+    },
+    {
+      "EP": "EP-02",
+      "Id and version": "`specstride.harness/1`, `descriptorVersion: 1`",
+      "Annex and section": "C §C.1"
+    },
+    {
+      "EP": "EP-03",
+      "Id and version": "`specstride.spec-format/1`",
+      "Annex and section": "C §C.7"
+    },
+    {
+      "EP": "EP-04",
+      "Id and version": "`specstride.loop-layer/1`",
+      "Annex and section": "D §D.1"
+    },
+    {
+      "EP": "EP-05",
+      "Id and version": "`specstride.check-runner/1`",
+      "Annex and section": "C §C.8"
+    },
+    {
+      "EP": "EP-06",
+      "Id and version": "`specstride.router-rules/1`",
+      "Annex and section": "D §D.4"
+    },
+    {
+      "EP": "EP-07",
+      "Id and version": "`specstride.verification-source/1`",
+      "Annex and section": "C §C.9"
+    },
+    {
+      "EP": "EP-08",
+      "Id and version": "`specstride.event-sink/1`",
+      "Annex and section": "C §C.10"
+    },
+    {
+      "EP": "EP-09",
+      "Id and version": "`specstride.view/1`",
+      "Annex and section": "G §G.6"
+    },
+    {
+      "EP": "EP-10",
+      "Id and version": "`specstride.secret-resolver/1`",
+      "Annex and section": "C §C.11"
+    },
+    {
+      "EP": "EP-11",
+      "Id and version": "`specstride.terms/1`",
+      "Annex and section": "C §C.12"
+    },
+    {
+      "EP": "EP-12",
+      "Id and version": "`specstride.quota-classifier/1`",
+      "Annex and section": "C §C.13"
+    },
+    {
+      "EP": "EP-13",
+      "Id and version": "`specstride.lock/1`",
+      "Annex and section": "F §F.5"
+    },
+    {
+      "EP": "EP-14",
+      "Id and version": "`specstride.doctor/1`",
+      "Annex and section": "G §G.7"
+    },
+    {
+      "EP": "EP-15",
+      "Id and version": "`specstride.prompt-block/1`",
+      "Annex and section": "D §D.5"
+    },
+    {
+      "EP": "EP-16",
+      "Id and version": "`specstride.toolchain/1`",
+      "Annex and section": "C §C.14"
+    },
+    {
+      "EP": "EP-17",
+      "Id and version": "`specstride.detach/1`",
+      "Annex and section": "F §F.6"
+    },
+    {
+      "EP": "EP-18",
+      "Id and version": "`specstride.critic-strategy/1` and `specstride.attempt-planner/1` (internal seams)",
+      "Annex and section": "E §E.1"
+    },
+    {
+      "EP": "EP-19",
+      "Id and version": "`specstride.stage-kind/1`",
+      "Annex and section": "F §F.7"
+    }
+  ]
+}

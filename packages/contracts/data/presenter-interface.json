@@ -1,0 +1,39 @@
+{
+  "schema": "specstride.presenter/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex G, §G.10",
+  "interface": [
+    {
+      "Subject": "Schema id",
+      "Content": "`specstride.presenter/1`"
+    },
+    {
+      "Subject": "Called by",
+      "Content": "The front door (119): `run` and `resume` in the foreground for the timeline, `watch` for the card, the inspection commands for the plain form"
+    },
+    {
+      "Subject": "Provided by",
+      "Content": "The presenter (145), with the banner and the theme"
+    },
+    {
+      "Subject": "Input",
+      "Content": "A stream of events: the compatibility projection in compatibility output, the primary event stream in default output (CQ-101); the mode; the detail level; the settings of colour, motion, banner, rail, background and glyphs; the size of the terminal; whether the stream is a terminal"
+    },
+    {
+      "Subject": "Modes",
+      "Content": "`timeline`, `card`, `plain` (annex X §X.6 row 160)"
+    },
+    {
+      "Subject": "Output",
+      "Content": "Lines on the stream the front door names. In compatibility output the lines of the baseline byte for byte. In default output no free text from outside the runtime"
+    },
+    {
+      "Subject": "Errors",
+      "Content": "None that reaches the run. A presenter that fails prints one line and leaves the exit code of the command as it is"
+    },
+    {
+      "Subject": "Owner of the four summary lines of the stream",
+      "Content": "The presenter, in compatibility output (CQ-121)"
+    }
+  ]
+}

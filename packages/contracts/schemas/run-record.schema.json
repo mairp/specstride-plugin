@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.run-state/1",
+  "title": "run-record",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.run-state/1",
+  "x-annex": "annex E, §E.2",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "runId": {
+      "type": "string",
+      "description": "Identifiers and feature slug",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "workspaceId": {
+      "type": "string",
+      "description": "Identifiers and feature slug",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "feature": {
+      "type": "string",
+      "description": "Identifiers and feature slug",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "state": {
+      "type": "string",
+      "description": "A state of the machine, never a derived condition",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes"
+    },
+    "stateSince": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time of the last transition",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    },
+    "transition": {
+      "type": "string",
+      "description": "Number of the last transition, T1 to T17",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "launchId": {
+      "type": "string",
+      "description": "The current launch and engine start",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "engineStartId": {
+      "type": "string",
+      "description": "The current launch and engine start",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "startMode": {
+      "type": "string",
+      "description": "`standalone` or `child`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "standalone",
+        "child"
+      ]
+    },
+    "requestKind": {
+      "type": "string",
+      "description": "`pipeline` or `engine`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "pipeline",
+        "engine"
+      ]
+    },
+    "productVersions": {
+      "type": "array",
+      "description": "Product version of every engine start of the run",
+      "x-type-in-words": "List of text",
+      "x-required": "Yes"
+    },
+    "relaunchOwner": {
+      "type": "string",
+      "description": "`root` or `supervise`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "root",
+        "supervise"
+      ]
+    },
+    "loop": {
+      "type": "object",
+      "description": "The pinned strategy and its named fields: `loop.strategy`, `loop.level`, `loop.manifest_hash`, and with parallel units the fields `loop.parallel.*`",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "containment": {
+      "type": "object",
+      "description": "Level in force per role, and `protection` (`prevent` or `detect`)",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "criticProof": {
+      "type": "object",
+      "description": "Result of the proof of the form of the `completion` level",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "redaction": {
+      "type": "string",
+      "description": "Version of the pattern set of the redactor",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "nativeMemory": {
+      "type": "object",
+      "description": "The setting of harness-native memory per role",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "caps": {
+      "type": "object",
+      "description": "The caps and budgets in force",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "verificationParallelism": {
+      "type": "integer",
+      "description": "The parallelism of verification commands in force, when the runtime lowered it below the configured value. In start mode `child` the runtime root copies it from the field of the same name of the terminal record before the next engine start. Where the root synthesized the terminal record, it takes the value `to` of the last event `check.parallelism_lowered` of the run",
+      "x-type-in-words": "Whole number",
+      "x-required": "No"
+    }
+  },
+  "required": [
+    "schema",
+    "runId",
+    "workspaceId",
+    "feature",
+    "state",
+    "stateSince",
+    "transition",
+    "launchId",
+    "engineStartId",
+    "startMode",
+    "requestKind",
+    "productVersions",
+    "relaunchOwner",
+    "loop",
+    "containment",
+    "criticProof",
+    "redaction",
+    "nativeMemory",
+    "caps"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

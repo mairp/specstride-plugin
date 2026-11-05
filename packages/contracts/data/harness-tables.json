@@ -1,0 +1,74 @@
+{
+  "schema": "specstride.harness/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex C, §C.3, §C.6, §C.15",
+  "completionForms": [
+    {
+      "Form": "First",
+      "Id": "`tool-less`",
+      "Meaning": "No tools by any route",
+      "Open to": "Every harness that qualifies",
+      "Proof": "The initial record of the call shows an empty tool list and the session identity that F100-FR-230 asks for. For a harness whose stream has no initial record: an exact version pin together with the preflight of the harness adapter and the flag set of the call, open to a tested harness adapter only, and recorded as the weaker proof (F100-FR-230, case 3)"
+    },
+    {
+      "Form": "Second",
+      "Id": "`read-only-tools`",
+      "Meaning": "The critic runs in the working tree inside a read-only sandbox of the operating system and may read project files by itself. It cannot write, cannot run a command that writes and cannot reach the network",
+      "Open to": "A tested harness adapter only",
+      "Proof": "The call record shows the read-only sandbox mode, the network off, and the confirmation of the harness adapter that the withheld paths of §C.4 cannot be read"
+    }
+  ],
+  "criticOrder": [
+    {
+      "Step": "1",
+      "Candidate": "The critic the consumer configured. Discovery never overrides it"
+    },
+    {
+      "Step": "2",
+      "Candidate": "A second model through the gateway of the host"
+    },
+    {
+      "Step": "3",
+      "Candidate": "A qualifying discovered harness, tested before unverified. Inside this step every tool-less candidate stands before every candidate with read-only tools"
+    },
+    {
+      "Step": "4",
+      "Candidate": "The default harness on a different model tier, in a fresh session, without tools, with a set budget"
+    }
+  ],
+  "containmentLevels": [
+    {
+      "Level": "C0",
+      "Meaning": "No containment. The harness runs with all tools as the consumer"
+    },
+    {
+      "Level": "C1",
+      "Meaning": "A restriction at tool level that the harness enforces: no bypass flag, an allow list, project settings of the harness ignored"
+    },
+    {
+      "Level": "C2",
+      "Meaning": "A sandbox of the operating system for commands, the network off or allow-listed, the control plane and credential paths denied. Whether the sandbox of a given harness denies reads of these paths is `unverified` until a capture of that harness shows it"
+    },
+    {
+      "Level": "C3",
+      "Meaning": "The whole run inside a container or a virtual machine, supplied by the consumer and detected"
+    }
+  ],
+  "placeholders": [
+    "{prompt}",
+    "{promptFile}",
+    "{workdir}",
+    "{emptyTmp}",
+    "{model}",
+    "{sessionId}",
+    "{file:<name>}"
+  ],
+  "normalizedStreamRecords": [
+    "init",
+    "text",
+    "tool",
+    "usage",
+    "error",
+    "terminal"
+  ]
+}

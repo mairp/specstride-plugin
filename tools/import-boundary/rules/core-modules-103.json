@@ -1,0 +1,18 @@
+{
+  "rule": "core-modules-103",
+  "owner": "103",
+  "requirement": "F103-FR-028",
+  "from": [
+    "packages/core/src/pass-loop/**",
+    "packages/core/src/layers/**",
+    "packages/core/src/prompt/**",
+    "packages/core/src/carry/**",
+    "packages/testkit/src/samples/EP-04/**",
+    "packages/testkit/src/samples/EP-15/**"
+  ],
+  "forbid": [
+    "packages/core/src/gate/writers.ts",
+    "packages/core/src/approval/record.ts"
+  ],
+  "reason": "Every writer of the phase gate is withheld from every loop layer and from the pass loop by construction (F103-FR-028): no module group of feature 103 in the core, and no sample of EP-04 or EP-15, imports packages/core/src/gate/writers.ts or packages/core/src/approval/record.ts"
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@specstride/tree-store",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride tree-store: the tree store of the parallel engine services, an edge package behind specstride.tree-store/1",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./doctor": "./src/doctor.ts",
+    "./git": "./src/git.ts",
+    "./data/*": "./data/*",
+    "./release": "./src/release.ts",
+    "./sweep": "./src/sweep.ts"
+  },
+  "scripts": {
+    "test": "node ../../tests/isolate.ts node --test \"test/**/*.test.*\"",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@specstride/contracts": "0.0.0",
+    "@specstride/kernel": "0.0.0"
+  }
+}

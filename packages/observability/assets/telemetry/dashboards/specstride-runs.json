@@ -1,0 +1,342 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "graphTooltip": 0,
+  "refresh": "30s",
+  "schemaVersion": 39,
+  "tags": [
+    "specstride",
+    "telemetry"
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "feature",
+        "label": "feature",
+        "type": "query",
+        "datasource": {
+          "type": "loki",
+          "uid": "loki"
+        },
+        "query": {
+          "label": "feature",
+          "stream": "",
+          "refId": "feature"
+        },
+        "definition": "feature"
+      },
+      {
+        "name": "harness",
+        "label": "harness",
+        "type": "query",
+        "datasource": {
+          "type": "loki",
+          "uid": "loki"
+        },
+        "query": {
+          "label": "harness",
+          "stream": "",
+          "refId": "harness"
+        },
+        "definition": "harness"
+      },
+      {
+        "name": "role",
+        "label": "role",
+        "type": "query",
+        "datasource": {
+          "type": "loki",
+          "uid": "loki"
+        },
+        "query": {
+          "label": "role",
+          "stream": "",
+          "refId": "role"
+        },
+        "definition": "role"
+      },
+      {
+        "name": "run",
+        "label": "run",
+        "type": "textbox",
+        "query": ".*",
+        "current": {
+          "text": ".*",
+          "value": ".*"
+        }
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timezone": "browser",
+  "title": "Specstride Runs",
+  "uid": "specstride-runs",
+  "version": 1,
+  "panels": [
+    {
+      "id": 1,
+      "title": "Runs",
+      "type": "stat",
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(count_over_time({job=\"specstride\", event=~\"run.started\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" [$__interval]))",
+          "refId": "A",
+          "legendFormat": "runs"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Iterations",
+      "type": "stat",
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(count_over_time({job=\"specstride\", event=~\"pass.started\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" [$__interval]))",
+          "refId": "A",
+          "legendFormat": "iterations"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Errors",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(count_over_time({job=\"specstride\", event=~\"stream.result\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" [$__interval]))",
+          "refId": "A",
+          "legendFormat": "stream.result is_error"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(count_over_time({job=\"specstride\", event=~\"pass.ended\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" [$__interval]))",
+          "refId": "B",
+          "legendFormat": "pass.ended status=error"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Cost (USD)",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 6
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(sum(sum_over_time({job=\"specstride\", event=~\"stream.result|pass.ended\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | unwrap cost.usd [$__interval])))",
+          "refId": "A",
+          "legendFormat": "cost.usd"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Input tokens",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(sum(sum_over_time({job=\"specstride\", event=~\"stream.result|pass.ended\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | unwrap input.tokens [$__interval])))",
+          "refId": "A",
+          "legendFormat": "tokens"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Output tokens",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 14
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(sum(sum_over_time({job=\"specstride\", event=~\"stream.result|pass.ended\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | unwrap output.tokens [$__interval])))",
+          "refId": "A",
+          "legendFormat": "tokens"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Cache tokens",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 16
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(sum(sum_over_time({job=\"specstride\", event=~\"stream.result|pass.ended\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | unwrap cache.read.tokens [$__interval])))",
+          "refId": "A",
+          "legendFormat": "tokens read"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(sum(sum_over_time({job=\"specstride\", event=~\"stream.result|pass.ended\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | unwrap cache.creation.tokens [$__interval])))",
+          "refId": "Z",
+          "legendFormat": "tokens creation"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Duration (ms)",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 22
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(avg(sum_over_time({job=\"specstride\", event=~\"stream.result|pass.ended\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | unwrap duration.ms [$__interval])))",
+          "refId": "A",
+          "legendFormat": "duration.ms"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Requests",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 24
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(count_over_time({job=\"specstride\", event=~\"stream.result|pass.ended\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" [$__interval]))",
+          "refId": "A",
+          "legendFormat": "requests"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Tool calls",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 30
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum by (tool) (count_over_time({job=\"specstride\", event=~\"tool.call\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | tool `~` `.*` [$__interval]))",
+          "refId": "A",
+          "legendFormat": "{{tool}}"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Verdicts",
+      "type": "piechart",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 32
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum by (result) (count_over_time({job=\"specstride\", event=~\"verdict.recorded\", feature=~\"$feature\", harness=~\"$harness\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | result `~` `.*` [$__interval]))",
+          "refId": "A",
+          "legendFormat": "{{result}}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.ledger/1",
+  "title": "ledger-record",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.ledger/1",
+  "x-annex": "annex B, §B.13",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "seq": {
+      "type": "integer",
+      "description": "Position in the ledger, from 1, without gaps",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "prev": {
+      "type": "string",
+      "description": "Hash of the record before",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "sig": {
+      "type": "string",
+      "description": "Signature over the record, made with the ledger key",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time of the append",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    },
+    "runId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "engineStartId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "phase": {
+      "description": "Identifiers, where they apply",
+      "x-type-in-words": "Whole number, text",
+      "x-required": "No"
+    },
+    "attemptId": {
+      "description": "Identifiers, where they apply",
+      "x-type-in-words": "Whole number, text",
+      "x-required": "No"
+    },
+    "passId": {
+      "description": "Identifiers, where they apply",
+      "x-type-in-words": "Whole number, text",
+      "x-required": "No"
+    },
+    "unitId": {
+      "description": "Identifiers, where they apply",
+      "x-type-in-words": "Whole number, text",
+      "x-required": "No"
+    },
+    "workerId": {
+      "type": "string",
+      "description": "Identifiers, only in the namespace `parallel`",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "groupId": {
+      "type": "string",
+      "description": "Identifiers, only in the namespace `parallel`",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "ns": {
+      "type": "string",
+      "description": "Namespace: `core` or the id of a loop layer",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "kind": {
+      "type": "string",
+      "description": "Record kind, from the closed set of the namespace",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "counters": {
+      "type": "object",
+      "description": "In the namespace `core`: reject count, ordinal of the phase attempt, MALFORMED streak, pass index, yield index, the consecutive breakers, as they stand after this record",
+      "x-type-in-words": "Record of whole numbers",
+      "x-required": "In `core`"
+    },
+    "treeHash": {
+      "type": "string",
+      "description": "Fingerprint of the tree the record is bound to",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "sessionId": {
+      "type": "string",
+      "description": "Session of the pass",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "data": {
+      "type": "object",
+      "description": "Content of the kind",
+      "x-type-in-words": "Record",
+      "x-required": "No"
+    }
+  },
+  "required": [
+    "schema",
+    "seq",
+    "prev",
+    "sig",
+    "ts",
+    "runId",
+    "engineStartId",
+    "ns",
+    "kind"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

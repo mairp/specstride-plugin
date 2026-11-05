@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.handoff/1",
+  "title": "handoff",
+  "description": "The handoff the engine writes for the proposer at the start of every pass with `carry.ledger_handoff` on (F103-FR-041). It crosses a FILE boundary — the engine writes it, the proposer reads it through its prompt — and therefore has its schema in @specstride/contracts, unlike the request and the result of the pass loop, which are a call. The file is regenerated every time and never appended to, is at most `carry.handoffMaxBytes` bytes (6 KB), is never read back by the runtime, and is refused by grounding (F100-FR-037). No model writes any part of it, and every text in it that comes from the workspace is data. Feature 103 (T003); the field list is F103-FR-041 and the table \"Handoff\" of specs/103-proposer-pass/data-model.md, and the specification stands where the two differ.",
+  "x-schema-id": "specstride.handoff/1",
+  "x-annex": "feature 103, spec.md, F103-FR-041",
+  "x-logical-name": "feature:<slug>:handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "phase",
+    "phaseAttempt",
+    "counters",
+    "ledgerTail",
+    "remainingUnits",
+    "feedbackPointers",
+    "treeFingerprint",
+    "treeWins"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "specstride.handoff/1",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "phase": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The phase the handoff was built for",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "phaseAttempt": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "The number of the phase attempt",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "counters": {
+      "type": "object",
+      "description": "The counters as they stand when the handoff is written: the pass index, the yield index, the error count, the cap count, the no-progress count and the short-pass count, and the outer-loop counts the engine adds (F103-FR-040)",
+      "x-type-in-words": "Record of whole numbers",
+      "x-required": "Yes",
+      "additionalProperties": {
+        "type": "integer"
+      }
+    },
+    "ledgerTail": {
+      "type": "array",
+      "description": "The last lines of the ledger, oldest first, as text",
+      "x-type-in-words": "List of text",
+      "x-required": "Yes",
+      "items": {
+        "type": "string"
+      }
+    },
+    "remainingUnits": {
+      "type": "array",
+      "description": "The remaining units of work: the plan less the ledger",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the unit of work",
+            "x-type-in-words": "Text",
+            "x-required": "Yes"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the unit of work, cut as the index cuts its titles",
+            "x-type-in-words": "Text",
+            "x-required": "Yes"
+          }
+        }
+      }
+    },
+    "killNote": {
+      "type": "object",
+      "description": "The newest kill note. After a kill it names the unit of work that was in progress, where a layer declared one; the runtime changes no file of the tree for it (F103-FR-041)",
+      "x-type-in-words": "Record",
+      "x-required": "No",
+      "additionalProperties": false,
+      "required": ["reason", "class"],
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "Why the pass was killed",
+          "x-type-in-words": "Text",
+          "x-required": "Yes"
+        },
+        "class": {
+          "type": "string",
+          "description": "The class of the kill",
+          "x-type-in-words": "Text",
+          "x-required": "Yes"
+        },
+        "passId": {
+          "type": "string",
+          "description": "The pass that was killed",
+          "x-type-in-words": "Text",
+          "x-required": "No"
+        },
+        "unitInProgress": {
+          "type": "string",
+          "description": "The unit of work that was in progress, where a layer declared one",
+          "x-type-in-words": "Text",
+          "x-required": "No"
+        },
+        "text": {
+          "type": "string",
+          "description": "The note itself. Text that comes from the workspace; framed as data",
+          "x-type-in-words": "Text",
+          "x-required": "No"
+        }
+      }
+    },
+    "detachedJob": {
+      "type": "object",
+      "description": "The `on_resume` text and the result of a detached job",
+      "x-type-in-words": "Record",
+      "x-required": "No",
+      "additionalProperties": false,
+      "required": ["onResume"],
+      "properties": {
+        "onResume": {
+          "type": "string",
+          "description": "The `on_resume` text, handed back verbatim. Text that comes from the workspace; framed as data",
+          "x-type-in-words": "Text",
+          "x-required": "Yes"
+        },
+        "exitCode": {
+          "type": "integer",
+          "description": "The exit code of the job, where it ended",
+          "x-type-in-words": "Whole number",
+          "x-required": "No"
+        },
+        "log": {
+          "type": "string",
+          "description": "A bounded slice of the job's log. Text that comes from the workspace; framed as data",
+          "x-type-in-words": "Text",
+          "x-required": "No"
+        }
+      }
+    },
+    "feedbackPointers": {
+      "type": "array",
+      "description": "The pointers to the feedback files, by logical name. The handoff holds the pointers, never the critic's text",
+      "x-type-in-words": "List of text",
+      "x-required": "Yes",
+      "items": {
+        "type": "string"
+      }
+    },
+    "treeFingerprint": {
+      "type": "string",
+      "description": "The fingerprint of the tree the handoff was built against",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "treeWins": {
+      "type": "string",
+      "description": "The line that says the tree wins where the handoff and the tree disagree (F103-FR-041)",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "maxBytes": {
+      "type": "integer",
+      "description": "The byte ceiling the file was rendered under, `carry.handoffMaxBytes` (6144)",
+      "x-type-in-words": "Whole number",
+      "x-required": "No"
+    },
+    "truncated": {
+      "type": "boolean",
+      "description": "True when the rendered file was cut at the last complete line under the ceiling, with the marker",
+      "x-type-in-words": "True or false",
+      "x-required": "No"
+    }
+  }
+}

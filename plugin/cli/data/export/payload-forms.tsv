@@ -1,0 +1,10 @@
+subject	as_is_form	new_form
+event and field names	names of the baseline, read from the compatibility projection; the three names that only the shippers used and that the projection has no row for are held by the exporter: api_request made from stream.result, tool_use made from tool.call, gate the name under which verdict.recorded feeds the old metric (never shipped as an event of a run)	types of the event catalogue (annex X §X.6 row 73) and fields of the envelope (annex X §X.1); data flattened with dotted keys
+loki label job	ralph	specstride
+loki labels	task, backend, event; model on api_request and tool_use; role for stream-tap events	feature, harness, event, role; model on usage and tool events
+log and metric scope	specstride.ralph	specstride.export
+log and metric resource attributes	service.name=ralph, task, backend	service.name=specstride, project, harness
+trace scope; trace service.name	specstride.trace; specstride	specstride.trace; specstride
+time of an entry or record	clock of the sink	ts of the event
+span names	as-is name of span-scopes.tsv (eight scopes)	span_name_new of span-scopes.tsv (sixteen scopes)
+events that project to nothing	not shipped	shipped

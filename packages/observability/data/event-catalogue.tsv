@@ -1,0 +1,124 @@
+type	kind	partner	data_fields	free_text_fields
+run.launched	instant		reason,countsCarried,countsReset,startMode,requestKind,productVersion	
+run.started	open	run.ended	workdir,phases,featureSlug,proposer,critic,resumeAt,states,verificationMode,verificationPlanRef	workdir:target
+run.ended	close	run.started	outcome,stopReason,exitCode,endCause,causedBy,synthesized,phase,phases,rc,evidenceRef,attempts,streak	
+run.paused	open	run.resumed	class,role,harness,resetsAt,resumeAt	
+run.resumed	close	run.paused	pausedMs,probeIndex,how,synthesized	
+quota.signal	instant		class,confidence,rateLimitType,utilization,resetsAt,resetsAtSource,status,evidence	evidence:diagnostic
+harness.error	instant		class,retryable,status,message	message:diagnostic
+fallback.switched	instant		from,to,reason,billingChange	reason:free-text
+fallback.restored	instant		from,to,reason	reason:free-text
+alert	instant		kind,level,role,threshold,value,limit	
+budget.exceeded	instant		dimension,limit,used,role,resumable	
+host.quota_observed	instant		kind,data	data:free-text
+blocked	open	unblocked	reason,needs,changedSource,changedRef,since,question,options,synthesized	needs:free-text,question:free-text,options:free-text
+unblocked	close	blocked	by,answerRef,latencyMs,synthesized	by:free-text
+counters.reset	instant		which,by	by:free-text
+pipeline.started	open	pipeline.ended	pipelineId,mode,stages,launcherRef,commentHash,comment,changed,delegated	comment:comment
+pipeline.ended	close	pipeline.started	state,exitReason,exitCode,lastStage,childExit,evidencePath,synthesized	evidencePath:target
+stage.started	open	stage.ended	stageId,kind	
+stage.ended	close	stage.started	outcome,reason,exitCode,synthesized	
+launch.checked	instant		check,status,decision,reason,detail	reason:free-text,detail:diagnostic
+supervisor.observed	instant		exitCode,childExit,stopReason,budgetLeft	
+supervisor.relaunch	instant		attempt,reason,exit,childExit,stage,stopReason,budgetRemaining,detail	detail:diagnostic
+supervisor.stopped	instant		sent,detail	detail:diagnostic
+digest.written	instant		state,exit,lastStage,childExit,evidencePath	evidencePath:target
+phase.started	open	phase.ended	phase,title,total,shape	title:free-text
+phase.ended	close	phase.started	phase,attempt,title,outcome,synthesized	title:free-text
+attempt.started	open	attempt.ended	phase,attempt,kind,backend,criteria,strategy	criteria:free-text
+attempt.ended	close	attempt.started	phase,attempt,endCause,workProducts,synthesized	
+attempt.archived	instant		phase,attempt,dirRef	
+attempt.acceleration_note	instant		phase,attempt,noteRef	
+attempt.tier_bumped	instant		fromTier,toTier,k,rejections	
+attempt.tier_bump_skipped	instant		reason	reason:free-text
+escalation.skipped	instant		reason	
+recovery.triggered	instant		phase,attempt	
+recovery.diagnosis_started	open	recovery.diagnosis_done	phase,attempt,provider	
+recovery.diagnosis_done	close	recovery.diagnosis_started	phase,attempt,bytes,case,synthesized	
+recovery.diagnosis_failed	close	recovery.diagnosis_started	phase,attempt,error,synthesized	error:diagnostic
+gate.oscillation	instant		phase,attempt,criterion,reappears	criterion:free-text
+pass.started	open	pass.ended	iter,maxIter,sessionId,continued	
+pass.ended	close	pass.started	iter,endCause,timeBreakdown,firstEditAt,usageComplete,transcriptRef,evidence,yielded,waitedSec,pluginRestart,subtype,consec,reason,killClass,elapsed,max,synthesized	subtype:free-text,reason:free-text
+pass.limits_set	instant		phase,attempt,role,seconds,source,arm,yieldPoll,yieldPollSource,yieldPollArm,tamperBracket	
+pass.killed	instant		iter,reason,class,elapsed,detail,checkpointRef	detail:diagnostic
+pass.short	instant		iter,elapsed,consec	
+pass.halted	instant		iter,reason,yields,max,killReason,consec,subtype,killClass,jobPid,jobLogRef	reason:free-text,subtype:free-text
+prompt.built	instant		promptRef,blocks,totalTokensEst	
+prompt.block_dropped	instant		block,assembledBytes,blockBytes,budgetBytes	
+prompt.block_protected	instant		block,assembledBytes,blockBytes,budgetBytes	
+evidence.present	instant		file,iters	file:target
+evidence.written	instant		file,iters	file:target
+progress.swept	instant		from,to	from:target,to:target
+commit.made	instant		phase	
+plugin.installed	instant		iter,profile,plugins	profile:free-text,plugins:free-text
+plugin.install_failed	instant		iter,reason	reason:free-text
+plugin.install_denied	instant		iter,reason	
+tool.call	instant		tool,toolId,status,category,target,targets,argsRef,resultRef,durationMs,ok,redacted,truncated,originalBytes,retainedBytes	tool:free-text,target:target,targets:target
+stream.init	instant		model,tools,schemaVersion,sessionId,cwd,provider,update	tools:free-text,cwd:target
+stream.text	instant		textRef,messageKey,messageId,contentIndex,finalFragment,redacted,truncated,originalBytes,retainedBytes	
+stream.result	instant		model,isError,subtype,costUsd,durationMs,numTurns,inputTokens,outputTokens,cacheReadTokens,cacheCreationTokens,status,reasonCode,reason,source,providerStatus,providerStopReason,producerExitCode,producerSignal,parserExitCode,timedOut	subtype:free-text,reason:free-text,providerStatus:free-text,providerStopReason:free-text
+stream.diagnostic	instant		code,severity,message,providerRecordType,toolId,tool,attempt,delayMs	message:diagnostic,providerRecordType:free-text,tool:free-text
+stream.mode	instant		mode,reason,providerFormat,role,supportedSignals	reason:free-text
+stream.evidence_writing	instant		tool,target,match,toolId	tool:free-text,target:target,match:free-text
+stream.missing_terminal	instant		passId	
+usage.reported	instant		usageId,scope,cumulative,inputTokens,outputTokens,cacheReadTokens,cacheWriteTokens,reasoningTokens,costUsd,costSource,billing	
+usage.unavailable	instant		reason,scope,iter,elapsed	reason:free-text
+verification.started	open	verification.ended	phase,attempt,planRef	
+verification.ended	close	verification.started	phase,attempt,result,rc,evidenceRef,synthesized	
+verification.release_passed	instant		evidenceRef	
+verification.prestaged	instant		phase,attempt,rc,summary	summary:free-text
+check.started	open	check.ended	checkId,commandRef,runner,unitId,batch,slot	
+check.ended	close	check.started	checkId,result,durationMs,unitId,condition,batch,slot,concurrent,synthesized	
+job.started	open	job.ended	kind,phase,attempt,cmd,logRef,iter,mode,pid,sid,argv	cmd:free-text,argv:free-text
+job.step	instant		jobId,cycle,stepTs	
+job.first_failure	instant		jobId,failedAt	
+job.ended	close	job.started	kind,phase,attempt,logRef,msAfterFirstFailure,synthesized	
+yield.started	open	yield.ended	iter,reason,predicateKind,deadlineSec,jobMode,jobLogRef,yieldIndex	reason:free-text
+yield.waiting	instant		iter,elapsed,predicateKind,yieldIndex	
+yield.ended	close	yield.started	iter,outcome,reason,waitedSec,jobRc,jobDurationSec,yieldIndex,predicateKind,deadlineSec,jobLogRef,synthesized	reason:free-text
+yield.refused	instant		iter,reason,artifactRef,logRef	reason:free-text
+resource.wait	instant		resource,holder,ms	resource:free-text,holder:free-text
+microloop.unit	instant		unitId,check,result,layerOff,fallbackReason	
+task.planned	instant		taskId,estimateMs	
+task.ticked	instant		taskId,elapsedMs	
+tasks.ticked	instant		phase,count,taskIds	
+critic.selected	instant		harness,model,why,diversity,sameModelWarning	why:free-text
+critic.started	open	critic.call	phase,attempt,provider	
+critic.call	close	critic.started	promptRef,form,outcome,latencyMs,usage,diversity,sameModelWarning,synthesized	
+critic.grounding_gap	instant		phase,attempt,paths	paths:target
+critic.grounding_carried	instant		phase,attempt,paths	paths:target
+critic.citation_unresolved	instant		phase,attempt,paths	paths:target
+critic.malformed	instant		phase,attempt,streak,limit	
+verdict.recorded	instant		verdictId,phase,attempt,result,title,reason,maxRejects,nonceOk,malformedStreak	title:free-text,reason:free-text
+verdict.adjudicated	instant		verdictId,falseNegative,by	by:free-text
+route.decided	instant		tableId,tableVersion,point,ruleId,signals,choice	
+integrity.noted	instant		kind,detail	detail:diagnostic
+integrity.events_changed	instant		phase,attempt,file	file:target
+learning.observed	instant		phase,pathRef	
+learning.knob_adjusted	instant		knob,phase,from,to,reason,metric,samples,runId,revertsRunId	reason:free-text
+learning.knob_auto_reverted	instant		knob,phase,guardrail,from,to,runId,revertsRunId	
+learning.knob_evaluated	instant		knob,phase,label,action,reset,costR,costMde,wallR,wallMde,nApplied,nBaseline,runId,evaluatesRunId	
+telemetry.delivery	instant		sink,batchId,eventCount,status,httpStatus,reasonCode	
+event.dropped	instant		count,reason	
+redaction.commit_blocked	instant		files,counts	files:target
+redaction.dropped	instant		ingressClass,mark,count	
+parallel.plan	instant		groupId,hash	
+parallel.admission	instant		groupId,taskId,check,result	
+parallel.group.started	open	parallel.group.ended	groupId	
+parallel.group.ended	close	parallel.group.started	groupId,outcome,synthesized	
+parallel.worker.started	open	parallel.worker.ended	groupId,workerId	
+parallel.worker.ended	close	parallel.worker.started	groupId,workerId,outcome,synthesized	
+parallel.integration	instant		groupId,step,pathCount,result,refusal	
+strategy.selected	instant		strategy,level,manifestHashes,fallbackReason	
+microloop.inert	instant		phase,attempt	
+checkpoint.accepted	instant		unitId,taskIds,checkpointRef	taskIds:free-text
+checkpoint.refused	instant		reason,bytes	
+checkpoint.removed	instant		bytes	
+check.excluded	instant		checkId,reason,scope,durationMs,ruleId	
+check.admission	instant		checkId,batch,slot,result,reason	
+check.parallelism_lowered	instant		from,to,batch,phase,attempt,reason	
+tripwire.raised	instant		kind,ruleId	
+tripwire.cleared	instant		clearedAt	
+source.change_accepted	instant		file,changedRef,oldHash,newHash,acceptedAt	
+fallback.skipped	instant		entry,entryHarness,entryProvider,authTier,audience,reason	
+terms.override_used	instant		termsProvider,authTier,audience	

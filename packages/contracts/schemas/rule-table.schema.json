@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.table/1",
+  "title": "rule-table",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.table/1",
+  "x-annex": "annex X, §X.3",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "id": {
+      "type": "string",
+      "description": "Id and version of the table",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "version": {
+      "type": "string",
+      "description": "Id and version of the table",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "points": {
+      "type": "object",
+      "description": "Per decision point: the named signals it may read, with their types, and its closed choice set",
+      "x-type-in-words": "Map",
+      "x-required": "Yes"
+    },
+    "rows": {
+      "type": "object",
+      "description": "Per decision point an ordered list of rows",
+      "x-type-in-words": "Map to lists",
+      "x-required": "Yes",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "description": "Id of the rule, stable, recorded with every decision",
+            "x-type-in-words": "Text",
+            "x-required": "Yes"
+          },
+          "when": {
+            "type": "object",
+            "description": "A predicate over named signals, built from the closed set of operators: equal, not equal, less, greater, member of, present, and, or, not",
+            "x-type-in-words": "Record",
+            "x-required": "Yes; absent in the default row"
+          },
+          "choice": {
+            "type": "string",
+            "description": "A member of the choice set of the point",
+            "x-type-in-words": "Member of a closed set",
+            "x-required": "Yes"
+          }
+        },
+        "required": [
+          "ruleId",
+          "when",
+          "choice"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "id",
+    "version",
+    "points",
+    "rows"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

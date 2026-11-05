@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.fact-block/1",
+  "title": "fact-block",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.fact-block/1",
+  "x-annex": "annex D, §D.7",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "manifestHash": {
+      "type": "string",
+      "description": "Hash of the check manifest and the list of its commands by id",
+      "x-type-in-words": "Text, list",
+      "x-required": "Yes"
+    },
+    "commands": {
+      "type": "array",
+      "description": "Hash of the check manifest and the list of its commands by id",
+      "x-type-in-words": "Text, list",
+      "x-required": "Yes"
+    },
+    "treeFingerprint": {
+      "type": "string",
+      "description": "Fingerprint of the tree at the phase gate, once",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "units": {
+      "type": "array",
+      "description": "Per unit of work: its id; the tasks it named, headed as the proposer's declaration; per command the exit result and, in separate fields, each condition (`tainted`, `flaky` with both observed results, `superseded` or `current`, `cached`)",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes (may be empty)"
+    },
+    "unnamedTasks": {
+      "type": "array",
+      "description": "Tasks of the phase that no unit named",
+      "x-type-in-words": "List of text",
+      "x-required": "Yes"
+    },
+    "notice": {
+      "type": "string",
+      "description": "One fixed sentence: a result is evidence about the tree and not about a task",
+      "x-type-in-words": "Fixed text",
+      "x-required": "Yes"
+    },
+    "protected": {
+      "type": "object",
+      "description": "Paths of the protected set changed since phase entry, and which were authorised from the text of the task at launch; protected paths changed since launch in phases already approved; suppression markers added and removed, per file",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "integrity": {
+      "type": "array",
+      "description": "Integrity events, by kind from the closed set of §X.6, without counts",
+      "x-type-in-words": "List of members of a closed set",
+      "x-required": "Yes (may be empty)"
+    },
+    "facts": {
+      "type": "array",
+      "description": "Further facts, each from a closed set: a check manifest that a relaunch derived differently; a cited result file that belongs to a stopped job; phase evidence that predates the tree; an intended change of a source that was accepted; a task list that changed since launch",
+      "x-type-in-words": "List of members of a closed set",
+      "x-required": "Yes (may be empty)"
+    },
+    "excluded": {
+      "type": "array",
+      "description": "Commands excluded from the inner set, each with the reason",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes (may be empty)"
+    }
+  },
+  "required": [
+    "schema",
+    "manifestHash",
+    "commands",
+    "treeFingerprint",
+    "units",
+    "unnamedTasks",
+    "notice",
+    "protected",
+    "integrity",
+    "facts",
+    "excluded"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

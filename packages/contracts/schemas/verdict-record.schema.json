@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.verdict/1",
+  "title": "verdict-record",
+  "description": "The verdict of one phase gate, written by the engine. Feature 101 (T002); the field list is the table \"Verdict record\" of specs/101-gate-and-verdict/data-model.md, and the specification stands where the two differ.",
+  "x-schema-id": "specstride.verdict/1",
+  "x-annex": "feature 101, data-model.md, \"Verdict record\"",
+  "x-logical-name": "attempt:<N>:<k>:<n>:verdict",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "verdictId": {
+      "type": "string",
+      "description": "Identity of the verdict",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "attemptId": {
+      "type": "string",
+      "description": "The phase attempt the verdict belongs to",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "phase": {
+      "type": "integer",
+      "description": "The phase the verdict belongs to",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "ordinal": {
+      "type": "integer",
+      "description": "The ordinal of the phase attempt the verdict belongs to",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "verdict": {
+      "type": "string",
+      "description": "APPROVED, REJECTED or MALFORMED (annex X §X.6 row 8)",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": ["APPROVED", "REJECTED", "MALFORMED"]
+    },
+    "detail": {
+      "type": "string",
+      "description": "For MALFORMED: a member of the closed set of details (annex X §X.6 row 251). Present only with MALFORMED",
+      "x-type-in-words": "Member of a closed set, or absent",
+      "x-required": "No",
+      "enum": ["nonce-mismatch", "no-verdict-line", "multiple-verdict-lines", "call-failed"]
+    },
+    "reason": {
+      "type": "string",
+      "description": "The reason line of a verdict that is no approval, at most 120 characters",
+      "x-type-in-words": "Text, or absent",
+      "x-required": "No",
+      "maxLength": 120
+    },
+    "calls": {
+      "type": "array",
+      "description": "One entry per call of the strategy; at least one entry. The session id of no entry equals a session id of a pass of the phase attempt",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "description": "One call of the strategy",
+        "x-type-in-words": "Record",
+        "properties": {
+          "critic": {
+            "type": "object",
+            "description": "Who judged: the harness, the provider, the model, the form of the `completion` level and the proof of that form",
+            "x-type-in-words": "Record",
+            "x-required": "Yes",
+            "properties": {
+              "harness": {
+                "type": "string",
+                "description": "The harness of the critic",
+                "x-type-in-words": "Text",
+                "x-required": "Yes"
+              },
+              "provider": {
+                "type": "string",
+                "description": "The provider of the critic",
+                "x-type-in-words": "Text",
+                "x-required": "Yes"
+              },
+              "model": {
+                "type": "string",
+                "description": "The model of the critic",
+                "x-type-in-words": "Text",
+                "x-required": "Yes"
+              },
+              "form": {
+                "type": "string",
+                "description": "The form of the `completion` level the call ran in (annex C §C.3)",
+                "x-type-in-words": "Member of a closed set",
+                "x-required": "Yes"
+              },
+              "proof": {
+                "type": ["object", "null"],
+                "description": "The proof of the form and its result, or null where the profile asks for none",
+                "x-type-in-words": "Record, or null",
+                "x-required": "Yes"
+              }
+            },
+            "required": ["harness", "provider", "model", "form", "proof"]
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "The session the call ran in; it is never a session of a pass of the phase attempt",
+            "x-type-in-words": "Text",
+            "x-required": "Yes"
+          },
+          "nonceHash": {
+            "type": "string",
+            "description": "The hash of the nonce of the call. The nonce itself is never written (F100-FR-139)",
+            "x-type-in-words": "Text",
+            "x-required": "Yes"
+          },
+          "at": {
+            "type": "string",
+            "description": "When the call was made",
+            "x-type-in-words": "Time",
+            "x-required": "Yes",
+            "format": "date-time"
+          },
+          "usage": {
+            "type": ["object", "null"],
+            "description": "What the call used, as the harness reported it, or null where it reported nothing",
+            "x-type-in-words": "Record, or null",
+            "x-required": "Yes"
+          },
+          "latencyMs": {
+            "type": ["integer", "null"],
+            "description": "How long the call took, in milliseconds, or null where it is not known",
+            "x-type-in-words": "Whole number, or null",
+            "x-required": "Yes"
+          },
+          "outcome": {
+            "type": "string",
+            "description": "How the call ended",
+            "x-type-in-words": "Text",
+            "x-required": "Yes"
+          }
+        },
+        "required": ["critic", "sessionId", "nonceHash", "at", "usage", "latencyMs", "outcome"]
+      }
+    },
+    "transcript": {
+      "type": "object",
+      "description": "The as-is form: the header lines, the prompt in full, and the reply or `(empty)`",
+      "x-type-in-words": "Record",
+      "x-required": "Yes",
+      "properties": {
+        "header": {
+          "type": "array",
+          "description": "The header lines, in order: phase, attempt, provider, nonce, verdict, parse",
+          "x-type-in-words": "List of text",
+          "x-required": "Yes",
+          "items": { "type": "string" }
+        },
+        "prompt": {
+          "type": "string",
+          "description": "The prompt in full, as it was sent",
+          "x-type-in-words": "Text",
+          "x-required": "Yes"
+        },
+        "reply": {
+          "type": "string",
+          "description": "The reply, or the as-is text `(empty)` where the reply held no bytes",
+          "x-type-in-words": "Text",
+          "x-required": "Yes"
+        }
+      },
+      "required": ["header", "prompt", "reply"]
+    }
+  },
+  "required": [
+    "schema",
+    "verdictId",
+    "attemptId",
+    "phase",
+    "ordinal",
+    "verdict",
+    "calls",
+    "transcript"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

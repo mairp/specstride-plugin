@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@specstride/config": ["../config/src/index.ts"]
+    }
+  },
+  "include": ["src", "test"]
+}

@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.terminal/1",
+  "title": "terminal-record",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.terminal/1",
+  "x-annex": "annex B, §B.15",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "exitCode": {
+      "type": "integer",
+      "description": "Code of the engine, from §E.4",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "stopReason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Member of the enumeration of §E.3, or null when the exit has no member (annex E §E.3, F100-FR-148)",
+      "x-type-in-words": "Member of a closed set, or null",
+      "x-required": "Yes"
+    },
+    "retryable": {
+      "type": "boolean",
+      "description": "Whether this stop may be relaunched. Decided for this stop, never above the `transient` attribute of its stop reason",
+      "x-type-in-words": "Truth value",
+      "x-required": "Yes"
+    },
+    "cause": {
+      "type": "string",
+      "description": "`normal`, `crash` or `owner-lost`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "normal",
+        "crash",
+        "owner-lost"
+      ]
+    },
+    "causedBy": {
+      "type": "string",
+      "description": "`self`, `operator`, `supervisor`, `host` or `crash`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "self",
+        "operator",
+        "supervisor",
+        "host",
+        "crash"
+      ]
+    },
+    "blocked": {
+      "type": "object",
+      "description": "When the run rests blocked on a human: reason from the closed set of §E.2, what is needed, the file that changed",
+      "x-type-in-words": "Record",
+      "x-required": "No"
+    },
+    "runId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "launchId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "engineStartId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "phase": {
+      "type": "integer",
+      "description": "Where the run stood",
+      "x-type-in-words": "Whole number, text",
+      "x-required": "No"
+    },
+    "attemptId": {
+      "type": "string",
+      "description": "Where the run stood",
+      "x-type-in-words": "Whole number, text",
+      "x-required": "No"
+    },
+    "at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    },
+    "synthesized": {
+      "type": "boolean",
+      "description": "True when the runtime root wrote the record",
+      "x-type-in-words": "Truth value",
+      "x-required": "Yes"
+    },
+    "verificationParallelism": {
+      "type": "integer",
+      "description": "The parallelism of verification commands in force at the exit, when the engine lowered it below the configured value (F148-FR-014)",
+      "x-type-in-words": "Whole number",
+      "x-required": "No"
+    }
+  },
+  "required": [
+    "schema",
+    "exitCode",
+    "stopReason",
+    "retryable",
+    "cause",
+    "causedBy",
+    "runId",
+    "launchId",
+    "engineStartId",
+    "at",
+    "synthesized"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

@@ -1,0 +1,162 @@
+{
+  "schema": "specstride.loop-layer/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex D, §D.1, §D.2, §D.4",
+  "callPoints": [
+    {
+      "#": "1",
+      "Call point": "`contributePrompt`",
+      "When": "Before a pass, when the prompt is assembled",
+      "What the layer returns": "Prompt blocks (the form of §D.5)"
+    },
+    {
+      "#": "2",
+      "Call point": "`afterPass`",
+      "When": "After a pass has exited",
+      "What the layer returns": "`accept`, `refuse` or `none`, for the checkpoint found in the outbox"
+    },
+    {
+      "#": "3",
+      "Call point": "`betweenPasses`",
+      "When": "While no session is open",
+      "What the layer returns": "An outcome with directives"
+    },
+    {
+      "#": "4",
+      "Call point": "`nextPassBlock`",
+      "When": "Before the next pass",
+      "What the layer returns": "The block for the next pass, or `none`"
+    },
+    {
+      "#": "5",
+      "Call point": "`onEvidence`",
+      "When": "When phase evidence appears",
+      "What the layer returns": "Whether a closing check runs, or `none`"
+    },
+    {
+      "#": "6",
+      "Call point": "`contributeCriticInput`",
+      "When": "Before the critic prompt is assembled",
+      "What the layer returns": "The rows of the fact block (§D.7), or `none`"
+    },
+    {
+      "#": "7",
+      "Call point": "`resume`",
+      "When": "At a start of the engine inside a phase attempt",
+      "What the layer returns": "What to do with open work, from the state of the ledger"
+    },
+    {
+      "#": "8",
+      "Call point": "`report`",
+      "When": "At the end of the run",
+      "What the layer returns": "The fields of the `[LOOP]` line"
+    }
+  ],
+  "directives": [
+    {
+      "Directive": "`keep`",
+      "Meaning": "The unit of work is kept: a ledger record bound to the tree fingerprint"
+    },
+    {
+      "Directive": "`repair`",
+      "Meaning": "The proposer gets the output of the check on the current tree"
+    },
+    {
+      "Directive": "`unresolved`",
+      "Meaning": "The unit stays as it is; the tree is not touched"
+    },
+    {
+      "Directive": "`layerOffForAttempt`",
+      "Meaning": "The layer is off for the rest of the phase attempt"
+    },
+    {
+      "Directive": "`layerOffForRun`",
+      "Meaning": "The layer is off for the rest of the run"
+    },
+    {
+      "Directive": "`giveIterationBack`",
+      "Meaning": "The pass is given back: it does not count towards the pass limit. The literal keeps the retired word"
+    },
+    {
+      "Directive": "`exemptShortPass`",
+      "Meaning": "The pass leaves the short-pass counter as it was"
+    },
+    {
+      "Directive": "`exemptRepeatCounter`",
+      "Meaning": "The exact argument lists of the inner check set are exempt from the process-level repeat counter"
+    },
+    {
+      "Directive": "`requestPass`",
+      "Meaning": "The engine runs one pass: prompt block, working directory, session directive, time limit, worker id"
+    },
+    {
+      "Directive": "`requestPassGroup`",
+      "Meaning": "The engine runs a list of `requestPass` with a concurrency limit and returns when every pass has ended"
+    },
+    {
+      "Directive": "`integrateGroup`",
+      "Meaning": "The engine integrates the results of a group through the tree-store service (§D.2). It carries, per worker, `accepted` or the refusal reason, which is how the verdicts of the audits of feature 142 reach the engine before `compose`"
+    }
+  ],
+  "treeStoreOperations": [
+    {
+      "Operation": "`snapshot`",
+      "Input": "A directory",
+      "Output": "A tree id",
+      "Writes": "The store"
+    },
+    {
+      "Operation": "`materialize`",
+      "Input": "A tree id",
+      "Output": "A worker tree",
+      "Writes": "The worker root"
+    },
+    {
+      "Operation": "`changed`",
+      "Input": "A base tree id and a tree id",
+      "Output": "The paths that differ, each with its kind (added, changed, deleted, mode changed)",
+      "Writes": "Nothing"
+    },
+    {
+      "Operation": "`compose`",
+      "Input": "A base tree id and audited deltas in the order of the tasks at launch",
+      "Output": "A tree id, or a refusal with the reason `overlap` and the paths",
+      "Writes": "The store"
+    },
+    {
+      "Operation": "`apply`",
+      "Input": "The base, the composed tree, the workspace",
+      "Output": "The paths written",
+      "Writes": "The workspace: exactly the paths of the composed delta"
+    },
+    {
+      "Operation": "`release`",
+      "Input": "A worker tree",
+      "Output": "—",
+      "Writes": "The worker root"
+    },
+    {
+      "Operation": "`sweep`",
+      "Input": "—",
+      "Output": "The trees removed",
+      "Writes": "The worker root and the store"
+    }
+  ],
+  "routerDecisionPoints": [
+    {
+      "Decision point": "`tools`",
+      "Chooses": "The order of, and exclusions among, entries of the frozen check manifest of the phase",
+      "Never": "Adds a command or builds an argument list"
+    },
+    {
+      "Decision point": "`loop`",
+      "Chooses": "A registered loop layer, or off for this phase attempt",
+      "Never": "Switches a layer on; replaces the gated loop"
+    },
+    {
+      "Decision point": "`escalation`",
+      "Chooses": "The next rung of the pinned model-tier ladder of the same harness, or `skip` with a reason",
+      "Never": "Moves to another harness; targets a rung that equals a critic-class call of the run in model and in effort (signal `targetIsCriticModel`)"
+    }
+  ]
+}

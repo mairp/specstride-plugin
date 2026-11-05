@@ -1,0 +1,4 @@
+# packages/config/src/cli
+#
+# This directory of the tree of plan.md is filled by T018, T020 (`config schema` and `config show`).
+# It is kept in the tree so that the package layout of plan.md exists as planned.

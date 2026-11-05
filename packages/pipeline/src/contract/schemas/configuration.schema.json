@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:internal:107:configuration/1",
+  "title": "The configuration of the launch contract",
+  "description": "The record `configuration` of the launch contract (feature 107), with the members this feature owns: `relaunch` (for the as-is member `auto`; the budget applies to every mode), `comment`, `scopes` and `verification`. The member `learning` is the block of the binding of feature 106 (F106-FR-027) and stays a pass-through here: its members are owned by feature 106. The record schema `launch-contract.schema.json` of @specstride/contracts names the same members; this item schema joins to it by reference so that one composed schema is the validator (T005). The members of `verification` are the closed set of annex X §X.6 row 52 (`verificationModes` of @specstride/contracts), the options of `comment.changed` the closed set of row 283 (`optionsThatTheConsumersCommentMaySelect`), and the sources of `scopes` the closed set of row 261 (`sourceOfADeclarationOfScopeReadOrWrite`); all read from @specstride/contracts, never copied by hand.",
+  "x-schema-id": "urn:specstride:schema:internal:107:configuration/1",
+  "x-annex": "feature 107, data-model.md, \"Member names\" (configuration with relaunch, comment, scopes and verification)",
+  "type": "object",
+  "properties": {
+    "agent_stream": {
+      "description": "As-is member of the record: the agent stream the run writes (owned by the baseline; no rule here)"
+    },
+    "color": {
+      "description": "As-is member of the record: when the run colors its output (owned by the baseline; no rule here)"
+    },
+    "live_detail": {
+      "description": "As-is member of the record: how much live detail the run writes (owned by the baseline; no rule here)"
+    },
+    "specstride_live": {
+      "description": "As-is member of the record: the live view of the run (owned by the baseline; no rule here)"
+    },
+    "telemetry": {
+      "description": "As-is member of the record: the telemetry sinks of the run (owned by the baseline; no rule here)"
+    },
+    "relaunch": {
+      "type": "object",
+      "description": "The relaunch budget: the maximum of relaunches (0 to 5, default 2) and the wall-clock seconds; it applies to every mode (for the as-is member `auto`, data-model.md \"Member names\")",
+      "properties": {
+        "max_relaunches": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5,
+          "description": "The maximum of relaunches; the default 2"
+        },
+        "wall_clock_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The wall-clock seconds of the budget"
+        }
+      },
+      "required": ["max_relaunches", "wall_clock_seconds"],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "learning": {
+      "type": "object",
+      "description": "The block of the binding of feature 106 (mode, decisions_through, decisions_sha256, effective, source_path); the members are owned by feature 106 (F106-FR-027) and this schema holds no rule of them"
+    },
+    "verification": {
+      "type": "object",
+      "description": "The verification mode the derivation set, with its reason (F107-FR-036); the mode is of the closed set of annex X §X.6 row 52 (verificationModes of @specstride/contracts)",
+      "properties": {
+        "mode": {
+          "enum": ["required", "plan", "off"],
+          "description": "The verification mode (row 52)"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The reason the derivation set the mode"
+        }
+      },
+      "required": ["mode", "reason"],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "comment": {
+      "type": "object",
+      "description": "The hash of the consumer's comment, and what was changed because of it (F107-FR-034, F107-FR-035): one entry per named option, with the option and the value in force",
+      "properties": {
+        "hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "The hash of the comment as typed, recorded before any text of the repository is printed"
+        },
+        "changed": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "One entry per named option",
+          "items": {
+            "type": "object",
+            "properties": {
+              "option": {
+                "enum": ["features", "relaunch", "learning", "mode"],
+                "description": "The option the comment selected; the closed set of annex X §X.6 row 283 (optionsThatTheConsumersCommentMaySelect of @specstride/contracts)"
+              },
+              "value": {
+                "description": "The value in force for the option"
+              }
+            },
+            "required": ["option", "value"],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          }
+        }
+      },
+      "required": ["hash", "changed"],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "scopes": {
+      "type": "object",
+      "description": "The declared write scopes of tasks and the declared reads and writes of verification commands, each with its source (F107-FR-037); they enter derivation only from user configuration, the environment or a flag, never from repository text, an answer to a judgment item or the comment",
+      "properties": {
+        "tasks": {
+          "type": "object",
+          "description": "The write scopes of the tasks marked [P], keyed by task id",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "scope": {
+                "description": "The declared write scope of the task"
+              },
+              "source": {
+                "enum": ["user-config", "environment", "flag"],
+                "description": "The source of the declaration; the closed set of annex X §X.6 row 261 (sourceOfADeclarationOfScopeReadOrWrite of @specstride/contracts)"
+              }
+            },
+            "required": ["scope", "source"],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          }
+        },
+        "commands": {
+          "type": "object",
+          "description": "The declared reads and writes of the verification commands, keyed by command id",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "reads": {
+                "type": "array",
+                "items": { "type": "string", "minLength": 1 },
+                "description": "The declared reads of the command"
+              },
+              "writes": {
+                "type": "array",
+                "items": { "type": "string", "minLength": 1 },
+                "description": "The declared writes of the command"
+              },
+              "source": {
+                "enum": ["user-config", "environment", "flag"],
+                "description": "The source of the declaration; the closed set of annex X §X.6 row 261 (sourceOfADeclarationOfScopeReadOrWrite of @specstride/contracts)"
+              }
+            },
+            "required": ["source"],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    }
+  },
+  "required": ["verification"],
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

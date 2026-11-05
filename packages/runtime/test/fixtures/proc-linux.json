@@ -1,0 +1,31 @@
+{
+  "note": "A recorded Linux process file system for T011, as a map of path to content. It is one JSON file and not a tree of extensionless files, because the product is written in TypeScript and a file with no extension in a package is a finding of the product-wide language check (F100-FR-030).",
+  "recordedOn": "2026-10-02, from this lane's Linux machine, then edited into the four processes the tests need",
+  "procRoot": "/proc",
+  "bootTimeSeconds": 1790914734,
+  "clockTicksPerSecond": 100,
+  "processes": {
+    "4101": "a live engine of the user, carrying the run token",
+    "4102": "the same token, and a command name that holds a space and a bracket",
+    "4103": "a process that exited and was not collected: state Z",
+    "4104": "a process of the user with no token, in another pid namespace"
+  },
+  "files": {
+    "/proc/stat": "cpu  123456 789 23456 9876543 1234 0 567 0 0 0\nintr 123456789 0 0\nctxt 987654321\nbtime 1790914734\nprocesses 1080200\nprocs_running 2\nprocs_blocked 0\n",
+    "/proc/sys/kernel/random/boot_id": "aebf8686-5592-4fb5-924c-9e1d1ce80e2f\n",
+    "/proc/4101/stat": "4101 (engine) S 4100 4101 4101 0 -1 4194304 0 0 0 0 0 0 0 0 0 0 0 0 795675 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n",
+    "/proc/4101/environ": "PATH=/usr/bin\u0000SPECSTRIDE_RUN_TOKEN=a9f1c0de5b7342e8\u0000HOME=/root\u0000",
+    "/proc/4102/stat": "4102 (we (are) fine) S 4100 4102 4101 0 -1 4194304 0 0 0 0 0 0 0 0 0 0 0 0 801000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n",
+    "/proc/4102/environ": "PATH=/usr/bin\u0000SPECSTRIDE_RUN_TOKEN=a9f1c0de5b7342e8\u0000",
+    "/proc/4103/stat": "4103 (gone-child) Z 4100 4103 4101 0 -1 4194304 0 0 0 0 0 0 0 0 0 0 0 0 802500 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n",
+    "/proc/4103/environ": "",
+    "/proc/4104/stat": "4104 (stranger) S 1 4104 4104 0 -1 4194304 0 0 0 0 0 0 0 0 0 0 0 0 803000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n",
+    "/proc/4104/environ": "PATH=/usr/bin\u0000"
+  },
+  "links": {
+    "/proc/4101/ns/pid": "pid:[4026531836]",
+    "/proc/4102/ns/pid": "pid:[4026531836]",
+    "/proc/4103/ns/pid": "pid:[4026531836]",
+    "/proc/4104/ns/pid": "pid:[4026531999]"
+  }
+}

@@ -1,0 +1,73 @@
+# The collector configuration of the shipped telemetry stack (F128-FR-045,
+# B-2451 to B-2458).
+#
+# The collector receives OTLP over HTTP on 0.0.0.0:4318 and over gRPC on
+# 0.0.0.0:4317 inside its container, batches every 5 seconds, promotes the
+# resource attributes `task` and `backend` and the log attributes `event` and
+# `model` to Loki stream labels (NOT `role`), forwards the log body raw
+# (`loki.format` = `raw`, so the logfmt line reaches Loki unchanged), pushes to
+# `http://loki:3100/loki/api/v1/push` with the default `job` label on and the
+# `exporter` label off, and exposes its own metrics on 0.0.0.0:8889 with
+# resource attributes converted to metric labels.
+#
+# Only the `logs` and `metrics` pipelines are defined: there is NO `traces`
+# pipeline, so the `/v1/traces` posts of the exporter are not accepted by the
+# shipped stack (CQ-127).
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+      grpc:
+        endpoint: 0.0.0.0:4317
+
+processors:
+  # Batch every 5 seconds.
+  batch:
+    timeout: 5s
+  # Resource attributes `task` and `backend` become Loki stream labels.
+  resource/loki-attributes:
+    attributes:
+      - key: loki.resource.labels
+        value: task, backend
+        action: upsert
+  # Log attributes `event` and `model` become Loki stream labels; `role` is
+  # deliberately NOT promoted (B-2455).
+  attributes/loki-attributes:
+    actions:
+      - key: loki.attribute.labels
+        value: event, model
+        action: upsert
+  # The log body is forwarded raw: the logfmt line reaches Loki unchanged
+  # (B-2454).
+  attributes/loki-format:
+    actions:
+      - key: loki.format
+        value: raw
+        action: upsert
+
+exporters:
+  loki:
+    endpoint: http://loki:3100/loki/api/v1/push
+    default_labels_enabled:
+      exporter: false
+      job: true
+  # The collector's own metrics, for Prometheus to scrape (B-2457): resource
+  # attributes are converted to metric labels.
+  prometheus:
+    endpoint: 0.0.0.0:8889
+    resource_to_telemetry_conversion:
+      enabled: true
+    send_timestamps: true
+
+service:
+  pipelines:
+    logs:
+      receivers: [otlp]
+      processors:
+        [resource/loki-attributes, attributes/loki-attributes, attributes/loki-format, batch]
+      exporters: [loki]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus]

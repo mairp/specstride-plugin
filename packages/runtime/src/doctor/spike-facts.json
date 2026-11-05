@@ -1,0 +1,114 @@
+{
+  "schema": "specstride.spike-facts/1",
+  "requirement": "F122-FR-040",
+  "boundBy": "F122-FR-041",
+  "note": "The facts the detach spike binds the product to. Generated from spikes/122-detach/results/ and kept in step with it by CT-122-40 in packages/runtime/test/characterization/spike-results.test.ts. No requirement of the product depends on the outcome of the spike (F122-FR-041); these facts only decide what the doctor says and whether a refused launch names `foreground`.",
+  "generatedFrom": "spikes/122-detach/results/",
+  "resultsReadOn": "2026-10-01",
+  "facts": [
+    {
+      "id": "SF-122-01",
+      "statement": "The runtime root, started detached from the host's shell tool, outlives the end of the host session, and its runtime log goes on filling afterwards.",
+      "requirements": ["F122-FR-001", "F122-SC-001"],
+      "status": "unverified",
+      "verified-on": null,
+      "pin": {
+        "host": { "id": "claude-code", "version": null },
+        "os": { "name": null, "version": null },
+        "note": "the pin is the host version of the session that runs the case; no case has run"
+      },
+      "reason": "Every one of the sixteen cases is paid: it needs a live host session, which is a model turn of the host. The owner's ruling of 2026-09-30 forbids an unattended run to start a paid case. The eight Linux cases are recorded `skipped` with the reason \"not run\"; the eight macOS cases `skipped` with the reason \"no macOS machine\".",
+      "cases": { "survived": 0, "ended": 0, "skipped": 16 },
+      "evidence": "spikes/122-detach/results/LOG.md"
+    },
+    {
+      "id": "SF-122-02",
+      "statement": "The host's shell tool can write the control root.",
+      "requirements": ["F122-FR-039"],
+      "status": "unverified",
+      "verified-on": null,
+      "pin": {
+        "host": { "id": "claude-code", "version": null },
+        "os": { "name": null, "version": null },
+        "note": "observation shellToolWroteControlRoot of a case that ran; none has run"
+      },
+      "reason": "The observation belongs to the paid cases, which were not run. The hermetic self-check wrote a scratch control root under the temporary directory on this machine, which says nothing about the control root of a real host session under its sandbox.",
+      "cases": { "survived": 0, "ended": 0, "skipped": 16 },
+      "evidence": "spikes/122-detach/results/LOG.md"
+    },
+    {
+      "id": "SF-122-03",
+      "statement": "The detached runtime root can still write the control root after the host session has ended.",
+      "requirements": ["F122-FR-039"],
+      "status": "unverified",
+      "verified-on": null,
+      "pin": {
+        "host": { "id": "claude-code", "version": null },
+        "os": { "name": null, "version": null },
+        "note": "observation detachedRootWroteControlRoot of a case that ran; none has run"
+      },
+      "reason": "As SF-122-02: the observation is only made after a host session has ended, and no paid case was run.",
+      "cases": { "survived": 0, "ended": 0, "skipped": 16 },
+      "evidence": "spikes/122-detach/results/LOG.md"
+    },
+    {
+      "id": "SF-122-04",
+      "statement": "The spike's driver and its stand-in for the runtime root work on Linux: the stand-in starts detached through the `spawn-detached` shape, outlives the process that spawned it, writes one line per second to its log, and writes a file in the control root it is given.",
+      "requirements": ["F122-FR-040"],
+      "status": "verified-local",
+      "verified-on": "2026-10-01",
+      "pin": {
+        "host": { "id": "claude-code", "version": "2.1.287" },
+        "os": { "name": "Debian GNU/Linux 13 (trixie)", "version": "7.0.14-15-pve" },
+        "node": "v22.23.2"
+      },
+      "reason": "Hermetic, free, no host session: `node spikes/122-detach/run.js --self-check`. Seven ticks at 1000 to 1004 ms, the control-root probe file present, the child alive after the caller of spawn returned.",
+      "evidence": "spikes/122-detach/results/SELF-CHECK.json",
+      "doesNotShow": "that anything survives the end of a host session; the self-check ends no host session. That is SF-122-01, and it is unverified."
+    }
+  ],
+  "doctor": {
+    "sessionEndSurvival": "unverified",
+    "say": "Survival of the end of a host session is unverified on this host: the cases of the detach spike have not been run.",
+    "becauseOf": ["a case is a skip"],
+    "launchRefusalNamesStrategy": "foreground",
+    "defaultStrategy": "spawn-detached",
+    "survives": []
+  },
+  "orchestratorReport": {
+    "endedCases": [],
+    "note": "No case ended as `ended`. Nothing in spec.md needs amending on the strength of the results; the spike has produced no outcome that contradicts it. spec.md keeps F122-FR-001, F122-FR-039, F122-FR-040 and F122-SC-001 at `status: unverified`, which is what the results say.",
+    "owed": [
+      {
+        "task": "T002",
+        "what": "the eight Linux cases on a live host",
+        "cases": [
+          "linux-interactive-off-exit",
+          "linux-interactive-off-kill",
+          "linux-interactive-on-exit",
+          "linux-interactive-on-kill",
+          "linux-headless-off-exit",
+          "linux-headless-off-kill",
+          "linux-headless-on-exit",
+          "linux-headless-on-kill"
+        ],
+        "why": "paid; an unattended run may not start it"
+      },
+      {
+        "task": "T003",
+        "what": "the eight macOS cases",
+        "cases": [
+          "macos-interactive-off-exit",
+          "macos-interactive-off-kill",
+          "macos-interactive-on-exit",
+          "macos-interactive-on-kill",
+          "macos-headless-off-exit",
+          "macos-headless-off-kill",
+          "macos-headless-on-exit",
+          "macos-headless-on-kill"
+        ],
+        "why": "paid, and no macOS machine exists in this environment"
+      }
+    ]
+  }
+}

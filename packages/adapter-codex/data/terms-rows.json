@@ -1,0 +1,85 @@
+{
+  "schema": "specstride.terms/1",
+  "provider": "openai",
+  "accessed": "2026-09-29",
+  "verifiedOn": "2026-09-29",
+  "pin": "codex-cli 0.153.4",
+  "status": "unverified: documentation only; an authorized person reads the live terms page and records the quoted sentences with their access dates",
+  "source": "R8v rows 7 and 9, D2, D3; specs/131-adapter-codex/contracts/terms-rows.json",
+  "handlesLoginToken": false,
+  "defaultAuthTier": { "audience": "distributed", "tier": 2 },
+  "rows": [
+    {
+      "tier": 1,
+      "audience": "personal",
+      "status": "conditional",
+      "conditions": [
+        "account holder's own trusted machine",
+        "no public or untrusted environment",
+        "no public or open-source CI",
+        "the login is never copied by the product",
+        "a limit signal is treated as a stop"
+      ],
+      "source": "R8v row 7; feature 131 spec F131-FR-005",
+      "accessed": "2026-09-29",
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4",
+      "unverified": "documentation only; a read of the live terms page by an authorized person, with its access date and quoted sentence, settles it"
+    },
+    {
+      "tier": 1,
+      "audience": "distributed",
+      "status": "personal-only",
+      "default": false,
+      "mark": "personal use only",
+      "source": "R8v row 9; feature 131 spec F131-FR-005",
+      "accessed": "2026-09-29",
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4",
+      "unverified": "documentation only; a read of the live terms page by an authorized person, with its access date and quoted sentence, settles it"
+    },
+    {
+      "tier": 2,
+      "audience": "personal",
+      "status": "allowed",
+      "source": "R8v D2; feature 131 spec F131-FR-005",
+      "accessed": "2026-09-29",
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4",
+      "unverified": "documentation only; a read of the live terms page by an authorized person, with its access date and quoted sentence, settles it"
+    },
+    {
+      "tier": 2,
+      "audience": "distributed",
+      "status": "allowed",
+      "default": true,
+      "source": "R8v D3; feature 131 spec F131-FR-005",
+      "accessed": "2026-09-29",
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4",
+      "unverified": "documentation only; a read of the live terms page by an authorized person, with its access date and quoted sentence, settles it"
+    },
+    {
+      "tier": 3,
+      "audience": "personal",
+      "status": "refused",
+      "note": "no `allowed` row exists at auth tier 3; the gate refuses it",
+      "source": "feature 131 spec F131-FR-005",
+      "accessed": "2026-09-29",
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4",
+      "unverified": "documentation only; a read of the live terms page by an authorized person, with its access date and quoted sentence, settles it"
+    },
+    {
+      "tier": 3,
+      "audience": "distributed",
+      "status": "refused",
+      "note": "no `allowed` row exists at auth tier 3; the gate refuses it",
+      "source": "feature 131 spec F131-FR-005",
+      "accessed": "2026-09-29",
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4",
+      "unverified": "documentation only; a read of the live terms page by an authorized person, with its access date and quoted sentence, settles it"
+    }
+  ]
+}

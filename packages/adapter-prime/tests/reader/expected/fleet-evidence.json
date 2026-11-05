@@ -1,0 +1,71 @@
+{
+  "events": [
+    [
+      "agent_init",
+      {
+        "cwd": "/work/project",
+        "schema_version": 3,
+        "session_id": "fixture-session-fleet-evidence"
+      }
+    ],
+    [
+      "agent_tool",
+      {
+        "original_bytes": 135,
+        "redacted": false,
+        "retained_bytes": 135,
+        "status": "start",
+        "summary": "{\"script\": \"from pathlib import Path; Path('.wiggum/features/fixture-feature/gates/GATE1-EVIDENCE.md').write_text('fixture evidence')\"}",
+        "targets": [
+          "from",
+          "pathlib",
+          "import",
+          "Path",
+          ".wiggum/features/fixture-feature/gates/GATE1-EVIDENCE.md"
+        ],
+        "tool": "ipython",
+        "tool_id": "fixture-tool-evidence-1",
+        "truncated": false
+      }
+    ],
+    [
+      "evidence_writing",
+      {
+        "match": "exact-expected-target",
+        "target": "/work/project/.wiggum/features/fixture-feature/gates/GATE1-EVIDENCE.md",
+        "tool": "ipython",
+        "tool_id": "fixture-tool-evidence-1"
+      }
+    ],
+    [
+      "agent_tool",
+      {
+        "duration_ms": 3,
+        "is_error": false,
+        "original_bytes": 2,
+        "redacted": false,
+        "result_summary": "16",
+        "retained_bytes": 2,
+        "status": "end",
+        "tool": "ipython",
+        "tool_id": "fixture-tool-evidence-1",
+        "truncated": false
+      }
+    ]
+  ],
+  "evidence_tools": ["fixture-tool-evidence-1"],
+  "output": [
+    "  · init prime-v3 session=fixture-session-fleet-evidence",
+    "  → ipython {\"script\": \"from pathlib import Path; Path('.wiggum/features/fixture-feature/gates/GATE1-EVIDENCE.md').write_text('fixture evidence')\"}",
+    "  ← ipython done"
+  ],
+  "schema_version": 3,
+  "stream": "fleet-evidence.jsonl",
+  "terminal": {
+    "model": null,
+    "status": "success",
+    "stop_reason": "end_turn"
+  },
+  "turns": 0,
+  "usage": {}
+}

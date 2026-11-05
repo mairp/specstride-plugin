@@ -1,0 +1,17 @@
+{
+  "capture": 2,
+  "task": "T002",
+  "paid": true,
+  "what": "first record of the stream: sandbox mode and session; the approval policy in force under `exec`",
+  "waits": ["F131-FR-009", "F131-FR-020", "F131-FR-036", "F131-FR-037"],
+  "status": "unverified",
+  "result": "not made",
+  "unverifiedReason": "the capture is paid (one small run of `codex exec`): the owner ruling of 2026-09-30 says this feature never runs and never fakes a paid, live or person-run step; an authorized person runs the scripted procedure in procedure.sh out of band and logs date, command, harness version and the first record here",
+  "command": null,
+  "date": null,
+  "harnessVersion": "codex-cli 0.153.4",
+  "harnessVersionSource": "read with `codex --version` (a read-only call, no model) in the phase 1 pass; pin from specs/131-adapter-codex/plan.md",
+  "fixtureFiles": ["procedure.sh", "README.md"],
+  "streamFixture": null,
+  "firstRecordFixture": null
+}

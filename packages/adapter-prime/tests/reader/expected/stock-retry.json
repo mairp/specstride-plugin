@@ -1,0 +1,75 @@
+{
+  "events": [
+    [
+      "agent_init",
+      {
+        "cwd": "/work/project",
+        "schema_version": 3,
+        "session_id": "fixture-session-stock-retry"
+      }
+    ],
+    [
+      "agent_diagnostic",
+      {
+        "attempt": 1,
+        "code": "provider_retry",
+        "delay_ms": 10,
+        "message": "temporary provider unavailable",
+        "original_bytes": 30,
+        "provider_record_type": "auto_retry_start",
+        "redacted": false,
+        "retained_bytes": 30,
+        "severity": "warning",
+        "truncated": false
+      }
+    ],
+    [
+      "agent_init",
+      {
+        "cwd": "/work/project",
+        "model": "fixture-model",
+        "provider": "fixture-provider",
+        "schema_version": 3,
+        "session_id": "fixture-session-stock-retry",
+        "update": true
+      }
+    ],
+    [
+      "agent_text",
+      {
+        "content_index": 0,
+        "final_fragment": true,
+        "message_id": "fixture-message-stock-retry-1",
+        "message_key": "fixture-message-stock-retry-1:0",
+        "original_bytes": 34,
+        "redacted": false,
+        "retained_bytes": 34,
+        "text": "Recovered after an internal retry.",
+        "truncated": false
+      }
+    ]
+  ],
+  "evidence_tools": [],
+  "output": [
+    "  · init prime-v3 session=fixture-session-stock-retry",
+    "  ! provider_retry: temporary provider unavailable",
+    "Recovered after an internal retry."
+  ],
+  "schema_version": 3,
+  "stream": "stock-retry.jsonl",
+  "terminal": {
+    "input_tokens": 15,
+    "model": "fixture-model",
+    "num_turns": 1,
+    "output_tokens": 7,
+    "status": "success",
+    "stop_reason": "end_turn",
+    "total_tokens": 22,
+    "turns": 1
+  },
+  "turns": 1,
+  "usage": {
+    "input_tokens": 15,
+    "output_tokens": 7
+  }
+}

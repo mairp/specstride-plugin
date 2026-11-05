@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.redaction/1",
+  "title": "redaction-pattern-set",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.redaction/1",
+  "x-annex": "annex X, §X.4",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the set, recorded in every run record",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "keyNames": {
+      "type": "array",
+      "description": "Patterns of key names whose values are secrets",
+      "x-type-in-words": "List of patterns",
+      "x-required": "Yes"
+    },
+    "values": {
+      "type": "array",
+      "description": "Patterns of values: private-key blocks, signed tokens, access key ids of clouds, addresses with embedded credentials, prefixes of provider keys",
+      "x-type-in-words": "List of patterns",
+      "x-required": "Yes"
+    }
+  },
+  "required": [
+    "schema",
+    "version",
+    "keyNames",
+    "values"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

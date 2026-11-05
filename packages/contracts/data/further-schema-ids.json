@@ -1,0 +1,133 @@
+{
+  "schema": "specstride.layout/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex B, §B.20",
+  "schemaIds": [
+    {
+      "Schema id": "`specstride.hidden-files/1`",
+      "Record": "What was moved out of the working tree for a critic-class call, and where it is kept",
+      "Logical name": "`attempt:<N>:<k>:<n>:hidden-files`",
+      "Owner": "117"
+    },
+    {
+      "Schema id": "`specstride.checkpoint/1`",
+      "Record": "A checkpoint, as read from the outbox",
+      "Logical name": "`unit:<unitId>:checkpoint`",
+      "Owner": "115"
+    },
+    {
+      "Schema id": "`specstride.protected-set/1`",
+      "Record": "The protected set of a phase with its fingerprints",
+      "Logical name": "`phase:<N>:protected-set`",
+      "Owner": "116"
+    },
+    {
+      "Schema id": "`specstride.check-result/1`",
+      "Record": "The result of one inner check",
+      "Logical name": "`unit:<unitId>:check:<i>`",
+      "Owner": "116"
+    },
+    {
+      "Schema id": "`specstride.invocation/1`",
+      "Record": "The invocation record of a pass (as-is name `specstride-invocation/v1`)",
+      "Logical name": "`pass:<passId>:invocation`",
+      "Owner": "126"
+    },
+    {
+      "Schema id": "`specstride.producer-status/1`",
+      "Record": "How the process of the harness ended (as-is name `specstride-producer-status/v1`)",
+      "Logical name": "`pass:<passId>:producer-status`",
+      "Owner": "126"
+    },
+    {
+      "Schema id": "`specstride.provider-terminal/1`",
+      "Record": "The terminal record of the stream (as-is name `specstride-provider-terminal/v1`)",
+      "Logical name": "`pass:<passId>:provider-terminal`",
+      "Owner": "126"
+    },
+    {
+      "Schema id": "`specstride.invocation-result/1`",
+      "Record": "The result of an invocation, written once",
+      "Logical name": "`pass:<passId>:result`",
+      "Owner": "126"
+    },
+    {
+      "Schema id": "`specstride.harness-verify/1`",
+      "Record": "The result of `harness verify`",
+      "Logical name": "`user:harness-verify:<id>`",
+      "Owner": "146"
+    },
+    {
+      "Schema id": "`specstride.retrospective/1`",
+      "Record": "The retrospective of a pipeline (as-is name `mol.retrospective/1`)",
+      "Logical name": "`pipeline:<pipelineId>:retrospective:<hash>`",
+      "Owner": "106"
+    },
+    {
+      "Schema id": "`specstride.learn.applied/2`",
+      "Record": "An entry of the decision log of learning, one per line, byte format kept (as-is id the same; entries of `/1` are read)",
+      "Logical name": "`feature:<slug>:learning:decisions`",
+      "Owner": "106"
+    },
+    {
+      "Schema id": "`specstride.learn.summary/7`",
+      "Record": "The metric summary of the runs of a feature (as-is id the same)",
+      "Logical name": "`feature:<slug>:learning:summary`",
+      "Owner": "106"
+    },
+    {
+      "Schema id": "`specstride.learn.observation/1`",
+      "Record": "The observation of an approved phase (as-is id the same)",
+      "Logical name": "`feature:<slug>:learning:observation:<N>`",
+      "Owner": "106"
+    },
+    {
+      "Schema id": "`specstride.state-archive/1`",
+      "Record": "The archive of `state export`",
+      "Logical name": "— (a file the consumer names)",
+      "Owner": "122"
+    },
+    {
+      "Schema id": "`specstride.reverse-inventory/1`",
+      "Record": "The source inventory of a reverse run, with the walk rules and the fingerprint that made it",
+      "Logical name": "`reverse:<slug>:inventory`",
+      "Owner": "140"
+    },
+    {
+      "Schema id": "`specstride.spend/1`",
+      "Record": "A record of the spend ledger",
+      "Logical name": "`run:<runId>:spend`",
+      "Owner": "127"
+    },
+    {
+      "Schema id": "`specstride.inspect.<verb>/1`",
+      "Record": "The `--json` record of an inspection command",
+      "Logical name": "— (output)",
+      "Owner": "119"
+    },
+    {
+      "Schema id": "`specstride.span-state/1`",
+      "Record": "The open spans of a run: the trace id and the stack of open scopes",
+      "Logical name": "`run:<runId>:span-state`",
+      "Owner": "128"
+    },
+    {
+      "Schema id": "`specstride.task-list/1`",
+      "Record": "The task list as read at launch: per phase its tasks (id, markers, text) in order and the canonical record hash of the phase",
+      "Logical name": "`run:<runId>:task-list`",
+      "Owner": "104"
+    },
+    {
+      "Schema id": "`urn:specstride:schema:internal:130:plugin-request/1`",
+      "Record": "The request record of a plugin call of dsh (as-is id `specstride-dsh-plugin-request/v1`)",
+      "Logical name": "— (internal to feature 130; no reader outside it)",
+      "Owner": "130"
+    },
+    {
+      "Schema id": "`urn:specstride:schema:internal:130:plugin-install/1`",
+      "Record": "The result record of a plugin installation of dsh (as-is id `specstride-dsh-plugin-install/v1`)",
+      "Logical name": "— (internal to feature 130; no reader outside it)",
+      "Owner": "130"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:internal:106:learning-mode-selection/1",
+ "title": "learning-mode-selection",
+ "description": "The result of the mode selector of learning (feature 106; a record not of annex B §B.20, so it stays internal, $id in the internal form of row 32 of 'What the other features must follow'). It is the value the resolution of F106-FR-009 returns and the doctor reports, and what the binding block `configuration.learning` of the launch contract pins against.",
+ "x-schema-id": "urn:specstride:schema:internal:106:learning-mode-selection/1",
+ "x-annex": "feature 106, data-model.md, 'Mode selector result'",
+ "type": "object",
+ "properties": {
+  "mode": {
+   "enum": ["off", "suggest", "apply"],
+   "description": "The closed set of F106-FR-009 (closed set 77), the default `off`; a value that is not a member reads as `off`"
+  },
+  "through": {
+   "type": ["string", "null"],
+   "description": "The run id the decision log is bound through (F106-FR-027), or null for no bound"
+  },
+  "mode_source": {
+   "enum": ["launch-contract", "environment", "default"],
+   "description": "Where the mode was read from; the launch contract's pin wins over the as-is alias SPECSTRIDE_LEARNING"
+  },
+  "through_source": {
+   "enum": ["launch-contract", "environment", "default"],
+   "description": "Where the bound was read from (the alias SPECSTRIDE_LEARNING_THROUGH)"
+  },
+  "observes": {
+   "type": "boolean",
+   "description": "Whether the layer watches the runs under this mode"
+  },
+  "takes_effect": {
+   "type": "boolean",
+   "description": "Whether a learned value takes effect at run time under this mode"
+  },
+  "evaluates": {
+   "type": "boolean",
+   "description": "Whether the layer evaluates applied decisions and may revert one automatically"
+  }
+ },
+ "required": ["mode", "through", "mode_source", "through_source"],
+ "additionalProperties": true
+}

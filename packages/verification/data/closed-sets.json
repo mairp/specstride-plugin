@@ -1,0 +1,99 @@
+{
+  "schema": "specstride.feature-closed-sets/1",
+  "feature": "105-verification",
+  "sets": [
+    {
+      "row": 52,
+      "name": "verification-modes",
+      "members": [
+        "required",
+        "plan",
+        "off"
+      ],
+      "closedBy": "owner decision",
+      "unknown": "configuration error, exit 3"
+    },
+    {
+      "row": 228,
+      "name": "command-stages",
+      "members": [
+        "gate",
+        "pre",
+        "prestage",
+        "both"
+      ],
+      "closedBy": "design (as-is)",
+      "unknown": "the declaration is refused",
+      "note": "pre is a spelling of prestage and is stored as prestage (baseline lib/verification_plan.py:51-57)"
+    },
+    {
+      "row": 229,
+      "name": "reuse-policies",
+      "members": [
+        "per-attempt",
+        "per-phase",
+        "per-run"
+      ],
+      "closedBy": "design (as-is)",
+      "unknown": "the declaration is refused"
+    },
+    {
+      "row": 230,
+      "name": "discovery-values",
+      "members": [
+        "none"
+      ],
+      "closedBy": "design (as-is)",
+      "unknown": "the document is refused"
+    },
+    {
+      "row": 231,
+      "name": "obligation-kinds",
+      "members": [
+        "effect-witness/integration",
+        "positive/contract"
+      ],
+      "closedBy": "design (as-is)",
+      "unknown": "the plan is refused"
+    },
+    {
+      "row": 232,
+      "name": "automation-status",
+      "members": [
+        "planned",
+        "manual"
+      ],
+      "closedBy": "design (as-is)",
+      "unknown": "the plan is refused"
+    },
+    {
+      "row": 233,
+      "name": "staged-command-signals",
+      "members": [
+        "DEADLINE"
+      ],
+      "closedBy": "design (as-is)",
+      "unknown": "the command counts as failed",
+      "note": "Row 233 also holds TIMEOUT and EXEC_ERROR, which the owner of the check runner owns"
+    },
+    {
+      "row": 234,
+      "name": "verify-sub-commands",
+      "members": [
+        "create",
+        "validate",
+        "slice",
+        "scaffold",
+        "run",
+        "prestage",
+        "prestage-report"
+      ],
+      "closedBy": "owner decision (ruling 26)",
+      "unknown": "exit 3"
+    }
+  ],
+  "openSets": [
+    "plan sources",
+    "toolchains of discovery"
+  ]
+}

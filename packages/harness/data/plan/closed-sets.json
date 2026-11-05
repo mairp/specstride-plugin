@@ -1,0 +1,168 @@
+{
+  "schema": "specstride.plan-data/1",
+  "note": "Data of the plan of feature 109. spec.md stands where the two differ.",
+  "owner": "109",
+  "rowsOfAnnexX6": [
+    {
+      "row": 26,
+      "set": "Containment levels",
+      "members": ["C0", "C1", "C2", "C3"],
+      "unknown": "Read as C0"
+    },
+    {
+      "row": 28,
+      "set": "Forms of the completion level",
+      "members": ["tool-less", "read-only-tools"],
+      "unknown": "critic_not_toolless"
+    },
+    {
+      "row": 29,
+      "set": "Tool-less mechanism of a descriptor",
+      "members": ["structural", "flag", "config", "none"],
+      "unknown": "none"
+    },
+    {
+      "row": 30,
+      "set": "Transports of a harness adapter",
+      "members": ["subprocess", "sdk-in-process", "direct-call"],
+      "unknown": "The transport is unavailable"
+    },
+    {
+      "row": 32,
+      "set": "Placeholders of a descriptor",
+      "members": [
+        "{prompt}",
+        "{promptFile}",
+        "{workdir}",
+        "{emptyTmp}",
+        "{model}",
+        "{sessionId}",
+        "{file:<name>}"
+      ],
+      "unknown": "The descriptor is refused"
+    },
+    {
+      "row": 33,
+      "set": "Provenance of a capability",
+      "members": ["declared", "probed", "adapter", "catalogue"],
+      "unknown": "The value is read as null"
+    },
+    {
+      "row": 35,
+      "set": "Origin of a descriptor",
+      "members": ["adapter", "bundled", "user", "detected"],
+      "unknown": "The descriptor is refused"
+    },
+    {
+      "row": 36,
+      "set": "Typed failures of the harness port",
+      "members": [
+        "authentication_failed",
+        "rate_limited",
+        "quota_exhausted",
+        "context_window_exceeded",
+        "transport_failed",
+        "agent_failure",
+        "capability_absent",
+        "critic_not_toolless"
+      ],
+      "unknown": "agent_failure"
+    },
+    {
+      "row": 37,
+      "set": "Outcomes of betweenPasses",
+      "members": ["continue", "stop:4", "stop:7"],
+      "unknown": "continue"
+    },
+    {
+      "row": 43,
+      "set": "Cost classes",
+      "members": ["subscription", "metered", "local", "unknown"],
+      "unknown": "unknown"
+    },
+    {
+      "row": 87,
+      "set": "Auth schemes of a descriptor",
+      "members": ["bearer", "x-api-key", "none"],
+      "unknown": "The descriptor is refused"
+    },
+    {
+      "row": 88,
+      "set": "Scopes of an overlay",
+      "members": ["none", "pass", "attempt"],
+      "unknown": "Configuration error (exit 3)"
+    }
+  ],
+  "introduced": [
+    {
+      "row": 123,
+      "set": "Capability levels",
+      "members": ["proposer", "completion"],
+      "unknown": "The entry is refused at registration"
+    },
+    {
+      "row": 124,
+      "set": "Qualifier forms of an entry",
+      "members": ["none", "optional", "required"],
+      "unknown": "The entry is refused at registration"
+    },
+    {
+      "row": 125,
+      "set": "Modes of stop",
+      "members": ["polite", "terminate", "kill"],
+      "unknown": "Read as terminate"
+    },
+    {
+      "row": 126,
+      "set": "Session directives",
+      "members": ["fresh", "continue"],
+      "unknown": "Read as fresh"
+    },
+    {
+      "row": 127,
+      "set": "Ways to hand over a prompt",
+      "members": ["stdin", "file", "argument"],
+      "unknown": "The descriptor is refused"
+    },
+    {
+      "row": 128,
+      "set": "Kinds of proof of the critic's form",
+      "members": ["initial-record", "pinned-configuration", "read-only-sandbox"],
+      "unknown": "critic_not_toolless"
+    },
+    {
+      "row": 129,
+      "set": "Scope words of an overlay marker",
+      "members": ["pass", "attempt", "critic"],
+      "unknown": "The tree is not an overlay of the product"
+    },
+    {
+      "row": 130,
+      "set": "Kinds of record of the environment record of an overlay",
+      "members": ["unset", "set"],
+      "unknown": "The pass fails with the result code 1"
+    },
+    {
+      "row": 131,
+      "set": "Results of harness verify (the field outcome of the stored result)",
+      "members": ["passed", "failed"],
+      "unknown": "Read as failed"
+    }
+  ],
+  "open": [
+    {
+      "set": "Kinds of a descriptor",
+      "wave1": ["cli", "openai-chat", "anthropic-messages"],
+      "owner": "109"
+    },
+    {
+      "set": "Stream formats",
+      "owner": "126"
+    },
+    {
+      "set": "Roles",
+      "owner": "124"
+    }
+  ],
+  "introducedNote": "Feature 100 holds these sets as rows 123 to 131 of annex X §X.6 (state of 2026-09-30)."
+}

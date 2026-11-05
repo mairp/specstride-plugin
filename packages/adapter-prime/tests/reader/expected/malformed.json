@@ -1,0 +1,38 @@
+{
+  "events": [
+    [
+      "agent_init",
+      {
+        "cwd": "/work/project",
+        "schema_version": 3,
+        "session_id": "fixture-session-malformed"
+      }
+    ],
+    [
+      "agent_diagnostic",
+      {
+        "code": "malformed_json",
+        "message": "Malformed Prime JSON: Expecting value: line 1 column 1 (char 0)",
+        "original_bytes": 63,
+        "redacted": false,
+        "retained_bytes": 63,
+        "severity": "error",
+        "truncated": false
+      }
+    ]
+  ],
+  "evidence_tools": [],
+  "output": [
+    "  · init prime-v3 session=fixture-session-malformed",
+    "  ! malformed_json: Malformed Prime JSON: Expecting value: line 1 column 1 (char 0)"
+  ],
+  "schema_version": 3,
+  "stream": "malformed.jsonl",
+  "terminal": {
+    "model": null,
+    "status": "success",
+    "stop_reason": "end_turn"
+  },
+  "turns": 0,
+  "usage": {}
+}

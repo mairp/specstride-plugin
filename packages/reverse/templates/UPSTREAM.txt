@@ -1,0 +1,33 @@
+Spec Kit templates (vendored) — the record of the upstream commit
+=================================================================
+
+Feature 140, T002 (F140-FR-026). The five templates in this directory are an
+unchanged copy of the Spec Kit templates, under the MIT licence of their
+project; the notice is the file `LICENSE` beside this one.
+
+Upstream project   github/spec-kit  (https://github.com/github/spec-kit)
+Upstream path      templates/
+Upstream commit    4a7341a9
+Upstream date      2026-09-04
+Upstream licence   MIT (see `LICENSE` in this directory)
+
+Copied through the Specstride baseline at commit 9cab15d, which vendored the
+same five files at `lib/speckit_templates/` and recorded the upstream commit
+above in its own README. The bytes in this directory equal the bytes of that
+baseline directory, which equal the bytes of the upstream commit.
+
+SHA-256 of each file as copied:
+
+c65b7f10aa9a965ea9c7f4e879d4ab0240665473731c5e9e638c4acb3ca9afc4  checklist-template.md
+ce7549540fa45543cca797a150201d868e64495fdff39dc38246fb17bd4024b3  constitution-template.md
+dfba43da2b2a207ff8c177a0fba03af074fd45e261696b4b64172041fad2e992  plan-template.md
+3945437fc35cd30a5b2bf7beea680337c3516826d3efa5a6b92c4a7eca1ba28e  spec-template.md
+1e448e9153462e8c5b5a55231a54c756d870a82950d4dd9425a2bf5b7008a0d9  tasks-template.md
+2510b446bc1f0cf9702453075d20cd88631e20e5642658edb7325d9c1eb534f7  LICENSE
+
+The reverse lint reads these files at run time, by the logical name
+`package:templates:<name>` of annex B §B.5, whose path is
+`<package>/templates/<name>`. Nothing in the code lists their headings: the
+heading rules of F140-FR-026 are derived from the bytes above. To follow a
+newer Spec Kit, copy the new files over these, update the commit, the date and
+the hashes in this file, and run the tests of `packages/reverse/test/`.

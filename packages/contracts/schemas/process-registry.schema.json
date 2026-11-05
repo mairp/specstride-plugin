@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.procs/1",
+  "title": "process-registry",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.procs/1",
+  "x-annex": "annex B, §B.10",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "procId": {
+      "type": "string",
+      "description": "Identifier of the entry",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "class": {
+      "type": "string",
+      "description": "`owned` or `adoptable`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "owned",
+        "adoptable"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "description": "`engine`, `stage-child`, `harness-pass`, `critic-call`, `check`, `detached-job`, `worker-pass`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "engine",
+        "stage-child",
+        "harness-pass",
+        "critic-call",
+        "check",
+        "detached-job",
+        "worker-pass"
+      ]
+    },
+    "pid": {
+      "type": "integer",
+      "description": "Identity from the operating system",
+      "x-type-in-words": "Whole numbers",
+      "x-required": "Yes"
+    },
+    "processGroup": {
+      "type": "integer",
+      "description": "Identity from the operating system",
+      "x-type-in-words": "Whole numbers",
+      "x-required": "Yes"
+    },
+    "processSession": {
+      "type": "integer",
+      "description": "Identity from the operating system",
+      "x-type-in-words": "Whole numbers",
+      "x-required": "Yes"
+    },
+    "startTime": {
+      "type": "string",
+      "description": "Start time of the process",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "runTokenHash": {
+      "type": "string",
+      "description": "Hash of the run token that the process holds in its environment",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "runId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "engineStartId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "attemptId": {
+      "type": "string",
+      "description": "Identifiers, where they apply",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "passId": {
+      "type": "string",
+      "description": "Identifiers, where they apply",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "jobId": {
+      "type": "string",
+      "description": "Identifiers, where they apply",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "workerId": {
+      "type": "string",
+      "description": "Identifiers, where they apply",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Times",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "`startedAt` yes"
+    },
+    "endedAt": {
+      "description": "Times",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "`startedAt` yes"
+    },
+    "endCause": {
+      "type": "string",
+      "description": "How the process ended",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    }
+  },
+  "required": [
+    "schema",
+    "procId",
+    "class",
+    "kind",
+    "pid",
+    "processGroup",
+    "processSession",
+    "startTime",
+    "runTokenHash",
+    "runId",
+    "engineStartId"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

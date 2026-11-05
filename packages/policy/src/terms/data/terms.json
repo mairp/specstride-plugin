@@ -1,0 +1,445 @@
+{
+  "schema": "specstride.terms/1",
+  "id": "terms-gate-default",
+  "version": "1",
+  "note": "Shipped terms data of feature 147 (F147-FR-011). Generated from the corrected matrix of R8v (docs/ecosystem/research/R8v-terms-verification.md, 42 cells, access date 2026-09-29). Statuses follow the mapping the spec fixes in Clarifications: confirmed allowed or documented -> allowed; downgraded to conditional -> conditional; downgraded to not-allowed-as-a-default, consumer opt-in only -> personal-only for the audience distributed; not allowed -> refused. Auth tier 3 ships refused for every provider and both audiences (F147-FR-001; ruling 59). pi has no row of its own: the row of the provider in use applies (F147-FR-007); the facts R8v rows 37 to 40 that feature 134 handed over as terms-facts.json are carried under `carried` as provenance, not as rows. verifiedOn is null until task T006 re-reads the cited page and records the date.",
+  "source": "docs/ecosystem/research/R8v-terms-verification.md (corrected matrix, 42 cells)",
+  "accessDate": "2026-09-29",
+  "rows": [
+    {
+      "provider": "anthropic",
+      "authTier": 1,
+      "audience": "personal",
+      "status": "allowed",
+      "source": "code.claude.com/docs/en/legal-and-compliance",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Nor does it prevent an end user from signing in to the unmodified Claude Code binary with their own Claude subscription",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "anthropic",
+      "authTier": 1,
+      "audience": "distributed",
+      "status": "personal-only",
+      "source": "code.claude.com/docs/en/agent-sdk/overview",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Unless previously approved, Anthropic does not allow third party developers to offer claude.ai login or rate limits for their products, including agents built on the Claude Agent SDK.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "anthropic",
+      "authTier": 2,
+      "audience": "personal",
+      "status": "allowed",
+      "source": "code.claude.com/docs/en/legal-and-compliance",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Developers building products or services that interact with Claude's capabilities, including those using the Agent SDK, should use API key authentication through Claude Console or a supported cloud provider.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "anthropic",
+      "authTier": 2,
+      "audience": "distributed",
+      "status": "allowed",
+      "source": "anthropic.com/legal/commercial-terms",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Subject to these Terms, Anthropic gives Customer permission to use the Services, including to power products and services Customer makes available to its own customers and end users",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "anthropic",
+      "authTier": 3,
+      "audience": "personal",
+      "status": "refused",
+      "source": "code.claude.com/docs/en/legal-and-compliance",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "OAuth authentication is intended exclusively for purchasers of Claude Free, Pro, Max, Team, and Enterprise subscription plans and is designed to support ordinary use of Claude Code and other native Anthropic applications.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "anthropic",
+      "authTier": 3,
+      "audience": "distributed",
+      "status": "refused",
+      "source": "code.claude.com/docs/en/legal-and-compliance",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "developers may not collect, store, or intermediate Claude.ai credentials or session tokens — sign-in to a Claude account must complete through Anthropic's own flow.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "openai",
+      "authTier": 1,
+      "audience": "personal",
+      "status": "conditional",
+      "source": "learn.chatgpt.com/docs/auth",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Use API key authentication for programmatic Codex CLI workflows, such as CI/CD jobs",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "openai",
+      "authTier": 1,
+      "audience": "distributed",
+      "status": "personal-only",
+      "source": "learn.chatgpt.com/docs/non-interactive-mode.md",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Do not use this workflow for public or open-source repositories.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "openai",
+      "authTier": 2,
+      "audience": "personal",
+      "status": "allowed",
+      "source": "learn.chatgpt.com/docs/auth",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Sign in with an API key for usage-based access",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "openai",
+      "authTier": 2,
+      "audience": "distributed",
+      "status": "allowed",
+      "source": "openai.com/policies/services-agreement (archive)",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "OpenAI grants Customer a non-exclusive right to access and use the Services during the Term. This includes the right to use OpenAI's API to integrate the Services into Customer Applications and to make Customer Applications available to End Users.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "openai",
+      "authTier": 3,
+      "audience": "personal",
+      "status": "refused",
+      "source": "openai.com/policies/row-terms-of-use (archive)",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "You may not share your account credentials or make your account available to anyone else",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "openai",
+      "authTier": 3,
+      "audience": "distributed",
+      "status": "refused",
+      "source": "openai.com/policies/row-terms-of-use (archive)",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "You may not share your account credentials or make your account available to anyone else",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "google",
+      "authTier": 1,
+      "audience": "personal",
+      "status": "conditional",
+      "source": "developers.google.com/gemini-code-assist/docs/deprecations/code-assist-individuals",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "No, access to Gemini Code Assist IDE extensions and Gemini CLI using Gemini Code Assist Standard or Enterprise subscriptions remain unchanged.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "google",
+      "authTier": 1,
+      "audience": "distributed",
+      "status": "conditional",
+      "source": "developers.google.com/gemini-code-assist/docs/deprecations/code-assist-individuals",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "No, access to Gemini Code Assist IDE extensions and Gemini CLI using Gemini Code Assist Standard or Enterprise subscriptions remain unchanged.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "google",
+      "authTier": 2,
+      "audience": "personal",
+      "status": "allowed",
+      "source": "geminicli.com/docs/get-started/authentication/",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Set the GEMINI_API_KEY environment variable to your key.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "google",
+      "authTier": 2,
+      "audience": "distributed",
+      "status": "allowed",
+      "source": "ai.google.dev/gemini-api/terms",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "You may only access the Services (or make API Clients available to users) within",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "google",
+      "authTier": 3,
+      "audience": "personal",
+      "status": "refused",
+      "source": "geminicli.com/docs/resources/tos-privacy/",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Directly accessing the services powering Gemini CLI (for example, the Gemini Code Assist service) using third-party software, tools, or services (for example, using OpenClaw with Gemini CLI OAuth) is a violation of applicable terms and policies.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "google",
+      "authTier": 3,
+      "audience": "distributed",
+      "status": "refused",
+      "source": "geminicli.com/docs/resources/tos-privacy/",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Directly accessing the services powering Gemini CLI (for example, the Gemini Code Assist service) using third-party software, tools, or services (for example, using OpenClaw with Gemini CLI OAuth) is a violation of applicable terms and policies.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "github-copilot",
+      "authTier": 1,
+      "audience": "personal",
+      "status": "allowed",
+      "source": "docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/run-cli-programmatically",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "This allows you to use Copilot directly from the terminal, but also allows you to use the CLI programmatically in scripts, CI/CD pipelines, and automation workflows.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "github-copilot",
+      "authTier": 1,
+      "audience": "distributed",
+      "status": "allowed",
+      "source": "docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/run-cli-programmatically",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "This allows you to use Copilot directly from the terminal, but also allows you to use the CLI programmatically in scripts, CI/CD pipelines, and automation workflows.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "github-copilot",
+      "authTier": 2,
+      "audience": "personal",
+      "status": "allowed",
+      "source": "docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/authenticate-copilot-cli",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Environment variables: Recommended for CI/CD pipelines, containers, and non-interactive environments. You set a supported token as an environment variable (COPILOT_GITHUB_TOKEN, GH_TOKEN, or GITHUB_TOKEN)",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "github-copilot",
+      "authTier": 2,
+      "audience": "distributed",
+      "status": "allowed",
+      "source": "docs.github.com/en/copilot/how-tos/copilot-sdk/setup/github-oauth",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Each user authenticates with their own GitHub account",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "github-copilot",
+      "authTier": 3,
+      "audience": "personal",
+      "status": "refused",
+      "source": "github.blog/changelog/2026-01-16-github-copilot-now-supports-opencode/",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "GitHub Copilot now fully supports authentication with OpenCode through a formal partnership",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "github-copilot",
+      "authTier": 3,
+      "audience": "distributed",
+      "status": "refused",
+      "source": "github.blog/changelog/2026-01-16-github-copilot-now-supports-opencode/",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "GitHub Copilot now fully supports authentication with OpenCode through a formal partnership",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "openrouter",
+      "authTier": 2,
+      "audience": "personal",
+      "status": "allowed",
+      "source": "openrouter.ai/terms",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "You are responsible for maintaining the confidentiality and security of all API keys, tokens, passwords, and other credentials used to access the Service",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "openrouter",
+      "authTier": 2,
+      "audience": "distributed",
+      "status": "allowed",
+      "source": "openrouter.ai/terms",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "the Service enables you, your Authorized Users, and your customers (to the extent you incorporate the Service into your own products and services) access to Models",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "zai-coding-plan",
+      "authTier": 1,
+      "audience": "personal",
+      "status": "conditional",
+      "source": "docs.z.ai/devpack/usage-policy",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "GLM Coding Plan may only be used within officially supported tools and products",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "zai-coding-plan",
+      "authTier": 1,
+      "audience": "distributed",
+      "status": "personal-only",
+      "source": "docs.z.ai/devpack/tool/others",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "users may not use their subscription benefits for tools or scenarios outside of this scope",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "zai-api",
+      "authTier": 2,
+      "audience": "personal",
+      "status": "allowed",
+      "source": "docs.z.ai/legal-agreement/terms-of-use",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "We grant you a non-exclusive right to access and use the API Services during the valid term, which includes the right to use Z.ai's API to integrate the Services into your applications or to develop downstream systems, applications or functions to your end users",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "zai-api",
+      "authTier": 2,
+      "audience": "distributed",
+      "status": "allowed",
+      "source": "docs.z.ai/legal-agreement/terms-of-use",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "You are solely responsible for the systems, applications, or functions developed by using API Services.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "zai",
+      "authTier": 3,
+      "audience": "personal",
+      "status": "refused",
+      "source": "docs.z.ai/devpack/usage-policy",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Account sharing or multi-user access is prohibited.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "zai",
+      "authTier": 3,
+      "audience": "distributed",
+      "status": "refused",
+      "source": "docs.z.ai/legal-agreement/subscription-terms",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "you may not resell, sub-resell, repackage, aggregate, proxy or otherwise provide the GLM Coding Plan to any third party, whether on a paid or free basis",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "opencode",
+      "authTier": 1,
+      "audience": "personal",
+      "status": "conditional",
+      "source": "opencode.ai/docs/providers/",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "There are plugins that allow you to use your Claude Pro/Max models with OpenCode. Anthropic explicitly prohibits this.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "opencode",
+      "authTier": 1,
+      "audience": "distributed",
+      "status": "conditional",
+      "source": "opencode.ai/docs/providers/",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "There are plugins that allow you to use your Claude Pro/Max models with OpenCode. Anthropic explicitly prohibits this.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "opencode",
+      "authTier": 3,
+      "audience": "personal",
+      "status": "refused",
+      "source": "github.blog/changelog/2026-01-16-github-copilot-now-supports-opencode/",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "GitHub Copilot now fully supports authentication with OpenCode through a formal partnership",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "opencode",
+      "authTier": 3,
+      "audience": "distributed",
+      "status": "refused",
+      "source": "github.blog/changelog/2026-01-16-github-copilot-now-supports-opencode/",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "GitHub Copilot now fully supports authentication with OpenCode through a formal partnership",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "deepseek",
+      "authTier": 2,
+      "audience": "personal",
+      "status": "allowed",
+      "source": "cdn.deepseek.com/policies/en-US/deepseek-open-platform-terms-of-service.html",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "Please keep your created API key securely, prevent any form of leakage, do not share or publicly disclose your API key with others, and do not expose it in browser or other client-side code.",
+      "verifiedOn": "2026-11-01"
+    },
+    {
+      "provider": "deepseek",
+      "authTier": 2,
+      "audience": "distributed",
+      "status": "allowed",
+      "source": "cdn.deepseek.com/policies/en-US/deepseek-open-platform-terms-of-service.html",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "You can integrate the capabilities of the DeepSeek models into various downstream systems, applications, or functionalities for intended purposes and specific scenarios, providing services to both internal and external end users.",
+      "verifiedOn": "2026-11-01"
+    }
+  ],
+  "carried": [
+    {
+      "note": "Provenance handed over by feature 134 as terms-facts.json (R8v rows 37 to 40). NOT rows of the table: pi has no row of its own, the row of the provider in use applies (F147-FR-007, F147-FR-011).",
+      "rowNumber": 37,
+      "provider": "pi (any API-key provider)",
+      "authTier": 1,
+      "audience": "personal",
+      "status": "allowed",
+      "software": "ALLOWED-DOCUMENTED (API-key back ends)",
+      "source": "raw.githubusercontent.com/badlogic/pi-mono/main/packages/coding-agent/README.md ; .../docs/providers.md",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "For a built-in AI provider, run `/login` inside Pi to connect a subscription or API key.; `auth.json` can contain API keys and OAuth tokens. Keep it private and do not commit it.; licence line \"MIT\".",
+      "verifiedOn": "2026-09-29",
+      "applies": "pi with an API-key back end, personal audience; the row of the provider in use governs"
+    },
+    {
+      "rowNumber": 38,
+      "provider": "pi (any API-key provider)",
+      "authTier": 1,
+      "audience": "distributed",
+      "status": "allowed",
+      "software": "ALLOWED-DOCUMENTED (API-key back ends)",
+      "source": "raw.githubusercontent.com/badlogic/pi-mono/main/packages/coding-agent/README.md ; .../docs/providers.md",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "For a built-in AI provider, run `/login` inside Pi to connect a subscription or API key.; `auth.json` can contain API keys and OAuth tokens. Keep it private and do not commit it.; licence line \"MIT\".",
+      "verifiedOn": "2026-09-29",
+      "applies": "pi with an API-key back end, distributed audience; the row of the provider in use governs"
+    },
+    {
+      "rowNumber": 39,
+      "provider": "anthropic",
+      "authTier": 3,
+      "audience": "personal",
+      "status": "refused",
+      "software": "NOT-ALLOWED",
+      "source": "raw.githubusercontent.com/badlogic/pi-mono/main/packages/coding-agent/README.md ; .../docs/providers.md",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "pi's `/login` OAuth is R8's mechanism M3; it inherits rows 5, 11, 17.",
+      "verifiedOn": "2026-09-29",
+      "applies": "the OAuth login of pi for a Claude subscription, personal audience; tier 3 ships refused for every provider and both audiences (F134-FR-006; ruling 59)"
+    },
+    {
+      "rowNumber": 40,
+      "provider": "anthropic",
+      "authTier": 3,
+      "audience": "distributed",
+      "status": "refused",
+      "software": "NOT-ALLOWED",
+      "source": "raw.githubusercontent.com/badlogic/pi-mono/main/packages/coding-agent/README.md ; .../docs/providers.md",
+      "accessDate": "2026-09-29",
+      "quotedSentence": "pi's `/login` OAuth is R8's mechanism M3; it inherits rows 5, 11, 17.",
+      "verifiedOn": "2026-09-29",
+      "applies": "the OAuth login of pi for a Claude subscription, distributed audience; tier 3 ships refused for every provider and both audiences (F134-FR-006; ruling 59)"
+    }
+  ]
+}

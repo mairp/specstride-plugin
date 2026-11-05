@@ -1,0 +1,122 @@
+{
+  "descriptorVersion": 1,
+  "id": "prime",
+  "displayName": "Prime agent",
+  "kind": "cli",
+  "provider": { "id": "prime", "termsRef": null },
+  "origin": "adapter",
+  "detect": {
+    "executable": "{harnesses.prime.bin}",
+    "version": { "flag": "-v", "of": "agent executable" },
+    "launcherVersionProbe": false
+  },
+  "auth": { "tiers": [1, 2], "credential": null, "scheme": "none" },
+  "models": {
+    "default": null,
+    "window": { "value": null, "source": "declared or model list" },
+    "select": "--model, bare form only"
+  },
+  "roles": {
+    "proposer": { "supported": true, "qualifier": { "form": "optional", "label": "variant" } },
+    "critic": {
+      "supported": true,
+      "qualifier": { "form": "optional", "label": "variant" },
+      "toolless": "flag",
+      "readOnlyTools": false,
+      "freshSession": true
+    }
+  },
+  "invoke": {
+    "proposer": "see argument-table.json, roles.proposer (bare and variant; prompt on standard input)",
+    "critic": "see argument-table.json, roles.critic (prompt on standard input)"
+  },
+  "stream": { "format": "jsonl", "dialect": "prime" },
+  "continuation": {
+    "supported": true,
+    "by": "session id inside a session directory of the phase attempt",
+    "status": "unverified"
+  },
+  "failures": {
+    "entries": "see classifier-entries.json (the typed failure vocabulary to the stream records of the reader)"
+  },
+  "cost": { "class": "unknown", "prices": null },
+  "isolation": {
+    "envAllow": [
+      "PATH",
+      "LANG",
+      "LC_*",
+      "HOME",
+      "{harnesses.prime.envAllow}",
+      "telemetry switches"
+    ],
+    "home": "auth tier 1: the real home, never written; auth tier 2: the throwaway home of configHome (F138-FR-045)",
+    "configHome": {
+      "vars": ["HOME", "PRIME_AGENT_SESSION_DIR"],
+      "seeds": [],
+      "scope": "pass",
+      "parityScope": "none",
+      "removal": "after the call, a killed pass and a call past its time limit",
+      "homeFollows": {
+        "statement": null,
+        "provenance": "capture (5) of F138-FR-042: a scripted check, calling no model, that shows whether the agent executable takes its configuration directory from the home variable",
+        "capture": 5,
+        "status": "unverified"
+      },
+      "status": "unverified until capture (5)"
+    }
+  },
+  "containment": {
+    "ceiling": "C0",
+    "provenance": "the harness's own statement that it is not a sandbox"
+  },
+  "memory": {
+    "native": "unverified",
+    "parts": [
+      { "part": "saved sessions", "off": "--no-session" },
+      { "part": "goal of a session", "off": "never seeded by the adapter" },
+      { "part": "context files", "off": "--no-context-files" }
+    ],
+    "critic": "off, always",
+    "proposer": "off by default; opt-in memory.native.proposer, user configuration only",
+    "recorded": "per run, for both roles",
+    "parity": "as-is: no flag about memory is passed (row 29)",
+    "capabilities": {
+      "nativeMemory": {
+        "parts": ["saved sessions", "goal of a session", "context files"],
+        "allSwitched": true,
+        "unswitched": null,
+        "status": "unverified until a capture looks; no unswitched memory is known at the pin"
+      },
+      "requirement": "F138-FR-046"
+    },
+    "requirement": "F138-FR-046"
+  },
+  "x-customisations": {
+    "kinds": ["skills", "extensions", "context files", "prompt templates"],
+    "critic": "off, always",
+    "proposer": "off by default; opt-in harnesses.prime.proposerCustomisations, user configuration only",
+    "parity": "as-is: no flag is passed (row 131)",
+    "requirement": "F138-FR-044"
+  },
+  "x-identity": {
+    "bare": "the model the consumer named, or null",
+    "variant": null,
+    "requirement": "F138-FR-047"
+  },
+  "telemetry": {
+    "off": {
+      "env": { "PRIME_AGENT_TELEMETRY": "0", "DO_NOT_TRACK": "1" },
+      "flags": [],
+      "from": "the dialect row prime (contracts/dialect-row-prime.json, telemetryOff)"
+    }
+  },
+  "concurrentSessions": null,
+  "spendLimit": null,
+  "versionRange": ">=0.7.3 <0.8",
+  "verifiedOn": "2026-09-29",
+  "x-automaticPick": {
+    "asCritic": "never, under every audience",
+    "asDefault": "never, for either role",
+    "requirement": "F138-FR-004; F138-FR-047"
+  }
+}

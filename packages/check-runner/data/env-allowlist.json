@@ -1,0 +1,69 @@
+{
+  "schema": "specstride.env-allowlist/1",
+  "owner": "148",
+  "requirement": "F148-FR-002, F148-FR-010, F148-FR-019",
+  "note": "T003 of feature 148. The NAMES a command of a check may see outside the `parity` profile. The environment of a command is this allow-list, overlaid with the `env` the command declares (F148-FR-002); under the `parity` profile it is the environment of the process overlaid with the declared `env`, as at the baseline (DV-113, row 125 of annex X §X.7). The list holds no provider credential: control T-21 of `packages/contracts/data/threat-model.json` (\"A check runs repository code with the runtime's environment\" — \"A scrubbed environment, no provider key\"); `research.md` D-8.",
+  "allow": [
+    {
+      "name": "PATH",
+      "reason": "The search path a check resolves its tools with. Its value is the one recorded at launch, not the live value of the process (F148-FR-010)."
+    },
+    {
+      "name": "HOME",
+      "reason": "A toolchain that cannot read a home directory fails for a reason that is not the check."
+    },
+    {
+      "name": "TMPDIR",
+      "reason": "The temporary directory of the command. The runner sets it to the command's own directory, which is removed after the result was taken (plan.md, Storage)."
+    },
+    {
+      "name": "LANG",
+      "reason": "Without it a toolchain may order or render output by the locale of the host, and two runs of the same check would differ."
+    },
+    {
+      "name": "LC_ALL",
+      "reason": "The same reason as LANG, and it overrides every other LC_ variable, so one name is enough."
+    },
+    {
+      "name": "TZ",
+      "reason": "A check that prints a timestamp prints the same one on every host."
+    },
+    {
+      "name": "CI",
+      "reason": "A toolchain that reads it turns off its progress output and its colour, which keeps the captured output stable under the cap."
+    },
+    {
+      "name": "TERM",
+      "reason": "A toolchain that finds no terminal writes plain output. The runner sets the value `dumb` for the same reason."
+    },
+    {
+      "name": "NO_COLOR",
+      "reason": "Escape sequences in captured output are not the result of the check and consume the cap."
+    },
+    {
+      "name": "SYSTEMROOT",
+      "reason": "On Windows a process without it cannot resolve a socket or a DLL. On Linux and macOS the name is absent and the entry adds nothing."
+    }
+  ],
+  "forbidden": {
+    "note": "Names that MUST NOT be in `allow`, whatever the environment of the runtime holds. The four exact names are the provider variables of `packages/config/data/alias-table.json`; the patterns catch a provider credential the alias table does not yet name. A name of the environment that matches a pattern is dropped even when it is not in this list.",
+    "names": [
+      "ANTHROPIC_API_KEY",
+      "OPENAI_API_KEY",
+      "SPECSTRIDE_CLAUDE_CRITIC_API_KEY",
+      "ANTHROPIC_AUTH_TOKEN"
+    ],
+    "patterns": [
+      "(^|_)API_KEY$",
+      "(^|_)TOKEN$",
+      "(^|_)SECRET$",
+      "(^|_)PASSWORD$",
+      "(^|_)CREDENTIALS?$",
+      "^ANTHROPIC_",
+      "^OPENAI_",
+      "^AWS_",
+      "^GH_",
+      "^GITHUB_TOKEN$"
+    ]
+  }
+}

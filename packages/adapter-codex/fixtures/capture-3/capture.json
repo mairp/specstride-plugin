@@ -1,0 +1,16 @@
+{
+  "capture": 3,
+  "task": "T003",
+  "paid": false,
+  "what": "can the read-only sandbox deny reads of named paths, inside and outside the working tree, read with the harness's own sandbox command",
+  "waits": ["F131-FR-011", "F131-FR-019", "F131-FR-037"],
+  "status": "unverified",
+  "result": "not made",
+  "unverifiedReason": "the capture is not paid (no model call) but it is a person-run step: the owner ruling of 2026-09-30 says this feature never runs and never fakes a person-run step; an authorized person runs the scripted procedure in procedure.sh (the harness's own sandbox command on the planted files) out of band and logs the result here. The hermetic part on Linux is done: the procedure, the planted-tree layout and the result schema are stored in this directory",
+  "command": null,
+  "date": null,
+  "harnessVersion": "codex-cli 0.153.4",
+  "harnessVersionSource": "read with `codex --version` (a read-only call, no model) in the phase 1 pass; pin from specs/131-adapter-codex/plan.md",
+  "fixtureFiles": ["procedure.sh", "README.md"],
+  "denialFixture": null
+}

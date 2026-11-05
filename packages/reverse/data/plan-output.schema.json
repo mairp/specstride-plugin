@@ -1,0 +1,44 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:internal:108:reverse-plan/1",
+ "title": "specstride.reverse-plan/1",
+ "type": "object",
+ "required": [
+  "src",
+  "slug",
+  "feature",
+  "out",
+  "state_dir",
+  "run_state",
+  "inventory",
+  "inventory_md",
+  "driver",
+  "verification_commands",
+  "test_plan",
+  "generate_tests",
+  "analysis",
+  "tasks_mode",
+  "oversize",
+  "phases",
+  "summary"
+ ],
+ "properties": {
+  "tasks_mode": {
+   "enum": [
+    "done",
+    "open"
+   ]
+  },
+  "phases": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "n",
+     "title",
+     "lint_level"
+    ]
+   }
+  }
+ }
+}

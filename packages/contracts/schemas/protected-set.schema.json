@@ -1,0 +1,177 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.protected-set/1",
+ "type": "object",
+ "properties": {
+  "schema": {
+   "const": "specstride.protected-set/1"
+  },
+  "phase": {
+   "type": "integer"
+  },
+  "profiles": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "version": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "version"
+    ]
+   }
+  },
+  "basic": {
+   "type": "boolean"
+  },
+  "classA": {
+   "type": "object",
+   "properties": {
+    "patterns": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "ignoredListings": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "properties": {
+       "path": {
+        "type": "string"
+       },
+       "listingHash": {
+        "type": "string"
+       },
+       "contentHashed": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "path": {
+           "type": "string"
+          },
+          "hash": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "path",
+          "hash"
+         ]
+        }
+       }
+      },
+      "required": [
+       "path",
+       "listingHash",
+       "contentHashed"
+      ]
+     }
+    }
+   },
+   "required": [
+    "patterns",
+    "ignoredListings"
+   ]
+  },
+  "classB": {
+   "type": "object",
+   "properties": {
+    "files": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "properties": {
+       "path": {
+        "type": "string"
+       },
+       "hash": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "path",
+       "hash"
+      ]
+     }
+    }
+   },
+   "required": [
+    "files"
+   ]
+  },
+  "authorised": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "array",
+    "items": {
+     "type": "string"
+    }
+   }
+  },
+  "atLaunch": {
+   "type": "object",
+   "properties": {
+    "set": {
+     "type": "string"
+    },
+    "tree": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "set",
+    "tree"
+   ]
+  },
+  "atPhaseEntry": {
+   "type": "object",
+   "properties": {
+    "set": {
+     "type": "string"
+    },
+    "tree": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "set",
+    "tree"
+   ]
+  },
+  "exclusions": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "effectiveConfig": {
+   "type": [
+    "string",
+    "null"
+   ]
+  }
+ },
+ "required": [
+  "schema",
+  "phase",
+  "profiles",
+  "basic",
+  "classA",
+  "classB",
+  "atLaunch",
+  "atPhaseEntry",
+  "exclusions"
+ ],
+ "additionalProperties": true,
+ "x-unknown-field": "ignored by a reader",
+ "x-different-major": "refused"
+}

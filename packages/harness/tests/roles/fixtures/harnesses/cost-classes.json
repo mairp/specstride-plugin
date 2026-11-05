@@ -1,0 +1,124 @@
+{
+  "schema": "specstride.fixture-harnesses/1",
+  "feature": "124",
+  "annex": "100, annex C §C.6, field `harnesses`",
+  "note": "T002 — every cost class: subscription, metered, local, unknown (row 43 of annex X §X.6). The metered entry is the one an automatic pick must give a hard spending cap (F124-FR-042).",
+  "harnesses": [
+    {
+      "id": "cost-subscription",
+      "state": "tested",
+      "origin": "user",
+      "version": "1.4.2",
+      "descriptorHash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "resolvedPath": "https://127.0.0.1:0/v1",
+      "kind": "openai-chat",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "subscription", "provenance": "declared" },
+      "contextWindow": { "tokens": 128000, "source": "declared" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:fixture-provider",
+        "provenance": "configuration"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "verified:adapter",
+        "version": "descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "descriptor",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "descriptor",
+        "terms": "terms gate"
+      }
+    },
+    {
+      "id": "cost-metered",
+      "state": "tested",
+      "origin": "user",
+      "version": "1.4.2",
+      "descriptorHash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "resolvedPath": "https://127.0.0.1:0/v1",
+      "kind": "openai-chat",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "metered", "provenance": "declared" },
+      "contextWindow": { "tokens": 128000, "source": "declared" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:fixture-provider",
+        "provenance": "configuration"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "verified:adapter",
+        "version": "descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "descriptor",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "descriptor",
+        "terms": "terms gate"
+      }
+    },
+    {
+      "id": "cost-local",
+      "state": "tested",
+      "origin": "user",
+      "version": "1.4.2",
+      "descriptorHash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "resolvedPath": "/usr/local/bin/stub-harness",
+      "kind": "cli",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "local", "provenance": "declared" },
+      "contextWindow": { "tokens": 200000, "source": "declared" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:local-stub",
+        "provenance": "configuration"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "verified:adapter",
+        "version": "descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "probe",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "descriptor",
+        "terms": "terms gate"
+      }
+    },
+    {
+      "id": "cost-unknown",
+      "state": "declared",
+      "origin": "user",
+      "version": null,
+      "descriptorHash": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "resolvedPath": "https://127.0.0.1:0/v1",
+      "kind": "openai-chat",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "unknown", "provenance": "absent" },
+      "contextWindow": { "tokens": 128000, "source": "declared" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:fixture-provider",
+        "provenance": "configuration"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "descriptor",
+        "version": "absent in the descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "descriptor",
+        "completionForm": "descriptor",
+        "costClass": "not declared",
+        "contextWindow": "descriptor",
+        "terms": "terms gate"
+      }
+    }
+  ]
+}

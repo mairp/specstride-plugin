@@ -1,0 +1,12 @@
+{
+  "schema": "specstride.gate-halts/1",
+  "halts": [
+    { "cause": "all-approved", "exitCode": 0, "stopReason": null, "retryable": false, "archivedBefore": null, "fixtures": ["FX-01", "FX-15"] },
+    { "cause": "critic-config", "exitCode": 3, "stopReason": "critic_config", "retryable": false, "asIsFields": ["phase"], "archivedBefore": false, "fixtures": ["FX-07/phase-not-found"] },
+    { "cause": "malformed-limit", "exitCode": 1, "stopReason": "critic_unavailable", "retryable": false, "asIsFields": ["phase", "attempts", "streak"], "archivedBefore": true, "fixtures": ["FX-05", "FX-06", "FX-07/missing-key", "FX-07/unknown-harness-name", "FX-07/dsh-conflicting-providers", "FX-07/dsh-invalid-model-ref", "FX-07/prime-empty-variant", "FX-07/codex-missing-key"] },
+    { "cause": "oscillation", "exitCode": 2, "stopReason": "gate_oscillation", "retryable": false, "asIsFields": ["phase", "attempts"], "archivedBefore": true, "fixtures": ["FX-04"] },
+    { "cause": "reject-limit", "exitCode": 2, "stopReason": "max_rejects", "retryable": false, "asIsFields": ["phase", "attempts"], "archivedBefore": false, "fixtures": ["FX-03"] },
+    { "cause": "release-verification", "exitCode": 2, "stopReason": "release_verification", "retryable": false, "archivedBefore": null, "fixtures": ["FX-15"] },
+    { "cause": "owner-lost", "exitCode": 6, "stopReason": "stop_flag", "retryable": false, "archivedBefore": false, "fixtures": [] }
+  ]
+}

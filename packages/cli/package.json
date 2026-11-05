@@ -1,0 +1,59 @@
+{
+  "name": "@specstride/cli",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride cli",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./commands/launch-handshake": "./src/commands/launch-handshake.ts",
+    "./commands/launch": "./src/commands/launch.ts",
+    "./commands/contract": "./src/commands/contract.ts",
+    "./commands/state": "./src/commands/state.ts",
+    "./commands/tripwire-clear": "./src/commands/tripwire-clear.ts",
+    "./status/event-reader": "./src/status/event-reader.ts",
+    "./status/cached-view": "./src/status/cached-view.ts",
+    "./status/state-readers": "./src/status/state-readers.ts",
+    "./status/probes": "./src/status/probes.ts",
+    "./status/status": "./src/status/status.ts",
+    "./status/wait": "./src/status/wait.ts",
+    "./status/output": "./src/status/output.ts",
+    "./present": "./src/present/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "test": "node ../../tests/isolate.ts node --test \"test/**/*.test.*\"",
+    "bundle": "rollup -c",
+    "pack:cli": "node scripts/pack.mjs"
+  },
+  "specstride": {
+    "skeleton": true,
+    "feature": "122-detached-runtime (launch-handshake.ts and state.ts only)",
+    "commands": [
+      "contract derive",
+      "contract",
+      "learn"
+    ]
+  },
+  "dependencies": {
+    "@specstride/config": "0.0.0",
+    "@specstride/contracts": "0.0.0",
+    "@specstride/integrity": "0.0.0",
+    "@specstride/kernel": "0.0.0",
+    "@specstride/learning": "0.0.0",
+    "@specstride/observability": "0.0.0",
+    "@specstride/spec-formats": "0.0.0"
+  },
+  "bin": {
+    "specstride": "bin/specstride"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "29.0.3",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "rollup": "4.64.7"
+  }
+}

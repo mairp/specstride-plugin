@@ -1,0 +1,73 @@
+{
+  "schema": "specstride.quota-classifier/1",
+  "status": "unverified: the login text and the exit code wait for capture 1; the API statuses are documentation only (F131-FR-032, F131-FR-033)",
+  "verifiedOn": "2026-09-29",
+  "pin": "codex-cli 0.153.4",
+  "structured": "none until capture 1: no entry may carry the confidence 'structured' while the capture has not recorded a structured quota record, or shown that none exists (F131-FR-034)",
+  "entries": [
+    {
+      "id": "login-limit-text",
+      "tier": 1,
+      "source": ["stream-error-record", "stderr", "reply"],
+      "match": { "textAny": ["usage limit", "usage limit has been reached", "try again in"] },
+      "class": "quota_window",
+      "confidence": "text",
+      "retryable": true,
+      "resetsAt": "parse",
+      "status": "unverified (capture 1: the record and the exit code at a login limit)"
+    },
+    {
+      "id": "quota-credit",
+      "tier": 2,
+      "source": ["http-reply", "stream-error-record"],
+      "match": { "bodyCode": "insufficient_quota" },
+      "class": "quota_credit",
+      "confidence": "status",
+      "retryable": false,
+      "state": "blocked-on-human",
+      "status": "unverified (documentation only)"
+    },
+    {
+      "id": "rate-limit-429",
+      "tier": 2,
+      "source": ["http-reply", "stream-error-record"],
+      "match": { "status": 429, "bodyCodeNot": "insufficient_quota" },
+      "class": "rate_limit_transient",
+      "confidence": "status",
+      "retryable": true,
+      "status": "unverified (documentation only)"
+    },
+    {
+      "id": "auth-401",
+      "tier": 2,
+      "source": ["http-reply", "stream-error-record"],
+      "match": { "status": 401 },
+      "class": "auth",
+      "confidence": "status",
+      "retryable": false,
+      "remedy": "the OPENAI_API_KEY credential",
+      "status": "unverified (documentation only)"
+    },
+    {
+      "id": "no-match",
+      "tier": null,
+      "source": ["any"],
+      "match": { "otherwise": true },
+      "class": "provider_other",
+      "confidence": "text",
+      "retryable": true
+    }
+  ],
+  "retryableByClass": {
+    "quota_window": true,
+    "rate_limit_transient": true,
+    "overload": true,
+    "agent_failure": true,
+    "provider_other": true,
+    "quota_credit": false,
+    "auth": false,
+    "context_window": false,
+    "budget_cap": false
+  },
+  "retryableSource": "feature 100, annex E §E.3; F131-FR-033: the value follows the class, one value per class for every adapter"
+}

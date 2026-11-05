@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.snapshot/1",
+  "title": "run-snapshot",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.snapshot/1",
+  "x-annex": "annex B, §B.12",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "runId": {
+      "type": "string",
+      "description": "Identifier",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time of the first write",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    },
+    "profile": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Name of the profile in force, or null",
+      "x-type-in-words": "Text, or null",
+      "x-required": "Yes"
+    },
+    "keys": {
+      "type": "object",
+      "description": "For every resolved configuration key: `value`, `source` (rank of §X.2), `class` (`pinned` or `tunable`), and for a learned value the id of the decision",
+      "x-type-in-words": "Map from key to record",
+      "x-required": "Yes"
+    },
+    "sourceHashes": {
+      "type": "object",
+      "description": "For each of the files `spec`, `plan`, `tasks`: logical path, content hash, and for `tasks` also the hash that ignores checkboxes",
+      "x-type-in-words": "Map from file to record",
+      "x-required": "Yes"
+    },
+    "acceptedChanges": {
+      "type": "array",
+      "description": "Every intended change accepted on `resume`: time, file, old hash, new hash",
+      "x-type-in-words": "List of records",
+      "x-required": "No"
+    }
+  },
+  "required": [
+    "schema",
+    "runId",
+    "createdAt",
+    "profile",
+    "keys",
+    "sourceHashes"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

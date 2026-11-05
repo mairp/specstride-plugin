@@ -1,0 +1,72 @@
+{
+  "schema": "specstride.verification-word-lists/1",
+  "requirement": "F105-FR-014, F105-FR-017",
+  "note": "The two word lists of the baseline as DATA (research.md D-16, Principle VI). Read from the Specstride baseline at 9cab15d, lib/verification_plan.py: MUTATION (line 24) and BUILD_ARTIFACT (line 32), with `git -C <baseline> show 9cab15d:lib/verification_plan.py`. `pattern` is the regular expression of the baseline, byte for byte; `words` is the same list spelled out. Where this file and the baseline differ, the baseline is the reference.",
+  "baseline": {
+    "repository": "<baseline>",
+    "commit": "9cab15d",
+    "file": "lib/verification_plan.py",
+    "readWith": "git -C <baseline> show 9cab15d:lib/verification_plan.py"
+  },
+  "lists": [
+    {
+      "id": "change-verbs",
+      "constant": "MUTATION",
+      "line": 24,
+      "requirement": "F105-FR-014",
+      "use": "A criterion whose phase title and text hold one of these verbs gets the obligation kind `effect-witness`, else `positive` (lib/verification_plan.py:800).",
+      "flags": ["IGNORECASE"],
+      "boundaries": "\\b…\\b",
+      "pattern": "\\b(start|create|write|delete|remove|publish|dispatch|persist|send|update|stop|resume|deploy|install|migrate|commit|push)\\b",
+      "words": [
+        "start",
+        "create",
+        "write",
+        "delete",
+        "remove",
+        "publish",
+        "dispatch",
+        "persist",
+        "send",
+        "update",
+        "stop",
+        "resume",
+        "deploy",
+        "install",
+        "migrate",
+        "commit",
+        "push"
+      ]
+    },
+    {
+      "id": "build-words",
+      "constant": "BUILD_ARTIFACT",
+      "line": 32,
+      "requirement": "F105-FR-017",
+      "use": "The suite of a phase gets the discovered build command only when the title or the criteria of the phase hold one of these words (lib/verification_plan.py:879).",
+      "flags": ["IGNORECASE"],
+      "boundaries": "\\b…\\b",
+      "wordBoundaryNote": "The pattern keeps the baseline's \\b on both sides, so `.d.ts` matches only after a word character (`index.d.ts`), never on its own. That is the baseline's behaviour and is kept.",
+      "pattern": "\\b(build|dist|artifact|tsc|compile[ds]?|bundle[ds]?|transpile[ds]?|typecheck|type-check|declaration file|\\.d\\.ts)\\b",
+      "words": [
+        "build",
+        "dist",
+        "artifact",
+        "tsc",
+        "compile",
+        "compiled",
+        "compiles",
+        "bundle",
+        "bundled",
+        "bundles",
+        "transpile",
+        "transpiled",
+        "transpiles",
+        "typecheck",
+        "type-check",
+        "declaration file",
+        ".d.ts"
+      ]
+    }
+  ]
+}

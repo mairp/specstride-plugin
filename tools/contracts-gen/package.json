@@ -1,0 +1,21 @@
+{
+  "name": "@specstride/contracts-gen",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The generator of the machine-readable form of the annexes of feature 100, ported from contracts/tools/generate.py (T207, F100-FR-030)",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "specstride-contracts-gen": "./src/main.ts"
+  },
+  "scripts": {
+    "test": "node ../../tests/isolate.ts node --test \"test/**/*.test.*\"",
+    "typecheck": "tsc -p ."
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
+}

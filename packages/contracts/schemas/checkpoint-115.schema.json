@@ -1,0 +1,29 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.checkpoint/1",
+ "type": "object",
+ "properties": {
+  "schema": {
+   "const": "specstride.checkpoint/1"
+  },
+  "tasks": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "string"
+   },
+   "description": "Task ids of the current phase, or criterion indexes"
+  },
+  "note": {
+   "type": "string",
+   "description": "512 bytes are kept; never shown to a critic-class call"
+  }
+ },
+ "required": [
+  "schema",
+  "tasks"
+ ],
+ "additionalProperties": true,
+ "x-unknown-field": "ignored by a reader",
+ "x-different-major": "refused"
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "specstride.user-config/1",
+  "note": [
+    "T001 — the descriptor-only fixture of the harness port, extended for feature 124 (F124-SC-001).",
+    "The harness descriptor of the fake endpoint of the test kit lives in the user configuration,",
+    "declares a context window, and carries a cost class that is not `metered`. No critic is",
+    "configured, so the automatic pick must reach step 3 of the critic order (`discovered`).",
+    "The base fixture of the port lives in tests/conformance/harness/descriptor-only/ (feature 109);",
+    "this fixture adds the user configuration and the expected announcement of feature 124."
+  ],
+  "harnesses": [
+    {
+      "descriptorVersion": 1,
+      "id": "fixture-fake-endpoint",
+      "displayName": "Fixture endpoint harness",
+      "kind": "openai-chat",
+      "provider": {
+        "id": "fixture-provider",
+        "termsRef": null
+      },
+      "auth": {
+        "tiers": [1],
+        "credential": "env:FIXTURE_ENDPOINT_KEY",
+        "scheme": "bearer"
+      },
+      "endpoint": {
+        "baseUrl": "http://127.0.0.1",
+        "chatPath": "/v1/chat/completions",
+        "modelsPath": "/v1/models"
+      },
+      "models": {
+        "selection": "declared",
+        "default": "fixture-model",
+        "contextWindow": {
+          "tokens": 128000,
+          "source": "declared"
+        }
+      },
+      "roles": {
+        "completion": { "supported": true },
+        "critic": { "supported": true }
+      },
+      "stream": {
+        "format": "jsonl",
+        "mapping": {
+          "kind": "fixture-of-feature-109",
+          "fields": { "reply": "text" }
+        }
+      },
+      "continuation": { "supported": false },
+      "failures": {},
+      "cost": {
+        "class": "subscription"
+      },
+      "memory": { "native": false },
+      "containment": { "ceiling": "C2" }
+    }
+  ],
+  "roles": {
+    "proposer": {
+      "harness": "fixture-fake-endpoint"
+    }
+  },
+  "critic": {
+    "autoPick": true,
+    "autoPickMaxUsd": null
+  },
+  "criticConfigured": false
+}

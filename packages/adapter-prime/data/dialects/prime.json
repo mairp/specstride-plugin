@@ -1,0 +1,48 @@
+{
+  "schema": "specstride.stream-dialect/1",
+  "dialect": "prime",
+  "schemaVersions": [3],
+  "providerFormat": "prime-v3",
+  "telemetryOff": { "env": { "PRIME_AGENT_TELEMETRY": "0", "DO_NOT_TRACK": "1" }, "flags": [] },
+  "sessionControl": {
+    "off": ["--no-session"],
+    "directoryFlag": "--session-dir",
+    "directoryVariable": "PRIME_AGENT_SESSION_DIR",
+    "resumeById": ["-r", "{sessionId}"]
+  },
+  "extraRecords": {},
+  "usageNames": {
+    "input": ["inputTokens", "input_tokens"],
+    "output": ["outputTokens", "output_tokens"],
+    "cacheRead": ["cacheReadTokens", "cache_read_tokens", "cacheReadInputTokens"],
+    "cacheWrite": ["cacheWriteTokens", "cache_write_tokens", "cacheCreationInputTokens"],
+    "total": ["totalTokens", "total_tokens"],
+    "cost": ["cost", "totalCost"],
+    "reasoning": []
+  },
+  "terminalDecides": true,
+  "x-caps": {
+    "lineBytes": 1048576,
+    "linesPerSecond": 5000,
+    "status": "proposed; values are assumptions of the plan"
+  },
+  "x-commonRecordTypes": [
+    "session",
+    "message_start",
+    "message_update",
+    "message_end",
+    "turn_start",
+    "turn_end",
+    "agent_start",
+    "agent_end",
+    "auto_retry_start",
+    "auto_retry_end",
+    "error",
+    "toolcall_start",
+    "toolcall_delta",
+    "toolcall_end",
+    "tool_execution_start",
+    "tool_execution_update",
+    "tool_execution_end"
+  ]
+}

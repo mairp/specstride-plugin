@@ -1,0 +1,60 @@
+{
+  "presenceLineKinds": [
+    "file",
+    "directory",
+    "missing",
+    "needs-grounding",
+    "wildcard",
+    "binary",
+    "unreadable",
+    "refused",
+    "not-shown"
+  ],
+  "refusedRoots": [
+    "control",
+    "events",
+    "outbox",
+    "carry-over",
+    "worker-root",
+    "tree-store",
+    "repository"
+  ],
+  "excerptKinds": [
+    "whole",
+    "anchored",
+    "head-tail",
+    "omitted",
+    "none"
+  ],
+  "criticBlocks": [
+    "rules",
+    "fact-block",
+    "criteria",
+    "evidence",
+    "grounding",
+    "pins",
+    "context",
+    "end",
+    "history"
+  ],
+  "shrinkOrder": [
+    "context",
+    "grounding",
+    "evidence"
+  ],
+  "overWindow": [
+    "refuse",
+    "send"
+  ],
+  "blockSet": [
+    "current",
+    "as-is"
+  ],
+  "callEnds": [
+    "reply",
+    "failure",
+    "time-limit",
+    "kill",
+    "stop"
+  ]
+}

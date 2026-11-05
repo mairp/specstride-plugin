@@ -1,0 +1,205 @@
+{
+ "mode": "compatibility",
+ "pipelineLines": [
+  {
+   "hue": "none",
+   "line": "`[WARN] <warning>`",
+   "stream": "Standard error; never coloured; not logged",
+   "when": "At start, once per validation warning"
+  },
+  {
+   "hue": "none",
+   "line": "`[STALE] <detail>` then `[DIGEST] state=failed exit=23 last-stage=none evidence=none`",
+   "stream": "Standard error; nothing is logged",
+   "when": "Sources are stale or learning decisions changed"
+  },
+  {
+   "hue": "none",
+   "line": "`[INVALID] <detail>` then `[DIGEST] state=failed exit=20 last-stage=none evidence=none`",
+   "stream": "Standard error; nothing is logged",
+   "when": "The launch contract is invalid"
+  },
+  {
+   "hue": "green",
+   "line": "`[DRY-RUN] contract <id> is source-current; no actions or writes will occur`",
+   "stream": "Standard output",
+   "when": "First line of a dry run"
+  },
+  {
+   "hue": "green when passed, yellow otherwise",
+   "line": "`[PREFLIGHT] <stage>: <check detail>: pass`, `fail` or `deferred`",
+   "stream": "Standard output",
+   "when": "Dry run, once per preflight-timed precondition of each stage that will run"
+  },
+  {
+   "hue": "yellow",
+   "line": "`[SKIP] <stage> (enable with --smoke)`",
+   "stream": "Standard output",
+   "when": "Dry run, a smoke stage without `--smoke`"
+  },
+  {
+   "hue": "cyan",
+   "line": "`[CHECK] <stage> uses existing prerequisite; --implement would run setup`",
+   "stream": "Standard output",
+   "when": "Dry run, a setup stage without `--implement`"
+  },
+  {
+   "hue": "cyan",
+   "line": "`[PLAN] <stage>: <redacted action>`",
+   "stream": "Standard output",
+   "when": "Dry run, every other stage"
+  },
+  {
+   "hue": "dim",
+   "line": "`[DIGEST] state=dry-run exit=0 last-stage=none evidence=none`",
+   "stream": "Standard output",
+   "when": "Last line of a dry run"
+  },
+  {
+   "hue": "red",
+   "line": "`[BLOCKED] another launcher owns <pipeline run>` then `[DIGEST] state=failed exit=24 last-stage=none evidence=<pipeline run>`",
+   "stream": "Standard output",
+   "when": "The lock is held"
+  },
+  {
+   "hue": "red",
+   "line": "`[BLOCKED] <failure>` once per preflight failure, then `[DIGEST] state=failed exit=21 last-stage=none evidence=<pipeline run>`",
+   "stream": "Standard output",
+   "when": "Preflight failed"
+  },
+  {
+   "hue": "yellow",
+   "line": "`[SKIP] <stage> smoke stage disabled`",
+   "stream": "Standard output",
+   "when": "Live run, a smoke stage without `--smoke`"
+  },
+  {
+   "hue": "green, yellow",
+   "line": "`[RESUME] <stage> postconditions still hold; skipping` or `[RESUME] <stage> postconditions changed; rerunning`",
+   "stream": "Standard output",
+   "when": "A stage that was completed in an earlier launch"
+  },
+  {
+   "hue": "green",
+   "line": "`[READY] <stage> already satisfies setup postconditions`",
+   "stream": "Standard output",
+   "when": "Setup stage, no `--implement`, postconditions hold"
+  },
+  {
+   "hue": "red",
+   "line": "`[BLOCKED] <stage>: <failure>; rerun with --implement`",
+   "stream": "Standard output",
+   "when": "Setup stage, no `--implement`, a postcondition fails"
+  },
+  {
+   "hue": "red",
+   "line": "`[BLOCKED] <stage>: <failure>`",
+   "stream": "Standard output",
+   "when": "A stage-timed precondition failed"
+  },
+  {
+   "hue": "cyan",
+   "line": "`[RUN] <stage> attempt <n>/<max>: <redacted action>`",
+   "stream": "Standard output",
+   "when": "Each stage attempt"
+  },
+  {
+   "hue": "green",
+   "line": "`[PASS] <stage> completed`",
+   "stream": "Standard output",
+   "when": "The action exited 0 and the postconditions hold"
+  },
+  {
+   "hue": "red",
+   "line": "`[ERROR] <stage> postcondition: <failure>`",
+   "stream": "Standard output",
+   "when": "The action exited 0 and a postcondition failed"
+  },
+  {
+   "hue": "magenta",
+   "line": "`[RECOVER] <stage> exit <code>[, reason=<reason>]; retry in <delay>s`",
+   "stream": "Standard output",
+   "when": "A stage attempt failed and will be retried"
+  },
+  {
+   "hue": "red",
+   "line": "`[FAIL] <stage> exit <code> (<outcome>)`",
+   "stream": "Standard output",
+   "when": "A stage failed for good"
+  },
+  {
+   "hue": "dim",
+   "line": "`[DIGEST] state=<failed or stopped> exit=<code> last-stage=<id> child-exit=<code or None> evidence=<pipeline run>`",
+   "stream": "Standard output",
+   "when": "A stage failed or the run was stopped"
+  },
+  {
+   "hue": "dim",
+   "line": "`[DIGEST] state=completed exit=0 last-stage=<id of the last stage of the launch contract, even if skipped> evidence=<pipeline run>`",
+   "stream": "Standard output",
+   "when": "Every stage complete"
+  }
+ ],
+ "schema": "specstride.pipeline-lines-123/1",
+ "superviseVerbs": [
+  {
+   "does": "Prints the mode line; prints the next-step line when the mode is `dry-run`",
+   "exit": "0 always",
+   "verb": "`mode --request TEXT [--token TOK ...]`"
+  },
+  {
+   "does": "Prints the launcher line, or a refusal",
+   "exit": "0; 4 on refusal",
+   "verb": "`resolve --repo DIR [--feature SLUG] [--launcher PATH]`"
+  },
+  {
+   "does": "Runs the six launch checks and prints every check and the decision",
+   "exit": "0 for `launch`; 4 for `refuse` and for `attach`",
+   "verb": "`gate --launcher PATH [--implement] [--smoke]`"
+  },
+  {
+   "does": "Runs the launch checks, then starts the launcher detached, then prints the launch line",
+   "exit": "0; 4 when the decision is not `launch`",
+   "verb": "`launch --launcher PATH [--mode run or auto] [--implement] [--smoke]`"
+  },
+  {
+   "does": "Supervises a launched run until it is terminal or supervision expires",
+   "exit": "The exit map",
+   "verb": "`watch (--launcher or --run-dir) [cadence]`"
+  },
+  {
+   "does": "Takes one reading; when terminal prints the digest and, with `relaunch.owner: supervise`, may relaunch; otherwise prints the next poll interval",
+   "exit": "0, or a refusal code",
+   "verb": "`observe (--launcher or --run-dir) [cadence] [--json]`"
+  },
+  {
+   "does": "`launch`, then `watch`, in one call. `--mode` defaults to `auto`",
+   "exit": "The exit map",
+   "verb": "`auto --launcher PATH [--mode run or auto] [--implement] [--smoke] [cadence]`"
+  },
+  {
+   "does": "Records the stop request, signals the process group of the run, prints the stop line, then supervises without relaunch (poll `min(poll, 5)` seconds, at most 120 seconds by default)",
+   "exit": "0 when nothing could be signalled; else the exit map",
+   "verb": "`stop (--launcher or --run-dir) [cadence]`"
+  },
+  {
+   "does": "Write the inbox request `hold-relaunch` with `hold` true or false, and an optional reason",
+   "exit": "0 written; 4 refused, `no-live-run`",
+   "verb": "`hold`, `release`"
+  }
+ ],
+ "superviseLabels": [
+  {
+   "line": "[SPECSTRIDE-SUPERVISE-LAUNCH]"
+  },
+  {
+   "line": "[SPECSTRIDE-SUPERVISE-STATE]"
+  },
+  {
+   "line": "[SPECSTRIDE-SUPERVISE-STOP]"
+  },
+  {
+   "line": "[SPECSTRIDE-SUPERVISE-DIGEST]"
+  }
+ ]
+}

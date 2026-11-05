@@ -1,0 +1,16 @@
+{
+  "probe": "critic form (b)",
+  "task": "T050",
+  "paid": true,
+  "what": "one critic call of form (b) with an API key: one `openai-chat` call against the provider's endpoint, the reply and its usage stored",
+  "waits": ["F131-FR-038"],
+  "status": "unverified",
+  "result": "not made",
+  "unverifiedReason": "the probe is paid (one live call with an API key against the provider's endpoint): the owner ruling of 2026-09-30 says this feature never runs and never fakes a paid, live or person-run step; an authorized person runs the scripted procedure in procedure.sh out of band and stores the log here (log.json, reply.json, usage.json, harness-version.txt, date.txt). The hermetic part of the task is done in this feature: the settings resolution, the window rule, the budget cap and the call itself are implemented and tested hermetically in packages/adapter-codex/src/critic-direct.ts and its tests, against the fake endpoint of tests/conformance/codex/fake-endpoint.ts — no test and no step of this feature waits for the probe",
+  "command": null,
+  "date": null,
+  "harnessVersion": "codex-cli 0.153.4",
+  "harnessVersionSource": "read with `codex --version` (a read-only call, no model) in the phase 1 pass; pin from specs/131-adapter-codex/plan.md",
+  "fixtureFiles": ["procedure.sh", "README.md"],
+  "logFiles": []
+}

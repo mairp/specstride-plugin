@@ -1,0 +1,36 @@
+{
+  "schema": "specstride.perf-baseline/1",
+  "task": "T105",
+  "covers": ["F109-FR-031", "F109-FR-042"],
+  "note": "Starting values of plan.md ('Performance Goals'), measured on the Linux host of the campaign with .specstride/features/109-harness-seam/gates/proofs/T105-measure.mjs and recorded here. Median of repeated runs; every value is hermetic: no probe, no model call, no paid call, no external network.",
+  "measuredAt": "2026-10-21T00:51:11.623Z",
+  "host": { "os": "linux", "method": "median of 25 runs (15 for the sweep), performance.now()" },
+  "startingValues": {
+    "registryBuild": {
+      "what": "createRegistry from 20 descriptor sources, without probes",
+      "goal": "under 50 ms",
+      "measuredMs": 0.05744300000000635,
+      "withinGoal": true
+    },
+    "overlayBuild": {
+      "what": "buildOverlay of a declaration with two variables and one seed, in a throwaway directory",
+      "goal": "under 50 ms",
+      "measuredMs": 0.5193160000000034,
+      "withinGoal": true
+    },
+    "sweep": {
+      "what": "sweep at start-up with 100 marked trees in the temporary directory",
+      "goal": "under 200 ms",
+      "measuredMs": 0.016300999999998567,
+      "withinGoal": true
+    },
+    "suiteRunTime": {
+      "what": "one run of the conformance suite (HC-01 to HC-17) on the sample outside the core",
+      "goal": "under 60 s",
+      "measuredMs": 929.4245679999999,
+      "measuredSeconds": 0.9294245679999999,
+      "cases": 17,
+      "withinGoal": true
+    }
+  }
+}

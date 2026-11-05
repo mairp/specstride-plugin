@@ -1,0 +1,82 @@
+{
+  "schema": "specstride.stream-mapping/1",
+  "status": "unverified: only the event names are documented; the kinds and fields of the item records wait for captures 1 and 2 (F131-FR-036)",
+  "verifiedOn": "2026-09-29",
+  "pin": "codex-cli 0.153.4",
+  "recordKindSelector": "type",
+  "noTerminal": "missing_terminal",
+  "otherwise": "dropped with a diagnostic event",
+  "rows": [
+    {
+      "record": "thread.started",
+      "match": { "type": "thread.started" },
+      "emits": ["init"],
+      "fields": { "init.sessionId": "thread_id" }
+    },
+    {
+      "record": "item.completed (agent message)",
+      "match": { "type": "item.completed", "item.type": "agent_message" },
+      "emits": ["text"],
+      "fields": { "text": "item.text" }
+    },
+    {
+      "record": "item.completed (command execution)",
+      "match": { "type": "item.completed", "item.type": "command_execution" },
+      "emits": ["tool"],
+      "fields": {
+        "tool.name": "item.type",
+        "tool.id": "item.id",
+        "tool.category": { "literal": "command" },
+        "tool.durationMs": "item.duration_ms"
+      }
+    },
+    {
+      "record": "item.completed (file change)",
+      "match": { "type": "item.completed", "item.type": "file_change" },
+      "emits": ["tool"],
+      "fields": {
+        "tool.name": "item.type",
+        "tool.id": "item.id",
+        "tool.category": { "literal": "edit" }
+      }
+    },
+    {
+      "record": "item.completed (tool call)",
+      "match": {
+        "type": "item.completed",
+        "item.type": ["tool_call", "mcp_tool_call", "web_search_call", "reasoning"]
+      },
+      "emits": ["tool"],
+      "fields": { "tool.name": "item.type", "tool.id": "item.id" }
+    },
+    {
+      "record": "turn.completed",
+      "match": { "type": "turn.completed" },
+      "emits": ["usage", "terminal"],
+      "usage": {
+        "inputTokens": "usage.input_tokens",
+        "cacheReadTokens": "usage.cached_input_tokens",
+        "outputTokens": "usage.output_tokens"
+      },
+      "fields": { "terminal.status": { "literal": "success" } }
+    },
+    {
+      "record": "turn.failed",
+      "match": { "type": "turn.failed" },
+      "emits": ["error", "terminal"],
+      "fields": {
+        "error.message": "error.message",
+        "terminal.status": { "literal": "error" },
+        "terminal.stopReason": "error.message"
+      }
+    },
+    {
+      "record": "error",
+      "match": { "type": "error" },
+      "emits": ["error"],
+      "fields": { "error.message": "message" }
+    },
+    { "record": "turn.started", "match": { "type": "turn.started" }, "emits": [] },
+    { "record": "item.started", "match": { "type": "item.started" }, "emits": [] }
+  ]
+}

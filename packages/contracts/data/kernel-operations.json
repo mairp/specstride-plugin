@@ -1,0 +1,49 @@
+{
+  "schema": "specstride.kernel/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex X, §X.4, §X.5",
+  "redactor": [
+    {
+      "Operation": "`register`",
+      "Input": "A secret value that the runtime resolved",
+      "Output": "Nothing. The value is matched exactly from then on"
+    },
+    {
+      "Operation": "`redact`",
+      "Input": "A text and a size cap",
+      "Output": "The redacted, cut text; how many replacements were made; the version of the pattern set"
+    }
+  ],
+  "hasher": [
+    {
+      "Operation": "Content hash",
+      "Input": "The bytes of a file, or a text taken as UTF-8",
+      "Output": "A SHA-256 hash"
+    },
+    {
+      "Operation": "Canonical record text",
+      "Input": "A record",
+      "Output": "The record as text with sorted keys, compact separators, non-ASCII characters kept, and no final line end. It is the input of the canonical record hash, and the form in which the Specstride baseline hashes the records of its verification plan"
+    },
+    {
+      "Operation": "Task-list hash that ignores checkboxes",
+      "Input": "A task list",
+      "Output": "A SHA-256 hash that does not change when a checkbox is ticked or cleared"
+    },
+    {
+      "Operation": "Canonical record hash",
+      "Input": "A record",
+      "Output": "The content hash of the canonical record text with one line end added"
+    },
+    {
+      "Operation": "Phase shape, obligation id, signature of unmet criteria",
+      "Input": "For the phase shape: the number, title and criteria of a phase; for the obligation id and the signature of unmet criteria: the text that each owner forms",
+      "Output": "As at the baseline; equal to the baseline's on the same input. The phase shape is built by the hasher (16 hexadecimal characters; rules: feature 104, F104-FR-021). The obligation id (rules: feature 107, F107-FR-004) and the signature of unmet criteria (rules: feature 101, F101-FR-019) are formed by their owners over the content hash of a text; the hasher holds no rule of theirs"
+    },
+    {
+      "Operation": "Classification of the staleness verdict",
+      "Input": "The recorded sources (logical name, repository-relative path, recorded hashes) and, for each, its hashes now or the mark that it cannot be read",
+      "Output": "For each source `unchanged`, `ticks-only`, `changed` or `unreadable`, and the verdict `fresh` or `stale`; a pure function that reads no file (rules: feature 104, F104-FR-024)"
+    }
+  ]
+}

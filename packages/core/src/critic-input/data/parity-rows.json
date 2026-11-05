@@ -1,0 +1,65 @@
+[
+  {
+    "row": 52,
+    "annex": "annex X §X.7",
+    "status": "confirmed",
+    "key": "roles.critic.grounding",
+    "default": "true",
+    "parity": "true, unless the fixture sets it",
+    "register": "DV-027"
+  },
+  {
+    "row": 53,
+    "annex": "annex X §X.7",
+    "status": "confirmed",
+    "key": "roles.critic.groundingMaxFiles",
+    "default": 80,
+    "parity": 80,
+    "register": "DV-027"
+  },
+  {
+    "row": 54,
+    "annex": "annex X §X.7",
+    "status": "confirmed",
+    "key": "roles.critic.anchorMaxBytes",
+    "default": 49152,
+    "parity": 49152,
+    "register": "DV-027"
+  },
+  {
+    "row": 55,
+    "annex": "annex X §X.7",
+    "status": "confirmed",
+    "key": "roles.critic.contextTokens",
+    "default": "the window of the model",
+    "parity": "not set unless the fixture sets it; the as-is fallback of the harness applies (row 28)",
+    "register": "DV-027; DV-106; DV-111"
+  },
+  {
+    "row": 56,
+    "annex": "annex X §X.7",
+    "status": "confirmed",
+    "key": "roles.critic.debug",
+    "default": "false",
+    "parity": "false, unless the fixture sets it",
+    "register": "DV-066"
+  },
+  {
+    "row": 57,
+    "annex": "annex X §X.7",
+    "status": "confirmed",
+    "key": "prompt.critic.overWindow",
+    "default": "refuse",
+    "parity": "send",
+    "register": "DV-099"
+  },
+  {
+    "row": 58,
+    "annex": "annex X §X.7",
+    "status": "confirmed",
+    "key": "prompt.critic.block_set",
+    "default": "current",
+    "parity": "as-is",
+    "register": "DV-100"
+  }
+]

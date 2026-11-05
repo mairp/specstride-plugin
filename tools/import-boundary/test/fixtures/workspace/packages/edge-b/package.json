@@ -1,0 +1,7 @@
+{
+  "name": "@specstride/view",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "T016 fixture: a package whose import is forbidden by the graph (mayImport lists @specstride/contracts only)"
+}

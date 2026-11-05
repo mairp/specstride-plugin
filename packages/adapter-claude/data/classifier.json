@@ -1,0 +1,249 @@
+{
+  "schema": "specstride.adapter-claude/1:classifier",
+  "source": "specs/125-adapter-claude/contracts/classifier-table.md (F125-FR-031)",
+  "status": "unverified",
+  "statusNote": "every row is unverified until fixture capture C has a real limit event on the CLI stream; the capture is paid and no test waits for it",
+  "retryableByClass": {
+    "quota_window": true,
+    "rate_limit_transient": true,
+    "overload": true,
+    "agent_failure": true,
+    "provider_other": true,
+    "quota_credit": false,
+    "auth": false,
+    "context_window": false,
+    "budget_cap": false
+  },
+  "rows": [
+    {
+      "row": 1,
+      "signal": { "kind": "limit_event", "status": "rejected" },
+      "class": "quota_window",
+      "confidence": "structured",
+      "resetsAt": "event",
+      "retryable": true,
+      "portFailure": "quota_exhausted"
+    },
+    {
+      "row": 2,
+      "signal": { "kind": "limit_event", "status": "allowed_warning" },
+      "class": null,
+      "confidence": null,
+      "resetsAt": null,
+      "retryable": null,
+      "portFailure": null,
+      "gauge": { "type": "observe", "field": "utilization" }
+    },
+    {
+      "row": 3,
+      "signal": { "kind": "limit_event", "code": "credits_required" },
+      "class": "quota_credit",
+      "confidence": "structured",
+      "resetsAt": null,
+      "retryable": false,
+      "portFailure": "quota_exhausted"
+    },
+    {
+      "row": 4,
+      "signal": { "kind": "retry_event", "category": "rate_limit" },
+      "class": "rate_limit_transient",
+      "confidence": "structured",
+      "resetsAt": null,
+      "retryable": true,
+      "portFailure": "rate_limited"
+    },
+    {
+      "row": 5,
+      "signal": { "anyKind": ["retry_event", "error"], "category": "overloaded", "status": 529 },
+      "class": "overload",
+      "confidence": "structured",
+      "resetsAt": null,
+      "retryable": true,
+      "portFailure": "transport_failed"
+    },
+    {
+      "row": 6,
+      "signal": { "anyKind": ["retry_event", "error"], "category": "billing_error" },
+      "class": "quota_credit",
+      "confidence": "structured",
+      "resetsAt": null,
+      "retryable": false,
+      "portFailure": "quota_exhausted"
+    },
+    {
+      "row": 7,
+      "signal": { "anyKind": ["retry_event", "error"], "category": "authentication_failed" },
+      "class": "auth",
+      "confidence": "structured",
+      "resetsAt": null,
+      "retryable": false,
+      "portFailure": "authentication_failed"
+    },
+    {
+      "row": 8,
+      "signal": { "anyKind": ["retry_event", "error"], "category": "server_error" },
+      "class": "provider_other",
+      "confidence": "structured",
+      "resetsAt": null,
+      "retryable": true,
+      "portFailure": "transport_failed"
+    },
+    {
+      "row": 9,
+      "signal": { "kind": "result", "subtype": "error_max_budget_usd" },
+      "class": "budget_cap",
+      "confidence": "structured",
+      "resetsAt": null,
+      "retryable": false,
+      "portFailure": "agent_failure"
+    },
+    {
+      "row": 10,
+      "signal": { "kind": "result", "subtype": "error_max_turns" },
+      "class": "agent_failure",
+      "confidence": "structured",
+      "resetsAt": null,
+      "retryable": true,
+      "portFailure": "agent_failure"
+    }
+  ],
+  "textRows": [
+    {
+      "row": 11,
+      "patterns": ["session limit", "weekly limit", "Opus limit", "Sonnet limit"],
+      "class": "quota_window",
+      "confidence": "text",
+      "resetsAt": null,
+      "resetsAtNote": "null: the time in the text is local and ambiguous",
+      "retryable": true,
+      "portFailure": "quota_exhausted"
+    },
+    {
+      "row": 12,
+      "patterns": ["Credit balance is too low"],
+      "class": "quota_credit",
+      "confidence": "text",
+      "resetsAt": null,
+      "retryable": false,
+      "portFailure": "quota_exhausted"
+    },
+    {
+      "row": 13,
+      "patterns": ["Request rejected (429)"],
+      "class": "rate_limit_transient",
+      "confidence": "text",
+      "resetsAt": null,
+      "retryable": true,
+      "portFailure": "rate_limited"
+    },
+    {
+      "row": 14,
+      "patterns": ["Server is temporarily limiting requests (not your usage limit)"],
+      "class": "rate_limit_transient",
+      "confidence": "text",
+      "resetsAt": null,
+      "retryable": true,
+      "portFailure": "rate_limited"
+    },
+    {
+      "row": 15,
+      "patterns": ["Prompt is too long"],
+      "class": "context_window",
+      "confidence": "text",
+      "resetsAt": null,
+      "retryable": false,
+      "portFailure": "context_window_exceeded"
+    }
+  ],
+  "exitRows": [
+    {
+      "row": 16,
+      "exitCode": 143,
+      "class": null,
+      "confidence": null,
+      "resetsAt": null,
+      "retryable": null,
+      "portFailure": null,
+      "note": "a stop the caller asked for; never a provider failure"
+    },
+    {
+      "row": 17,
+      "exitCode": "other-non-zero",
+      "class": "agent_failure",
+      "confidence": "status",
+      "resetsAt": null,
+      "retryable": true,
+      "portFailure": "agent_failure",
+      "also": "a stream without a terminal record"
+    }
+  ],
+  "fallbackRow": {
+    "row": 18,
+    "class": "provider_other",
+    "confidence": "text",
+    "resetsAt": null,
+    "retryable": true,
+    "portFailure": "agent_failure"
+  },
+  "directRows": [
+    {
+      "row": 19,
+      "status": [401, 403],
+      "class": "auth",
+      "confidence": "status",
+      "resetsAt": null,
+      "retryable": false
+    },
+    {
+      "row": 20,
+      "status": [402],
+      "class": "quota_credit",
+      "confidence": "status",
+      "resetsAt": null,
+      "retryable": false,
+      "also": "a billing error in the body"
+    },
+    {
+      "row": 21,
+      "status": [429],
+      "class": "rate_limit_transient",
+      "confidence": "status",
+      "resetsAt": "retry-after",
+      "retryable": true
+    },
+    {
+      "row": 22,
+      "status": [529],
+      "class": "overload",
+      "confidence": "status",
+      "resetsAt": null,
+      "retryable": true
+    },
+    {
+      "row": 23,
+      "status": [400],
+      "class": "context_window",
+      "confidence": "status",
+      "resetsAt": null,
+      "retryable": false,
+      "also": "a too-long prompt in the body"
+    },
+    {
+      "row": 24,
+      "status": "other-4xx-5xx",
+      "class": "provider_other",
+      "confidence": "status",
+      "resetsAt": null,
+      "retryable": true
+    },
+    {
+      "row": 25,
+      "status": "no-reply",
+      "class": null,
+      "confidence": null,
+      "resetsAt": null,
+      "retryable": null,
+      "note": "transport_failed, not a class"
+    }
+  ]
+}

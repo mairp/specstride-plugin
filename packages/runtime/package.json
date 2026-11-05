@@ -1,0 +1,41 @@
+{
+  "name": "@specstride/runtime",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride runtime (feature 122): the runtime root of a detached process tree, the workspace lock and its lease, the process registry, the inbox and the state commands",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./root": "./src/root/index.ts",
+    "./detach": "./src/detach/index.ts",
+    "./lock": "./src/lock/index.ts",
+    "./lease": "./src/lease/index.ts",
+    "./procs": "./src/procs/index.ts",
+    "./inbox": "./src/inbox/index.ts",
+    "./state": "./src/state/index.ts",
+    "./doctor": "./src/doctor/index.ts",
+    "./data/*": "./src/data/*"
+  },
+  "scripts": {
+    "test": "node test/isolate.ts node --test \"test/unit/**/*.test.ts\" \"test/characterization/**/*.test.ts\"",
+    "test:contention": "node test/isolate.ts node --test \"test/contention/**/*.test.ts\"",
+    "test:crash": "node test/isolate.ts node --test \"test/crash/**/*.test.ts\"",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@specstride/config": "0.0.0",
+    "@specstride/contracts": "0.0.0",
+    "@specstride/kernel": "0.0.0"
+  },
+  "specstride": {
+    "skeleton": true,
+    "feature": "122-detached-runtime",
+    "layer": "L5, L4",
+    "compositionRoot": true,
+    "dependencyPolicy": "no dependency outside the workspace: `dependencies`, `devDependencies`, `peerDependencies` and `optionalDependencies` hold only `@specstride/*` packages of this repository. Proved by packages/runtime/test/unit/package-layout.test.ts (T006)."
+  }
+}

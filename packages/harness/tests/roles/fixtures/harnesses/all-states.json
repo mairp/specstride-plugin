@@ -1,0 +1,120 @@
+{
+  "schema": "specstride.fixture-harnesses/1",
+  "feature": "124",
+  "annex": "100, annex C §C.6, field `harnesses`",
+  "note": "T002 — one entry per state of a harness: tested, locally-verified, declared, detected (the order of the ranking table, key R2).",
+  "harnesses": [
+    {
+      "id": "state-tested",
+      "state": "tested",
+      "origin": "user",
+      "version": "1.4.2",
+      "descriptorHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "resolvedPath": "/usr/local/bin/stub-harness",
+      "kind": "cli",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "local", "provenance": "declared" },
+      "contextWindow": { "tokens": 200000, "source": "declared" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:local-stub",
+        "provenance": "configuration"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "verified:adapter",
+        "version": "descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "probe",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "descriptor",
+        "terms": "terms gate"
+      }
+    },
+    {
+      "id": "state-locally-verified",
+      "state": "locally-verified",
+      "origin": "project",
+      "version": "0.9.0",
+      "descriptorHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "resolvedPath": "./tools/stub-harness.mjs",
+      "kind": "cli",
+      "completionForm": { "value": "read-only-tools", "provenance": "declared" },
+      "costClass": { "value": "local", "provenance": "declared" },
+      "contextWindow": { "tokens": 128000, "source": "measured" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:local-stub",
+        "provenance": "configuration"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "verified:local-preflight",
+        "version": "descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "probe",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "probe",
+        "terms": "terms gate"
+      }
+    },
+    {
+      "id": "state-declared",
+      "state": "declared",
+      "origin": "user",
+      "version": null,
+      "descriptorHash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "resolvedPath": "https://127.0.0.1:0/v1",
+      "kind": "openai-chat",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "subscription", "provenance": "declared" },
+      "contextWindow": { "tokens": 128000, "source": "declared" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:fixture-provider",
+        "provenance": "configuration"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "descriptor",
+        "version": "absent in the descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "descriptor",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "descriptor",
+        "terms": "terms gate"
+      }
+    },
+    {
+      "id": "state-detected",
+      "state": "detected",
+      "origin": "discovered",
+      "version": "2.0.1",
+      "descriptorHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "resolvedPath": "/opt/harness/bin/harness",
+      "kind": "cli",
+      "completionForm": { "value": "tool-less", "provenance": "probed" },
+      "costClass": { "value": "unknown", "provenance": "absent" },
+      "contextWindow": { "tokens": null, "source": "unknown" },
+      "memory": { "native": true, "provenance": "probed" },
+      "terms": { "decision": "unknown", "row": null, "provenance": "no row" },
+      "containmentCeiling": "C1",
+      "sources": {
+        "state": "probe",
+        "version": "probe",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "probe",
+        "completionForm": "probe",
+        "costClass": "not declared",
+        "contextWindow": "not shown",
+        "terms": "no row of the terms matrix"
+      }
+    }
+  ]
+}

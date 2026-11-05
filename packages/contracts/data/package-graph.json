@@ -1,0 +1,338 @@
+{
+  "schema": "specstride.package-graph/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex A, §A.1, §A.2, §A.3",
+  "source": "Hand-written. R15 A-4, with the packages that the owner's rulings added (four harness adapters, the layer of parallel units). Used by the import-boundary check (F100-FR-001, F100-FR-012).",
+  "published": [
+    "specstride",
+    "@specstride/contracts",
+    "@specstride/testkit"
+  ],
+  "builtByFeature100": [
+    "@specstride/contracts",
+    "@specstride/testkit",
+    "the table evaluator and the atomic write in @specstride/kernel",
+    "the import-boundary check"
+  ],
+  "packages": [
+    {
+      "name": "@specstride/contracts",
+      "layer": "all",
+      "owner": "100",
+      "mayImport": [],
+      "external": [
+        "a schema validator"
+      ],
+      "nodeBuiltins": false
+    },
+    {
+      "name": "@specstride/kernel",
+      "layer": "all",
+      "owner": "100 (table evaluator, atomic write, registration call of doctor checks); 104 (hasher); 111 (redactor); 122 (process primitive)",
+      "mayImport": [
+        "@specstride/contracts"
+      ]
+    },
+    {
+      "name": "@specstride/core",
+      "layer": "L4, L3",
+      "owner": "101, 149, 103, 117, 118, 102; module groups of 142 and 143 under src/parallel/",
+      "core": true,
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ],
+      "forbidden": [
+        "node:child_process",
+        "node:net",
+        "node:http",
+        "node:https",
+        "any provider SDK",
+        "node:fs",
+        "node:fs/promises"
+      ],
+      "note": "A module group of the core may belong to a feature that is not an owner of the package: 142 and 143 place module groups under packages/core/src/parallel/ (item A18; reports of 142 and 143)."
+    },
+    {
+      "name": "@specstride/layer-micro",
+      "layer": "L3",
+      "owner": "115",
+      "core": true,
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ],
+      "forbidden": [
+        "node:child_process",
+        "node:net",
+        "node:http",
+        "node:https",
+        "node:fs",
+        "node:fs/promises"
+      ]
+    },
+    {
+      "name": "@specstride/layer-parallel",
+      "layer": "L3",
+      "owner": "142",
+      "core": true,
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ],
+      "forbidden": [
+        "node:child_process",
+        "node:net",
+        "node:http",
+        "node:https",
+        "node:fs",
+        "node:fs/promises"
+      ]
+    },
+    {
+      "name": "@specstride/spec-formats",
+      "layer": "L1",
+      "owner": "104",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ]
+    },
+    {
+      "name": "@specstride/verification",
+      "layer": "L1",
+      "owner": "105",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ]
+    },
+    {
+      "name": "@specstride/integrity",
+      "layer": "L1",
+      "owner": "116; 115 (checkpoint reading, tripwire record)",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ],
+      "note": "Edge package of the kernel services of check integrity (split from the micro-loop layer): fingerprints and the protected set. An edge package may touch the file system or start a process on behalf of a core package, behind its interface in @specstride/contracts (annex A §A.3, F100-FR-234); a core package reaches it through that interface and never by importing it. Feature 115 owns the checkpoint reading and the tripwire record in packages/integrity/src/checkpoint/ and packages/integrity/src/tripwire/ (item A17 of the second pass; the report of 115).",
+      "edge": true
+    },
+    {
+      "name": "@specstride/tree-store",
+      "layer": "L1",
+      "owner": "143",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ],
+      "note": "Edge package of the kernel services of parallel units: the tree store. An edge package may touch the file system or start a process on behalf of a core package, behind its interface in @specstride/contracts (annex A §A.3, F100-FR-234); a core package reaches it through that interface and never by importing it.",
+      "edge": true
+    },
+    {
+      "name": "@specstride/check-runner",
+      "layer": "L1",
+      "owner": "148",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ],
+      "note": "Edge package of the kernel services of the check runner; split from the verification package. An edge package may touch the file system or start a process on behalf of a core package, behind its interface in @specstride/contracts (annex A §A.3, F100-FR-234); a core package reaches it through that interface and never by importing it.",
+      "edge": true
+    },
+    {
+      "name": "@specstride/harness",
+      "layer": "L1",
+      "owner": "109, 124, 126, 146",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ]
+    },
+    {
+      "name": "@specstride/adapter-claude",
+      "layer": "L1",
+      "owner": "125",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel",
+        "@specstride/harness"
+      ],
+      "optionalExternal": [
+        "the Agent SDK, never bundled"
+      ]
+    },
+    {
+      "name": "@specstride/adapter-dsh",
+      "layer": "L1",
+      "owner": "130",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel",
+        "@specstride/harness"
+      ]
+    },
+    {
+      "name": "@specstride/adapter-codex",
+      "layer": "L1",
+      "owner": "131",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel",
+        "@specstride/harness"
+      ]
+    },
+    {
+      "name": "@specstride/adapter-pi",
+      "layer": "L1",
+      "owner": "134",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel",
+        "@specstride/harness",
+        "@specstride/adapter-prime"
+      ]
+    },
+    {
+      "name": "@specstride/adapter-prime",
+      "layer": "L1",
+      "owner": "138",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel",
+        "@specstride/harness"
+      ]
+    },
+    {
+      "name": "@specstride/config",
+      "layer": "L1",
+      "owner": "110",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ]
+    },
+    {
+      "name": "@specstride/policy",
+      "layer": "L1",
+      "owner": "110, 127, 147",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ]
+    },
+    {
+      "name": "@specstride/observability",
+      "layer": "L1",
+      "owner": "111, 128, 144",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ]
+    },
+    {
+      "name": "@specstride/view",
+      "layer": "L6",
+      "owner": "129",
+      "mayImport": [
+        "@specstride/contracts"
+      ],
+      "nodeBuiltins": false,
+      "note": "The table evaluator, the redaction function and the canonical hasher are handed in by the caller"
+    },
+    {
+      "name": "@specstride/learning",
+      "layer": "L1",
+      "owner": "106",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel"
+      ]
+    },
+    {
+      "name": "@specstride/reverse",
+      "layer": "L6",
+      "owner": "108, 140",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel",
+        "@specstride/spec-formats"
+      ]
+    },
+    {
+      "name": "@specstride/pipeline",
+      "layer": "L5",
+      "owner": "107, 123",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel",
+        "@specstride/spec-formats",
+        "@specstride/config"
+      ]
+    },
+    {
+      "name": "@specstride/runtime",
+      "layer": "L5, L4",
+      "owner": "122",
+      "compositionRoot": true,
+      "mayImport": [
+        "every package above"
+      ]
+    },
+    {
+      "name": "@specstride/doctor",
+      "layer": "L6",
+      "owner": "112",
+      "mayImport": [
+        "@specstride/contracts",
+        "@specstride/kernel",
+        "@specstride/config",
+        "@specstride/view"
+      ]
+    },
+    {
+      "name": "@specstride/cli",
+      "layer": "L6",
+      "owner": "119, 145 (presenter) and the owner of each command",
+      "mayImport": [
+        "every package above"
+      ]
+    },
+    {
+      "name": "@specstride/host-claude-code",
+      "layer": "L7",
+      "owner": "113",
+      "mayImport": [
+        "@specstride/contracts (at build time only)"
+      ]
+    },
+    {
+      "name": "@specstride/testkit",
+      "layer": "dev",
+      "owner": "100 (frame, static tests); each content owner its conformance suite and sample",
+      "mayImport": [
+        "anything"
+      ],
+      "shipped": "published for authors; never part of the package `specstride`"
+    },
+    {
+      "name": "@specstride/oracle",
+      "layer": "dev",
+      "owner": "141",
+      "mayImport": [
+        "anything"
+      ],
+      "shipped": "never"
+    }
+  ],
+  "rules": [
+    "A package imports only what `mayImport` lists (LR-1).",
+    "A package marked `core` names no implementation of an extension point and no sample (F100-FR-012).",
+    "A package marked `core` does not import node:fs or node:fs/promises; it reads and writes files through the kernel and through the ports of the edge packages (F100-FR-012, F100-FR-234; assumption: CQ-185).",
+    "No package but @specstride/runtime and @specstride/cli is a composition root.",
+    "The pi harness adapter imports the JSONL reader from the package of the prime harness adapter, or both import it from @specstride/harness; feature 138 decides and the graph follows.",
+    "A core package receives the kernel services of annex A §A.3 (the process primitive, the clock, the registration call of the doctor's checks, the atomic write) as arguments from the composition root, and never reads them from a module of the platform (F100-FR-234; the interface types are packages/contracts/src/ep/kernel-services.ts).",
+    "A core package reaches an edge package (the three marked `edge`: @specstride/integrity, owner 116; @specstride/tree-store, owner 143; @specstride/check-runner, owner 148) only through its interface in @specstride/contracts, never by importing it; an edge package may touch the file system or start a process on behalf of a core package (F100-FR-234).",
+    "The calls of the engine into learning are a plain function interface of @specstride/contracts at layer L2, which the composition root hands to the engine; it is no extension point in Wave 1 and a failure of a call leaves the run on the value it would have had without learning (F100-FR-235)."
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:internal:107:finding/1",
+  "title": "One finding of the launch contract",
+  "description": "One entry of `findings` of the launch contract (feature 107). The severities and the statuses are the members of the closed set of annex X §X.6 row 79 that annex G §G.8 gives (the record schema `launch-contract.schema.json` of @specstride/contracts names them); the severities and statuses are read from that table, never copied by hand. The draft holds exactly one bootstrap finding, `semantic-derivation-required`, with the fixed message and resolution text (F107-FR-005); an open blocker refuses promotion (F107-FR-021). A finding that an answer to a judgment item wrote carries the provenance of the answer (F107-FR-010).",
+  "x-schema-id": "urn:specstride:schema:internal:107:finding/1",
+  "x-annex": "feature 107, data-model.md, \"Member names\" (a finding)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The id of the finding; `semantic-derivation-required` for the bootstrap finding"
+    },
+    "severity": {
+      "enum": ["info", "warning", "blocker"],
+      "description": "The severity; a member of the closed set of annex X §X.6 row 79, as annex G §G.8 gives it"
+    },
+    "status": {
+      "enum": ["open", "resolved", "accepted"],
+      "description": "The status; a member of the closed set of annex X §X.6 row 79, as annex G §G.8 gives it"
+    },
+    "message": {
+      "type": "string",
+      "description": "The message of the finding"
+    },
+    "source": {
+      "type": "object",
+      "description": "Where the finding stands: the path, the line and the anchor",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The path of the source, relative to the repository root"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The line of the source"
+        },
+        "anchor": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The anchor: the id the line carries, else the anchor of the record"
+        }
+      },
+      "required": ["path", "line", "anchor"],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "resolution": {
+      "type": "string",
+      "description": "The resolution; the fixed text for the bootstrap finding, the text that names what resolved it for a finding an answer wrote"
+    },
+    "provenance": {
+      "type": "object",
+      "description": "The provenance of the answer, for a finding that the answer wrote (F107-FR-010)",
+      "properties": {
+        "who": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The host or the harness that answered"
+        },
+        "route": {
+          "enum": ["host-model", "delegated-harness"],
+          "description": "The route of the answer; the closed set of annex X §X.6 row 260 (routeOfAnAnswerToAJudgmentItem of @specstride/contracts)"
+        },
+        "harness": {
+          "type": ["string", "null"],
+          "description": "The named harness of a delegated answer; null for the host model"
+        },
+        "batch_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The id of the batch the answer closed"
+        }
+      },
+      "required": ["who", "route", "batch_id"],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    }
+  },
+  "required": ["id", "severity", "status", "message", "source", "resolution"],
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "specstride.feature-parity-rows/1",
+  "feature": "148-check-runner",
+  "read": [
+    {
+      "row": 1,
+      "key": "loop.strategy",
+      "underParity": "classic",
+      "requirements": [
+        "F148-FR-010"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "row": 6,
+      "key": "verification.step_runner",
+      "underParity": "off",
+      "requirements": [
+        "F148-FR-008",
+        "F148-FR-009"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "row": 7,
+      "key": "verification.parallelism",
+      "underParity": 1,
+      "requirements": [
+        "F148-FR-011",
+        "F148-FR-012",
+        "F148-FR-013",
+        "F148-FR-014",
+        "F148-FR-015",
+        "F148-FR-016",
+        "F148-FR-017"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "row": 25,
+      "key": "sandbox.level",
+      "underParity": "as at the baseline: none",
+      "requirements": [
+        "F148-FR-006"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "row": 31,
+      "key": "integrity.gate_fingerprint",
+      "underParity": "off",
+      "requirements": [
+        "F148-FR-006"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "row": 125,
+      "key": "verification.envAllowlist",
+      "default": "on",
+      "underParity": "off",
+      "register": "DV-113",
+      "status": "confirmed",
+      "requirements": [
+        "F148-FR-002"
+      ]
+    }
+  ]
+}

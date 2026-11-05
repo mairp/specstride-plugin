@@ -1,0 +1,30 @@
+{
+  "schema": "specstride.quota-classifier/1",
+  "harness": "prime",
+  "entries": [
+    {
+      "from": "reader error class provider_auth",
+      "portFailure": "authentication_failed",
+      "class": "auth",
+      "confidence": "text",
+      "retryable": false
+    },
+    {
+      "from": "reader error class provider_error, message states a limit and a time or duration of reset",
+      "portFailure": "quota_exhausted",
+      "class": "quota_window",
+      "confidence": "text",
+      "resetsAt": "read from the message",
+      "retryable": true,
+      "status": "unverified until capture (2)"
+    },
+    {
+      "from": "any other message",
+      "portFailure": "agent_failure",
+      "class": "provider_other",
+      "confidence": "text",
+      "retryable": true
+    }
+  ],
+  "structuredQuotaCode": false
+}

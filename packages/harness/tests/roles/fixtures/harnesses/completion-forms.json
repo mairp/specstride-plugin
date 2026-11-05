@@ -1,0 +1,66 @@
+{
+  "schema": "specstride.fixture-harnesses/1",
+  "feature": "124",
+  "annex": "100, annex C §C.6, field `harnesses`",
+  "note": "T002 — both forms of the `completion` level: `tool-less` and `read-only-tools` (row 28 of annex X §X.6).",
+  "harnesses": [
+    {
+      "id": "form-tool-less",
+      "state": "tested",
+      "origin": "user",
+      "version": "1.4.2",
+      "descriptorHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "resolvedPath": "/usr/local/bin/stub-harness",
+      "kind": "cli",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "local", "provenance": "declared" },
+      "contextWindow": { "tokens": 200000, "source": "declared" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:local-stub",
+        "provenance": "configuration"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "verified:adapter",
+        "version": "descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "probe",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "descriptor",
+        "terms": "terms gate"
+      }
+    },
+    {
+      "id": "form-read-only-tools",
+      "state": "tested",
+      "origin": "user",
+      "version": "1.4.2",
+      "descriptorHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "resolvedPath": "/usr/local/bin/stub-harness-readonly",
+      "kind": "cli",
+      "completionForm": { "value": "read-only-tools", "provenance": "declared" },
+      "costClass": { "value": "local", "provenance": "declared" },
+      "contextWindow": { "tokens": 200000, "source": "declared" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:local-stub",
+        "provenance": "configuration"
+      },
+      "containmentCeiling": "C3",
+      "sources": {
+        "state": "verified:adapter",
+        "version": "descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "probe",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "descriptor",
+        "terms": "terms gate"
+      }
+    }
+  ]
+}

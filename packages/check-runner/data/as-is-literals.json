@@ -1,0 +1,21 @@
+{
+ "schema": "specstride.feature-literals/1",
+ "note": "Compared byte for byte in compatibility output. <component> is the logical component name of feature 100, annex X, section X.8.",
+ "literals": [
+  {
+   "requirement": "F148-FR-004",
+   "text": "command timed out",
+   "item": "B-1122"
+  },
+  {
+   "requirement": "F148-FR-004",
+   "text": "TIMEOUT",
+   "item": "B-1122"
+  },
+  {
+   "requirement": "F148-FR-004",
+   "text": "EXEC_ERROR",
+   "item": "B-1122"
+  }
+ ]
+}

@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.attempt/1",
+  "title": "attempt-record",
+  "description": "The record of one phase attempt, written by the engine. Feature 101 (T002); the field list is the table \"Record of a phase attempt\" of specs/101-gate-and-verdict/data-model.md, and the specification stands where the two differ.",
+  "x-schema-id": "specstride.attempt/1",
+  "x-annex": "feature 101, data-model.md, \"Record of a phase attempt\"",
+  "x-logical-name": "attempt:<N>:<k>:<n>:record",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "attemptId": {
+      "type": "string",
+      "description": "Identity of the phase attempt",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "phase": {
+      "type": "integer",
+      "description": "The phase the attempt belongs to",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "ordinal": {
+      "type": "integer",
+      "description": "The ordinal of the phase attempt inside its phase",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "engineStartOrdinal": {
+      "type": "integer",
+      "description": "The ordinal of the engine start the phase attempt ran under",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "kind": {
+      "type": "string",
+      "description": "The kind that the attempt planner gave (feature 100 annex E §E.1; annex X §X.6 row 9)",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": ["plain", "diagnosed", "accelerated", "bumped"]
+    },
+    "role": {
+      "type": "string",
+      "description": "`proposer` or `accelerator`, read from the role registry; the registry is open, so this schema closes no list of roles (F100-FR-023)",
+      "x-type-in-words": "Text, from the role registry",
+      "x-required": "Yes"
+    },
+    "harness": {
+      "type": "string",
+      "description": "The harness that ran the passes of the phase attempt",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "model": {
+      "type": "string",
+      "description": "The model that ran the passes of the phase attempt",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "modelTier": {
+      "type": "string",
+      "description": "The model tier that ran the passes of the phase attempt",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "planned": {
+      "type": "object",
+      "description": "The decision record of the attempt planner, as it returned it; absent where no planner ran",
+      "x-type-in-words": "Record, or absent",
+      "x-required": "No"
+    },
+    "signature": {
+      "type": "string",
+      "description": "The signature of unmet criteria of the feedback that led to this phase attempt; absent for the first phase attempt of a phase",
+      "x-type-in-words": "Text, or absent",
+      "x-required": "No"
+    },
+    "outcome": {
+      "type": "string",
+      "description": "How the phase attempt ended. A field of this record only: the verdict stays one of the three members of the closed set of verdicts (annex X §X.6 row 8), and `gate-failed` and `no-verdict` have no verdict",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": ["approved", "rejected", "malformed", "gate-failed", "config-error", "no-verdict"]
+    },
+    "verdictId": {
+      "type": "string",
+      "description": "The verdict, where one exists",
+      "x-type-in-words": "Text, or absent",
+      "x-required": "No"
+    },
+    "archived": {
+      "type": "object",
+      "description": "Whether the phase attempt was archived, and the label of the archive",
+      "x-type-in-words": "Record",
+      "x-required": "Yes",
+      "properties": {
+        "archived": {
+          "type": "boolean",
+          "description": "Whether the phase attempt was archived",
+          "x-type-in-words": "Truth value",
+          "x-required": "Yes"
+        },
+        "label": {
+          "type": ["string", "null"],
+          "description": "The label of the archive, or null where the phase attempt was not archived",
+          "x-type-in-words": "Text, or null",
+          "x-required": "Yes"
+        }
+      },
+      "required": ["archived", "label"]
+    }
+  },
+  "required": [
+    "schema",
+    "attemptId",
+    "phase",
+    "ordinal",
+    "engineStartOrdinal",
+    "kind",
+    "role",
+    "harness",
+    "model",
+    "modelTier",
+    "outcome",
+    "archived"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

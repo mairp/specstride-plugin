@@ -1,0 +1,157 @@
+{
+  "schema": "specstride.stop-reason/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex E, §E.3",
+  "stopReasons": [
+    {
+      "number": 1,
+      "literal": "stop_flag",
+      "writtenBy": "Engine; pass loop during the wait of a yield",
+      "engineExit": 6,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "No"
+    },
+    {
+      "number": 2,
+      "literal": "wall_budget",
+      "writtenBy": "Engine",
+      "engineExit": 4,
+      "transient": true,
+      "transientNote": "Yes",
+      "retryable": "true, except false when the stop is blocked on a human (`budget-cap`)",
+      "matchedByStringAtBaseline": "Yes"
+    },
+    {
+      "number": 3,
+      "literal": "proposer_max_iter",
+      "writtenBy": "Engine. The result 4 of the pass loop writes no line of its own",
+      "engineExit": 4,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "No"
+    },
+    {
+      "number": 4,
+      "literal": "proposer_no_progress",
+      "writtenBy": "Engine; pass loop",
+      "engineExit": 4,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "No"
+    },
+    {
+      "number": 5,
+      "literal": "proposer_consecutive_errors",
+      "writtenBy": "Engine; pass loop",
+      "engineExit": 4,
+      "transient": true,
+      "transientNote": "Yes, for failure classes that are not quota",
+      "retryable": "true for the classes `agent_failure`, `provider_other`, and `overload` after its cap; false when blocked on a human (`quota-credit`, `auth`)",
+      "matchedByStringAtBaseline": "Yes"
+    },
+    {
+      "number": 6,
+      "literal": "proposer_yield_budget",
+      "writtenBy": "Engine; pass loop",
+      "engineExit": 4,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "No"
+    },
+    {
+      "number": 7,
+      "literal": "proposer_yield_timeout",
+      "writtenBy": "Pass loop only. The engine records member 6 for the same stop",
+      "engineExit": 4,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "No"
+    },
+    {
+      "number": 8,
+      "literal": "proposer_cap_exhausted",
+      "writtenBy": "Engine; pass loop",
+      "engineExit": 4,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "No"
+    },
+    {
+      "number": 9,
+      "literal": "proposer_no_evidence",
+      "writtenBy": "Engine",
+      "engineExit": 1,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "No"
+    },
+    {
+      "number": 10,
+      "literal": "critic_config",
+      "writtenBy": "Engine",
+      "engineExit": 3,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "No"
+    },
+    {
+      "number": 11,
+      "literal": "critic_unavailable",
+      "writtenBy": "Engine",
+      "engineExit": 1,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "No"
+    },
+    {
+      "number": 12,
+      "literal": "gate_oscillation",
+      "writtenBy": "Engine",
+      "engineExit": 2,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "No"
+    },
+    {
+      "number": 13,
+      "literal": "max_rejects",
+      "writtenBy": "Engine",
+      "engineExit": 2,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "No"
+    },
+    {
+      "number": 14,
+      "literal": "release_verification",
+      "writtenBy": "Engine",
+      "engineExit": 2,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "No"
+    },
+    {
+      "number": 15,
+      "literal": "paused_quota_ceiling",
+      "writtenBy": "Engine",
+      "engineExit": 4,
+      "transient": false,
+      "transientNote": "No",
+      "retryable": "false",
+      "matchedByStringAtBaseline": "— (new)"
+    }
+  ]
+}

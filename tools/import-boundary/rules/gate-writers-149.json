@@ -1,0 +1,16 @@
+{
+  "rule": "gate-writers-149",
+  "owner": "149",
+  "requirement": "F149-FR-007",
+  "from": [
+    "packages/layer-micro/src/**",
+    "packages/layer-parallel/src/**",
+    "packages/core/src/ep18/**",
+    "packages/testkit/src/samples/EP-18/**"
+  ],
+  "forbid": [
+    "packages/core/src/gate/writers.ts",
+    "packages/core/src/approval/record.ts"
+  ],
+  "reason": "No loop layer, no router, no critic strategy and no planner holds a writer of the phase gate"
+}

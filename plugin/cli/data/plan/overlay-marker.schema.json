@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride-overlay/v1:marker",
+  "title": "overlay marker",
+  "description": "The marker of an overlay tree: the part of specstride-overlay/v1 (feature 100, annex C §C.16) that is written into the tree, with the fields of the owner and of the time of creation (CQ-064) and the scope words of annex X §X.6 row 129. Feature 100 owns the schema of the record; this file is the part that this feature, the content owner, fills.",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "const": "specstride-overlay/v1"
+    },
+    "key": {
+      "type": "string"
+    },
+    "scope": {
+      "enum": ["pass", "attempt", "critic"]
+    },
+    "vars": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ownerPid": {
+      "type": "integer"
+    },
+    "ownerStart": {
+      "type": ["string", "number", "null"]
+    },
+    "createdAt": {
+      "type": ["string", "number"]
+    }
+  },
+  "required": ["contract", "key", "scope", "vars", "ownerPid", "ownerStart", "createdAt"],
+  "additionalProperties": true
+}

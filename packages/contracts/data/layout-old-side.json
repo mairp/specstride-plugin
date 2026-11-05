@@ -1,0 +1,2875 @@
+{
+  "schema": "specstride.oracle-normalization/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex X, §X.8",
+  "count": 199,
+  "placeholders": {
+    "<workdir>": "the working directory",
+    "<state-dir>, <state>": "the as-is state directory of the Specstride baseline inside the working directory",
+    "<feature-dir>, <feature>, <FEATURE_DIR>": "<state>/features/<slug>",
+    "<run-dir>": "<feature-dir>/runs/<run-id>",
+    "<invocation_dir>": "<feature-dir>/debug/invocations/<run-id>/<role>/phase-<P>/attempt-<A>/iter-<i>/<invocation-id>",
+    "<artifact root>, runs/<id>/": "the as-is artifact directory of mixture-of-loops beside the launcher",
+    "<run_state>": "<SRC>/<state>/reverse/<slug>",
+    "<overlay>": "the overlay tree in the temporary directory"
+  },
+  "items": [
+    {
+      "item": "B-0156",
+      "system": "SS",
+      "disposition": "superseded-by DV-023",
+      "feature": "110-config-and-terms",
+      "asIsPaths": [
+        "<install-dir>/.env",
+        "orchestrator.sh"
+      ],
+      "logicalNames": [],
+      "rule": "not carried (DV-023)",
+      "what": "location"
+    },
+    {
+      "item": "B-0157",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "100-specstride",
+      "asIsPaths": [
+        "<workdir>/<state-dir>/features/<slug>/"
+      ],
+      "logicalNames": [
+        "run:<runId>:record",
+        "gate:<N>:approved",
+        "feature:<slug>:notebook"
+      ],
+      "rule": "the state of a feature is reached under the feature slug in the control plane and in the workspace part",
+      "what": "location"
+    },
+    {
+      "item": "B-0158",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "<workdir>/testautomation/<slug>/TEST_PLAN.md"
+      ],
+      "logicalNames": [
+        "feature:<slug>:verification:test-plan"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0159",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "<workdir>/testautomation/<slug>/generated"
+      ],
+      "logicalNames": [
+        "feature:<slug>:verification:scaffolds"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0160",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "<feature-dir>/runs/<run-id>/verification/verification-plan.json"
+      ],
+      "logicalNames": [
+        "run:<runId>:verification:plan"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0161",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "122-detached-runtime",
+      "asIsPaths": [
+        "<workdir>/<state-dir>/lock"
+      ],
+      "logicalNames": [
+        "workspace:lock"
+      ],
+      "rule": "the form of the lock is mapped per operating system (N-02; DV-022)",
+      "what": "location"
+    },
+    {
+      "item": "B-0162",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "122-detached-runtime",
+      "asIsPaths": [],
+      "logicalNames": [
+        "workspace:lock"
+      ],
+      "rule": "the form of the lock is mapped per operating system (N-02; DV-022)",
+      "what": "location"
+    },
+    {
+      "item": "B-0163",
+      "system": "SS",
+      "disposition": "superseded-by DV-022",
+      "feature": "122-detached-runtime",
+      "asIsPaths": [
+        "<state-dir>/lock.d"
+      ],
+      "logicalNames": [],
+      "rule": "not carried (DV-022)",
+      "what": "location"
+    },
+    {
+      "item": "B-0164",
+      "system": "SS",
+      "disposition": "superseded-by DV-022",
+      "feature": "122-detached-runtime",
+      "asIsPaths": [
+        "<state-dir>/lock.d/owner"
+      ],
+      "logicalNames": [],
+      "rule": "not carried (DV-022)",
+      "what": "location"
+    },
+    {
+      "item": "B-0165",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "100-specstride",
+      "asIsPaths": [
+        "<feature-dir>/runs/<run-id>/",
+        "verdicts/",
+        "attempts/",
+        "debug/",
+        "gates/proofs/",
+        "runs/<run-id>/verification/"
+      ],
+      "logicalNames": [
+        "run:<runId>:record",
+        "attempt:<N>:<k>:<n>:record",
+        "attempt:<N>:<k>:<n>:verdict",
+        "run:<runId>:verification:plan"
+      ],
+      "rule": "directories are created when their first file is written",
+      "what": "location"
+    },
+    {
+      "item": "B-0166",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "144-compatibility-projection",
+      "asIsPaths": [
+        "<run-dir>/run.log",
+        "<run-dir>/events.jsonl"
+      ],
+      "logicalNames": [
+        "run:<runId>:engine-log:<k>",
+        "run:<runId>:events-legacy"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0167",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "100-specstride",
+      "asIsPaths": [
+        "<state-dir>/run.log",
+        "features/<slug>/runs/<run-id>/run.log"
+      ],
+      "logicalNames": [
+        "workspace:current:engine-log"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0168",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "100-specstride",
+      "asIsPaths": [
+        "<state-dir>/events.jsonl",
+        "features/<slug>/runs/<run-id>/events.jsonl"
+      ],
+      "logicalNames": [
+        "workspace:current:events"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0169",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "102-run-control",
+      "asIsPaths": [
+        "<feature-dir>/last-run.conf"
+      ],
+      "logicalNames": [
+        "run:<runId>:snapshot"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0170",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "102-run-control",
+      "asIsPaths": [
+        "<state-dir>/last-run.conf"
+      ],
+      "logicalNames": [
+        "run:<runId>:snapshot"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0171",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "102-run-control",
+      "asIsPaths": [
+        "<state-dir>/stop.flag"
+      ],
+      "logicalNames": [
+        "inbox:stop"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0172",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "<feature-dir>/runs/<run-id>/verification/release.json"
+      ],
+      "logicalNames": [
+        "run:<runId>:verification:release"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0173",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "gates/.diagnosed-phase<N>"
+      ],
+      "logicalNames": [
+        "phase:<N>:recovery-markers"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0174",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "gates/GATE<N>-ACCELERATION.md"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:acceleration"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0175",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "gates/GATE<N>-ACCELERATOR-NOTE.md"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:accelerator-note"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0176",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "<feature-dir>/attempts/phase<N>/attempt<M>/"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:evidence",
+        "attempt:<N>:<k>:<n>:record"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0177",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "118-pass-supervision-and-jobs",
+      "asIsPaths": [
+        "<feature-dir>/yield/phase<N>-attempt<M>-<run-id>.json"
+      ],
+      "logicalNames": [
+        "job:<jobId>:yield",
+        "feature:<slug>:outbox"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0178",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "103-proposer-pass",
+      "asIsPaths": [
+        "<feature-dir>/proposer-prompt.phase<N>.txt",
+        "<feature-dir>/accelerator-prompt.phase<N>.txt"
+      ],
+      "logicalNames": [
+        "pass:<passId>:prompt"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0179",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "gates/.accelerated-phase<N>"
+      ],
+      "logicalNames": [
+        "phase:<N>:recovery-markers"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0180",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "<run-dir>/accelerator/phase<N>-attempt<M>.before",
+        ".after",
+        "<path>\\tnew"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:accelerator-snapshot"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0181",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "<feature-dir>/runs/<run-id>/verification/phase-<N>-attempt-<M>.json"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:verification"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0182",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "gates/GATE<N>-FEEDBACK.md",
+        "verification_failure_digest.py"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:feedback"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-0183",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "<feature-dir>/debug/invocations/<run-id>/critic/phase-<N>/attempt-<A>/iter-0/<invocation-id>/"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:critic-invocation"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0184",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "GATE<N>-FEEDBACK.md",
+        "GATE<N>-HINT.md",
+        "GATE<N>-ACCELERATION.md",
+        "<feature-dir>/attempts/phase<N>/approved/"
+      ],
+      "logicalNames": [
+        "phase:<N>:approved-archive"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0185",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "gates/.diagnosed-phase<N>",
+        "gates/.accelerated-phase<N>",
+        "GATE<N>-EVIDENCE.md"
+      ],
+      "logicalNames": [
+        "phase:<N>:recovery-markers"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0186",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [],
+      "logicalNames": [
+        "feature:<slug>:learning:observation:<N>"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0339",
+      "system": "SS",
+      "disposition": "dropped",
+      "feature": "none",
+      "asIsPaths": [
+        "<state-dir>/proposer.pid",
+        "<state-dir>/critic.pid"
+      ],
+      "logicalNames": [],
+      "rule": "dropped with the digest script (DV-061)",
+      "what": "location"
+    },
+    {
+      "item": "B-0340",
+      "system": "SS",
+      "disposition": "dropped",
+      "feature": "none",
+      "asIsPaths": [
+        "<output>.tmp"
+      ],
+      "logicalNames": [],
+      "rule": "dropped with the digest script (DV-061)",
+      "what": "location"
+    },
+    {
+      "item": "B-0352",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "111-event-schema-and-projection",
+      "asIsPaths": [],
+      "logicalNames": [
+        "run:<runId>:events-legacy"
+      ],
+      "rule": null,
+      "what": "write discipline"
+    },
+    {
+      "item": "B-0353",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "118-pass-supervision-and-jobs",
+      "asIsPaths": [
+        "<feature-dir>/long-jobs/phase<N>-attempt<M>-<run-id>.{pid,log,done}"
+      ],
+      "logicalNames": [
+        "job:<jobId>:record",
+        "job:<jobId>:log"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0395",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "109-harness-seam",
+      "asIsPaths": [
+        "<overlay>/specstride-overlay.json",
+        "specstride-overlay/v1"
+      ],
+      "logicalNames": [
+        "overlay:<id>:tree"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0396",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "109-harness-seam",
+      "asIsPaths": [],
+      "logicalNames": [
+        "overlay:<id>:tree"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0397",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "109-harness-seam",
+      "asIsPaths": [],
+      "logicalNames": [
+        "overlay:<id>:tree"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0398",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "109-harness-seam",
+      "asIsPaths": [
+        "<overlay>/specstride-overlay.gitconfig"
+      ],
+      "logicalNames": [
+        "overlay:<id>:tree"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0435",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "130-adapter-dsh",
+      "asIsPaths": [
+        "<DSH_HOME>/profiles/<profile>/.specstride-plugin-install.lock"
+      ],
+      "logicalNames": [
+        "harness:<id>:install-lock"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0436",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "130-adapter-dsh",
+      "asIsPaths": [
+        "specstride-dsh-plugin-install/v1"
+      ],
+      "logicalNames": [
+        "harness:<id>:plugin-installs"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0445",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "103-proposer-pass",
+      "asIsPaths": [
+        "result.json",
+        "<root>/<run_id>/<role>/phase-<P>/attempt-<A>/iter-<i>/<invocation_id>/result.json"
+      ],
+      "logicalNames": [
+        "pass:<passId>:result"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0454",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "118-pass-supervision-and-jobs",
+      "asIsPaths": [],
+      "logicalNames": [
+        "feature:<slug>:failure-ledger"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0617",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "103-proposer-pass",
+      "asIsPaths": [],
+      "logicalNames": [
+        "feature:<slug>:outbox",
+        "gate:<N>:evidence"
+      ],
+      "rule": "directories are created at start when missing",
+      "what": "location"
+    },
+    {
+      "item": "B-0618",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "130-adapter-dsh",
+      "asIsPaths": [
+        "<state>/features/<feature>/dsh-plugin-request.json"
+      ],
+      "logicalNames": [
+        "harness:<id>:plugin-request"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0619",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "130-adapter-dsh",
+      "asIsPaths": [
+        "<state>/features/<feature>/plugin-installs/"
+      ],
+      "logicalNames": [
+        "harness:<id>:plugin-installs"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0620",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "118-pass-supervision-and-jobs",
+      "asIsPaths": [
+        "<yield-dir>/phase<P>-attempt<A>-<run-id>.json"
+      ],
+      "logicalNames": [
+        "job:<jobId>:yield",
+        "feature:<slug>:outbox"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0621",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "130-adapter-dsh",
+      "asIsPaths": [
+        "settings.yaml",
+        "settings.yaml"
+      ],
+      "logicalNames": [
+        "overlay:<id>:tree"
+      ],
+      "rule": "the throwaway home of one harness is an overlay that its harness adapter builds",
+      "what": "location"
+    },
+    {
+      "item": "B-0622",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "109-harness-seam",
+      "asIsPaths": [
+        "$TMPDIR/specstride-overlay.<key>.XXXXXX"
+      ],
+      "logicalNames": [
+        "overlay:<id>:tree"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0623",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "109-harness-seam",
+      "asIsPaths": [
+        "<overlay>/specstride-overlay.env"
+      ],
+      "logicalNames": [
+        "overlay:<id>:tree"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0624",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "130-adapter-dsh",
+      "asIsPaths": [
+        "$TMPDIR/specstride-dsh-home.XXXXXX",
+        "settings.yaml"
+      ],
+      "logicalNames": [
+        "overlay:<id>:tree"
+      ],
+      "rule": "the throwaway home of one harness is an overlay that its harness adapter builds",
+      "what": "location"
+    },
+    {
+      "item": "B-0625",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "125-adapter-claude",
+      "asIsPaths": [
+        "$TMPDIR/specstride-prompt.XXXXXX"
+      ],
+      "logicalNames": [
+        "pass:<passId>:prompt-transfer"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0626",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "<invocation_dir>/producer.json",
+        "specstride-producer-status/v1"
+      ],
+      "logicalNames": [
+        "pass:<passId>:producer-status"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0627",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "<invocation_dir>/metadata.json",
+        "specstride-invocation/v1"
+      ],
+      "logicalNames": [
+        "pass:<passId>:invocation"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0628",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "118-pass-supervision-and-jobs",
+      "asIsPaths": [
+        "<FEATURE_DIR>/pass-checkpoints/<run-id>-phase<P>-attempt<A>-pass<i>-<YYYYmmdd-HHMMSS>.md"
+      ],
+      "logicalNames": [
+        "pass:<passId>:kill-note"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0629",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "118-pass-supervision-and-jobs",
+      "asIsPaths": [
+        "<state>/.last-watchdog-kill.path"
+      ],
+      "logicalNames": [
+        "pass:<passId>:kill-note"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0630",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "118-pass-supervision-and-jobs",
+      "asIsPaths": [
+        "<state>/.last-watchdog-kill",
+        "<reason>|<elapsed>|<detail>"
+      ],
+      "logicalNames": [
+        "pass:<passId>:kill-note"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0631",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "118-pass-supervision-and-jobs",
+      "asIsPaths": [
+        "<FEATURE_DIR>/yield-jobs/phase<P>-attempt<A>-<run-id>-yield<k>.pid",
+        ".rc",
+        ".log"
+      ],
+      "logicalNames": [
+        "job:<jobId>:record",
+        "job:<jobId>:log"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0632",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "118-pass-supervision-and-jobs",
+      "asIsPaths": [
+        "<FEATURE_DIR>/failure-ledger.jsonl"
+      ],
+      "logicalNames": [
+        "feature:<slug>:failure-ledger"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0633",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "<state>/features/<feature>/debug/invocations/<run-id>/<role>/phase-<P>/attempt-<A>/iter-<i>/<invocation-id>"
+      ],
+      "logicalNames": [
+        "pass:<passId>:invocation",
+        "pass:<passId>:result",
+        "pass:<passId>:prompt",
+        "pass:<passId>:stream",
+        "pass:<passId>:response"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0634",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "<state>/.last-invocation-dir"
+      ],
+      "logicalNames": [
+        "run:<runId>:current-pass"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0635",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "<invocation_dir>/prompt.txt"
+      ],
+      "logicalNames": [
+        "pass:<passId>:prompt"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0636",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "<invocation_dir>/provider-terminal.json"
+      ],
+      "logicalNames": [
+        "pass:<passId>:provider-terminal"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0637",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "103-proposer-pass",
+      "asIsPaths": [
+        "<state>/.breaker-state.<run-id>.json"
+      ],
+      "logicalNames": [
+        "run:<runId>:ledger"
+      ],
+      "rule": "the breaker state is a set of counters of the ledger (DV-011)",
+      "what": "location"
+    },
+    {
+      "item": "B-0638",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "118-pass-supervision-and-jobs",
+      "asIsPaths": [
+        "<state>/proposer.pid"
+      ],
+      "logicalNames": [
+        "run:<runId>:procs"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0869",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "<feature>/gates/GATE<N>-HINT.md"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:hint"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-0870",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "<workdir>/<state-dir>/features/<slug>/",
+        ".specstride"
+      ],
+      "logicalNames": [
+        "run:<runId>:record",
+        "gate:<N>:evidence"
+      ],
+      "rule": "the legacy directory name is not carried (DV-036)",
+      "what": "location"
+    },
+    {
+      "item": "B-0871",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "<feature>/gates/",
+        "<feature>/verdicts/"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:verdict",
+        "gate:<N>:evidence"
+      ],
+      "rule": "directories are created when their first file is written",
+      "what": "location"
+    },
+    {
+      "item": "B-0872",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "<feature>/gates/GATE<N>-EVIDENCE.md"
+      ],
+      "logicalNames": [
+        "gate:<N>:evidence"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0873",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "117-critic-grounding-and-prompt",
+      "asIsPaths": [
+        "<feature>/debug/critic-prompt.phase<N>.att<M>.txt"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:critic-prompt"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0874",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "<feature>/verdicts/phase<N>.attempt<M>.<YYYYmmdd-HHMMSS>.txt"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:verdict"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0875",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "<feature>/gates/GATE<N>-APPROVED"
+      ],
+      "logicalNames": [
+        "gate:<N>:approved"
+      ],
+      "rule": "existence only; content is waived (DV-029)",
+      "what": "location"
+    },
+    {
+      "item": "B-0876",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:verdict"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0877",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:verdict"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-0878",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "<feature>/gates/GATE<N>-FEEDBACK.md"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:feedback"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-0879",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:feedback"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-0880",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [
+        "<detail>"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:feedback"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-0881",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "101-gate-and-verdict",
+      "asIsPaths": [],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:feedback"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-0882",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "117-critic-grounding-and-prompt",
+      "asIsPaths": [],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:feedback"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1018",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "117-critic-grounding-and-prompt",
+      "asIsPaths": [
+        "<feature>/verdict-pins.phase<N>.json"
+      ],
+      "logicalNames": [
+        "phase:<N>:verdict-pins"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1019",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "117-critic-grounding-and-prompt",
+      "asIsPaths": [
+        "<path>.tmp",
+        "os.replace"
+      ],
+      "logicalNames": [
+        "phase:<N>:verdict-pins"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1060",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [],
+      "logicalNames": [
+        "feature:<slug>:verification:test-plan"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1061",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [],
+      "logicalNames": [
+        "run:<runId>:verification:plan",
+        "feature:<slug>:verification:test-plan"
+      ],
+      "rule": null,
+      "what": "write discipline"
+    },
+    {
+      "item": "B-1062",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [],
+      "logicalNames": [
+        "feature:<slug>:verification:commands"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1063",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [],
+      "logicalNames": [
+        "run:<runId>:verification:plan"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1064",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [],
+      "logicalNames": [
+        "run:<runId>:verification:plan",
+        "feature:<slug>:verification:test-plan"
+      ],
+      "rule": null,
+      "what": "write discipline"
+    },
+    {
+      "item": "B-1065",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        ".verification-*",
+        "os.replace"
+      ],
+      "logicalNames": [
+        "run:<runId>:verification:plan",
+        "feature:<slug>:verification:test-plan"
+      ],
+      "rule": null,
+      "what": "write discipline"
+    },
+    {
+      "item": "B-1066",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "verification.generated.test.ts",
+        "it.todo",
+        "verification.generated.test.js",
+        "test.todo"
+      ],
+      "logicalNames": [
+        "feature:<slug>:verification:scaffolds"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1067",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "test_verification_generated.py"
+      ],
+      "logicalNames": [
+        "feature:<slug>:verification:scaffolds"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1068",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "verification.generated.json"
+      ],
+      "logicalNames": [
+        "feature:<slug>:verification:scaffolds"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1069",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "prestage-phase-<N>-attempt-<M>.json"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:prestage"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1070",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "prestage-logs/<name>.log",
+        "prestage-logs/<name>.status.json"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:prestage"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1071",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:verification"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1142",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "<run-dir>/verification/release.json"
+      ],
+      "logicalNames": [
+        "run:<runId>:verification:release"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1143",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [
+        "<run-dir>/verification/phase-<N>-attempt-<M>.json"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:verification"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1144",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "105-verification",
+      "asIsPaths": [],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:feedback"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1254",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [
+        "specstride.learn.summary/7"
+      ],
+      "logicalNames": [
+        "feature:<slug>:learning:summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1255",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [],
+      "logicalNames": [
+        "run:<runId>:events-legacy"
+      ],
+      "rule": null,
+      "what": "reading"
+    },
+    {
+      "item": "B-1256",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:verification"
+      ],
+      "rule": null,
+      "what": "reading"
+    },
+    {
+      "item": "B-1257",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:verdict"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1258",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [
+        "specstride.learn.applied/2",
+        "/1"
+      ],
+      "logicalNames": [
+        "feature:<slug>:learning:decisions"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1259",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [
+        "<feature-dir>/learning/applied.json"
+      ],
+      "logicalNames": [
+        "feature:<slug>:learning:decisions"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1260",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [
+        "<feature-dir>/events.jsonl",
+        "runs/<id>/events.jsonl"
+      ],
+      "logicalNames": [
+        "feature:<slug>:learning:events",
+        "feature:<slug>:learning:events-legacy"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1261",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [],
+      "logicalNames": [
+        "feature:<slug>:learning:decisions"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1262",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [],
+      "logicalNames": [
+        "feature:<slug>:learning:decisions"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1263",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [],
+      "logicalNames": [
+        "feature:<slug>:learning:decisions"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1264",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [],
+      "logicalNames": [
+        "feature:<slug>:learning:decisions"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1265",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [],
+      "logicalNames": [
+        "feature:<slug>:learning:decisions"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1266",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [
+        "<feature-dir>/learning/phase-<N>.json"
+      ],
+      "logicalNames": [
+        "feature:<slug>:learning:observation:<N>"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1367",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "145-presenter",
+      "asIsPaths": [
+        "stop.flag"
+      ],
+      "logicalNames": [
+        "inbox:stop"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1505",
+      "system": "SS",
+      "disposition": "superseded-by DV-023",
+      "feature": "110-config-and-terms",
+      "asIsPaths": [],
+      "logicalNames": [],
+      "rule": "not carried (DV-023)",
+      "what": "location"
+    },
+    {
+      "item": "B-1506",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "119-front-door-and-presenter",
+      "asIsPaths": [
+        "<workdir>/<STATE_BASENAME>",
+        ".specstride"
+      ],
+      "logicalNames": [
+        "run:<runId>:record",
+        "gate:<N>:evidence"
+      ],
+      "rule": "the legacy directory name is not carried (DV-036)",
+      "what": "location"
+    },
+    {
+      "item": "B-1507",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "119-front-door-and-presenter",
+      "asIsPaths": [
+        "<state>/last-run.conf"
+      ],
+      "logicalNames": [
+        "run:<runId>:snapshot"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1508",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "119-front-door-and-presenter",
+      "asIsPaths": [
+        "<state>/features/<slug>/",
+        "<state>/features/<slug>/gates/"
+      ],
+      "logicalNames": [
+        "run:<runId>:record",
+        "gate:<N>:evidence"
+      ],
+      "rule": "the legacy directory name is not carried (DV-036)",
+      "what": "location"
+    },
+    {
+      "item": "B-1509",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "122-detached-runtime",
+      "asIsPaths": [
+        "<state>/lock.d"
+      ],
+      "logicalNames": [
+        "workspace:lock"
+      ],
+      "rule": "the lock is probed through the lock provider (DV-022)",
+      "what": "location"
+    },
+    {
+      "item": "B-1510",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "122-detached-runtime",
+      "asIsPaths": [
+        "<state>/lock"
+      ],
+      "logicalNames": [
+        "workspace:lock"
+      ],
+      "rule": "the form of the lock is mapped per operating system (N-02; DV-022)",
+      "what": "location"
+    },
+    {
+      "item": "B-1511",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "119-front-door-and-presenter",
+      "asIsPaths": [
+        "last-run.conf",
+        "last-run.conf"
+      ],
+      "logicalNames": [
+        "run:<runId>:snapshot"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1512",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "119-front-door-and-presenter",
+      "asIsPaths": [
+        "<state>/features/<slug>/verdicts/*.txt"
+      ],
+      "logicalNames": [
+        "attempt:<N>:<k>:<n>:verdict"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1513",
+      "system": "SS",
+      "disposition": "superseded-by DV-062",
+      "feature": "119-front-door-and-presenter",
+      "asIsPaths": [
+        "/tmp/specstride-spec-err"
+      ],
+      "logicalNames": [],
+      "rule": "not carried (DV-062)",
+      "what": "location"
+    },
+    {
+      "item": "B-1514",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "102-run-control",
+      "asIsPaths": [
+        "<state>/stop.flag"
+      ],
+      "logicalNames": [
+        "inbox:stop"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1515",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "102-run-control",
+      "asIsPaths": [
+        "<state>/proposer.pid"
+      ],
+      "logicalNames": [
+        "run:<runId>:procs"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1516",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "102-run-control",
+      "asIsPaths": [
+        "<state>/last-run.conf",
+        "<state>/features/<X>/last-run.conf"
+      ],
+      "logicalNames": [
+        "run:<runId>:snapshot"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1698",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "108-reverse",
+      "asIsPaths": [
+        "<SRC>/specs/NNN-as-is-<slug>",
+        "specs/"
+      ],
+      "logicalNames": [
+        "reverse:<slug>:output"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1699",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "108-reverse",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:driver"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1700",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "108-reverse",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:driver"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1701",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "108-reverse",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:driver"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1702",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "108-reverse",
+      "asIsPaths": [
+        "<run_state>/ANALYSIS.md",
+        "/speckit.analyze"
+      ],
+      "logicalNames": [
+        "reverse:<slug>:analysis"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-1703",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "108-reverse",
+      "asIsPaths": [
+        "<SRC>/<state>/reverse/<slug>/"
+      ],
+      "logicalNames": [
+        "reverse:<slug>:inventory",
+        "reverse:<slug>:driver"
+      ],
+      "rule": "directories are created when their first file is written",
+      "what": "location"
+    },
+    {
+      "item": "B-1704",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "108-reverse",
+      "asIsPaths": [
+        "<run_state>/inventory.json"
+      ],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1705",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "108-reverse",
+      "asIsPaths": [
+        "<run_state>/INVENTORY.md"
+      ],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1706",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "108-reverse",
+      "asIsPaths": [
+        "<run_state>/DRIVER.md"
+      ],
+      "logicalNames": [
+        "reverse:<slug>:driver"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1707",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "108-reverse",
+      "asIsPaths": [
+        "<run_state>/verification-commands.json"
+      ],
+      "logicalNames": [
+        "reverse:<slug>:verification-commands"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1708",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "108-reverse",
+      "asIsPaths": [
+        "1.0.0"
+      ],
+      "logicalNames": [
+        "reverse:<slug>:verification-commands"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1875",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1876",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1877",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1878",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1879",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1880",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1881",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1882",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1883",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1884",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1885",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1886",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1887",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1888",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1889",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1890",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1891",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1892",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1893",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1894",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1895",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1896",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [
+        " (<manifest>)"
+      ],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1897",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1898",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1899",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1900",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [
+        "._"
+      ],
+      "logicalNames": [
+        "reverse:<slug>:inventory-summary"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1901",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [
+        "<path>.tmp",
+        "os.replace"
+      ],
+      "logicalNames": [
+        "reverse:<slug>:inventory",
+        "reverse:<slug>:driver"
+      ],
+      "rule": null,
+      "what": "write discipline"
+    },
+    {
+      "item": "B-1967",
+      "system": "SS",
+      "disposition": "ported",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [
+        ".specify/templates/"
+      ],
+      "logicalNames": [
+        "package:templates:<name>"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1968",
+      "system": "SS",
+      "disposition": "ported",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "package:templates:<name>"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1969",
+      "system": "SS",
+      "disposition": "ported",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "package:templates:<name>"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1970",
+      "system": "SS",
+      "disposition": "ported",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "package:templates:<name>"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1971",
+      "system": "SS",
+      "disposition": "ported",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "package:templates:<name>"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1972",
+      "system": "SS",
+      "disposition": "ported",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "package:templates:<name>"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1973",
+      "system": "SS",
+      "disposition": "ported",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "package:templates:<name>"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1974",
+      "system": "SS",
+      "disposition": "ported",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "package:templates:<name>"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1975",
+      "system": "SS",
+      "disposition": "ported",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [
+        "template.expected"
+      ],
+      "logicalNames": [
+        "package:templates:<name>"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1976",
+      "system": "SS",
+      "disposition": "ported",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [],
+      "logicalNames": [
+        "package:templates:<name>"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-1977",
+      "system": "SS",
+      "disposition": "ported",
+      "feature": "140-reverse-inventory-and-lint",
+      "asIsPaths": [
+        "template.family"
+      ],
+      "logicalNames": [
+        "package:templates:<name>"
+      ],
+      "rule": null,
+      "what": "content"
+    },
+    {
+      "item": "B-2010",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "104-spec-input",
+      "asIsPaths": [
+        "<spec>.tick.<pid>.tmp",
+        "os.replace"
+      ],
+      "logicalNames": [],
+      "rule": "temporary name (N-08); the write is atomic (annex B, §B.2)",
+      "what": "write discipline"
+    },
+    {
+      "item": "B-2098",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [],
+      "logicalNames": [
+        "run:<runId>:events-legacy"
+      ],
+      "rule": null,
+      "what": "write discipline"
+    },
+    {
+      "item": "B-2099",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "<invocation_dir>/provider-terminal.json",
+        "specstride-provider-terminal/v1"
+      ],
+      "logicalNames": [
+        "pass:<passId>:provider-terminal"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2154",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "<invocation_dir>/metadata.json"
+      ],
+      "logicalNames": [
+        "pass:<passId>:invocation"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2155",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "<invocation_dir>/producer.json"
+      ],
+      "logicalNames": [
+        "pass:<passId>:producer-status"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2156",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "<invocation_dir>/provider-terminal.json"
+      ],
+      "logicalNames": [
+        "pass:<passId>:provider-terminal"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2157",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "<invocation_dir>/result.json"
+      ],
+      "logicalNames": [
+        "pass:<passId>:result"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2158",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [],
+      "logicalNames": [
+        "run:<runId>:ledger"
+      ],
+      "rule": "the breaker state is a set of counters of the ledger (DV-011)",
+      "what": "location"
+    },
+    {
+      "item": "B-2179",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        ".<name>.<random>.tmp",
+        "os.replace"
+      ],
+      "logicalNames": [
+        "pass:<passId>:result",
+        "pass:<passId>:invocation"
+      ],
+      "rule": null,
+      "what": "write discipline"
+    },
+    {
+      "item": "B-2180",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [],
+      "logicalNames": [
+        "pass:<passId>:result",
+        "pass:<passId>:invocation"
+      ],
+      "rule": null,
+      "what": "write discipline"
+    },
+    {
+      "item": "B-2181",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "result.json"
+      ],
+      "logicalNames": [
+        "pass:<passId>:result"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2182",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "<feature_root>/debug/invocations/<run_id>/<role>/phase-<n>/attempt-<n>/iter-<n>/<invocation_id>"
+      ],
+      "logicalNames": [
+        "pass:<passId>:invocation",
+        "pass:<passId>:result",
+        "pass:<passId>:prompt",
+        "pass:<passId>:stream",
+        "pass:<passId>:response"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2183",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "126-stream-seam-and-invocation",
+      "asIsPaths": [
+        "metadata.json",
+        "result.json",
+        "prompt.txt",
+        "provider.jsonl",
+        "events.jsonl",
+        "response.txt"
+      ],
+      "logicalNames": [
+        "pass:<passId>:invocation",
+        "pass:<passId>:result",
+        "pass:<passId>:prompt",
+        "pass:<passId>:stream",
+        "pass:<passId>:response"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2363",
+      "system": "SS",
+      "disposition": "translated",
+      "feature": "128-telemetry-export",
+      "asIsPaths": [
+        "<path>.<pid>.tmp",
+        "<path>.lock"
+      ],
+      "logicalNames": [
+        "run:<runId>:span-state"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2497",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "107-launch-contract",
+      "asIsPaths": [
+        ".mixture-of-loops/"
+      ],
+      "logicalNames": [
+        "pipeline:<pipelineId>:bundle:<hash>",
+        "pipeline:<pipelineId>:state"
+      ],
+      "rule": "the artifact directory beside the launcher is replaced by the control plane (DV-006)",
+      "what": "location"
+    },
+    {
+      "item": "B-2547",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "107-launch-contract",
+      "asIsPaths": [
+        "launch-contract.json",
+        "runtime.py",
+        "contract_lib.py",
+        ".publish-*",
+        "os.replace"
+      ],
+      "logicalNames": [
+        "pipeline:<pipelineId>:bundle:<hash>"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2548",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "107-launch-contract",
+      "asIsPaths": [],
+      "logicalNames": [
+        "pipeline:<pipelineId>:launcher"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2586",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "123-pipeline-runtime-and-supervisor",
+      "asIsPaths": [
+        "runs/<id>/state.json"
+      ],
+      "logicalNames": [
+        "pipeline:<pipelineId>:state"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2587",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "123-pipeline-runtime-and-supervisor",
+      "asIsPaths": [
+        "runs/<id>/launcher.log"
+      ],
+      "logicalNames": [
+        "pipeline:<pipelineId>:launcher-log"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2588",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "122-detached-runtime",
+      "asIsPaths": [
+        "runs/<id>/lock",
+        "fcntl.flock(LOCK_EX|LOCK_NB)"
+      ],
+      "logicalNames": [
+        "workspace:lock"
+      ],
+      "rule": "the form of the lock is mapped per operating system (N-02; DV-022)",
+      "what": "location"
+    },
+    {
+      "item": "B-2637",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "107-launch-contract",
+      "asIsPaths": [
+        "os.replace"
+      ],
+      "logicalNames": [
+        "pipeline:<pipelineId>:contract"
+      ],
+      "rule": null,
+      "what": "write discipline"
+    },
+    {
+      "item": "B-2654",
+      "system": "MOL",
+      "disposition": "superseded-by DV-056",
+      "feature": "113-host-claude-code",
+      "asIsPaths": [
+        ".agents/skills",
+        ".claude/skills",
+        ".dsh/skills",
+        ".pi/skills",
+        ".prime/agent/skills"
+      ],
+      "logicalNames": [],
+      "rule": "not carried (DV-056)",
+      "what": "location"
+    },
+    {
+      "item": "B-2661",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "113-host-claude-code",
+      "asIsPaths": [
+        ".mixture-of-loops/",
+        ".gitignore",
+        ".git/info/exclude"
+      ],
+      "logicalNames": [],
+      "rule": "nothing of the product lies in the working tree outside the workspace part, which carries its own ignore rule; compared through the mapping of the host skill (113)",
+      "what": "location"
+    },
+    {
+      "item": "B-2662",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "113-host-claude-code",
+      "asIsPaths": [
+        ".mixture-of-loops/<feature>/verification-commands.json"
+      ],
+      "logicalNames": [
+        "feature:<slug>:verification:commands"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2732",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "123-pipeline-runtime-and-supervisor",
+      "asIsPaths": [
+        "runs/<id>/harness-launch.log"
+      ],
+      "logicalNames": [
+        "pipeline:<pipelineId>:launch-log"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2733",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "123-pipeline-runtime-and-supervisor",
+      "asIsPaths": [
+        "runs/<id>/harness-run.json",
+        "mixture-of-loops/harness-run/1"
+      ],
+      "logicalNames": [
+        "pipeline:<pipelineId>:harness-run"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2734",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "123-pipeline-runtime-and-supervisor",
+      "asIsPaths": [
+        "runs/<id>/harness-report.log"
+      ],
+      "logicalNames": [
+        "pipeline:<pipelineId>:report-log"
+      ],
+      "rule": null,
+      "what": "location"
+    },
+    {
+      "item": "B-2735",
+      "system": "MOL",
+      "disposition": "translated",
+      "feature": "106-learning",
+      "asIsPaths": [
+        "mol.retrospective/1"
+      ],
+      "logicalNames": [
+        "pipeline:<pipelineId>:retrospective:<hash>"
+      ],
+      "rule": null,
+      "what": "location"
+    }
+  ],
+  "comparedRows": [
+    {
+      "As-is path": "`<state>/lock`, `<state>/lock.d/owner`",
+      "Logical name": "`workspace:lock`"
+    },
+    {
+      "As-is path": "`<state>/stop.flag`",
+      "Logical name": "`inbox:stop`"
+    },
+    {
+      "As-is path": "`<state>/proposer.pid`",
+      "Logical name": "`run:<runId>:procs` (the entry of the pass in flight)"
+    },
+    {
+      "As-is path": "`<state>/last-run.conf`, `<state>/features/<slug>/last-run.conf`",
+      "Logical name": "`run:<runId>:snapshot`"
+    },
+    {
+      "As-is path": "`<state>/run.log`",
+      "Logical name": "`workspace:current:engine-log`"
+    },
+    {
+      "As-is path": "`<state>/events.jsonl`",
+      "Logical name": "`workspace:current:events`, compared through `run:<runId>:events-legacy`"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/PROGRESS.md`",
+      "Logical name": "`feature:<slug>:notebook`"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/gates/GATE<N>-EVIDENCE.md`",
+      "Logical name": "`gate:<N>:evidence`"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/gates/GATE<N>-APPROVED`",
+      "Logical name": "`gate:<N>:approved` (existence only)"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/gates/GATE<N>-FEEDBACK.md`",
+      "Logical name": "`attempt:<N>:<k>:<n>:feedback` of the newest phase attempt"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/gates/GATE<N>-HINT.md`",
+      "Logical name": "`attempt:<N>:<k>:<n>:hint` of the newest phase attempt"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/gates/GATE<N>-ACCELERATION.md`",
+      "Logical name": "`attempt:<N>:<k>:<n>:acceleration` of the newest phase attempt"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/attempts/phase<N>/attempt<M>` with or without the run-id suffix",
+      "Logical name": "`attempt:<N>:<k>:<n>:evidence` and its siblings"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/verdicts/phase<N>.attempt<M>.<time>.txt`",
+      "Logical name": "`attempt:<N>:<k>:<n>:verdict`"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/yield/phase<N>-attempt<M>-<run id>.json`",
+      "Logical name": "`job:<jobId>:yield`"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/proposer-prompt.phase<N>.txt`, `<state>/features/<slug>/accelerator-prompt.phase<N>.txt`",
+      "Logical name": "`pass:<passId>:prompt` of the newest pass of the phase"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/learning/applied.json`",
+      "Logical name": "`feature:<slug>:learning:decisions`"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/events.jsonl`",
+      "Logical name": "`feature:<slug>:learning:events`, compared through `feature:<slug>:learning:events-legacy`"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/runs/<run id>/run.log`",
+      "Logical name": "`run:<runId>:engine-log:<k>`, the engine log of the engine start; `run:<runId>:engine-log` resolves to the newest"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/runs/<run id>/events.jsonl`",
+      "Logical name": "`run:<runId>:events-legacy`"
+    },
+    {
+      "As-is path": "`<state>/features/<slug>/runs/<run id>/verification/verification-plan.json`",
+      "Logical name": "`run:<runId>:verification:plan`"
+    },
+    {
+      "As-is path": "The launcher file",
+      "Logical name": "`pipeline:<pipelineId>:launcher`"
+    },
+    {
+      "As-is path": "`<artifacts>/generated/<id>/<hash prefix>/`",
+      "Logical name": "`pipeline:<pipelineId>:bundle:<hash>`"
+    },
+    {
+      "As-is path": "`<artifacts>/runs/<id>/lock`",
+      "Logical name": "`workspace:lock`"
+    },
+    {
+      "As-is path": "`<artifacts>/runs/<id>/state.json`",
+      "Logical name": "`pipeline:<pipelineId>:state`"
+    },
+    {
+      "As-is path": "`<artifacts>/runs/<id>/launcher.log`",
+      "Logical name": "`pipeline:<pipelineId>:launcher-log`"
+    },
+    {
+      "As-is path": "`<artifacts>/runs/<id>/harness-run.json`",
+      "Logical name": "`pipeline:<pipelineId>:harness-run`"
+    },
+    {
+      "As-is path": "`<artifacts>/runs/<id>/harness-launch.log`",
+      "Logical name": "`pipeline:<pipelineId>:launch-log`"
+    },
+    {
+      "As-is path": "`<artifacts>/runs/<id>/harness-report.log`",
+      "Logical name": "`pipeline:<pipelineId>:report-log`"
+    },
+    {
+      "As-is path": "`<artifacts>/runs/<id>/retrospectives/<hash>.json`",
+      "Logical name": "`pipeline:<pipelineId>:retrospective:<hash>`"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.provider-terminal/1",
+ "title": "Provider terminal",
+ "description": "Annex B §B.20; logical name pass:<passId>:provider-terminal. F126-FR-031. As-is literal specstride-provider-terminal/v1 in the compatibility form.",
+ "type": "object",
+ "properties": {
+  "schema": {
+   "const": "specstride.provider-terminal/1"
+  },
+  "provider_terminal": {
+   "type": [
+    "object",
+    "null"
+   ],
+   "description": "The last terminal record of the stream, or null"
+  },
+  "malformed_stream": {
+   "type": "boolean"
+  }
+ },
+ "required": [
+  "schema",
+  "provider_terminal",
+  "malformed_stream"
+ ],
+ "additionalProperties": false
+}

@@ -1,0 +1,93 @@
+{
+  "feature": "142-parallel-units",
+  "sets": [
+    {
+      "name": "fallback-reasons",
+      "annexXRow": 60,
+      "closedBy": "design",
+      "members": [
+        "classic",
+        "gate-not-executing",
+        "not-git",
+        "submodules",
+        "git-version",
+        "harness",
+        "containment",
+        "no-group"
+      ],
+      "unknown": "shown as text; the layer is off"
+    },
+    {
+      "name": "admission-checks",
+      "annexXRow": 61,
+      "closedBy": "design",
+      "members": [
+        "marker",
+        "scope",
+        "protected",
+        "resource",
+        "headroom",
+        "check",
+        "links",
+        "jobs"
+      ],
+      "unknown": "the task is serial"
+    },
+    {
+      "name": "delta-refusal-reasons",
+      "annexXRow": 63,
+      "closedBy": "design",
+      "members": [
+        "scope",
+        "protected",
+        "overlap",
+        "path-leak",
+        "checkpoint",
+        "yield",
+        "tree-changed-after-end",
+        "workspace-changed"
+      ],
+      "unknown": "the delta is refused"
+    },
+    {
+      "name": "layer-off-reasons",
+      "annexXRow": 185,
+      "closedBy": "design",
+      "members": {
+        "attempt": [
+          "group-failures",
+          "harness-error",
+          "unchecked",
+          "missing-object",
+          "ledger",
+          "check-budget"
+        ],
+        "run": [
+          "plan-hash",
+          "apply-incomplete"
+        ]
+      },
+      "unknown": "shown as text; the layer is off for the run"
+    },
+    {
+      "name": "scope-sources",
+      "annexXRow": 186,
+      "closedBy": "design",
+      "members": [
+        "consumer",
+        "task-text"
+      ],
+      "unknown": "the scope is read as absent, which is the whole tree"
+    }
+  ],
+  "contributedTo": [
+    {
+      "annexXRow": 65,
+      "owner": "116",
+      "members": [
+        "tree-changed-outside-pass",
+        "protected-change-not-applied"
+      ]
+    }
+  ]
+}

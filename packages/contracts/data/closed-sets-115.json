@@ -1,0 +1,77 @@
+{
+ "schema": "specstride.closed-sets-115/1",
+ "note": "Data of feature 115. spec.md stands where the two differ.",
+ "owner": "115",
+ "sets": [
+  {
+   "row": "55",
+   "set": "Loop strategies",
+   "members": "classic, micro",
+   "closedBy": "Owner decision",
+   "unknownValue": "Configuration error"
+  },
+  {
+   "row": "56",
+   "set": "Micro levels",
+   "members": "L0, L1, L2, L3; Wave 1 uses L1",
+   "closedBy": "Design",
+   "unknownValue": "Configuration error"
+  },
+  {
+   "row": "59",
+   "set": "Fallback reasons of the layer `micro`",
+   "members": "gate-not-executing, no-check, single-unit, harness, config, tripwire",
+   "closedBy": "Design",
+   "unknownValue": "Shown as text"
+  },
+  {
+   "row": "67",
+   "set": "Decision points of the router and their choice sets",
+   "members": "tools: run, exclude:flaky, exclude:slow, exclude:budget. loop: stay, off:<registered layer>. escalation: next-tier, skip:<skip reason>. attempt-tier (of the attempt planner, owner 149): bump, skip, none. A layer may register a point",
+   "closedBy": "Design",
+   "unknownValue": "The table is invalid"
+  },
+  {
+   "row": "136",
+   "set": "Outcomes of a unit of work",
+   "members": "kept, repair, unresolved",
+   "closedBy": "Design",
+   "unknownValue": "Read as unresolved"
+  },
+  {
+   "row": "137",
+   "set": "Status of a unit or task without a result",
+   "members": "unchecked",
+   "closedBy": "Design",
+   "unknownValue": "Read as unchecked"
+  },
+  {
+   "row": "138",
+   "set": "Refusal reasons of a checkpoint",
+   "members": "pass-killed, foreign-id, yield-in-pass, not-regular, stale, too-large, changed-while-read, empty",
+   "closedBy": "Design",
+   "unknownValue": "The checkpoint is refused"
+  },
+  {
+   "row": "139",
+   "set": "Kinds of record of the ledger namespace `micro`",
+   "members": "unit-declared, check-started, check-finished, unit-kept, unit-repair, unit-unresolved, command-excluded, escalation, closing-check, disengaged, integrity",
+   "closedBy": "Design",
+   "unknownValue": "The ledger is invalid for the layer; the layer is off for the phase attempt"
+  },
+  {
+   "row": "140",
+   "set": "Skip reasons of an escalation",
+   "members": "off, integrity, flaky, not-due, cap, no-ladder, critic-collision, quota, budget",
+   "closedBy": "Design",
+   "unknownValue": "Read as a skip; shown as text"
+  },
+  {
+   "row": "141",
+   "set": "Breach kinds of the integrity of the phase gate",
+   "members": "approval-without-gate, outer-counter-changed, critic-input-excluded-field, false-pass",
+   "closedBy": "Owner decision",
+   "unknownValue": "Treated as a breach"
+  }
+ ]
+}

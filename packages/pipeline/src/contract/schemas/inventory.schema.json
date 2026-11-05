@@ -1,0 +1,356 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:internal:107:inventory/1",
+  "title": "The inventory of the launch contract, with the judgment exchange",
+  "description": "The record `inventory` of the launch contract (feature 107): the tasks, the shell candidates, the prerequisite candidates and the verification documents of the deterministic inventory (F107-FR-004), and the record `judgment` of the exchange `specstride.judgment/1`, which the first `--next-batch` writes and no plain `contract derive` writes (F107-FR-009); it is the only state of the exchange. The member names are those of the baseline (data-model.md, \"Member names\"); `judgment` is new and its members are the ones data-model.md names in words. The members of `kind` of an item are the closed set of annex X §X.6 row 259 (`kindsOfJudgmentItem`), the ids of its choices and the choice of an answer are members of row 285 (`choicesOfAJudgmentItem`), and the route of an answer is a member of row 260 (`routeOfAnAnswerToAJudgmentItem`); all read from @specstride/contracts, never copied by hand.",
+  "x-schema-id": "urn:specstride:schema:internal:107:inventory/1",
+  "x-annex": "feature 107, data-model.md, \"Member names\" (the inventory with inventory.judgment)",
+  "type": "object",
+  "properties": {
+    "tasks": {
+      "type": "array",
+      "description": "Every task of the task lists, read by the canonical spec model (EP-03)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^T[0-9]+[A-Za-z]?$",
+            "description": "The id of the task, as the task line names it"
+          },
+          "phase": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "description": "The number of the phase the task stands in; null for a task in no phase"
+          },
+          "line": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The line of the task in its source"
+          },
+          "checked": {
+            "type": "boolean",
+            "description": "Whether the checkbox of the task is ticked"
+          },
+          "parallel_marker": {
+            "type": "boolean",
+            "description": "Whether the task line carries the marker [P]"
+          },
+          "story": {
+            "type": ["string", "null"],
+            "description": "The story the line names in brackets; null where it names none"
+          },
+          "text": {
+            "type": "string",
+            "description": "The text of the task line after the id and the markers"
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The path of the task list, relative to the repository root"
+          }
+        },
+        "required": [
+          "id",
+          "phase",
+          "line",
+          "checked",
+          "parallel_marker",
+          "story",
+          "text",
+          "source"
+        ],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      }
+    },
+    "shell_candidates": {
+      "type": "array",
+      "description": "The shell candidates of the plan and the quickstart only, with the reading of fences of the baseline, line by line, its accident included (F107-FR-004)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The path of the source that holds the block"
+          },
+          "start_line": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The first line of the body: the line after the opening fence"
+          },
+          "end_line": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The last line of the body: the line before the closing fence"
+          },
+          "text": {
+            "type": "string",
+            "description": "The text of the body, trimmed"
+          },
+          "classification": {
+            "const": "candidate-only",
+            "description": "The classification that keeps a candidate from becoming a command"
+          }
+        },
+        "required": ["path", "start_line", "end_line", "text", "classification"],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      }
+    },
+    "prerequisites": {
+      "type": "array",
+      "description": "The prerequisite candidates of every Markdown source (F107-FR-004)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": ["string", "null"],
+            "pattern": "^PRE-[0-9]+$",
+            "description": "The id the line carries; null where the line carries none"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "path": { "type": "string", "minLength": 1 },
+              "line": { "type": "integer", "minimum": 1 },
+              "anchor": {
+                "type": "string",
+                "minLength": 1,
+                "description": "The id, else `prerequisites`"
+              }
+            },
+            "required": ["path", "line", "anchor"],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The path the backticked token writes"
+          },
+          "resolved": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The path resolved against the repository root"
+          },
+          "present": {
+            "type": "boolean",
+            "description": "Whether the resolved path is there"
+          }
+        },
+        "required": ["id", "source", "path", "resolved", "present"],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      }
+    },
+    "verification_documents": {
+      "type": "array",
+      "description": "The record for the verification-commands document of each source that names one (F107-FR-004)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The path of the document"
+          },
+          "valid_json": {
+            "type": "boolean",
+            "description": "Whether the document is a JSON object"
+          },
+          "error": {
+            "type": "string",
+            "description": "The error, where the document cannot be read"
+          },
+          "feature": {
+            "description": "The feature the document names; null where it names none"
+          },
+          "phase_map": {
+            "description": "The phase map the document holds; null where it holds none"
+          },
+          "commands": {
+            "type": "array",
+            "description": "The commands the document declares"
+          }
+        },
+        "required": ["path", "valid_json"],
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {}
+        }
+      }
+    },
+    "judgment": {
+      "type": "object",
+      "description": "The state of the judgment exchange `specstride.judgment/1`: the items, the batch of each and the answers, kept in the draft itself (F107-FR-009). Written by the first `--next-batch`; a draft of a plain `contract derive` holds no such member (a rule of validation)",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The items of the exchange; the number depends on the distinct questions of the sources, never on the number of tasks",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "description": "The id of the item"
+              },
+              "kind": {
+                "enum": [
+                  "classify-obligation",
+                  "settle-prerequisite",
+                  "map-declared-command",
+                  "resolve-blocker"
+                ],
+                "description": "The kind of the item; the closed set of annex X §X.6 row 259 (kindsOfJudgmentItem of @specstride/contracts)"
+              },
+              "anchor": {
+                "type": "string",
+                "minLength": 1,
+                "description": "The source anchor: the task id, the id of the prerequisite, the id of the command or the line of the blocker"
+              },
+              "choices": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "enum": ["mapped", "optional", "out-of-scope", "accepted", "keep-blocker"],
+                      "description": "The literal members of the closed set"
+                    },
+                    {
+                      "pattern": "^specstride-phase:[1-9][0-9]*$",
+                      "description": "The parameterized member `specstride-phase:<n>` of the closed set, n the number of a phase"
+                    }
+                  ],
+                  "description": "A member of the closed set of annex X §X.6 row 285 (choicesOfAJudgmentItem of @specstride/contracts), the literal members as their enum and the parameterized member as its pattern"
+                },
+                "description": "The ids of the choices the item offers; members of the closed set of annex X §X.6 row 285 (choicesOfAJudgmentItem of @specstride/contracts)"
+              },
+              "batch_id": {
+                "type": "string",
+                "minLength": 1,
+                "description": "The id of the batch the item stands in"
+              },
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "description": "The question the item asks, as the derivation wrote it"
+              },
+              "excerpt": {
+                "description": "The excerpt of the source the item stands for"
+              },
+              "source": {
+                "type": "object",
+                "description": "The source the item was read from (path and line)",
+                "properties": {
+                  "path": { "type": "string", "minLength": 1 },
+                  "line": { "type": "integer", "minimum": 1 }
+                },
+                "required": ["path", "line"],
+                "additionalProperties": false,
+                "patternProperties": { "^x-": {} }
+              }
+            },
+            "required": ["id", "kind", "anchor", "choices"],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          }
+        },
+        "answers": {
+          "type": "array",
+          "description": "The answers recorded in the exchange, each with its provenance",
+          "items": {
+            "type": "object",
+            "properties": {
+              "item": {
+                "type": "string",
+                "minLength": 1,
+                "description": "The id of the item the answer is to"
+              },
+              "choice": {
+                "anyOf": [
+                  {
+                    "enum": ["mapped", "optional", "out-of-scope", "accepted", "keep-blocker"],
+                    "description": "The literal members of the closed set"
+                  },
+                  {
+                    "pattern": "^specstride-phase:[1-9][0-9]*$",
+                    "description": "The parameterized member `specstride-phase:<n>` of the closed set, n the number of a phase"
+                  }
+                ],
+                "description": "The id of the choice the answer is; a member of the closed set of annex X §X.6 row 285 (choicesOfAJudgmentItem of @specstride/contracts), the literal members as their enum and the parameterized member as its pattern"
+              },
+              "provenance": {
+                "type": "object",
+                "description": "Who answered, how, and in which batch (F107-FR-010, F107-FR-011)",
+                "properties": {
+                  "who": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The host or the harness that answered"
+                  },
+                  "route": {
+                    "enum": ["host-model", "delegated-harness"],
+                    "description": "The route of the answer; the closed set of annex X §X.6 row 260 (routeOfAnAnswerToAJudgmentItem of @specstride/contracts)"
+                  },
+                  "harness": {
+                    "type": ["string", "null"],
+                    "description": "The named harness of a delegated answer; null for the host model"
+                  },
+                  "batch": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The id of the batch the answer closed"
+                  }
+                },
+                "required": ["who", "route", "batch"],
+                "additionalProperties": false,
+                "patternProperties": {
+                  "^x-": {}
+                }
+              },
+              "settled": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "The ids of the obligations and findings the answer settled"
+              }
+            },
+            "required": ["item", "choice", "provenance"],
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {}
+            }
+          }
+        }
+      },
+      "required": ["items", "answers"],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    }
+  },
+  "required": ["tasks", "shell_candidates", "prerequisites", "verification_documents"],
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

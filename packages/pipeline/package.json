@@ -1,0 +1,45 @@
+{
+  "name": "@specstride/pipeline",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride pipeline",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./launch-checks/checks": "./src/launch-checks/checks.ts",
+    "./supervisor/mode": "./src/supervisor/mode.ts",
+    "./supervisor/resolve": "./src/supervisor/resolve.ts",
+    "./supervisor/verbs": "./src/supervisor/verbs.ts",
+    "./supervisor/launch": "./src/supervisor/launch.ts",
+    "./supervisor/lines": "./src/supervisor/lines.ts",
+    "./supervisor/record": "./src/supervisor/record.ts",
+    "./supervisor/observe": "./src/supervisor/observe.ts",
+    "./supervisor/cadence": "./src/supervisor/cadence.ts",
+    "./relaunch/observe-table": "./src/relaunch/observe-table.ts",
+    "./contract/commands": "./src/contract/commands/index.ts",
+    "./contract/launch/modes": "./src/contract/launch/modes.ts",
+    "./contract/validate/compose": "./src/contract/validate/compose.ts",
+    "./contract/kernel": "./src/contract/kernel.ts",
+    "./contract/ports": "./src/contract/ports.ts"
+  },
+  "scripts": {
+    "test": "node ../../tests/isolate.ts node --test \"test/**/*.test.*\"",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@specstride/contracts": "0.0.0",
+    "@specstride/kernel": "0.0.0",
+    "@specstride/spec-formats": "0.0.0",
+    "@specstride/config": "0.0.0"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0"
+  },
+  "specstride": {
+    "skeleton": true
+  }
+}

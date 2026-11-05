@@ -1,0 +1,197 @@
+{
+ "schema": "specstride.reverse-finding-codes/1",
+ "owner": "140",
+ "note": "Closed family. Levels: the levels at which the code can be raised, cumulative upward from the first one; 'all' means every level.",
+ "codes": [
+  {
+   "code": "template.mandatory",
+   "severity": "error",
+   "levels": "1,2,4"
+  },
+  {
+   "code": "template.family",
+   "severity": "error",
+   "levels": "1,2,4"
+  },
+  {
+   "code": "template.expected",
+   "severity": "warning",
+   "levels": "1,2,4"
+  },
+  {
+   "code": "placeholder",
+   "severity": "error",
+   "levels": "1,2,3,4"
+  },
+  {
+   "code": "structure.extra",
+   "severity": "error",
+   "levels": "all"
+  },
+  {
+   "code": "structure.contracts",
+   "severity": "error",
+   "levels": "3"
+  },
+  {
+   "code": "structure.required",
+   "severity": "error",
+   "levels": "all"
+  },
+  {
+   "code": "evidence.format",
+   "severity": "error",
+   "levels": "0,1,2,3"
+  },
+  {
+   "code": "evidence.kind",
+   "severity": "error",
+   "levels": "0,1,2,3"
+  },
+  {
+   "code": "evidence.confidence",
+   "severity": "error",
+   "levels": "0,1,2,3"
+  },
+  {
+   "code": "evidence.validation",
+   "severity": "error",
+   "levels": "0,1,2,3"
+  },
+  {
+   "code": "evidence.disproved",
+   "severity": "error",
+   "levels": "1"
+  },
+  {
+   "code": "evidence.citation",
+   "severity": "error",
+   "levels": "0,1,2,3"
+  },
+  {
+   "code": "evidence.contradicts",
+   "severity": "error",
+   "levels": "0,1,2,3"
+  },
+  {
+   "code": "evidence.missing",
+   "severity": "error",
+   "levels": "0,1,2,3"
+  },
+  {
+   "code": "evidence.skipped",
+   "severity": "warning",
+   "levels": "all"
+  },
+  {
+   "code": "unknowns.placement",
+   "severity": "warning",
+   "levels": "1"
+  },
+  {
+   "code": "spec.fr-format",
+   "severity": "error",
+   "levels": "1"
+  },
+  {
+   "code": "spec.sc-format",
+   "severity": "error",
+   "levels": "1"
+  },
+  {
+   "code": "spec.fr-unique",
+   "severity": "error",
+   "levels": "1"
+  },
+  {
+   "code": "spec.sc-unique",
+   "severity": "error",
+   "levels": "1"
+  },
+  {
+   "code": "spec.story-format",
+   "severity": "error",
+   "levels": "1"
+  },
+  {
+   "code": "spec.story-numbers",
+   "severity": "error",
+   "levels": "1"
+  },
+  {
+   "code": "spec.story-parts",
+   "severity": "error",
+   "levels": "1"
+  },
+  {
+   "code": "spec.clarifications",
+   "severity": "error",
+   "levels": "1"
+  },
+  {
+   "code": "research.decisions",
+   "severity": "error",
+   "levels": "2"
+  },
+  {
+   "code": "data-model.entities",
+   "severity": "warning",
+   "levels": "3"
+  },
+  {
+   "code": "checklist.items",
+   "severity": "error",
+   "levels": "1"
+  },
+  {
+   "code": "tasks.grammar",
+   "severity": "error",
+   "levels": "4"
+  },
+  {
+   "code": "tasks.line-format",
+   "severity": "error",
+   "levels": "4"
+  },
+  {
+   "code": "tasks.ids",
+   "severity": "error",
+   "levels": "4"
+  },
+  {
+   "code": "tasks.phase-order",
+   "severity": "error",
+   "levels": "4"
+  },
+  {
+   "code": "tasks.story-labels",
+   "severity": "error",
+   "levels": "4"
+  },
+  {
+   "code": "tasks.story-exists",
+   "severity": "error",
+   "levels": "4"
+  },
+  {
+   "code": "tasks.parallel-files",
+   "severity": "error",
+   "levels": "4"
+  },
+  {
+   "code": "tasks.mode",
+   "severity": "error",
+   "levels": "4"
+  },
+  {
+   "code": "coverage.fr",
+   "severity": "error",
+   "levels": "5"
+  },
+  {
+   "code": "claims.missing",
+   "severity": "error",
+   "levels": "0"
+  }
+ ]
+}

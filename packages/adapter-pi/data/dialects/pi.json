@@ -1,0 +1,43 @@
+{
+  "schema": "specstride.stream-dialect/1",
+  "dialect": "pi",
+  "schemaVersions": [3],
+  "providerFormat": "openai-completions",
+  "providerFormatProvenance": "CAP-1 stream: every assistant message carries \"api\": \"openai-completions\"; the session header record is {\"type\": \"session\", \"version\": 3}",
+  "telemetryOff": {
+    "env": {
+      "PI_TELEMETRY": "0"
+    }
+  },
+  "sessionControl": {
+    "env": ["PI_CODING_AGENT_SESSION_DIR"],
+    "options": {
+      "noSession": "--no-session",
+      "dir": "--session-dir",
+      "byId": "--session-id"
+    }
+  },
+  "extraRecords": {
+    "auto_retry_start": "ignore",
+    "auto_retry_end": "ignore",
+    "agent_settled": "ignore",
+    "compaction_start": "ignore",
+    "compaction_end": "ignore"
+  },
+  "usageNames": {
+    "input": ["input"],
+    "output": ["output"],
+    "cacheRead": ["cacheRead"],
+    "cacheWrite": ["cacheWrite"],
+    "total": ["totalTokens"],
+    "reasoning": [],
+    "cost": ["cost"]
+  },
+  "usageProvenance": "CAP-1 stream: the usage object of the assistant messages of tests/characterization/134/fixtures/error-exit-code/stream.json carries the keys input, output, cacheRead, cacheWrite, totalTokens and a cost object; no reasoning field is present, so reasoning stays empty",
+  "costNote": "cost in the stream of pi is an object with input, output, cacheRead, cacheWrite and total; the reader takes a number, so a pi cost object reads as null - cost is null where the stream gives no numeric cost (F134-FR-026, R14 EV-03/EV-17)",
+  "terminalDecides": true,
+  "terminalProvenance": "CAP-1: pi exits 0 on a provider error (exit-code.json) while the stream ends with stopReason error; the terminal record decides, as for prime (F134-FR-025)",
+  "verifiedOn": "2026-10-28",
+  "pin": ">=0.80.6 <0.81",
+  "status": "providerFormat, usageNames and terminalDecides settled by CAP-1 (verified 2026-10-28); the <captured> fields of a live proposer pass and a critic call (capture 2) and the exact-session-id behaviour in print mode (capture 4) remain capture-pending"
+}

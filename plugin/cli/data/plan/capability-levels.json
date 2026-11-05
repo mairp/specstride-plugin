@@ -1,0 +1,58 @@
+{
+  "schema": "specstride.plan-data/1",
+  "note": "Data of the plan of feature 109. spec.md stands where the two differ.",
+  "levels": {
+    "proposer": [
+      {
+        "id": "P1",
+        "capability": "Runs without interaction and ends by itself"
+      },
+      {
+        "id": "P2",
+        "capability": "Takes the prompt by standard input, by a file, or as an argument with a declared size limit"
+      },
+      {
+        "id": "P3",
+        "capability": "Works in a given directory, writes files and runs commands there, without asking"
+      },
+      {
+        "id": "P4",
+        "capability": "Has a declared way to suppress permission prompts, or declares that none exists"
+      },
+      {
+        "id": "P5",
+        "capability": "Gives an exit code"
+      },
+      {
+        "id": "P6",
+        "capability": "Its credential can be checked before the first pass without a paid call, or it declares that no such check exists"
+      }
+    ],
+    "completion": [
+      {
+        "id": "C1",
+        "capability": "One prompt in, one text reply out"
+      },
+      {
+        "id": "C2",
+        "capability": "No tools, by construction or by a declared mechanism proven per call; or the second form"
+      },
+      {
+        "id": "C3",
+        "capability": "A known context window in tokens, with its source"
+      },
+      {
+        "id": "C4",
+        "capability": "A fresh session on every call"
+      },
+      {
+        "id": "C5",
+        "capability": "Typed failures for at least authentication, rate limit or quota, and context overflow"
+      },
+      {
+        "id": "C6",
+        "capability": "An identity of provider and model"
+      }
+    ]
+  }
+}

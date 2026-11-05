@@ -1,0 +1,461 @@
+{
+ "schema": "specstride.table/1",
+ "id": "relaunch-observe",
+ "version": "1.0.0",
+ "points": {
+  "relaunch": {
+   "signals": {
+    "noRelaunch": "boolean",
+    "terminal": "boolean",
+    "stopRequested": "boolean",
+    "status": "text",
+    "launcherExit": "whole number or null",
+    "runState": "text",
+    "stageKnown": "boolean",
+    "stageReasonClass": "text",
+    "blocked": "boolean",
+    "retryable": "boolean",
+    "parityProfile": "boolean",
+    "childExitListed": "boolean",
+    "reasonAllowed": "boolean",
+    "contractChanged": "boolean",
+    "learningChanged": "boolean",
+    "launcherEdited": "boolean",
+    "budgetRemaining": "whole number",
+    "deadlinePassed": "boolean"
+   },
+   "choices": [
+    "blocked-on-human",
+    "budget-deadline-exceeded",
+    "budget-exhausted",
+    "child-exit-not-retryable",
+    "classified-transient",
+    "completed",
+    "contract-digest-changed",
+    "deliberate-stop",
+    "exec-error",
+    "interrupted",
+    "invalid-contract",
+    "launcher-edited",
+    "launcher-exit-<n>",
+    "learning-decisions-changed",
+    "lock-conflict",
+    "operator-stop",
+    "postcondition-failure",
+    "preflight-blocked",
+    "relaunch-disabled",
+    "setup-required",
+    "signal-stop",
+    "stage-did-not-fail",
+    "stage-did-not-run",
+    "stage-precondition",
+    "stage-reason-not-transient",
+    "stale-sources",
+    "state-not-failed",
+    "still-running",
+    "stop-not-retryable",
+    "stop-reason-not-allowed",
+    "unknown-launcher-exit",
+    "unknown-stage",
+    "unknown-terminal"
+   ]
+  }
+ },
+ "rows": {
+  "relaunch": [
+   {
+    "ruleId": "O-01",
+    "choice": "relaunch-disabled",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "noRelaunch",
+      true
+     ]
+    }
+   },
+   {
+    "ruleId": "O-02",
+    "choice": "still-running",
+    "decision": "refuse",
+    "when": {
+     "not": {
+      "equal": [
+       "terminal",
+       true
+      ]
+     }
+    }
+   },
+   {
+    "ruleId": "O-03",
+    "choice": "operator-stop",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "stopRequested",
+      true
+     ]
+    }
+   },
+   {
+    "ruleId": "O-04",
+    "choice": "completed",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "status",
+      "completed"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-05",
+    "choice": "deliberate-stop",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "status",
+      "stopped"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-06",
+    "choice": "unknown-terminal",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "status",
+      "unknown-terminal"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-07",
+    "choice": "lock-conflict",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "status",
+      "lock-conflict"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-08",
+    "choice": "unknown-launcher-exit",
+    "decision": "refuse",
+    "when": {
+     "not": {
+      "present": "launcherExit"
+     }
+    }
+   },
+   {
+    "ruleId": "O-09",
+    "choice": "signal-stop",
+    "decision": "refuse",
+    "when": {
+     "not": {
+      "less": [
+       "launcherExit",
+       128
+      ]
+     }
+    }
+   },
+   {
+    "ruleId": "O-10",
+    "choice": "invalid-contract",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "launcherExit",
+      20
+     ]
+    }
+   },
+   {
+    "ruleId": "O-11",
+    "choice": "preflight-blocked",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "launcherExit",
+      21
+     ]
+    }
+   },
+   {
+    "ruleId": "O-12",
+    "choice": "stale-sources",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "launcherExit",
+      23
+     ]
+    }
+   },
+   {
+    "ruleId": "O-13",
+    "choice": "lock-conflict",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "launcherExit",
+      24
+     ]
+    }
+   },
+   {
+    "ruleId": "O-14",
+    "choice": "launcher-exit-<n>",
+    "decision": "refuse",
+    "when": {
+     "notEqual": [
+      "launcherExit",
+      22
+     ]
+    }
+   },
+   {
+    "ruleId": "O-15",
+    "choice": "state-not-failed",
+    "decision": "refuse",
+    "when": {
+     "notEqual": [
+      "runState",
+      "failed"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-16",
+    "choice": "unknown-stage",
+    "decision": "refuse",
+    "when": {
+     "not": {
+      "equal": [
+       "stageKnown",
+       true
+      ]
+     }
+    }
+   },
+   {
+    "ruleId": "O-17",
+    "choice": "postcondition-failure",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "stageReasonClass",
+      "postcondition"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-18",
+    "choice": "stage-precondition",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "stageReasonClass",
+      "stage-precondition"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-19",
+    "choice": "setup-required",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "stageReasonClass",
+      "setup-required"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-20",
+    "choice": "interrupted",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "stageReasonClass",
+      "interrupted"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-21",
+    "choice": "stage-did-not-run",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "stageReasonClass",
+      "existing-prerequisite"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-22",
+    "choice": "stage-did-not-fail",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "stageReasonClass",
+      "completed"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-23",
+    "choice": "exec-error",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "stageReasonClass",
+      "exec-error"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-24",
+    "choice": "stage-reason-not-transient",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "stageReasonClass",
+      "other"
+     ]
+    }
+   },
+   {
+    "ruleId": "O-33",
+    "choice": "blocked-on-human",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "blocked",
+      true
+     ]
+    }
+   },
+   {
+    "ruleId": "O-34",
+    "choice": "stop-not-retryable",
+    "decision": "refuse",
+    "when": {
+     "and": [
+      {
+       "not": {
+        "equal": [
+         "parityProfile",
+         true
+        ]
+       }
+      },
+      {
+       "not": {
+        "equal": [
+         "retryable",
+         true
+        ]
+       }
+      }
+     ]
+    }
+   },
+   {
+    "ruleId": "O-25",
+    "choice": "child-exit-not-retryable",
+    "decision": "refuse",
+    "when": {
+     "not": {
+      "equal": [
+       "childExitListed",
+       true
+      ]
+     }
+    }
+   },
+   {
+    "ruleId": "O-26",
+    "choice": "stop-reason-not-allowed",
+    "decision": "refuse",
+    "when": {
+     "not": {
+      "equal": [
+       "reasonAllowed",
+       true
+      ]
+     }
+    }
+   },
+   {
+    "ruleId": "O-27",
+    "choice": "contract-digest-changed",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "contractChanged",
+      true
+     ]
+    }
+   },
+   {
+    "ruleId": "O-28",
+    "choice": "learning-decisions-changed",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "learningChanged",
+      true
+     ]
+    }
+   },
+   {
+    "ruleId": "O-29",
+    "choice": "launcher-edited",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "launcherEdited",
+      true
+     ]
+    }
+   },
+   {
+    "ruleId": "O-30",
+    "choice": "budget-exhausted",
+    "decision": "refuse",
+    "when": {
+     "not": {
+      "greater": [
+       "budgetRemaining",
+       0
+      ]
+     }
+    }
+   },
+   {
+    "ruleId": "O-31",
+    "choice": "budget-deadline-exceeded",
+    "decision": "refuse",
+    "when": {
+     "equal": [
+      "deadlinePassed",
+      true
+     ]
+    }
+   },
+   {
+    "ruleId": "O-32",
+    "choice": "classified-transient",
+    "decision": "relaunch"
+   }
+  ]
+ }
+}

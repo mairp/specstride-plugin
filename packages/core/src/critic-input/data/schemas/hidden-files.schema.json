@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.hidden-files/1",
+  "title": "hidden-files",
+  "description": "What was moved out of the working tree for a critic-class call of the form read-only-tools, and where it is kept. Feature 100 annex B §B.20 fixes the schema id, the logical name attempt:<N>:<k>:<n>:hidden-files and the owner (117). The fields are those of specs/117-critic-grounding-and-prompt/data-model.md; spec.md F117-FR-040 stands where they differ.",
+  "x-schema-id": "specstride.hidden-files/1",
+  "x-annex": "annex B, §B.20",
+  "x-logical-name": "attempt:<N>:<k>:<n>:hidden-files",
+  "type": "object",
+  "properties": {
+    "schema": { "const": "specstride.hidden-files/1" },
+    "attemptId": { "type": "string", "description": "The phase attempt of the call" },
+    "callId": { "type": "string", "description": "The critic-class call" },
+    "state": { "enum": ["planned", "hidden", "returned"], "description": "planned: record written; hidden: files moved; returned: files back, hashes equal" },
+    "files": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "properties": {
+          "logicalName": { "enum": ["feature:<slug>:notebook", "feature:<slug>:handoff", "feature:<slug>:outbox"], "description": "The logical name of annex B §B.5, as a pattern" },
+          "existed": { "type": "boolean", "description": "Whether the file existed before the call; a file that did not exist must not exist after it" },
+          "from": { "type": "string", "description": "Where it was, relative to the workspace root" },
+          "keptAt": { "type": "string", "description": "Where it is kept, relative to the location of the logical name of this record" },
+          "bytes": { "type": "integer", "minimum": 0 },
+          "hash": { "type": "string", "description": "Hash of the content by the canonical hasher (annex X §X.5)" },
+          "mode": { "type": "integer", "minimum": 0 },
+          "mtime": { "type": "string", "description": "Modification time as the file system gave it" },
+          "setAside": { "type": "string", "description": "Where a file found at the place at the return was set aside, if one was found" }
+        },
+        "required": ["logicalName", "existed"],
+        "additionalProperties": true
+      }
+    }
+  },
+  "required": ["schema", "attemptId", "callId", "state", "files"],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

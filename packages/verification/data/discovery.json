@@ -1,0 +1,133 @@
+{
+  "schema": "specstride.verification-discovery/1",
+  "requirement": "F105-FR-017",
+  "note": "The toolchains of discovery as DATA, so that a further toolchain needs no code (research.md D-16, Principle VI; F105-FR-017, 'The list of toolchains is data and MUST be open to further rows'). Read from the Specstride baseline at 9cab15d, lib/verification_plan.py, with `git -C <baseline> show 9cab15d:lib/verification_plan.py`: discover_project (line 419) and _project_files (line 158). Where this file and the baseline differ, the baseline is the reference.",
+  "placeholders": {
+    "<workdir>": "The absolute working directory of the project, as discovery resolved it.",
+    "<script>": "The name of the script of the entry point.",
+    "<manifest>": "The `manifest` of the toolchain, resolved inside the working directory."
+  },
+  "baseline": {
+    "repository": "<baseline>",
+    "commit": "9cab15d",
+    "file": "lib/verification_plan.py",
+    "readWith": "git -C <baseline> show 9cab15d:lib/verification_plan.py"
+  },
+  "toolchains": [
+    {
+      "id": "node",
+      "framework": "node",
+      "detect": ["package.json"],
+      "manifest": "package.json",
+      "manager": {
+        "fromManifest": "packageManager",
+        "separator": "@",
+        "fromLockFile": { "pnpm-lock.yaml": "pnpm" },
+        "default": "npm",
+        "argumentForms": {
+          "pnpm": ["--dir", "<workdir>", "<script>"],
+          "npm": ["--prefix", "<workdir>", "run", "<script>"],
+          "other": ["--cwd", "<workdir>", "<script>"]
+        },
+        "notOnSearchPath": {
+          "as": "ambiguity",
+          "text": "Project declares %s, but no absolute executable was found on PATH"
+        }
+      },
+      "frameworksFromDependencies": {
+        "vitest": "vitest",
+        "jest": "jest",
+        "@playwright/test": "playwright",
+        "cypress": "cypress"
+      },
+      "entryPoints": [
+        { "script": "test", "kind": "test", "label": "Run project tests", "timeoutSec": 1800 },
+        { "script": "build", "kind": "build", "label": "Build the project", "timeoutSec": 1800 },
+        { "script": "lint", "kind": "lint", "label": "Run project lint", "timeoutSec": 900 },
+        {
+          "script": "format:check",
+          "kind": "format",
+          "label": "Check project formatting",
+          "timeoutSec": 900
+        }
+      ]
+    },
+    {
+      "id": "python",
+      "framework": "python",
+      "detect": ["pyproject.toml", "pytest.ini", "tox.ini"],
+      "runnerNamedInManifest": { "needle": "pytest", "caseInsensitive": true, "framework": "pytest" },
+      "executable": "python3",
+      "notOnSearchPath": {
+        "as": "ambiguity",
+        "text": "pytest was detected, but no absolute python3 executable was found on PATH"
+      },
+      "entryPoints": [
+        {
+          "kind": "test",
+          "label": "Run pytest",
+          "args": ["-m", "pytest", "<workdir>"],
+          "timeoutSec": 1800
+        }
+      ]
+    },
+    {
+      "id": "rust",
+      "frameworks": ["rust", "cargo-test"],
+      "detect": ["Cargo.toml"],
+      "executable": "cargo",
+      "manifest": "Cargo.toml",
+      "notOnSearchPath": {
+        "as": "ambiguity",
+        "text": "Cargo.toml was detected, but no absolute cargo executable was found on PATH"
+      },
+      "entryPoints": [
+        {
+          "kind": "test",
+          "label": "Run Cargo tests",
+          "args": ["test", "--manifest-path", "<manifest>"],
+          "timeoutSec": 1800
+        }
+      ]
+    },
+    {
+      "id": "go",
+      "frameworks": ["go", "go-test"],
+      "detect": ["go.mod"],
+      "executable": "go",
+      "notOnSearchPath": {
+        "as": "ambiguity",
+        "text": "go.mod was detected, but no absolute go executable was found on PATH"
+      },
+      "entryPoints": [
+        {
+          "kind": "test",
+          "label": "Run Go tests",
+          "args": ["test", "./..."],
+          "timeoutSec": 1800
+        }
+      ]
+    }
+  ],
+  "fingerprintFiles": [
+    "package.json",
+    "pnpm-lock.yaml",
+    "package-lock.json",
+    "yarn.lock",
+    "bun.lock",
+    "pyproject.toml",
+    "pytest.ini",
+    "tox.ini",
+    "Cargo.toml",
+    "Cargo.lock",
+    "go.mod",
+    "go.sum"
+  ],
+  "ambiguities": {
+    "noTestCommand": "No safe automated test command was discovered below %s; required verification cannot start until one is configured",
+    "phasesWithoutCommand": "Phase(s) %s have neither a discovered nor a declared verification command; their gates would execute nothing"
+  },
+  "assumptions": {
+    "noFramework": "No supported automated test framework was detected below %s; obligations remain operator-verifiable"
+  }
+}

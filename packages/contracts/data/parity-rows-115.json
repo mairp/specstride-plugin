@@ -1,0 +1,52 @@
+{
+ "schema": "specstride.profile-rows-115/1",
+ "note": "Data of feature 115. spec.md stands where the two differ.",
+ "owned": [
+  {
+   "Row": "1",
+   "Switch": "Loop strategy",
+   "Key": "loop.strategy",
+   "Default": "micro",
+   "Under `parity`": "classic",
+   "Register row": "DV-012",
+   "Requirement": "F115-FR-001"
+  },
+  {
+   "Row": "2",
+   "Switch": "Closing check",
+   "Key": "loop.micro.closing_check",
+   "Default": "on",
+   "Under `parity`": "off",
+   "Register row": "DV-046",
+   "Requirement": "F115-FR-028"
+  },
+  {
+   "Row": "3",
+   "Switch": "Escalation of the model tier as the second repair",
+   "Key": "loop.escalation",
+   "Default": "on",
+   "Under `parity`": "off",
+   "Register row": "DV-050",
+   "Requirement": "F115-FR-034"
+  },
+  {
+   "Row": "64",
+   "Switch": "Routing",
+   "Key": "loop.routing",
+   "Default": "on",
+   "Under `parity`": "not used",
+   "Register row": "none",
+   "Requirement": "F115-FR-033"
+  },
+  {
+   "Row": "65",
+   "Switch": "Caps of the micro-loop layer",
+   "Key": "loop.micro.caps.repairs, loop.micro.caps.escalationsPerTask, loop.micro.caps.escalationsPerAttempt, loop.micro.caps.proposalMin, loop.micro.caps.unitMin, loop.micro.caps.checkMin, loop.micro.caps.checkSharePercent, loop.micro.caps.cyclesExtra, loop.micro.caps.cyclesMin, loop.micro.caps.unresolvedUnits",
+   "Default": "2; 1; 2; 20; 30; 5; 15; 6; 12; 2",
+   "Under `parity`": "not used",
+   "Register row": "DV-012",
+   "Requirement": "F115-FR-022; F115-FR-023; F115-FR-034"
+  }
+ ],
+ "proposed": []
+}

@@ -1,0 +1,57 @@
+{
+  "schema": "specstride.fixture-expected/1",
+  "feature": "124",
+  "requirement": "F124-SC-001",
+  "note": [
+    "T001 — what the extended descriptor-only fixture expects of a launch with no critic",
+    "configured: the announcement line, the catalogue event and the digest field of the pick.",
+    "The announcement line follows the grammar of annex G §G.3 as output-lines.json of",
+    "specs/124-harness-discovery-and-roles/contracts/ spells it."
+  ],
+  "announcement": {
+    "label": "SPECSTRIDE-CRITIC",
+    "keys": ["harness", "model", "step", "state", "form", "window-source", "cap", "auto"],
+    "expected": {
+      "harness": "fixture-fake-endpoint",
+      "model": "fixture-model",
+      "step": "discovered",
+      "state": "declared",
+      "form": "tool-less",
+      "window-source": "declared",
+      "cap": null,
+      "auto": true
+    }
+  },
+  "event": {
+    "type": "critic.selected",
+    "catalogue": "feature 111, EV-28",
+    "fields": ["harness", "model", "why", "diversity", "sameModelWarning"],
+    "expected": {
+      "harness": "fixture-fake-endpoint",
+      "why": "discovered",
+      "diversity": "diverse",
+      "sameModelWarning": false
+    }
+  },
+  "digest": {
+    "field": "critic",
+    "names": "fixture-fake-endpoint",
+    "note": "the digest names the picked harness; the resolved registry holds criticPick.automatic = true"
+  },
+  "registry": {
+    "criticPick": {
+      "step": "discovered",
+      "automatic": true,
+      "harness": "fixture-fake-endpoint",
+      "window": 128000,
+      "windowSource": "declared",
+      "cap": null,
+      "diversity": "diverse",
+      "sameModelWarning": false
+    }
+  },
+  "withAutoPickOff": {
+    "step": "default-model-tier",
+    "note": "with critic.autoPick off the launch falls to step 4 (quickstart, scenario 1, item 4)"
+  }
+}

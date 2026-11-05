@@ -1,0 +1,77 @@
+{
+  "events": [
+    [
+      "agent_init",
+      {
+        "cwd": "/work/project",
+        "schema_version": 3,
+        "session_id": "fixture-session-fleet-ipython"
+      }
+    ],
+    [
+      "agent_tool",
+      {
+        "original_bytes": 43,
+        "redacted": false,
+        "retained_bytes": 43,
+        "status": "start",
+        "summary": "{\"script\": \"open('lib/example.py').read()\"}",
+        "targets": ["lib/example.py"],
+        "tool": "ipython",
+        "tool_id": "fixture-tool-ipython-1",
+        "truncated": false
+      }
+    ],
+    [
+      "agent_tool",
+      {
+        "original_bytes": 31,
+        "redacted": false,
+        "retained_bytes": 31,
+        "status": "progress",
+        "summary": "Read one fixture workspace file",
+        "tool": "ipython",
+        "tool_id": "fixture-tool-ipython-1",
+        "truncated": false
+      }
+    ],
+    [
+      "agent_tool",
+      {
+        "duration_ms": 4,
+        "is_error": false,
+        "original_bytes": 23,
+        "redacted": false,
+        "result_summary": "example fixture content",
+        "retained_bytes": 23,
+        "status": "end",
+        "tool": "ipython",
+        "tool_id": "fixture-tool-ipython-1",
+        "truncated": false
+      }
+    ]
+  ],
+  "evidence_tools": [],
+  "output": [
+    "  · init prime-v3 session=fixture-session-fleet-ipython",
+    "  → ipython {\"script\": \"open('lib/example.py').read()\"}",
+    "  ← ipython done"
+  ],
+  "schema_version": 3,
+  "stream": "fleet-ipython.jsonl",
+  "terminal": {
+    "input_tokens": 18,
+    "model": null,
+    "num_turns": 1,
+    "output_tokens": 4,
+    "status": "success",
+    "stop_reason": "end_turn",
+    "total_tokens": 22,
+    "turns": 1
+  },
+  "turns": 1,
+  "usage": {
+    "input_tokens": 18,
+    "output_tokens": 4
+  }
+}

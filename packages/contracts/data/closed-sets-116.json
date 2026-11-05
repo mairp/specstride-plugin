@@ -1,0 +1,42 @@
+{
+ "schema": "specstride.closed-sets-116/1",
+ "note": "Data of feature 116. spec.md stands where the two differ.",
+ "owner": "116",
+ "sets": [
+  {
+   "row": "27",
+   "set": "protection",
+   "members": "prevent, detect",
+   "closedBy": "Design",
+   "unknownValue": "Read as detect"
+  },
+  {
+   "row": "65",
+   "set": "Integrity kinds that reach the critic",
+   "members": "ledger-invalid, manifest-mismatch, pin-mismatch, changed-during-check, phase-entry-mismatch, toolchain-config-changed, advisory-marker-removed, and the two neutral kinds of feature 142, tree-changed-outside-pass and protected-change-not-applied",
+   "closedBy": "Design",
+   "unknownValue": "The kind is not shown to the critic; it stays in the event file"
+  },
+  {
+   "row": "66",
+   "set": "Further facts of the fact block",
+   "members": "manifest-rederived, result-of-stopped-job, evidence-predates-tree, source-change-accepted, task-list-changed",
+   "closedBy": "Design",
+   "unknownValue": "Not shown"
+  },
+  {
+   "row": "142",
+   "set": "Classes of the protected set",
+   "members": "A, B",
+   "closedBy": "Design",
+   "unknownValue": "Read as class A"
+  },
+  {
+   "row": "143",
+   "set": "Freshness of a result",
+   "members": "current, superseded",
+   "closedBy": "Design",
+   "unknownValue": "Read as superseded"
+  }
+ ]
+}

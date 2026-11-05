@@ -1,0 +1,1991 @@
+{
+  "schema": "specstride.profile/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex X, §X.7",
+  "profile": "parity",
+  "switches": [
+    {
+      "number": 1,
+      "switch": "Loop strategy",
+      "key": "loop.strategy",
+      "keys": [
+        "loop.strategy"
+      ],
+      "keyNote": "`loop.strategy`",
+      "default": "`micro`",
+      "parity": "`classic`",
+      "owner": "115",
+      "registerRows": [
+        "DV-012"
+      ]
+    },
+    {
+      "number": 2,
+      "switch": "Closing check",
+      "key": "loop.micro.closing_check",
+      "keys": [
+        "loop.micro.closing_check"
+      ],
+      "keyNote": "`loop.micro.closing_check`",
+      "default": "on",
+      "parity": "off",
+      "owner": "115",
+      "registerRows": [
+        "DV-046"
+      ]
+    },
+    {
+      "number": 3,
+      "switch": "Escalation of the model tier as the second repair",
+      "key": "loop.escalation",
+      "keys": [
+        "loop.escalation"
+      ],
+      "keyNote": "`loop.escalation`",
+      "default": "on",
+      "parity": "off",
+      "owner": "115",
+      "registerRows": [
+        "DV-050"
+      ]
+    },
+    {
+      "number": 4,
+      "switch": "First-failure predicate",
+      "key": "verification.failfast",
+      "keys": [
+        "verification.failfast"
+      ],
+      "keyNote": "`verification.failfast`",
+      "default": "on",
+      "parity": "off",
+      "owner": "118",
+      "registerRows": [
+        "DV-051"
+      ]
+    },
+    {
+      "number": 5,
+      "switch": "Default action on a first failure",
+      "key": "verification.failfast_action",
+      "keys": [
+        "verification.failfast_action"
+      ],
+      "keyNote": "`verification.failfast_action`",
+      "default": "`stop`",
+      "parity": "not used",
+      "owner": "118",
+      "registerRows": [
+        "DV-051"
+      ]
+    },
+    {
+      "number": 6,
+      "switch": "Step runner",
+      "key": "verification.step_runner",
+      "keys": [
+        "verification.step_runner"
+      ],
+      "keyNote": "`verification.step_runner`",
+      "default": "off",
+      "parity": "off",
+      "owner": "148",
+      "registerRows": []
+    },
+    {
+      "number": 7,
+      "switch": "Concurrent verification commands",
+      "key": "verification.parallelism",
+      "keys": [
+        "verification.parallelism"
+      ],
+      "keyNote": "`verification.parallelism`",
+      "default": "1 (ceiling 4)",
+      "parity": "1",
+      "owner": "148",
+      "registerRows": [
+        "DV-080"
+      ]
+    },
+    {
+      "number": 8,
+      "switch": "Ledger and handoff",
+      "key": "carry.ledger_handoff",
+      "keys": [
+        "carry.ledger_handoff"
+      ],
+      "keyNote": "`carry.ledger_handoff`",
+      "default": "on",
+      "parity": "off",
+      "owner": "103",
+      "registerRows": [
+        "DV-092"
+      ]
+    },
+    {
+      "number": 9,
+      "switch": "Obligations index",
+      "key": "carry.index",
+      "keys": [
+        "carry.index"
+      ],
+      "keyNote": "`carry.index`",
+      "default": "on",
+      "parity": "off",
+      "owner": "103",
+      "registerRows": [
+        "DV-045"
+      ]
+    },
+    {
+      "number": 10,
+      "switch": "Session continuation inside a phase attempt",
+      "key": "carry.continuation",
+      "keys": [
+        "carry.continuation"
+      ],
+      "keyNote": "`carry.continuation`",
+      "default": "on, where the harness supports it",
+      "parity": "off",
+      "owner": "125, 103",
+      "registerRows": [
+        "DV-010"
+      ]
+    },
+    {
+      "number": 11,
+      "switch": "Polite stop",
+      "key": "carry.polite_stop",
+      "keys": [
+        "carry.polite_stop"
+      ],
+      "keyNote": "`carry.polite_stop`",
+      "default": "on",
+      "parity": "off",
+      "owner": "118",
+      "registerRows": [
+        "DV-093"
+      ]
+    },
+    {
+      "number": 12,
+      "switch": "Block set of the proposer's prompt, with the cache-stable start",
+      "key": "prompt.block_set",
+      "keys": [
+        "prompt.block_set"
+      ],
+      "keyNote": "`prompt.block_set`",
+      "default": "current",
+      "parity": "as-is",
+      "owner": "103",
+      "registerRows": [
+        "DV-094"
+      ]
+    },
+    {
+      "number": 13,
+      "switch": "Counts survive a resume, and a rerun through `run` or `launch`",
+      "key": null,
+      "keys": [],
+      "keyNote": "— (the flag `--reset-counts`)",
+      "default": "counts continue",
+      "parity": "Fixtures that resume or rerun pass the flag",
+      "owner": "102",
+      "registerRows": [
+        "DV-011",
+        "DV-044"
+      ]
+    },
+    {
+      "number": 14,
+      "switch": "Owner of relaunch",
+      "key": "relaunch.owner",
+      "keys": [
+        "relaunch.owner"
+      ],
+      "keyNote": "`relaunch.owner`",
+      "default": "`root`",
+      "parity": "`supervise`",
+      "owner": "123",
+      "registerRows": [
+        "DV-074"
+      ]
+    },
+    {
+      "number": 15,
+      "switch": "Check points of staleness",
+      "key": "staleness.check_points",
+      "keys": [
+        "staleness.check_points"
+      ],
+      "keyNote": "`staleness.check_points`",
+      "default": "launch, resume and every pass start",
+      "parity": "critic start only",
+      "owner": "102, 103, 105",
+      "registerRows": [
+        "DV-082"
+      ]
+    },
+    {
+      "number": 16,
+      "switch": "Content capture in telemetry",
+      "key": "telemetry.content",
+      "keys": [
+        "telemetry.content"
+      ],
+      "keyNote": "`telemetry.content`",
+      "default": "`auto`: follows traces",
+      "parity": "off",
+      "owner": "128",
+      "registerRows": [
+        "DV-083"
+      ]
+    },
+    {
+      "number": 17,
+      "switch": "Compatibility projection of events",
+      "key": "compat.legacyEvents",
+      "keys": [
+        "compat.legacyEvents"
+      ],
+      "keyNote": "`compat.legacyEvents`",
+      "default": "off",
+      "parity": "on",
+      "owner": "144",
+      "registerRows": [
+        "DV-007"
+      ]
+    },
+    {
+      "number": 18,
+      "switch": "Output mode",
+      "key": "output.compat",
+      "keys": [
+        "output.compat"
+      ],
+      "keyNote": "`output.compat`",
+      "default": "default output",
+      "parity": "compatibility output",
+      "owner": "119, 123",
+      "registerRows": [
+        "DV-033"
+      ]
+    },
+    {
+      "number": 19,
+      "switch": "Lines with no as-is equivalent, `[LOOP]` included",
+      "key": null,
+      "keys": [],
+      "keyNote": "— (follows rows 1, 18, 20)",
+      "default": "printed when their feature is on",
+      "parity": "never printed",
+      "owner": "100",
+      "registerRows": [
+        "DV-034",
+        "DV-018"
+      ]
+    },
+    {
+      "number": 20,
+      "switch": "Parallel units",
+      "key": "loop.parallel.units",
+      "keys": [
+        "loop.parallel.units"
+      ],
+      "keyNote": "`loop.parallel.units`",
+      "default": "off",
+      "parity": "off",
+      "owner": "142",
+      "registerRows": [
+        "DV-080",
+        "DV-084",
+        "DV-085",
+        "DV-086",
+        "DV-088"
+      ]
+    },
+    {
+      "number": 21,
+      "switch": "Workers of a group",
+      "key": "loop.parallel.workers",
+      "keys": [
+        "loop.parallel.workers"
+      ],
+      "keyNote": "`loop.parallel.workers`",
+      "default": "2; the ceiling is the key of row 130, `loop.parallel.workersMax`; a value above the ceiling is a configuration error",
+      "parity": "not used",
+      "owner": "142",
+      "registerRows": [
+        "DV-080"
+      ]
+    },
+    {
+      "number": 22,
+      "switch": "Quota headroom for a group",
+      "key": "loop.parallel.quota_headroom",
+      "keys": [
+        "loop.parallel.quota_headroom"
+      ],
+      "keyNote": "`loop.parallel.quota_headroom`",
+      "default": "70 per cent",
+      "parity": "not used",
+      "owner": "142",
+      "registerRows": [
+        "DV-080"
+      ]
+    },
+    {
+      "number": 23,
+      "switch": "Parallel units at detection only",
+      "key": "loop.parallel.allow_detect",
+      "keys": [
+        "loop.parallel.allow_detect"
+      ],
+      "keyNote": "`loop.parallel.allow_detect`",
+      "default": "off",
+      "parity": "off",
+      "owner": "142",
+      "registerRows": [
+        "DV-080"
+      ]
+    },
+    {
+      "number": 24,
+      "switch": "Model-tier bump after K rejections",
+      "key": "attempt.tier_bump",
+      "keys": [
+        "attempt.tier_bump"
+      ],
+      "keyNote": "`attempt.tier_bump`",
+      "default": "off",
+      "parity": "off",
+      "owner": "149",
+      "registerRows": [
+        "DV-079"
+      ]
+    },
+    {
+      "number": 25,
+      "switch": "Containment level",
+      "key": "sandbox.level",
+      "keys": [
+        "sandbox.level"
+      ],
+      "keyNote": "`sandbox.level`",
+      "default": "The strongest the harness offers",
+      "parity": "As at the baseline: none",
+      "owner": "109",
+      "registerRows": [
+        "DV-030"
+      ]
+    },
+    {
+      "number": 26,
+      "switch": "Permission mode and argument list of each harness, with the extra flags of the critic and the tool allow-list",
+      "key": "sandbox.permissionMode",
+      "keys": [
+        "sandbox.permissionMode"
+      ],
+      "keyNote": "`sandbox.permissionMode`",
+      "default": "Contained, the mode always stated",
+      "parity": "`baseline`: as at the baseline, mapped through the argument table of the harness adapter",
+      "owner": "125, 130, 131, 134, 138",
+      "registerRows": [
+        "DV-031"
+      ]
+    },
+    {
+      "number": 27,
+      "switch": "Transport of a harness adapter",
+      "key": "harnesses.<id>.transport",
+      "keys": [
+        "harnesses.<id>.transport"
+      ],
+      "keyNote": "`harnesses.<id>.transport`",
+      "default": "`subprocess`",
+      "parity": "`subprocess`; the SDK transport is not used",
+      "owner": "109, 125",
+      "registerRows": []
+    },
+    {
+      "number": 28,
+      "switch": "Transport and mode of the critic of each harness",
+      "key": "roles.critic.transport",
+      "keys": [
+        "roles.critic.transport"
+      ],
+      "keyNote": "`roles.critic.transport`",
+      "default": "The harness CLI without tools at Tier 1; for one harness read-only tools; for prime JSON mode",
+      "parity": "`as-is`: the as-is transport and mode of each harness, with its as-is context window for a model that is not listed",
+      "owner": "109, 124, 131, 138",
+      "registerRows": [
+        "DV-001",
+        "DV-081",
+        "DV-090"
+      ]
+    },
+    {
+      "number": 29,
+      "switch": "Harness-native memory",
+      "key": "memory.native.proposer",
+      "keys": [
+        "memory.native.proposer"
+      ],
+      "keyNote": "`memory.native.proposer`",
+      "default": "off for the critic always; off for the proposer",
+      "parity": "`as-is`: no flag about memory is passed",
+      "owner": "109",
+      "registerRows": [
+        "DV-047"
+      ]
+    },
+    {
+      "number": 30,
+      "switch": "Overlay of the configuration home",
+      "key": "harnesses.<id>.overlay",
+      "keys": [
+        "harnesses.<id>.overlay"
+      ],
+      "keyNote": "`harnesses.<id>.overlay`",
+      "default": "Unset: follows the auth tier, the real home at Tier 1 and a throwaway home at Tier 2",
+      "parity": "`none`",
+      "owner": "109",
+      "registerRows": [
+        "DV-002"
+      ]
+    },
+    {
+      "number": 31,
+      "switch": "Fingerprints around every command of the verification gate and around grounding",
+      "key": "integrity.gate_fingerprint",
+      "keys": [
+        "integrity.gate_fingerprint"
+      ],
+      "keyNote": "`integrity.gate_fingerprint`",
+      "default": "on",
+      "parity": "off",
+      "owner": "148, 117",
+      "registerRows": [
+        "DV-076"
+      ]
+    },
+    {
+      "number": 32,
+      "switch": "Comparison of the tree at phase entry",
+      "key": "integrity.phase_entry",
+      "keys": [
+        "integrity.phase_entry"
+      ],
+      "keyNote": "`integrity.phase_entry`",
+      "default": "on",
+      "parity": "off",
+      "owner": "116; 149 performs the comparison",
+      "registerRows": [
+        "DV-077"
+      ]
+    },
+    {
+      "number": 33,
+      "switch": "Comparison of the check manifest on a relaunch",
+      "key": "integrity.manifest_relaunch",
+      "keys": [
+        "integrity.manifest_relaunch"
+      ],
+      "keyNote": "`integrity.manifest_relaunch`",
+      "default": "on",
+      "parity": "off",
+      "owner": "105",
+      "registerRows": [
+        "DV-078"
+      ]
+    },
+    {
+      "number": 34,
+      "switch": "Audience",
+      "key": "distribution.audience",
+      "keys": [
+        "distribution.audience"
+      ],
+      "keyNote": "`distribution.audience`",
+      "default": "`distributed`",
+      "parity": "`personal`",
+      "owner": "147",
+      "registerRows": [
+        "DV-048"
+      ]
+    },
+    {
+      "number": 35,
+      "switch": "Automatic pick of the critic",
+      "key": "critic.autoPick",
+      "keys": [
+        "critic.autoPick"
+      ],
+      "keyNote": "`critic.autoPick`",
+      "default": "on",
+      "parity": "not reached: every fixture names the critic",
+      "owner": "124",
+      "registerRows": [
+        "DV-049"
+      ]
+    },
+    {
+      "number": 36,
+      "switch": "Default proposer and critic",
+      "key": "roles.proposer.harness",
+      "keys": [
+        "roles.proposer.harness",
+        "roles.critic.harness"
+      ],
+      "keyNote": "`roles.proposer.harness`, `roles.critic.harness`",
+      "default": "The default harness for both, on different model tiers",
+      "parity": "Every fixture names both",
+      "owner": "110, 124",
+      "registerRows": [
+        "DV-004"
+      ]
+    },
+    {
+      "number": 37,
+      "switch": "Mode of the host skill",
+      "key": null,
+      "keys": [],
+      "keyNote": "— (the argument of `launch`)",
+      "default": "`run`",
+      "parity": "Mapped through the mode map",
+      "owner": "107",
+      "registerRows": [
+        "DV-009"
+      ]
+    },
+    {
+      "number": 38,
+      "switch": "Pins of the launch contract",
+      "key": null,
+      "keys": [],
+      "keyNote": "—",
+      "default": "The pinnable keys",
+      "parity": "The two as-is keys only",
+      "owner": "123",
+      "registerRows": [
+        "DV-026"
+      ]
+    },
+    {
+      "number": 39,
+      "switch": "Quota pause",
+      "key": "pause.maxTotalMs",
+      "keys": [
+        "pause.maxTotalMs"
+      ],
+      "keyNote": "`pause.maxTotalMs`",
+      "default": "On; ceiling 24 hours",
+      "parity": "Not reached: the stub agents emit no quota signal",
+      "owner": "127",
+      "registerRows": [
+        "DV-005"
+      ]
+    },
+    {
+      "number": 40,
+      "switch": "Fallback of a role",
+      "key": "roles.<role>.fallback",
+      "keys": [
+        "roles.<role>.fallback"
+      ],
+      "keyNote": "`roles.<role>.fallback`",
+      "default": "off",
+      "parity": "off",
+      "owner": "127",
+      "registerRows": []
+    },
+    {
+      "number": 41,
+      "switch": "Executable of the engine",
+      "key": "engine.executable",
+      "keys": [
+        "engine.executable"
+      ],
+      "keyNote": "`engine.executable`",
+      "default": "The product's own entry",
+      "parity": "Set by the oracle to its engine stub where a fixture needs one",
+      "owner": "122, 123",
+      "registerRows": []
+    },
+    {
+      "number": 42,
+      "switch": "As-is names of metrics",
+      "key": "telemetry.otel.legacyMetricNames",
+      "keys": [
+        "telemetry.otel.legacyMetricNames"
+      ],
+      "keyNote": "`telemetry.otel.legacyMetricNames`",
+      "default": "off",
+      "parity": "off",
+      "owner": "128",
+      "registerRows": [
+        "DV-058"
+      ]
+    },
+    {
+      "number": 43,
+      "switch": "Learning mode",
+      "key": "learning.mode",
+      "keys": [
+        "learning.mode"
+      ],
+      "keyNote": "`learning.mode`",
+      "default": "`off`",
+      "parity": "As the fixture sets it",
+      "owner": "106",
+      "registerRows": [
+        "DV-026"
+      ]
+    },
+    {
+      "number": 44,
+      "switch": "Limits of the observability policy",
+      "key": "observability.limits.text",
+      "keys": [
+        "observability.limits.text",
+        "observability.limits.toolArguments",
+        "observability.limits.toolResult",
+        "observability.limits.diagnostic",
+        "observability.limits.target",
+        "observability.limits.maxTargets",
+        "observability.limits.freeText"
+      ],
+      "keyNote": "`observability.limits.text`, `.toolArguments`, `.toolResult`, `.diagnostic`, `.target`, `.maxTargets`, `.freeText`",
+      "default": "4096, 2048, 4096, 1024, 512, 8, 1024",
+      "parity": "The same, as at the baseline",
+      "owner": "111",
+      "registerRows": []
+    },
+    {
+      "number": 45,
+      "switch": "Retention of captures",
+      "key": "observability.retention.rawCapture",
+      "keys": [
+        "observability.retention.rawCapture",
+        "observability.retention.rawDays",
+        "observability.retention.metadataDays"
+      ],
+      "keyNote": "`observability.retention.rawCapture`, `.rawDays`, `.metadataDays`",
+      "default": "off, 7, 30",
+      "parity": "The same",
+      "owner": "111, 126",
+      "registerRows": []
+    },
+    {
+      "number": 46,
+      "switch": "Time limit of a call of a sink",
+      "key": "telemetry.sinkTimeoutMs",
+      "keys": [
+        "telemetry.sinkTimeoutMs"
+      ],
+      "keyNote": "`telemetry.sinkTimeoutMs`",
+      "default": "2000",
+      "parity": "not used",
+      "owner": "111",
+      "registerRows": []
+    },
+    {
+      "number": 47,
+      "switch": "Delegation of derivation judgment to a harness",
+      "key": "derive.judgment.harness",
+      "keys": [
+        "derive.judgment.harness"
+      ],
+      "keyNote": "`derive.judgment.harness`",
+      "default": "unset",
+      "parity": "unset",
+      "owner": "107",
+      "registerRows": [
+        "DV-096"
+      ]
+    },
+    {
+      "number": 48,
+      "switch": "Ceilings of the relaunch count and of the wall clock",
+      "key": "supervise.maxRelaunches",
+      "keys": [
+        "supervise.maxRelaunches",
+        "supervise.wallClockSec"
+      ],
+      "keyNote": "`supervise.maxRelaunches`, `supervise.wallClockSec`",
+      "default": "2; derived",
+      "parity": "unset",
+      "owner": "107",
+      "registerRows": [
+        "DV-055"
+      ]
+    },
+    {
+      "number": 49,
+      "switch": "Inputs of the specification",
+      "key": "spec.format",
+      "keys": [
+        "spec.format",
+        "spec.feature",
+        "spec.contextBudget"
+      ],
+      "keyNote": "`spec.format`, `spec.feature`, `spec.contextBudget`",
+      "default": "detected; the last active; 24000",
+      "parity": "As the fixture sets them; 24000",
+      "owner": "104",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 50,
+      "switch": "Grace of the polite stop",
+      "key": "carry.politeStopGraceSec",
+      "keys": [
+        "carry.politeStopGraceSec"
+      ],
+      "keyNote": "`carry.politeStopGraceSec`",
+      "default": "10",
+      "parity": "not used",
+      "owner": "118",
+      "registerRows": [
+        "DV-093"
+      ]
+    },
+    {
+      "number": 51,
+      "switch": "Grace of a stop at a first failure",
+      "key": "verification.failfastGraceSec",
+      "keys": [
+        "verification.failfastGraceSec"
+      ],
+      "keyNote": "`verification.failfastGraceSec`",
+      "default": "10",
+      "parity": "not used",
+      "owner": "118",
+      "registerRows": [
+        "DV-051"
+      ]
+    },
+    {
+      "number": 52,
+      "switch": "Grounding pass of the critic",
+      "key": "roles.critic.grounding",
+      "keys": [
+        "roles.critic.grounding"
+      ],
+      "keyNote": "`roles.critic.grounding`",
+      "default": "true",
+      "parity": "true, unless the fixture sets it",
+      "owner": "117",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 53,
+      "switch": "Cap of presence lines",
+      "key": "roles.critic.groundingMaxFiles",
+      "keys": [
+        "roles.critic.groundingMaxFiles"
+      ],
+      "keyNote": "`roles.critic.groundingMaxFiles`",
+      "default": "80",
+      "parity": "80",
+      "owner": "117",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 54,
+      "switch": "Ceiling per file of an anchored excerpt",
+      "key": "roles.critic.anchorMaxBytes",
+      "keys": [
+        "roles.critic.anchorMaxBytes"
+      ],
+      "keyNote": "`roles.critic.anchorMaxBytes`",
+      "default": "49152",
+      "parity": "49152",
+      "owner": "117",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 55,
+      "switch": "Context window of the critic, set by the consumer",
+      "key": "roles.critic.contextTokens",
+      "keys": [
+        "roles.critic.contextTokens"
+      ],
+      "keyNote": "`roles.critic.contextTokens`",
+      "default": "The window of the model",
+      "parity": "Not set unless the fixture sets it; the as-is fallback of the harness applies (row 28)",
+      "owner": "117",
+      "registerRows": [
+        "DV-027",
+        "DV-106",
+        "DV-111"
+      ]
+    },
+    {
+      "number": 56,
+      "switch": "Debug output of the critic",
+      "key": "roles.critic.debug",
+      "keys": [
+        "roles.critic.debug"
+      ],
+      "keyNote": "`roles.critic.debug`",
+      "default": "false",
+      "parity": "false, unless the fixture sets it",
+      "owner": "117",
+      "registerRows": [
+        "DV-066"
+      ]
+    },
+    {
+      "number": 57,
+      "switch": "A critic prompt still over the window",
+      "key": "prompt.critic.overWindow",
+      "keys": [
+        "prompt.critic.overWindow"
+      ],
+      "keyNote": "`prompt.critic.overWindow`",
+      "default": "`refuse`",
+      "parity": "`send`",
+      "owner": "117",
+      "registerRows": [
+        "DV-099"
+      ]
+    },
+    {
+      "number": 58,
+      "switch": "Block set of the critic's prompt, which the prompt of the diagnostician also reads",
+      "key": "prompt.critic.block_set",
+      "keys": [
+        "prompt.critic.block_set"
+      ],
+      "keyNote": "`prompt.critic.block_set`",
+      "default": "`current`",
+      "parity": "`as-is`",
+      "owner": "117",
+      "registerRows": [
+        "DV-100"
+      ]
+    },
+    {
+      "number": 59,
+      "switch": "No-progress breaker on the structured path",
+      "key": "loop.noProgressStructured",
+      "keys": [
+        "loop.noProgressStructured"
+      ],
+      "keyNote": "`loop.noProgressStructured`",
+      "default": "on",
+      "parity": "off",
+      "owner": "103",
+      "registerRows": [
+        "DV-067"
+      ]
+    },
+    {
+      "number": 60,
+      "switch": "Parameters of carry-over",
+      "key": "carry.handoffMaxBytes",
+      "keys": [
+        "carry.handoffMaxBytes",
+        "carry.indexTitleChars",
+        "carry.maxContinuedPasses",
+        "carry.contextFillTokens",
+        "carry.contextFillShare",
+        "carry.ageFallbackSec"
+      ],
+      "keyNote": "`carry.handoffMaxBytes`, `carry.indexTitleChars`, `carry.maxContinuedPasses`, `carry.contextFillTokens`, `carry.contextFillShare`, `carry.ageFallbackSec`",
+      "default": "6144; set by the plan; 3; 150000; 50; 300",
+      "parity": "not used",
+      "owner": "103",
+      "registerRows": [
+        "DV-092",
+        "DV-045",
+        "DV-010"
+      ]
+    },
+    {
+      "number": 61,
+      "switch": "Options of the doctor",
+      "key": "doctor.staleAfterDays",
+      "keys": [
+        "doctor.staleAfterDays",
+        "doctor.online",
+        "doctor.probeTimeoutSec",
+        "doctor.probeOutputBytes"
+      ],
+      "keyNote": "`doctor.staleAfterDays`, `doctor.online`, `doctor.probeTimeoutSec`, `doctor.probeOutputBytes`",
+      "default": "90; true; 5; 65536",
+      "parity": "not used",
+      "owner": "112",
+      "registerRows": []
+    },
+    {
+      "number": 62,
+      "switch": "Continuation of an unfinished run",
+      "key": null,
+      "keys": [],
+      "keyNote": "— (the flag `--new-run`)",
+      "default": "A launch continues the unfinished run",
+      "parity": "not used",
+      "owner": "102",
+      "registerRows": [
+        "DV-011"
+      ]
+    },
+    {
+      "number": 63,
+      "switch": "End of adoptable jobs at a stop",
+      "key": null,
+      "keys": [],
+      "keyNote": "— (the flag `--jobs` of `stop`)",
+      "default": "off",
+      "parity": "not used",
+      "owner": "102",
+      "registerRows": []
+    },
+    {
+      "number": 64,
+      "switch": "Routing",
+      "key": "loop.routing",
+      "keys": [
+        "loop.routing"
+      ],
+      "keyNote": "`loop.routing`",
+      "default": "on",
+      "parity": "not used",
+      "owner": "115",
+      "registerRows": []
+    },
+    {
+      "number": 65,
+      "switch": "Caps of the micro-loop layer",
+      "key": "loop.micro.caps.repairs",
+      "keys": [
+        "loop.micro.caps.repairs",
+        "loop.micro.caps.escalationsPerTask",
+        "loop.micro.caps.escalationsPerAttempt",
+        "loop.micro.caps.proposalMin",
+        "loop.micro.caps.unitMin",
+        "loop.micro.caps.checkMin",
+        "loop.micro.caps.checkSharePercent",
+        "loop.micro.caps.cyclesExtra",
+        "loop.micro.caps.cyclesMin",
+        "loop.micro.caps.unresolvedUnits"
+      ],
+      "keyNote": "`loop.micro.caps.repairs`, `.escalationsPerTask`, `.escalationsPerAttempt`, `.proposalMin`, `.unitMin`, `.checkMin`, `.checkSharePercent`, `.cyclesExtra`, `.cyclesMin`, `.unresolvedUnits`",
+      "default": "2; 1; 2; 20; 30; 5; 15; 6; 12; 2",
+      "parity": "not used",
+      "owner": "115",
+      "registerRows": [
+        "DV-012"
+      ]
+    },
+    {
+      "number": 66,
+      "switch": "Detached reverse run",
+      "key": null,
+      "keys": [],
+      "keyNote": "— (the flag `--detach` of `reverse`)",
+      "default": "off; the host skill passes it",
+      "parity": "off",
+      "owner": "108",
+      "registerRows": []
+    },
+    {
+      "number": 67,
+      "switch": "Comment of a reverse run",
+      "key": null,
+      "keys": [],
+      "keyNote": "— (the flag `--comment` of `reverse`)",
+      "default": "absent",
+      "parity": "not used",
+      "owner": "108",
+      "registerRows": []
+    },
+    {
+      "number": 68,
+      "switch": "Tasks mode of a reverse run",
+      "key": "reverse.tasks",
+      "keys": [
+        "reverse.tasks"
+      ],
+      "keyNote": "`reverse.tasks`",
+      "default": "`done`",
+      "parity": "`done`",
+      "owner": "108",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 69,
+      "switch": "Limits of the source inventory",
+      "key": "reverse.maxFileBytes",
+      "keys": [
+        "reverse.maxFileBytes",
+        "reverse.maxTotalBytes",
+        "reverse.contextBudget"
+      ],
+      "keyNote": "`reverse.maxFileBytes`, `reverse.maxTotalBytes`, `reverse.contextBudget`",
+      "default": "1048576; 20971520; 24000",
+      "parity": "The same",
+      "owner": "140",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 70,
+      "switch": "Live timeline",
+      "key": "output.live",
+      "keys": [
+        "output.live"
+      ],
+      "keyNote": "`output.live`",
+      "default": "`auto`",
+      "parity": "`auto`",
+      "owner": "145",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 71,
+      "switch": "Live detail",
+      "key": "output.liveDetail",
+      "keys": [
+        "output.liveDetail"
+      ],
+      "keyNote": "`output.liveDetail`",
+      "default": "`tools`",
+      "parity": "`tools`",
+      "owner": "145",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 72,
+      "switch": "Verbose output",
+      "key": "output.verbose",
+      "keys": [
+        "output.verbose"
+      ],
+      "keyNote": "`output.verbose`",
+      "default": "false",
+      "parity": "not used",
+      "owner": "119",
+      "registerRows": [
+        "DV-033"
+      ]
+    },
+    {
+      "number": 73,
+      "switch": "Colour depth",
+      "key": "output.color",
+      "keys": [
+        "output.color"
+      ],
+      "keyNote": "`output.color`",
+      "default": "unset",
+      "parity": "unset",
+      "owner": "145",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 74,
+      "switch": "Banner",
+      "key": "output.banner",
+      "keys": [
+        "output.banner"
+      ],
+      "keyNote": "`output.banner`",
+      "default": "on",
+      "parity": "on",
+      "owner": "145",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 75,
+      "switch": "Animation",
+      "key": "output.motion",
+      "keys": [
+        "output.motion"
+      ],
+      "keyNote": "`output.motion`",
+      "default": "on where a terminal allows it",
+      "parity": "As at the baseline",
+      "owner": "145",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 76,
+      "switch": "Live rail",
+      "key": "output.liveRail",
+      "keys": [
+        "output.liveRail"
+      ],
+      "keyNote": "`output.liveRail`",
+      "default": "on",
+      "parity": "on",
+      "owner": "145",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 77,
+      "switch": "Background of the banner",
+      "key": "output.bannerBg",
+      "keys": [
+        "output.bannerBg"
+      ],
+      "keyNote": "`output.bannerBg`",
+      "default": "unset",
+      "parity": "unset",
+      "owner": "145",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 78,
+      "switch": "ASCII glyphs",
+      "key": "output.ascii",
+      "keys": [
+        "output.ascii"
+      ],
+      "keyNote": "`output.ascii`",
+      "default": "off",
+      "parity": "off",
+      "owner": "145",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 79,
+      "switch": "Stream tap",
+      "key": "stream.tap",
+      "keys": [
+        "stream.tap"
+      ],
+      "keyNote": "`stream.tap`",
+      "default": "on",
+      "parity": "on",
+      "owner": "126",
+      "registerRows": [
+        "DV-065"
+      ]
+    },
+    {
+      "number": 80,
+      "switch": "Executable of the stream tap",
+      "key": "stream.tapExecutable",
+      "keys": [
+        "stream.tapExecutable"
+      ],
+      "keyNote": "`stream.tapExecutable`",
+      "default": "unset",
+      "parity": "unset",
+      "owner": "126",
+      "registerRows": []
+    },
+    {
+      "number": 81,
+      "switch": "Caps on the size and the rate of stream lines",
+      "key": "stream.limits.lineBytes",
+      "keys": [
+        "stream.limits.lineBytes",
+        "stream.limits.linesPerSecond"
+      ],
+      "keyNote": "`stream.limits.lineBytes`, `stream.limits.linesPerSecond`",
+      "default": "1048576; 5000",
+      "parity": "off",
+      "owner": "126",
+      "registerRows": [
+        "DV-102"
+      ]
+    },
+    {
+      "number": 82,
+      "switch": "Flag of a pass that did nothing",
+      "key": "stream.noActivityFlag",
+      "keys": [
+        "stream.noActivityFlag"
+      ],
+      "keyNote": "`stream.noActivityFlag`",
+      "default": "on",
+      "parity": "off",
+      "owner": "126",
+      "registerRows": [
+        "DV-101"
+      ]
+    },
+    {
+      "number": 83,
+      "switch": "Invocation record for every pass",
+      "key": "invocation.recordAllPasses",
+      "keys": [
+        "invocation.recordAllPasses"
+      ],
+      "keyNote": "`invocation.recordAllPasses`",
+      "default": "on",
+      "parity": "off",
+      "owner": "126",
+      "registerRows": [
+        "DV-103"
+      ]
+    },
+    {
+      "number": 84,
+      "switch": "Base of the invocation id",
+      "key": "invocation.idBase",
+      "keys": [
+        "invocation.idBase"
+      ],
+      "keyNote": "`invocation.idBase`",
+      "default": "unset",
+      "parity": "unset",
+      "owner": "126",
+      "registerRows": []
+    },
+    {
+      "number": 85,
+      "switch": "Debug retention of prompt and reply",
+      "key": "invocation.debug",
+      "keys": [
+        "invocation.debug"
+      ],
+      "keyNote": "`invocation.debug`",
+      "default": "off",
+      "parity": "off",
+      "owner": "126",
+      "registerRows": []
+    },
+    {
+      "number": 86,
+      "switch": "Capture of the agent stream: the same switch as row 79",
+      "key": "stream.tap",
+      "keys": [
+        "stream.tap"
+      ],
+      "keyNote": "`stream.tap` (the proposed key `stream.capture` is not used)",
+      "default": "on",
+      "parity": "on",
+      "owner": "126",
+      "registerRows": []
+    },
+    {
+      "number": 87,
+      "switch": "Discovery",
+      "key": "discovery.enabled",
+      "keys": [
+        "discovery.enabled"
+      ],
+      "keyNote": "`discovery.enabled`",
+      "default": "true",
+      "parity": "off",
+      "owner": "146",
+      "registerRows": [
+        "DV-064"
+      ]
+    },
+    {
+      "number": 88,
+      "switch": "Metadata pass of discovery",
+      "key": "discovery.online",
+      "keys": [
+        "discovery.online"
+      ],
+      "keyNote": "`discovery.online`",
+      "default": "true when a credential reference exists",
+      "parity": "off",
+      "owner": "146",
+      "registerRows": [
+        "DV-064"
+      ]
+    },
+    {
+      "number": 89,
+      "switch": "Safety margin on a context window from the catalogue",
+      "key": "critic.catalogueWindowMargin",
+      "keys": [
+        "critic.catalogueWindowMargin"
+      ],
+      "keyNote": "`critic.catalogueWindowMargin`",
+      "default": "20 per cent",
+      "parity": "not used",
+      "owner": "146",
+      "registerRows": [
+        "DV-049"
+      ]
+    },
+    {
+      "number": 90,
+      "switch": "Refusal at launch of a role name that the registry does not hold",
+      "key": "roles.refuseUnknown",
+      "keys": [
+        "roles.refuseUnknown"
+      ],
+      "keyNote": "`roles.refuseUnknown`",
+      "default": "on",
+      "parity": "off",
+      "owner": "124",
+      "registerRows": [
+        "DV-104"
+      ]
+    },
+    {
+      "number": 91,
+      "switch": "Hard spending cap of an automatically picked metered critic",
+      "key": "critic.autoPickMaxUsd",
+      "keys": [
+        "critic.autoPickMaxUsd"
+      ],
+      "keyNote": "`critic.autoPickMaxUsd`",
+      "default": "not set",
+      "parity": "not used",
+      "owner": "124",
+      "registerRows": [
+        "DV-049"
+      ]
+    },
+    {
+      "number": 92,
+      "switch": "Line of the critic-diversity warning",
+      "key": "critic.warnSameModel",
+      "keys": [
+        "critic.warnSameModel"
+      ],
+      "keyNote": "`critic.warnSameModel`",
+      "default": "true",
+      "parity": "not printed",
+      "owner": "124",
+      "registerRows": [
+        "DV-034"
+      ]
+    },
+    {
+      "number": 93,
+      "switch": "Declared write scope of a task",
+      "key": "loop.parallel.scopes.<taskId>",
+      "keys": [
+        "loop.parallel.scopes.<taskId>"
+      ],
+      "keyNote": "`loop.parallel.scopes.<taskId>`",
+      "default": "none",
+      "parity": "not used",
+      "owner": "142",
+      "registerRows": [
+        "DV-080"
+      ]
+    },
+    {
+      "number": 94,
+      "switch": "Tasks removed from eligibility",
+      "key": "loop.parallel.exclude",
+      "keys": [
+        "loop.parallel.exclude"
+      ],
+      "keyNote": "`loop.parallel.exclude`",
+      "default": "empty",
+      "parity": "not used",
+      "owner": "142",
+      "registerRows": [
+        "DV-080"
+      ]
+    },
+    {
+      "number": 95,
+      "switch": "Seed paths of worker trees",
+      "key": "loop.parallel.seedPaths",
+      "keys": [
+        "loop.parallel.seedPaths"
+      ],
+      "keyNote": "`loop.parallel.seedPaths`",
+      "default": "empty",
+      "parity": "not used",
+      "owner": "143",
+      "registerRows": [
+        "DV-080"
+      ]
+    },
+    {
+      "number": 96,
+      "switch": "Capacity of an exclusive resource",
+      "key": "loop.parallel.resources.<name>.capacity",
+      "keys": [
+        "loop.parallel.resources.<name>.capacity"
+      ],
+      "keyNote": "`loop.parallel.resources.<name>.capacity`",
+      "default": "1",
+      "parity": "not used",
+      "owner": "142",
+      "registerRows": [
+        "DV-080"
+      ]
+    },
+    {
+      "number": 97,
+      "switch": "Loki sink",
+      "key": "telemetry.enabled",
+      "keys": [
+        "telemetry.enabled",
+        "telemetry.loki.url"
+      ],
+      "keyNote": "`telemetry.enabled`, `telemetry.loki.url`",
+      "default": "false; `http://localhost:3100`",
+      "parity": "false unless the fixture sets it; the same address",
+      "owner": "128",
+      "registerRows": [
+        "DV-058"
+      ]
+    },
+    {
+      "number": 98,
+      "switch": "OTLP exporter",
+      "key": "telemetry.otel.enabled",
+      "keys": [
+        "telemetry.otel.enabled",
+        "telemetry.otel.url"
+      ],
+      "keyNote": "`telemetry.otel.enabled`, `telemetry.otel.url`",
+      "default": "false; `http://localhost:4318`",
+      "parity": "false unless the fixture sets it; the same address",
+      "owner": "128",
+      "registerRows": [
+        "DV-058"
+      ]
+    },
+    {
+      "number": 99,
+      "switch": "Traces when the exporter is on",
+      "key": "telemetry.otel.traces",
+      "keys": [
+        "telemetry.otel.traces"
+      ],
+      "keyNote": "`telemetry.otel.traces`",
+      "default": "on",
+      "parity": "on",
+      "owner": "128",
+      "registerRows": [
+        "DV-058"
+      ]
+    },
+    {
+      "number": 100,
+      "switch": "Attribute dialects",
+      "key": "telemetry.otel.dialects",
+      "keys": [
+        "telemetry.otel.dialects"
+      ],
+      "keyNote": "`telemetry.otel.dialects`",
+      "default": "empty",
+      "parity": "empty",
+      "owner": "128",
+      "registerRows": []
+    },
+    {
+      "number": 101,
+      "switch": "Limits of captured content",
+      "key": "telemetry.contentMaxPromptBytes",
+      "keys": [
+        "telemetry.contentMaxPromptBytes",
+        "telemetry.contentMaxReplyBytes"
+      ],
+      "keyNote": "`telemetry.contentMaxPromptBytes`, `telemetry.contentMaxReplyBytes`",
+      "default": "262144; 16384",
+      "parity": "not used",
+      "owner": "128",
+      "registerRows": [
+        "DV-083"
+      ]
+    },
+    {
+      "number": 102,
+      "switch": "Time limit of a request of a sink",
+      "key": "telemetry.loki.timeoutMs",
+      "keys": [
+        "telemetry.loki.timeoutMs",
+        "telemetry.otel.timeoutMs"
+      ],
+      "keyNote": "`telemetry.loki.timeoutMs`, `telemetry.otel.timeoutMs`",
+      "default": "2500; 2500",
+      "parity": "The same",
+      "owner": "128",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 103,
+      "switch": "Bound of a batch",
+      "key": "telemetry.loki.maxBatchBytes",
+      "keys": [
+        "telemetry.loki.maxBatchBytes",
+        "telemetry.otel.maxBatchBytes"
+      ],
+      "keyNote": "`telemetry.loki.maxBatchBytes`, `telemetry.otel.maxBatchBytes`",
+      "default": "3145728; 3145728",
+      "parity": "The same",
+      "owner": "128",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 104,
+      "switch": "Flush interval",
+      "key": "telemetry.flush.intervalMs",
+      "keys": [
+        "telemetry.flush.intervalMs"
+      ],
+      "keyNote": "`telemetry.flush.intervalMs`",
+      "default": "2000",
+      "parity": "0: a flush at every event",
+      "owner": "128",
+      "registerRows": [
+        "DV-058"
+      ]
+    },
+    {
+      "number": 105,
+      "switch": "Buffer of a sink",
+      "key": "telemetry.queueMaxEvents",
+      "keys": [
+        "telemetry.queueMaxEvents"
+      ],
+      "keyNote": "`telemetry.queueMaxEvents`",
+      "default": "10000",
+      "parity": "not used",
+      "owner": "128",
+      "registerRows": []
+    },
+    {
+      "number": 106,
+      "switch": "Credential of a collector",
+      "key": "telemetry.loki.auth",
+      "keys": [
+        "telemetry.loki.auth",
+        "telemetry.otel.auth"
+      ],
+      "keyNote": "`telemetry.loki.auth`, `telemetry.otel.auth`",
+      "default": "unset",
+      "parity": "unset",
+      "owner": "128",
+      "registerRows": []
+    },
+    {
+      "number": 107,
+      "switch": "Wall-clock budget of a run",
+      "key": "loop.maxWallMin",
+      "keys": [
+        "loop.maxWallMin"
+      ],
+      "keyNote": "`loop.maxWallMin`",
+      "default": "0 (unlimited)",
+      "parity": "0, unless the fixture sets it",
+      "owner": "127",
+      "registerRows": []
+    },
+    {
+      "number": 108,
+      "switch": "Ceilings per role and per run",
+      "key": "budget.role.<role>.costUsd",
+      "keys": [
+        "budget.role.<role>.costUsd",
+        "budget.role.<role>.tokens",
+        "budget.role.<role>.softTokens",
+        "budget.role.<role>.calls",
+        "budget.run.costUsd",
+        "budget.run.tokens",
+        "budget.run.phaseAttempts",
+        "budget.run.calls"
+      ],
+      "keyNote": "`budget.role.<role>.costUsd`, `.tokens`, `.softTokens`, `.calls`; `budget.run.costUsd`, `.tokens`, `.phaseAttempts`, `.calls`",
+      "default": "none",
+      "parity": "none",
+      "owner": "127",
+      "registerRows": []
+    },
+    {
+      "number": 109,
+      "switch": "Alert thresholds",
+      "key": "budget.alerts.thresholds",
+      "keys": [
+        "budget.alerts.thresholds"
+      ],
+      "keyNote": "`budget.alerts.thresholds`",
+      "default": "50, 75, 90",
+      "parity": "not used",
+      "owner": "127",
+      "registerRows": []
+    },
+    {
+      "number": 110,
+      "switch": "Rate table for estimated cost",
+      "key": "budget.rates",
+      "keys": [
+        "budget.rates"
+      ],
+      "keyNote": "`budget.rates`",
+      "default": "unset",
+      "parity": "unset",
+      "owner": "127",
+      "registerRows": []
+    },
+    {
+      "number": 111,
+      "switch": "Margin, jitter and probe schedule of a quota pause; bounds of the retries at pass level",
+      "key": "pause.marginMs",
+      "keys": [
+        "pause.marginMs",
+        "pause.jitterMs",
+        "pause.probeScheduleMs",
+        "quota.transientMaxWaitMs",
+        "quota.overloadRetries"
+      ],
+      "keyNote": "`pause.marginMs`, `pause.jitterMs`, `pause.probeScheduleMs`, `quota.transientMaxWaitMs`, `quota.overloadRetries`",
+      "default": "60000; 30000; 300000, 900000, 1800000, 3600000; 60000; 3",
+      "parity": "Not reached",
+      "owner": "127",
+      "registerRows": [
+        "DV-005"
+      ]
+    },
+    {
+      "number": 112,
+      "switch": "Delay and return of a fallback",
+      "key": "roles.<role>.fallbackAfterMs",
+      "keys": [
+        "roles.<role>.fallbackAfterMs",
+        "roles.<role>.fallbackReturn"
+      ],
+      "keyNote": "`roles.<role>.fallbackAfterMs`, `roles.<role>.fallbackReturn`",
+      "default": "0; `restore`",
+      "parity": "not used",
+      "owner": "127",
+      "registerRows": []
+    },
+    {
+      "number": 113,
+      "switch": "Detach strategy",
+      "key": "runtime.detach.strategy",
+      "keys": [
+        "runtime.detach.strategy"
+      ],
+      "keyNote": "`runtime.detach.strategy`",
+      "default": "`spawn-detached`",
+      "parity": "`spawn-detached`",
+      "owner": "122",
+      "registerRows": [
+        "DV-074"
+      ]
+    },
+    {
+      "number": 114,
+      "switch": "Limit of the handshake; heartbeat and grace of the lease",
+      "key": "runtime.handshake.timeoutSec",
+      "keys": [
+        "runtime.handshake.timeoutSec",
+        "runtime.lease.heartbeatSec",
+        "runtime.lease.graceSec"
+      ],
+      "keyNote": "`runtime.handshake.timeoutSec`, `runtime.lease.heartbeatSec`, `runtime.lease.graceSec`",
+      "default": "30; 10; 30",
+      "parity": "The defaults; not observable",
+      "owner": "122",
+      "registerRows": []
+    },
+    {
+      "number": 115,
+      "switch": "Lock and liveness provider",
+      "key": "runtime.lock.provider",
+      "keys": [
+        "runtime.lock.provider"
+      ],
+      "keyNote": "`runtime.lock.provider`",
+      "default": "The shipped provider",
+      "parity": "The shipped provider",
+      "owner": "122",
+      "registerRows": [
+        "DV-022"
+      ]
+    },
+    {
+      "number": 116,
+      "switch": "Control root",
+      "key": "state.dir",
+      "keys": [
+        "state.dir"
+      ],
+      "keyNote": "`state.dir`",
+      "default": "The user's state directory, keyed by the workspace",
+      "parity": "Set by the fixture through the as-is variable",
+      "owner": "122",
+      "registerRows": [
+        "DV-006"
+      ]
+    },
+    {
+      "number": 117,
+      "switch": "Proof of the critic mode of dsh",
+      "key": "harnesses.dsh.critic.proof",
+      "keys": [
+        "harnesses.dsh.critic.proof"
+      ],
+      "keyNote": "`harnesses.dsh.critic.proof`",
+      "default": "`strict`",
+      "parity": "`none`",
+      "owner": "130",
+      "registerRows": [
+        "DV-110"
+      ]
+    },
+    {
+      "number": 118,
+      "switch": "Plugin allowlist of a harness",
+      "key": "harnesses.<id>.pluginAllowlist",
+      "keys": [
+        "harnesses.<id>.pluginAllowlist"
+      ],
+      "keyNote": "`harnesses.<id>.pluginAllowlist`",
+      "default": "empty",
+      "parity": "As the fixture sets it",
+      "owner": "130",
+      "registerRows": [
+        "DV-091"
+      ]
+    },
+    {
+      "number": 119,
+      "switch": "Slash-command skills of the Claude proposer",
+      "key": "harnesses.claude.proposerSkills",
+      "keys": [
+        "harnesses.claude.proposerSkills"
+      ],
+      "keyNote": "`harnesses.claude.proposerSkills`",
+      "default": "off",
+      "parity": "off",
+      "owner": "125",
+      "registerRows": [
+        "DV-027"
+      ]
+    },
+    {
+      "number": 120,
+      "switch": "Scrub of credentials from the environment of tool commands",
+      "key": "harnesses.claude.subprocessEnvScrub",
+      "keys": [
+        "harnesses.claude.subprocessEnvScrub"
+      ],
+      "keyNote": "`harnesses.claude.subprocessEnvScrub`",
+      "default": "on",
+      "parity": "off",
+      "owner": "125",
+      "registerRows": []
+    },
+    {
+      "number": 121,
+      "switch": "Removal of the harness's repository snapshot from context",
+      "key": "harnesses.claude.gitInstructions",
+      "keys": [
+        "harnesses.claude.gitInstructions"
+      ],
+      "keyNote": "`harnesses.claude.gitInstructions`",
+      "default": "unset",
+      "parity": "unset",
+      "owner": "125",
+      "registerRows": [
+        "DV-094"
+      ]
+    },
+    {
+      "number": 122,
+      "switch": "Refusal of the sub-agent tool on the SDK transport",
+      "key": "harnesses.claude.disableSubagents",
+      "keys": [
+        "harnesses.claude.disableSubagents"
+      ],
+      "keyNote": "`harnesses.claude.disableSubagents`",
+      "default": "off",
+      "parity": "not used",
+      "owner": "125",
+      "registerRows": []
+    },
+    {
+      "number": 123,
+      "switch": "Verification mode",
+      "key": "verification.mode",
+      "keys": [
+        "verification.mode"
+      ],
+      "keyNote": "`verification.mode`",
+      "default": "`required`",
+      "parity": "As the fixture sets it",
+      "owner": "105",
+      "registerRows": [
+        "DV-043"
+      ]
+    },
+    {
+      "number": 124,
+      "switch": "Places of the verification plan, the verification-commands document and the test scaffolds",
+      "key": "verification.testPlan",
+      "keys": [
+        "verification.testPlan",
+        "verification.commands",
+        "verification.generateTests"
+      ],
+      "keyNote": "`verification.testPlan`, `verification.commands`, `verification.generateTests`",
+      "default": "`testautomation/<slug>/TEST_PLAN.md`; none; `testautomation/<slug>/generated`. The two places are under the working directory and hold unless the mode is `off`",
+      "parity": "As the fixture sets them",
+      "owner": "105",
+      "registerRows": []
+    },
+    {
+      "number": 125,
+      "switch": "Environment allow-list of a check",
+      "key": "verification.envAllowlist",
+      "keys": [
+        "verification.envAllowlist"
+      ],
+      "keyNote": "`verification.envAllowlist`",
+      "default": "on",
+      "parity": "off: the environment of the process is passed",
+      "owner": "148",
+      "registerRows": [
+        "DV-113"
+      ]
+    },
+    {
+      "number": 126,
+      "switch": "Lines of the failure summary",
+      "key": "verification.summary.tailLines",
+      "keys": [
+        "verification.summary.tailLines",
+        "verification.summary.tailErrLines"
+      ],
+      "keyNote": "`verification.summary.tailLines`, `verification.summary.tailErrLines`",
+      "default": "80; 40",
+      "parity": "80; 40",
+      "owner": "105",
+      "registerRows": []
+    },
+    {
+      "number": 127,
+      "switch": "Precomputed status line",
+      "key": "status.precompute",
+      "keys": [
+        "status.precompute"
+      ],
+      "keyNote": "`status.precompute`",
+      "default": "on",
+      "parity": "off",
+      "owner": "129",
+      "registerRows": [
+        "DV-034"
+      ]
+    },
+    {
+      "number": 128,
+      "switch": "K of the model-tier bump",
+      "key": "attempt.tier_bump_after",
+      "keys": [
+        "attempt.tier_bump_after"
+      ],
+      "keyNote": "`attempt.tier_bump_after`",
+      "default": "2",
+      "parity": "not used",
+      "owner": "149",
+      "registerRows": [
+        "DV-079"
+      ]
+    },
+    {
+      "number": 129,
+      "switch": "Refusal of a start for ticked phases without an approval record",
+      "key": null,
+      "keys": [],
+      "keyNote": "— (follows the approval record)",
+      "default": "on",
+      "parity": "off",
+      "owner": "101",
+      "registerRows": [
+        "DV-029"
+      ]
+    },
+    {
+      "number": 130,
+      "switch": "Ceiling of the workers of a group",
+      "key": "loop.parallel.workersMax",
+      "keys": [
+        "loop.parallel.workersMax"
+      ],
+      "keyNote": "`loop.parallel.workersMax`",
+      "default": "4",
+      "parity": "not used",
+      "owner": "142",
+      "registerRows": [
+        "DV-080"
+      ]
+    },
+    {
+      "number": 131,
+      "switch": "Customisations of a harness that are loaded into a proposer pass by themselves: project instruction files, and the auto-loaded context of a harness (extensions, skills, context files, prompt templates). Row 29 covers harness-native memory only",
+      "key": "harnesses.<id>.proposerCustomisations",
+      "keys": [
+        "harnesses.<id>.proposerCustomisations"
+      ],
+      "keyNote": "`harnesses.<id>.proposerCustomisations`",
+      "default": "off; never loaded into a critic-class call",
+      "parity": "`as-is`: no flag about customisations is passed",
+      "owner": "131, 134",
+      "registerRows": [
+        "DV-047",
+        "DV-002"
+      ]
+    },
+    {
+      "number": 132,
+      "switch": "The reading of `retryable` in the observation of a stopped launcher by `supervise observe` (DV-114). The reading of the blocked reason (row O-33 of table 1, refusal `blocked-on-human`) is not switched by the profile: it is on under every profile, `parity` included (CQ-238)",
+      "key": null,
+      "keys": [],
+      "keyNote": "— (follows the tables `relaunch-observe` and `relaunch-root`)",
+      "default": "on: table 1 reads `retryable` from the terminal record and refuses with `stop-not-retryable` (row O-34)",
+      "parity": "off: row O-34 is inactive and a stop that is not blocked is classified by the as-is classifier of DV-074",
+      "owner": "123",
+      "registerRows": [
+        "DV-114"
+      ]
+    },
+    {
+      "number": 133,
+      "switch": "A missing credential of the critic is a configuration error, found before the call by `preflight` and refused with engine exit 3 and `critic_config`; no count changes",
+      "key": null,
+      "keys": [],
+      "keyNote": "— (none; feature 110 may name one)",
+      "default": "on",
+      "parity": "off: the missing credential is raised inside the call and scored as a failed call (DV-117)",
+      "owner": "101",
+      "registerRows": [
+        "DV-117"
+      ]
+    }
+  ]
+}

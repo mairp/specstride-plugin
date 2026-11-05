@@ -1,0 +1,12 @@
+{
+  "rule": "commands-129",
+  "owner": "129",
+  "requirement": "F129-FR-032",
+  "from": ["packages/cli/src/commands/**"],
+  "forbid": [
+    "packages/cli/src/status/event-reader.ts",
+    "packages/cli/src/status/state-readers.ts",
+    "packages/cli/src/status/probes.ts"
+  ],
+  "reason": "The commands that render state take the view (specstride.view/1) and its one reader: no command outside packages/cli/src/status imports the event reader, a state reader or the process probe in place of the view (F129-FR-032)."
+}

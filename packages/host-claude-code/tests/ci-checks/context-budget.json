@@ -1,0 +1,218 @@
+{
+  "format": "context-budget/1",
+  "task": "T031",
+  "requirement": "F113-FR-036; F113-FR-037",
+  "modelCalls": 0,
+  "platform": "linux x64 node v22.23.2",
+  "builtPackageValidated": true,
+  "allChecksPass": true,
+  "report": {
+    "format": "context-cost-report/1",
+    "requirement": "F113-FR-036; F113-FR-037",
+    "bytesPerToken": 2.8,
+    "allChecksPass": true,
+    "lines": [
+      {
+        "check": "static size",
+        "subject": "specstride-run: body bytes",
+        "measuredBytes": 6907,
+        "measuredTokens": 2467,
+        "limit": 7000,
+        "unit": "bytes",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "static size",
+        "subject": "specstride-run: body lines",
+        "measuredTokens": 90,
+        "limit": 500,
+        "unit": "count",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "static size",
+        "subject": "specstride-reverse: body bytes",
+        "measuredBytes": 5191,
+        "measuredTokens": 1854,
+        "limit": 5600,
+        "unit": "bytes",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "static size",
+        "subject": "specstride-reverse: body lines",
+        "measuredTokens": 67,
+        "limit": 500,
+        "unit": "count",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "static size",
+        "subject": "doctor: body bytes",
+        "measuredBytes": 1772,
+        "measuredTokens": 633,
+        "limit": 2240,
+        "unit": "bytes",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "static size",
+        "subject": "doctor: body lines",
+        "measuredTokens": 33,
+        "limit": 500,
+        "unit": "count",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "reference closure",
+        "subject": "specstride-run",
+        "measuredTokens": 0,
+        "limit": 0,
+        "unit": "count",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "reference closure",
+        "subject": "specstride-reverse",
+        "measuredTokens": 0,
+        "limit": 0,
+        "unit": "count",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "reference closure",
+        "subject": "doctor",
+        "measuredTokens": 0,
+        "limit": 0,
+        "unit": "count",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "golden output",
+        "subject": "skills/specstride-run/SKILL.md",
+        "measuredBytes": 7209,
+        "measuredTokens": 2575,
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "golden output",
+        "subject": "skills/specstride-reverse/SKILL.md",
+        "measuredBytes": 5497,
+        "measuredTokens": 1963,
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "golden output",
+        "subject": "skills/specstride-doctor/SKILL.md",
+        "measuredBytes": 2021,
+        "measuredTokens": 722,
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "golden output",
+        "subject": "entry/doctor",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "supervision cycle",
+        "subject": "specstride-run: one cycle",
+        "measuredBytes": 357,
+        "measuredTokens": 128,
+        "limit": 420,
+        "unit": "bytes",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "supervision cycle",
+        "subject": "specstride-run: whole run",
+        "measuredBytes": 586,
+        "measuredTokens": 209,
+        "limit": 8400,
+        "unit": "bytes",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "supervision cycle",
+        "subject": "specstride-reverse: one cycle",
+        "measuredBytes": 357,
+        "measuredTokens": 128,
+        "limit": 420,
+        "unit": "bytes",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "supervision cycle",
+        "subject": "specstride-reverse: whole run",
+        "measuredBytes": 586,
+        "measuredTokens": 209,
+        "limit": 8400,
+        "unit": "bytes",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "judgment payload",
+        "subject": "synthetic feature of 200 tasks",
+        "measuredBytes": 19200,
+        "measuredTokens": 6857,
+        "unit": "bytes",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "judgment payload",
+        "subject": "total after doubling the size of the sources",
+        "measuredBytes": 19200,
+        "measuredTokens": 6857,
+        "limit": 19200,
+        "unit": "bytes",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "host cross-check",
+        "subject": "capabilities of the plugin against the host",
+        "verdict": "skip",
+        "bytesPerToken": 2.8
+      },
+      {
+        "check": "startup",
+        "subject": "status p90 of 30 runs",
+        "measuredTokens": 28,
+        "limit": 150,
+        "unit": "ms",
+        "verdict": "pass",
+        "bytesPerToken": 2.8
+      }
+    ]
+  },
+  "startup": {
+    "runner": "the status shim of the built package (hooks/session-start.sh) printing the precomputed status line; no host CLI, no model",
+    "runs": 30,
+    "percentile": 90,
+    "measuredP90Ms": 27.535,
+    "limitMs": 150,
+    "verdict": "pass"
+  },
+  "macosRunner": {
+    "task": "T032",
+    "status": "unverified",
+    "reason": "the macOS runner run of the startup check is never run and never faked in this lane (owner's ruling of 2026-09-30); it stays `unverified` until a macOS runner has passed it — the row `macos-startup-check` of src/host-facts.ts records it"
+  }
+}

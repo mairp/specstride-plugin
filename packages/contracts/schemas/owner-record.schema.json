@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.lease/1:owner",
+  "title": "owner-record",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.lease/1:owner",
+  "x-annex": "annex B, §B.9",
+  "type": "object",
+  "properties": {
+    "pid": {
+      "type": "integer",
+      "description": "Process id",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "processGroup": {
+      "type": "integer",
+      "description": "Process group id",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "startTime": {
+      "type": "string",
+      "description": "Start time of the process, from the operating system",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "bootId": {
+      "type": "string",
+      "description": "Identity of the boot",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "hostName": {
+      "type": "string",
+      "description": "Host name",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "pidNamespace": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Identity of the pid namespace",
+      "x-type-in-words": "Text, or null",
+      "x-required": "Yes"
+    },
+    "launchId": {
+      "type": "string",
+      "description": "Identifier",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "runTokenHash": {
+      "type": "string",
+      "description": "Hash of the run token",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    }
+  },
+  "required": [
+    "pid",
+    "processGroup",
+    "startTime",
+    "bootId",
+    "hostName",
+    "pidNamespace",
+    "launchId",
+    "runTokenHash"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "specstride.feature-closed-sets/1",
+  "feature": "148-check-runner",
+  "sets": [
+    {
+      "row": 53,
+      "name": "result-conditions",
+      "members": [
+        "tainted",
+        "cached",
+        "flaky",
+        "interrupted",
+        "unchecked"
+      ],
+      "closedBy": "design",
+      "unknown": "the result is unchecked, reason unknown-condition"
+    },
+    {
+      "row": 53,
+      "name": "tainted-reasons",
+      "members": [
+        "changed-during-check",
+        "protected-set-changed",
+        "pin-mismatch"
+      ],
+      "closedBy": "design",
+      "unknown": "stays tainted; reason shown as text"
+    },
+    {
+      "row": 53,
+      "name": "unchecked-reasons",
+      "members": [
+        "no-command",
+        "slow",
+        "budget",
+        "flaky-excluded",
+        "gate-not-executing",
+        "partial",
+        "unknown-condition"
+      ],
+      "closedBy": "design",
+      "unknown": "stays unchecked; reason shown as text"
+    },
+    {
+      "row": 54,
+      "name": "runner-errors",
+      "members": [
+        "cannot-start",
+        "timeout",
+        "interrupted"
+      ],
+      "closedBy": "design",
+      "unknown": "cannot-start"
+    },
+    {
+      "row": 233,
+      "name": "result-signals",
+      "members": [
+        "TIMEOUT",
+        "EXEC_ERROR"
+      ],
+      "closedBy": "design",
+      "unknown": "the command counts as failed",
+      "note": "Row 233 has a third member, DEADLINE, owned by feature 105; the check runner never sets it"
+    },
+    {
+      "row": 235,
+      "name": "step-run-state",
+      "members": [
+        "full",
+        "partial"
+      ],
+      "closedBy": "design",
+      "unknown": "partial"
+    },
+    {
+      "row": 236,
+      "name": "admission-reasons",
+      "members": [
+        "disjoint",
+        "undeclared",
+        "reads-written",
+        "writes-overlap",
+        "follows-writer",
+        "exclusive",
+        "steps",
+        "demoted"
+      ],
+      "closedBy": "design",
+      "unknown": "the command runs alone"
+    }
+  ],
+  "openSets": [
+    "kinds of identity of the check runner"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "rule": "no-network-129",
+  "owner": "129",
+  "requirement": "F129-FR-033",
+  "from": ["packages/view/**", "packages/cli/src/status/**"],
+  "forbid": [
+    "node:net",
+    "node:http",
+    "node:https",
+    "node:http2",
+    "node:dgram",
+    "node:tls",
+    "node:inspector",
+    "undici"
+  ],
+  "reason": "No component of Wave 1 opens a network listener, and no route, write path or request handler exists in the read model, `status` or `wait` (F129-FR-033, threats T-38 to T-42): the read model (packages/view/) and the command code (packages/cli/src/status/) import no network module. The time limit of `wait` is the second half of the same guarantee: the loop ends at `wait.timeoutSec` (default 600, CT-129-29 and CT-129-41) and leaves no process behind (CT-129-33)."
+}

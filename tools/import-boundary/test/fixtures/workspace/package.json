@@ -1,0 +1,9 @@
+{
+  "name": "import-boundary-fixture-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The test tree of T016: a permitted import (edge-a) and a forbidden import (edge-b, edge-c) over the fixture graph (test/fixtures/graph.json)",
+  "workspaces": [
+    "packages/*"
+  ]
+}

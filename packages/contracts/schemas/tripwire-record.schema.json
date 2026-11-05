@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.tripwire/1",
+  "title": "tripwire-record",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.tripwire/1",
+  "x-annex": "annex B, §B.18",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "raisedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    },
+    "workspaceId": {
+      "type": "string",
+      "description": "Where the breach was found",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "runId": {
+      "type": "string",
+      "description": "Where the breach was found",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "kind": {
+      "type": "string",
+      "description": "Kind of the breach of integrity of the phase gate",
+      "x-type-in-words": "Member of the closed set of breach kinds (annex X §X.6 row 141)",
+      "x-required": "Yes"
+    },
+    "ruleId": {
+      "type": "string",
+      "description": "The rule that found it",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "productVersion": {
+      "type": "string",
+      "description": "Product version",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    }
+  },
+  "required": [
+    "schema",
+    "raisedAt",
+    "workspaceId",
+    "runId",
+    "kind",
+    "ruleId",
+    "productVersion"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

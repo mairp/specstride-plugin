@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.launch/1",
+  "title": "launch-record",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.launch/1",
+  "x-annex": "annex B, §B.7",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "launchId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "runId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "workspaceId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "requestKind": {
+      "type": "string",
+      "description": "`pipeline` or `engine` (§F.2)",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "pipeline",
+        "engine"
+      ]
+    },
+    "request": {
+      "type": "object",
+      "description": "For `pipeline`: pipeline id and hash of the launch bundle. For `engine`: the argument list of the one engine start",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "mode": {
+      "type": "string",
+      "description": "`run`. The mode `dry-run` writes no launch record and no run state",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "run",
+        "dry-run"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "description": "`first`, `resume`, `relaunch` or `manual`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "first",
+        "resume",
+        "relaunch",
+        "manual"
+      ]
+    },
+    "host": {
+      "type": "string",
+      "description": "The host that launched: a host id, or `cli`",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "commentHash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Hash of the consumer's comment, taken before any repository text was printed",
+      "x-type-in-words": "Text, or null",
+      "x-required": "Yes"
+    },
+    "detachStrategy": {
+      "type": "string",
+      "description": "Id of the detach strategy in use",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "launchNonce": {
+      "type": "string",
+      "description": "Nonce that the lease must carry",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "engineExecutable": {
+      "type": "object",
+      "description": "Path and hash of the engine executable pinned at launch",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time of the launch",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    },
+    "productVersion": {
+      "type": "string",
+      "description": "Product version and CLI protocol integer of the launching CLI",
+      "x-type-in-words": "Text, whole number",
+      "x-required": "Yes"
+    },
+    "protocol": {
+      "type": "integer",
+      "description": "Product version and CLI protocol integer of the launching CLI",
+      "x-type-in-words": "Text, whole number",
+      "x-required": "Yes"
+    },
+    "outcome": {
+      "type": "string",
+      "description": "Handshake outcome: `started`, `attached` or `refused`; absent until the handshake ends",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "No",
+      "enum": [
+        "started",
+        "attached",
+        "refused"
+      ]
+    },
+    "refusal": {
+      "type": "string",
+      "description": "Reason of a refusal, from the closed sets of the refusals of a launch and of `resume`",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "refusalFile": {
+      "type": "string",
+      "description": "The file that changed, when the refusal is `source-changed`",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "resetCounts": {
+      "type": "boolean",
+      "description": "The flags of the command that made the launch, so that a continuation through the runtime root can apply them",
+      "x-type-in-words": "Truth values",
+      "x-required": "No, default false"
+    },
+    "acceptSourceChange": {
+      "type": "boolean",
+      "description": "The flags of the command that made the launch, so that a continuation through the runtime root can apply them",
+      "x-type-in-words": "Truth values",
+      "x-required": "No, default false"
+    },
+    "newRun": {
+      "type": "boolean",
+      "description": "The flags of the command that made the launch, so that a continuation through the runtime root can apply them",
+      "x-type-in-words": "Truth values",
+      "x-required": "No, default false"
+    },
+    "resolveRoles": {
+      "type": "boolean",
+      "description": "The flags of the command that made the launch, so that a continuation through the runtime root can apply them",
+      "x-type-in-words": "Truth values",
+      "x-required": "No, default false"
+    }
+  },
+  "required": [
+    "schema",
+    "launchId",
+    "runId",
+    "workspaceId",
+    "requestKind",
+    "request",
+    "mode",
+    "reason",
+    "host",
+    "commentHash",
+    "detachStrategy",
+    "launchNonce",
+    "engineExecutable",
+    "createdAt",
+    "productVersion",
+    "protocol"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

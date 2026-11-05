@@ -1,0 +1,8 @@
+{
+  "source": "R29v PU-83",
+  "appliesTo": "every input of a critic-class call of every parallel fixture",
+  "caseSensitive": false,
+  "forbidden": ["group", "worker", "parallel", "merge", "integrat", "refus", "snapshot"],
+  "forbiddenAtRunTime": ["the opaque token of every worker", "the opaque component of every worker tree path"],
+  "baseline": "a word that the serial run of the same fixture also holds, from the project's own text, is not a finding"
+}

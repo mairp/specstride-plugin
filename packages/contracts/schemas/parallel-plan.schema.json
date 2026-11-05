@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.parallel-plan/1",
+  "title": "parallel-plan",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.parallel-plan/1",
+  "x-annex": "annex D, §D.3",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "runId": {
+      "type": "string",
+      "description": "Identifier",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "hash": {
+      "type": "string",
+      "description": "Hash of the plan, which is also an event",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "workers": {
+      "type": "integer",
+      "description": "Worker count in force (default 2; the ceiling is `loop.parallel.workersMax`, default 4)",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "phases": {
+      "type": "array",
+      "description": "Per phase: its groups, its serial tasks, and the ceiling of the speed-up under equal task cost",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes",
+      "items": {
+        "type": "object",
+        "properties": {
+          "groups": {
+            "type": "array",
+            "description": "Per group: ordinal, and the task ids in the order of the tasks at launch. A group holds at least 2 and at most `workers` tasks, all consecutive and admitted",
+            "x-type-in-words": "List of records",
+            "x-required": "Yes (may be empty)"
+          },
+          "tasks": {
+            "type": "array",
+            "description": "Per candidate task: id, write scope (path prefixes relative to the workspace root), the source of the scope (consumer declaration, or the task's own text at launch), and the verdict of every admission check with its detail",
+            "x-type-in-words": "List of records",
+            "x-required": "Yes"
+          },
+          "serial": {
+            "type": "array",
+            "description": "Tasks made serial, each with the reason",
+            "x-type-in-words": "List of records",
+            "x-required": "Yes (may be empty)"
+          }
+        },
+        "required": [
+          "groups",
+          "tasks",
+          "serial"
+        ]
+      }
+    },
+    "fallback": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "When the layer is off for the run: the reason, from the closed set of fallback reasons",
+      "x-type-in-words": "Member of a closed set, or null",
+      "x-required": "Yes"
+    }
+  },
+  "required": [
+    "schema",
+    "runId",
+    "hash",
+    "workers",
+    "phases",
+    "fallback"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

@@ -1,0 +1,40 @@
+{
+  "FX-PAR-S": {
+    "cost": "none",
+    "when": "once per release candidate",
+    "fixtures": [
+      "task lists shaped like the 48-file corpus",
+      "scope violation: a path beside the scope",
+      "scope violation: a lock file at the root",
+      "scope violation: a link that leaves the tree",
+      "scope violation: a deletion outside the scope",
+      "protected change without authority",
+      "protected change with authority from the task text",
+      "two deltas that share a path",
+      "a delta that composes cleanly and fails a test",
+      "a worker killed at the cap",
+      "a quota signal while a sibling works",
+      "an engine kill after each of the thirteen ledger records",
+      "a delta that carries the worker root's path",
+      "a group with an empty inner check set",
+      "an attributes file that names a filter",
+      "a symbolic link that leaves the tree in the base snapshot",
+      "ticks of three consecutive tasks",
+      "a worker process that outlives the engine",
+      "a detached job of an earlier yield alive at group start"
+    ],
+    "passMark": "every test of a rule passes; zero breaches of gate integrity",
+    "note": "The fixtures that kill the engine after a ledger record and that leave a worker process behind drive the engine services through the contracts of feature 100, annex D."
+  },
+  "FX-PAR-L": {
+    "cost": "paid; logged",
+    "arms": [
+      "serial",
+      "2 workers",
+      "4 workers"
+    ],
+    "selection": "phases whose plan has a ceiling of at least 1.15 at two workers, fixed before the first run",
+    "passMark": "none for a default; reported: failure classes, cost, killed passes",
+    "defaultCondition": "a corpus with phase ceilings of 1.28 or more and at least 71 pairs"
+  }
+}

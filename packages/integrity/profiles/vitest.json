@@ -1,0 +1,21 @@
+{
+  "schema": "specstride.toolchain/1",
+  "id": "vitest",
+  "version": "1",
+  "detect": { "files": ["vitest.config.ts", "vitest.config.mts", "vitest.config.js"] },
+  "classA": [
+    "vitest.config.ts",
+    "vitest.config.mts",
+    "vitest.config.js",
+    "vite.config.ts",
+    "vite.config.js"
+  ],
+  "testFiles": ["test/**", "tests/**", "**/*.test.ts", "**/*.spec.ts"],
+  "caches": [{ "path": "node_modules/.vite", "disableEnv": { "VITEST_CACHE": "0" } }],
+  "userConfig": ["~/.config/vitest/config.json"],
+  "suppressionMarkers": ["vitest-ignore"],
+  "executables": ["vitest"],
+  "effectiveConfig": null,
+  "workerSeeds": [],
+  "workerEnv": {}
+}

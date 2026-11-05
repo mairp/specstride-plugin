@@ -1,0 +1,153 @@
+{
+ "schema": "specstride.integrity-rules-116/1",
+ "note": "Data of feature 116. spec.md stands where the two differ.",
+ "rules": [
+  {
+   "rule": "IR-11",
+   "subject": "Two classes, fingerprint at phase entry, tainted",
+   "requirements": [
+    "F116-FR-001",
+    "F116-FR-004",
+    "F116-FR-006"
+   ],
+   "test": "CT-116-111"
+  },
+  {
+   "rule": "IR-12",
+   "subject": "Authorisation from the task text at launch",
+   "requirements": [
+    "F116-FR-010"
+   ],
+   "test": "CT-116-112"
+  },
+  {
+   "rule": "IR-16",
+   "subject": "Results bound to the fingerprint",
+   "requirements": [
+    "F116-FR-008"
+   ],
+   "test": "CT-116-116"
+  },
+  {
+   "rule": "IR-17",
+   "subject": "The fact block is built from the control plane",
+   "requirements": [
+    "F116-FR-016"
+   ],
+   "test": "CT-116-117"
+  },
+  {
+   "rule": "IR-18",
+   "subject": "The same final state gives the same block",
+   "requirements": [
+    "F116-FR-020"
+   ],
+   "test": "CT-116-118"
+  },
+  {
+   "rule": "IR-31",
+   "subject": "Fingerprint before and after, for the checks of a loop layer. At the verification gate and at grounding: annex C §C.8, F100-FR-098",
+   "requirements": [
+    "F116-FR-005"
+   ],
+   "test": "CT-116-131"
+  },
+  {
+   "rule": "IR-33",
+   "subject": "Tree at phase entry equals the approved tree",
+   "requirements": [
+    "F116-FR-012"
+   ],
+   "test": "CT-116-133"
+  },
+  {
+   "rule": "IR-35",
+   "subject": "Scope of the fingerprint",
+   "requirements": [
+    "F116-FR-003"
+   ],
+   "test": "CT-116-135"
+  },
+  {
+   "rule": "IR-36",
+   "subject": "Executables, search path, configuration of the toolchain",
+   "requirements": [
+    "F116-FR-009"
+   ],
+   "test": "CT-116-136"
+  },
+  {
+   "rule": "IR-37",
+   "subject": "Caches; cached is not a pass",
+   "requirements": [
+    "F116-FR-009"
+   ],
+   "test": "CT-116-137"
+  },
+  {
+   "rule": "IR-38",
+   "subject": "Class A as patterns",
+   "requirements": [
+    "F116-FR-002"
+   ],
+   "test": "CT-116-138"
+  },
+  {
+   "rule": "IR-39",
+   "subject": "Suppression markers",
+   "requirements": [
+    "F116-FR-011"
+   ],
+   "test": "CT-116-139"
+  },
+  {
+   "rule": "IR-40",
+   "subject": "Exit result and conditions in separate fields",
+   "requirements": [
+    "F116-FR-008",
+    "F116-FR-017"
+   ],
+   "test": "CT-116-140"
+  },
+  {
+   "rule": "IR-41",
+   "subject": "Authorisation covers class A",
+   "requirements": [
+    "F116-FR-010"
+   ],
+   "test": "CT-116-141"
+  },
+  {
+   "rule": "IR-42",
+   "subject": "Integrity events reach the critic",
+   "requirements": [
+    "F116-FR-021"
+   ],
+   "test": "CT-116-142"
+  },
+  {
+   "rule": "IR-43",
+   "subject": "Results per command and tree",
+   "requirements": [
+    "F116-FR-018"
+   ],
+   "test": "CT-116-143"
+  },
+  {
+   "rule": "IR-44",
+   "subject": "Escaping inside a data boundary: here the marking of values. The escaping: annex D §D.7, F100-FR-135",
+   "requirements": [
+    "F116-FR-021"
+   ],
+   "test": "CT-116-144"
+  },
+  {
+   "rule": "IR-46",
+   "subject": "No fingerprint value per row",
+   "requirements": [
+    "F116-FR-017"
+   ],
+   "test": "CT-116-146"
+  }
+ ]
+}

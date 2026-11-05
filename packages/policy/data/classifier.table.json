@@ -1,0 +1,243 @@
+{
+  "schema": "specstride.table/1",
+  "id": "quota-classifier-default",
+  "version": "1",
+  "note": "Default classifier table of feature 127 (F127-FR-003). Signals are computed by the pattern set in text-patterns.json and by the harness adapter. Every fact about a provider text is unverified until captured., edited 2026-09-30 (item W-127-02): each row carries `retryable`, the constant value of its class in section Q.1 of the spec, edited 2026-10-02 (T005): every `when` is written in the canonical predicate form of feature 100 annex X §X.3 (`{\"op\": <one of the nine operators>, \"signal\": <declared signal>, \"value\": <literal>}`), which is the form `loadTable` of `@specstride/kernel` accepts; the earlier shorthand `{\"equal\": [<signal>, <literal>]}` named no operator in the field `op` and the load refused it. No row, rule id, order, choice, confidence or `retryable` value changed.",
+  "points": {
+    "classify": {
+      "signals": {
+        "structuredClass": "text or null: a class named by a structured record of the stream, set by a harness adapter",
+        "httpStatus": "whole number or null",
+        "textGroup": "text or null: the group of the first matching pattern of text-patterns.json",
+        "stalled": "truth value: the stall watchdog fired with no other signal"
+      },
+      "choices": [
+        "quota_window",
+        "quota_credit",
+        "rate_limit_transient",
+        "overload",
+        "auth",
+        "context_window",
+        "agent_failure",
+        "provider_other"
+      ]
+    }
+  },
+  "rows": {
+    "classify": [
+      {
+        "ruleId": "Q-01-quota_window",
+        "when": {
+          "op": "equal",
+          "signal": "structuredClass",
+          "value": "quota_window"
+        },
+        "choice": "quota_window",
+        "retryable": true,
+        "confidence": "structured"
+      },
+      {
+        "ruleId": "Q-01-quota_credit",
+        "when": {
+          "op": "equal",
+          "signal": "structuredClass",
+          "value": "quota_credit"
+        },
+        "choice": "quota_credit",
+        "retryable": false,
+        "confidence": "structured"
+      },
+      {
+        "ruleId": "Q-01-rate_limit_transient",
+        "when": {
+          "op": "equal",
+          "signal": "structuredClass",
+          "value": "rate_limit_transient"
+        },
+        "choice": "rate_limit_transient",
+        "retryable": true,
+        "confidence": "structured"
+      },
+      {
+        "ruleId": "Q-01-overload",
+        "when": {
+          "op": "equal",
+          "signal": "structuredClass",
+          "value": "overload"
+        },
+        "choice": "overload",
+        "retryable": true,
+        "confidence": "structured"
+      },
+      {
+        "ruleId": "Q-01-auth",
+        "when": {
+          "op": "equal",
+          "signal": "structuredClass",
+          "value": "auth"
+        },
+        "choice": "auth",
+        "retryable": false,
+        "confidence": "structured"
+      },
+      {
+        "ruleId": "Q-01-context_window",
+        "when": {
+          "op": "equal",
+          "signal": "structuredClass",
+          "value": "context_window"
+        },
+        "choice": "context_window",
+        "retryable": false,
+        "confidence": "structured"
+      },
+      {
+        "ruleId": "Q-01-agent_failure",
+        "when": {
+          "op": "equal",
+          "signal": "structuredClass",
+          "value": "agent_failure"
+        },
+        "choice": "agent_failure",
+        "retryable": true,
+        "confidence": "structured"
+      },
+      {
+        "ruleId": "Q-01-provider_other",
+        "when": {
+          "op": "equal",
+          "signal": "structuredClass",
+          "value": "provider_other"
+        },
+        "choice": "provider_other",
+        "retryable": true,
+        "confidence": "structured"
+      },
+      {
+        "ruleId": "Q-02",
+        "when": {
+          "op": "member of",
+          "signal": "httpStatus",
+          "value": [
+            402
+          ]
+        },
+        "choice": "quota_credit",
+        "retryable": false,
+        "confidence": "status"
+      },
+      {
+        "ruleId": "Q-03",
+        "when": {
+          "op": "member of",
+          "signal": "httpStatus",
+          "value": [
+            401,
+            403
+          ]
+        },
+        "choice": "auth",
+        "retryable": false,
+        "confidence": "status"
+      },
+      {
+        "ruleId": "Q-04",
+        "when": {
+          "op": "member of",
+          "signal": "httpStatus",
+          "value": [
+            529,
+            503
+          ]
+        },
+        "choice": "overload",
+        "retryable": true,
+        "confidence": "status"
+      },
+      {
+        "ruleId": "Q-05",
+        "when": {
+          "op": "equal",
+          "signal": "httpStatus",
+          "value": 429
+        },
+        "choice": "rate_limit_transient",
+        "retryable": true,
+        "confidence": "status"
+      },
+      {
+        "ruleId": "Q-06",
+        "when": {
+          "op": "equal",
+          "signal": "textGroup",
+          "value": "window"
+        },
+        "choice": "quota_window",
+        "retryable": true,
+        "confidence": "text"
+      },
+      {
+        "ruleId": "Q-07",
+        "when": {
+          "op": "equal",
+          "signal": "textGroup",
+          "value": "credit"
+        },
+        "choice": "quota_credit",
+        "retryable": false,
+        "confidence": "text"
+      },
+      {
+        "ruleId": "Q-08",
+        "when": {
+          "op": "equal",
+          "signal": "textGroup",
+          "value": "auth"
+        },
+        "choice": "auth",
+        "retryable": false,
+        "confidence": "text"
+      },
+      {
+        "ruleId": "Q-09",
+        "when": {
+          "op": "equal",
+          "signal": "textGroup",
+          "value": "overload"
+        },
+        "choice": "overload",
+        "retryable": true,
+        "confidence": "text"
+      },
+      {
+        "ruleId": "Q-10",
+        "when": {
+          "op": "equal",
+          "signal": "textGroup",
+          "value": "context"
+        },
+        "choice": "context_window",
+        "retryable": false,
+        "confidence": "text"
+      },
+      {
+        "ruleId": "Q-11",
+        "when": {
+          "op": "equal",
+          "signal": "stalled",
+          "value": true
+        },
+        "choice": "quota_window",
+        "retryable": true,
+        "confidence": "stall"
+      },
+      {
+        "ruleId": "Q-99",
+        "default": true,
+        "choice": "provider_other",
+        "retryable": true,
+        "confidence": "text"
+      }
+    ]
+  }
+}

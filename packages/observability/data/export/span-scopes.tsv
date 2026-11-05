@@ -1,0 +1,17 @@
+scope	opens	closes	span_name_new	span_name_as_is	parent_scope	error_closers
+run	run.started	run.ended	specstride.run	run <feature|task|run_id>	pipeline|stage|none	run.ended with a stop reason; as-is run_stop without iter
+phase	phase.started	phase.ended	specstride.phase	phase <n>: <title>|phase <n>	run	none
+attempt	attempt.started	attempt.ended	specstride.attempt	attempt p<phase>#<attempt>	phase	attempt.ended with a rejection; as-is reject
+pass	pass.started	pass.ended	specstride.pass	iter <iter>	attempt	pass.ended with error or killed, not quota pause; as-is iter_error
+verification	verification.started	verification.ended	specstride.verification	verification p<phase>	attempt	verification.ended failed; as-is verification_failed
+critic	critic.started	critic.call|verdict.recorded	specstride.critic.call	critic p<phase>#<attempt>	attempt	verdict not APPROVED (case-insensitive)
+yield	yield.started (as-is form: yield.waiting, shipped as yield_wait, as the baseline)	yield.ended	specstride.yield	yield	pass	yield.ended timeout; as-is yield_timeout
+long_job	job.started	job.ended	specstride.job	long_job	pass	none
+check	check.started	check.ended	specstride.check	-	pass	check.ended failed
+pause	run.paused	run.resumed	specstride.pause	-	run	never
+blocked	blocked	unblocked	specstride.blocked	-	run	never
+stage	stage.started	stage.ended	specstride.stage	-	pipeline	stage.ended failed
+pipeline	pipeline.started	pipeline.ended	specstride.pipeline	-	none	pipeline.ended failed
+diagnosis	recovery.diagnosis_started	recovery.diagnosis_done|recovery.diagnosis_failed	specstride.recovery.diagnosis	-	phase	recovery.diagnosis_failed
+group	parallel.group.started	parallel.group.ended	specstride.parallel.group	-	attempt	parallel.group.ended failed
+worker	parallel.worker.started	parallel.worker.ended	specstride.parallel.worker	-	group	parallel.worker.ended killed or refused

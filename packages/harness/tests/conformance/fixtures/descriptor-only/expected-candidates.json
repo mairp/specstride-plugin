@@ -1,0 +1,150 @@
+{
+  "schema": "specstride.expected-candidates/1",
+  "fixture": "descriptor-only",
+  "note": "The expected list of candidates discovery returns on this fixture (T002, F146-SC-001). Every value carries the provenance of the source it came from, or is null with the reason. Both candidates are unverified: no record specstride.harness-verify/1 exists on this fixture.",
+  "candidates": [
+    {
+      "id": "example-cli",
+      "expected": {
+        "state": {
+          "value": "detected",
+          "provenance": "the constant of the four states for a candidate that a source found and that no consumer declaration and no record specstride.harness-verify/1 covers (F146-FR-017)"
+        },
+        "verified": {
+          "value": false,
+          "provenance": "no record specstride.harness-verify/1 exists on the fixture, so nothing promotes the candidate to locally-verified (F146-FR-018)"
+        },
+        "sources": {
+          "value": ["binary"],
+          "provenance": "the search-path look-up of detect.executable `example-cli` of the harness descriptor read as package:harness:example-cli"
+        },
+        "origin": {
+          "value": "bundled",
+          "provenance": "the harness descriptor ships with the package and is read as the logical name package:harness:example-cli (annex B B.5)"
+        },
+        "kind": {
+          "value": "cli",
+          "provenance": "the field kind of the harness descriptor package:harness:example-cli"
+        },
+        "version": {
+          "value": null,
+          "provenance": null,
+          "nullReason": "the passive pass runs no process; without the probe pass the step version-help has not run"
+        },
+        "descriptorHash": {
+          "value": "digest-of-descriptor",
+          "provenance": "the canonical record hash of the harness descriptor package:harness:example-cli, by the hasher of feature 100, annex X X.5"
+        },
+        "resolvedPath": {
+          "value": "absolute-path-of-example-cli",
+          "provenance": "the search-path look-up that the source binary performed for detect.executable of the descriptor (F100-FR-080)"
+        },
+        "endpoint": {
+          "value": null,
+          "provenance": null,
+          "nullReason": "a command-line harness has no endpoint"
+        },
+        "provider": {
+          "value": null,
+          "provenance": null,
+          "nullReason": "no endpoint, so no host to name as provider"
+        },
+        "capabilities": {
+          "value": null,
+          "provenance": null,
+          "nullReason": "no probe has run on this fixture"
+        },
+        "window": {
+          "value": null,
+          "provenance": null,
+          "nullReason": "none of the sources of the context window has a value (F146-FR-016)"
+        },
+        "credential": {
+          "value": "unprobed",
+          "provenance": "the step credential-presence has not run in the passive pass (F146-FR-004)"
+        },
+        "termsRef": {
+          "value": null,
+          "provenance": null,
+          "nullReason": "the harness descriptor package:harness:example-cli states no provider.termsRef; discovery ranks and picks nothing (annex C C.2, ruling P14)"
+        },
+        "informational": {
+          "value": false,
+          "provenance": "the source binary does not produce informational entries; only the source host does (F146-FR-005)"
+        },
+        "findings": { "value": [], "provenance": "no probe has run, so no probe has failed" }
+      }
+    },
+    {
+      "id": "example-openai-chat",
+      "expected": {
+        "state": {
+          "value": "detected",
+          "provenance": "the constant of the four states for a candidate that a source found and that no consumer declaration and no record specstride.harness-verify/1 covers (F146-FR-017)"
+        },
+        "verified": {
+          "value": false,
+          "provenance": "no record specstride.harness-verify/1 exists on the fixture, so nothing promotes the candidate to locally-verified (F146-FR-018)"
+        },
+        "sources": {
+          "value": ["endpoint"],
+          "provenance": "the presence of the variable EXAMPLE_ENDPOINT_URL, named by detect.variables of the harness descriptor read as package:harness:example-openai-chat"
+        },
+        "origin": {
+          "value": "bundled",
+          "provenance": "the harness descriptor ships with the package and is read as the logical name package:harness:example-openai-chat (annex B B.5)"
+        },
+        "kind": {
+          "value": "openai-chat",
+          "provenance": "the field kind of the harness descriptor package:harness:example-openai-chat"
+        },
+        "version": {
+          "value": null,
+          "provenance": null,
+          "nullReason": "an endpoint states no version; no step of the ladder reads one"
+        },
+        "descriptorHash": {
+          "value": "digest-of-descriptor",
+          "provenance": "the canonical record hash of the harness descriptor package:harness:example-openai-chat, by the hasher of feature 100, annex X X.5"
+        },
+        "resolvedPath": {
+          "value": null,
+          "provenance": null,
+          "nullReason": "an endpoint is not an executable on the search path (F100-FR-080)"
+        },
+        "endpoint": {
+          "value": { "scheme": "http", "host": "127.0.0.1", "path": "/v1" },
+          "provenance": "the variable EXAMPLE_ENDPOINT_URL of the environment; the user part and the query are removed (F146-FR-006)"
+        },
+        "provider": {
+          "value": "127.0.0.1",
+          "provenance": "the host of the endpoint (feature 100, annex X X.9, threat T-14)"
+        },
+        "capabilities": {
+          "value": null,
+          "provenance": null,
+          "nullReason": "no probe has run on this fixture"
+        },
+        "window": {
+          "value": null,
+          "provenance": null,
+          "nullReason": "the metadata pass has not run on this fixture, so the model list carries no window yet (F146-FR-016)"
+        },
+        "credential": {
+          "value": "unprobed",
+          "provenance": "the step credential-presence has not run in the passive pass (F146-FR-004)"
+        },
+        "termsRef": {
+          "value": null,
+          "provenance": null,
+          "nullReason": "the harness descriptor package:harness:example-openai-chat states provider.termsRef as null; discovery ranks and picks nothing (annex C C.2, ruling P14)"
+        },
+        "informational": {
+          "value": false,
+          "provenance": "the source endpoint does not produce informational entries; only the source host does (F146-FR-005)"
+        },
+        "findings": { "value": [], "provenance": "no probe has run, so no probe has failed" }
+      }
+    }
+  ]
+}

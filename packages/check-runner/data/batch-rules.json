@@ -1,0 +1,19 @@
+{
+  "schema": "specstride.feature-batch-rules/1",
+  "parallelism": {"key": "verification.parallelism", "default": 1, "ceiling": 4, "underParity": 1},
+  "order": "manifest order, greedy; a batch closes when the next command is refused or the batch holds as many commands as the parallelism",
+  "scopeComparison": "normalised path prefixes with a path boundary; ignored paths included",
+  "rules": [
+    {"id": "B1", "refuse": "the command declares neither reads and writes nor sideEffects none with reads tree", "reason": "undeclared"},
+    {"id": "B2", "refuse": "the command reads a prefix that a command of the batch writes", "reason": "reads-written"},
+    {"id": "B3", "refuse": "the command writes a prefix that a command of the batch reads or writes", "reason": "writes-overlap"},
+    {"id": "B4", "refuse": "a command of the batch has declared writes and the reads of this later command are not declared disjoint from them", "reason": "follows-writer"},
+    {"id": "B5", "refuse": "the command names an exclusive resource, or shares a cache marked exclusive by a toolchain profile, with a command of the batch", "reason": "exclusive"},
+    {"id": "B6", "refuse": "the command has steps and the step runner is on", "reason": "steps"},
+    {"id": "B7", "refuse": "the parallelism of the run was set to 1 after a taint", "reason": "demoted"}
+  ],
+  "admit": {"reason": "disjoint"},
+  "declarations": "taken from the frozen check manifest only; never from repository text; an entry without a declaration is undeclared (CQ-190)",
+  "events": {"admission": "check.admission", "lowering": "check.parallelism_lowered"},
+  "afterBatch": ["one fingerprint pair brackets the batch", "a failed command of a batch of more than one is executed once more alone", "results ordered by manifest position"]
+}

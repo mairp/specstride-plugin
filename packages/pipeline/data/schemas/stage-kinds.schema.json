@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:internal:123:stage-kinds/1",
+  "title": "The Wave 1 members of the two open registries of EP-19 (feature 123, §R.3)",
+  "type": "object",
+  "required": ["schema", "stageKinds", "preconditionChecks"],
+  "properties": {
+    "schema": {"const": "specstride.stage-kinds-123/1"},
+    "stageKinds": {
+      "type": "array",
+      "minItems": 5,
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "preconditionChecks": {
+      "type": "array",
+      "minItems": 6,
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false
+}

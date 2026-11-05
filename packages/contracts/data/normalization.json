@@ -1,0 +1,407 @@
+{
+  "schema": "specstride.oracle-normalization/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex X, §X.8",
+  "rules": [
+    {
+      "Id": "N-01",
+      "Subject": "Absolute paths",
+      "Rule": "The working directory, the root of the fixture, the root of the reference, the root of the port, the home and the temporary directory become named placeholders; the longest prefix first; real paths are resolved first"
+    },
+    {
+      "Id": "N-02",
+      "Subject": "State layout",
+      "Rule": "Both sides map physical paths to logical names through the layout tables. It applies to captured trees and to the text of messages that name state"
+    },
+    {
+      "Id": "N-03",
+      "Subject": "Run id",
+      "Rule": "The as-is run id becomes a numbered placeholder, numbered by first appearance"
+    },
+    {
+      "Id": "N-04",
+      "Subject": "Timestamps",
+      "Rule": "Every time field, log header and file stamp of a transcript becomes a placeholder. Order is kept: values do not decrease where the reference's do not"
+    },
+    {
+      "Id": "N-05",
+      "Subject": "Durations",
+      "Rule": "Every duration becomes a placeholder, unless the fixture declares the value as the behaviour under test"
+    },
+    {
+      "Id": "N-06",
+      "Subject": "Nonce",
+      "Rule": "The 16 hexadecimal characters of each critic call become a numbered placeholder. First the comparator asserts the form and that no two calls share a nonce"
+    },
+    {
+      "Id": "N-07",
+      "Subject": "Process ids",
+      "Rule": "Process ids, process group ids and lock owners become numbered placeholders"
+    },
+    {
+      "Id": "N-08",
+      "Subject": "Temporary names",
+      "Rule": "Generated suffixes and names of temporary files become a placeholder"
+    },
+    {
+      "Id": "N-09",
+      "Subject": "Hash, same class",
+      "Rule": "Hashes over fixture content must be equal and are not normalized"
+    },
+    {
+      "Id": "N-10",
+      "Subject": "Hash, path class",
+      "Rule": "A hash whose input holds an absolute path is computed again from the side's own input, asserted, replaced by a placeholder, and the normalized inputs are compared"
+    },
+    {
+      "Id": "N-11",
+      "Subject": "Hash, implementation class",
+      "Rule": "A hash over bytes of the implementation: self-consistency is asserted, the value becomes a placeholder, the content is not compared"
+    },
+    {
+      "Id": "N-12",
+      "Subject": "Event vocabulary",
+      "Rule": "The compatibility projection of the port is compared, not its primary stream"
+    },
+    {
+      "Id": "N-13",
+      "Subject": "Event typing and duplicate keys",
+      "Rule": "Lines are read as ordered pairs of key and value with types kept, so that text against number and duplicate keys are compared as they are"
+    },
+    {
+      "Id": "N-14",
+      "Subject": "Event order",
+      "Rule": "Order is compared inside each class of writer. Interleaving between classes is not compared"
+    },
+    {
+      "Id": "N-15",
+      "Subject": "Implementation names in text",
+      "Rule": "A prefix that names an implementation file maps to a logical component name through the component-name table; the message after the prefix must be equal"
+    },
+    {
+      "Id": "N-16",
+      "Subject": "Generated-by fields",
+      "Rule": "Fields that name the generating tool compare through the component-name table"
+    },
+    {
+      "Id": "N-17",
+      "Subject": "Body of the launcher",
+      "Rule": "Compared as a logical record (marker present, hash valid, reference to the launch bundle resolves, arguments passed through), not as text"
+    },
+    {
+      "Id": "N-18",
+      "Subject": "Messages of the old interpreters",
+      "Rule": "Usage text and error text of the old language compare by exit code and by the class of the first line only"
+    },
+    {
+      "Id": "N-19",
+      "Subject": "Literals of the old language",
+      "Rule": "Compared as written. No rule hides them"
+    },
+    {
+      "Id": "N-20",
+      "Subject": "Output labels",
+      "Rule": "The supervisor lines and the digest are compared as written, in compatibility output"
+    },
+    {
+      "Id": "N-21",
+      "Subject": "Colour",
+      "Rule": "Captures run with colour off; a fixture that tests colour compares the escape sequences as written"
+    },
+    {
+      "Id": "N-22",
+      "Subject": "Objects of the repository",
+      "Rule": "Hashes of commits become numbered placeholders; message, tree content and the absence of a push are compared"
+    },
+    {
+      "Id": "N-23",
+      "Subject": "Counter files and transcripts of stub agents",
+      "Rule": "Counter files are left out of the tree; transcripts are compared after N-01 to N-08"
+    },
+    {
+      "Id": "N-24",
+      "Subject": "Prompt text",
+      "Rule": "Prompts are compared in full after N-01 to N-08"
+    },
+    {
+      "Id": "N-25",
+      "Subject": "Caches of the languages",
+      "Rule": "Left out; their presence inside the working directory is a failure"
+    },
+    {
+      "Id": "N-26",
+      "Subject": "Telemetry payloads",
+      "Rule": "Compared at the stub sink after N-03, N-04 and N-07"
+    },
+    {
+      "Id": "N-27",
+      "Subject": "Sorting that depends on the locale",
+      "Rule": "Both sides run with the same locale; the comparator does not sort for them"
+    },
+    {
+      "Id": "N-28",
+      "Subject": "Legacy state and names",
+      "Rule": "The behaviour of the legacy command names, legacy variables and the pre-v2 layout is not compared"
+    },
+    {
+      "Id": "N-29",
+      "Subject": "Field `schema` of a reverse-run source inventory",
+      "Rule": "The key `schema` is removed from the source inventory of a reverse run before the inventory is compared (DV-116: the as-is inventory carries `schema_version` 1 and no field `schema`)"
+    }
+  ],
+  "environmentAliases": [
+    {
+      "As-is variable": "`SPECSTRIDE_PROPOSER`, `SPECSTRIDE_CRITIC`",
+      "Key": "`roles.proposer.harness`, `roles.critic.harness`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_<HARNESS>_PROPOSER_MODEL`, `SPECSTRIDE_<HARNESS>_CRITIC_MODEL`, and the as-is model variable of a harness that has one name for both roles",
+      "Key": "`roles.<role>.model` for the named harness"
+    },
+    {
+      "As-is variable": "The as-is variable for the executable of a harness, and for its profile",
+      "Key": "`harnesses.<id>.bin`, `harnesses.<id>.profile`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_<HARNESS>_OVERLAY`",
+      "Key": "`harnesses.<id>.overlay`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_PROPOSER_TIMEOUT`, `SPECSTRIDE_PROPOSER_TIMEOUT_PHASE_<N>`",
+      "Key": "`roles.proposer.timeoutSec`, `phases.<N>.proposer.timeoutSec`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_DIAGNOSTICIAN`, `SPECSTRIDE_ACCELERATOR`, `SPECSTRIDE_ACCELERATOR_BACKEND`",
+      "Key": "`roles.diagnostician.*`, `roles.accelerator.*`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_MAX_REJECTS`, `SPECSTRIDE_MAX_ITER`, `SPECSTRIDE_MAX_WALL_MIN`, `SPECSTRIDE_OSC_MAX`",
+      "Key": "`loop.maxRejects`, `loop.maxIter`, `loop.maxWallMin`, `loop.oscMax`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_PROMPT_MAX_BYTES`, `SPECSTRIDE_GIT_COMMITS`",
+      "Key": "`loop.promptMaxBytes`, `loop.gitCommits`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_SPEC_FORMAT`, `SPECSTRIDE_FEATURE`",
+      "Key": "`spec.format`, `spec.feature`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_VERIFICATION`, `SPECSTRIDE_TEST_PLAN`, `SPECSTRIDE_VERIFICATION_COMMANDS`, `SPECSTRIDE_GENERATE_TESTS`",
+      "Key": "`verification.mode`, `verification.testPlan`, `verification.commands`, `verification.generateTests`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_VERIFY_TAIL_LINES`, `SPECSTRIDE_VERIFY_TAIL_ERR_LINES`",
+      "Key": "`verification.summary.tailLines`, `verification.summary.tailErrLines`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_VERIFICATION_PLAN`",
+      "Key": "No key: the as-is default of the plan argument of a critic call. The engine hands the critic call the verification plan of the run by logical name (`run:<runId>:verification:plan`); under the `parity` profile a set variable names the plan as at the baseline, and an empty value means no plan (F105-FR-042)"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_TELEMETRY_ENABLED`, `SPECSTRIDE_LOKI_URL`, `SPECSTRIDE_OTEL_ENABLED`, `SPECSTRIDE_OTEL_URL`",
+      "Key": "`telemetry.enabled`, `telemetry.loki.url`, `telemetry.otel.enabled`, `telemetry.otel.url`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_LIVE`, `SPECSTRIDE_LIVE_DETAIL`, `SPECSTRIDE_VERBOSE`",
+      "Key": "`output.live`, `output.liveDetail`, `output.verbose`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_LEARNING`, `SPECSTRIDE_LEARNING_THROUGH`",
+      "Key": "`learning.mode`, `learning.through`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_STATE_DIR`",
+      "Key": "`state.dir`, the control root"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_REVERSE_*`",
+      "Key": "`reverse.*`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_CONTEXT_BUDGET`",
+      "Key": "`spec.contextBudget` and `reverse.contextBudget`: one variable feeds both keys"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_GROUNDING_MAX_FILES`, `SPECSTRIDE_ANCHOR_MAX_BYTES_CEIL`",
+      "Key": "`roles.critic.groundingMaxFiles`, `roles.critic.anchorMaxBytes`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_CRITIC_TIMEOUT`, `SPECSTRIDE_CRITIC_MALFORMED_LIMIT`, `SPECSTRIDE_CRITIC_GROUNDING`, `SPECSTRIDE_CRITIC_CONTEXT_TOKENS`",
+      "Key": "`roles.critic.timeoutSec`, `roles.critic.malformedLimit`, `roles.critic.grounding`, `roles.critic.contextTokens`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_PROPOSER_IDLE_TIMEOUT`, `SPECSTRIDE_PROPOSER_PROGRESS_TIMEOUT`, `SPECSTRIDE_PROPOSER_REPEAT_LIMIT`, `SPECSTRIDE_PROPOSER_REPEAT_IGNORE`, `SPECSTRIDE_PROPOSER_PROGRESS_PATHS`, `SPECSTRIDE_PROPOSER_MAX_ERRORS`, `SPECSTRIDE_PROPOSER_MAX_CAPS`, `SPECSTRIDE_PROPOSER_MAX_NOPROGRESS`",
+      "Key": "`roles.proposer.idleTimeoutSec`, `.progressTimeoutSec`, `.repeatLimit`, `.repeatIgnore`, `.progressPaths`, `.maxErrors`, `.maxCaps`, `.maxNoProgress`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_WATCHDOG_TICK`, `SPECSTRIDE_SHORT_PASS_SEC`, `SPECSTRIDE_SHORT_PASS_NUDGE_AFTER`",
+      "Key": "`loop.watchdogTickSec`, `loop.shortPass.sec`, `loop.shortPass.nudgeAfter`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_YIELD_POLL`, `SPECSTRIDE_YIELD_MAX_PER_ATTEMPT`, `SPECSTRIDE_YIELD_COUNTS_AS_ITER`, `SPECSTRIDE_YIELD_ALLOW_COMMAND`, and the other `SPECSTRIDE_YIELD_*`",
+      "Key": "`loop.yield.pollSec`, `loop.yield.maxPerAttempt`, `loop.yield.countsAsIter`, `loop.yield.allowCommand`; each of the others the key of the same meaning under `loop.yield.*`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_LONG_JOB_PHASE`, `SPECSTRIDE_LONG_JOB_CMD`",
+      "Key": "`verification.longJob.phase`, `verification.longJob.cmd`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_PROMPT_PROTECTED_BLOCKS`, `SPECSTRIDE_TICK_TASKS`",
+      "Key": "`loop.promptProtectedBlocks`, `loop.tickTasks`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_COLOR`, `SPECSTRIDE_MOTION`, `SPECSTRIDE_BANNER`, `SPECSTRIDE_LIVE_RAIL`, `SPECSTRIDE_BANNER_BG`, `SPECSTRIDE_ASCII`",
+      "Key": "`output.color`, `output.motion`, `output.banner`, `output.liveRail`, `output.bannerBg`, `output.ascii`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_AGENT_STREAM`, `SPECSTRIDE_AGENT_TAP`",
+      "Key": "`stream.tap`, `stream.tapExecutable`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_DSH_PLUGIN_ALLOWLIST`, `SPECSTRIDE_DSH_PLUGIN_TIMEOUT`",
+      "Key": "`harnesses.dsh.pluginAllowlist`, `harnesses.dsh.pluginTimeoutSec`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_DSH_REASONING_EFFORT`, and the as-is variable of the reasoning effort of the critic",
+      "Key": "`roles.proposer.effort`, `roles.critic.effort`"
+    },
+    {
+      "As-is variable": "The as-is variables of one harness for its home, its provider and the provider of its critic",
+      "Key": "`harnesses.dsh.home`, `harnesses.dsh.provider`, `roles.critic.provider`"
+    },
+    {
+      "As-is variable": "`OPENAI_BASE_URL`, `OPENAI_API_KEY`",
+      "Key": "`harnesses.codex.endpoint.base`, and the secret reference `harnesses.codex.auth.credential`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_CLAUDE_CRITIC_BASE_URL`, `SPECSTRIDE_CLAUDE_CRITIC_API_KEY`, `SPECSTRIDE_CLAUDE_CRITIC_MODEL`",
+      "Key": "`harnesses.claude.endpoint.base`, the secret reference `harnesses.claude.auth.credential`, `roles.critic.model` for this harness"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_PROPOSER_SKILLS`, `SPECSTRIDE_BACKEND_LABEL`",
+      "Key": "`harnesses.claude.proposerSkills`, `harnesses.claude.label`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_STDIN_FILE`",
+      "Key": "No key: the as-is hand-over of the prompt as a file, which the harness adapter performs"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_EVENTS`, `SPECSTRIDE_RUN_ID`, `SPECSTRIDE_TASK`, `SPECSTRIDE_TRACE_ID`",
+      "Key": "No key: the event context of the run (annex C §C.10), handed under these names to every process the runtime starts under the `parity` profile (F144-FR-006, F126-FR-011, F128-FR-017)"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_SHIP`",
+      "Key": "No key: under the `parity` profile the name is handed to every process the runtime starts, with an empty value; nothing reads it, because no shipper program exists (DV-065) and delivery is the exporter of feature 128"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_PRIME_BIN`, `SPECSTRIDE_PRIME_AGENT_BIN`",
+      "Key": "`harnesses.prime.launcher`, `harnesses.prime.bin`"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_PRIME_FLEET_BIN`",
+      "Key": "`harnesses.prime.launcher`, read before `SPECSTRIDE_PRIME_BIN`, which is read only when the first is unset or empty; the one pair of names that reaches one key without refusing the launch when the two differ (feature 110, §K.8; assumption: CQ-196)"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_OTEL_STATE_DIR`",
+      "Key": "Accepted and without effect; a message at launch says so (CQ-120)"
+    },
+    {
+      "As-is variable": "`SPECSTRIDE_OTEL_TRACES`, `RALPH_OTEL_URL`, `RALPH_OTEL_TIMEOUT`, `RALPH_OTEL_MAX_BATCH_BYTES`, `RALPH_LOKI_URL`, `RALPH_LOKI_TIMEOUT`, `RALPH_LOKI_MAX_BATCH_BYTES`",
+      "Key": "`telemetry.otel.traces`, `telemetry.otel.url`, `telemetry.otel.timeoutMs`, `telemetry.otel.maxBatchBytes`, `telemetry.loki.url`, `telemetry.loki.timeoutMs`, `telemetry.loki.maxBatchBytes`. The as-is timeout variables are in seconds; the keys are in milliseconds, and the alias multiplies by 1000"
+    },
+    {
+      "As-is variable": "The `WIGGUM_*` names",
+      "Key": "Not carried"
+    }
+  ],
+  "componentNames": [
+    {
+      "As-is implementation file": "The engine script of the Specstride baseline",
+      "Logical component name": "`engine`"
+    },
+    {
+      "As-is implementation file": "The pass-loop script",
+      "Logical component name": "`pass-loop`"
+    },
+    {
+      "As-is implementation file": "The front-door script",
+      "Logical component name": "`front-door`"
+    },
+    {
+      "As-is implementation file": "The critic module",
+      "Logical component name": "`critic`"
+    },
+    {
+      "As-is implementation file": "The verification-plan module",
+      "Logical component name": "`verification`"
+    },
+    {
+      "As-is implementation file": "The spec module",
+      "Logical component name": "`spec`"
+    },
+    {
+      "As-is implementation file": "The learning module",
+      "Logical component name": "`learning`"
+    },
+    {
+      "As-is implementation file": "The reverse module and the reverse-inventory module",
+      "Logical component name": "`reverse`, `reverse-inventory`"
+    },
+    {
+      "As-is implementation file": "The derivation tool, the validation tool and the rendering tool of mixture-of-loops",
+      "Logical component name": "`contract-derive`, `contract-validate`, `launcher-render`"
+    },
+    {
+      "As-is implementation file": "The pipeline runtime of mixture-of-loops",
+      "Logical component name": "`pipeline-runtime`"
+    },
+    {
+      "As-is implementation file": "The supervisor of mixture-of-loops",
+      "Logical component name": "`supervisor`"
+    },
+    {
+      "As-is implementation file": "The stream tap",
+      "Logical component name": "`stream-tap`"
+    },
+    {
+      "As-is implementation file": "The telemetry shipper for Loki",
+      "Logical component name": "`telemetry-loki`"
+    },
+    {
+      "As-is implementation file": "The telemetry shipper for OTLP",
+      "Logical component name": "`telemetry-otlp`"
+    },
+    {
+      "As-is implementation file": "The overlay tool",
+      "Logical component name": "`overlay`"
+    },
+    {
+      "As-is implementation file": "The plugin request processor of one harness",
+      "Logical component name": "`plugin-requests`"
+    }
+  ],
+  "modeMap": {
+    "generate": "dry-run",
+    "run": "run",
+    "auto": "run"
+  },
+  "resumeExitCodeMap": [
+    {
+      "asIs": 1,
+      "cause": "lock held",
+      "new": 5
+    },
+    {
+      "asIs": 1,
+      "cause": "nothing to resume",
+      "new": 3
+    }
+  ],
+  "launchContractKeyMap": {
+    "configuration.auto": "configuration.relaunch",
+    "schema_version": "schema"
+  },
+  "layoutOldSide": "data/layout-old-side.json",
+  "layoutNewSide": "data/layout.json"
+}

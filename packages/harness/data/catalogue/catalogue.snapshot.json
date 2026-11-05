@@ -1,0 +1,22 @@
+{
+  "schema": "specstride.catalogue-snapshot/1",
+  "date": "2026-09-30",
+  "models": [
+    {
+      "model": "example-model",
+      "contextWindowTokens": 200000,
+      "outputCapTokens": 8192,
+      "usdPerMillionInput": 0,
+      "usdPerMillionOutput": 0,
+      "note": "Example bundled data of the product. Data only: no host, no account and no name specific to one machine (F109-FR-023). Read offline as `package:catalogue`; a newer copy the consumer asked for is read as `user:catalogue`. A window taken from here is reduced by the safety margin of row 89 before it is used (F146-FR-016)."
+    },
+    {
+      "model": "example-small-model",
+      "contextWindowTokens": 32000,
+      "outputCapTokens": 4096,
+      "usdPerMillionInput": 0,
+      "usdPerMillionOutput": 0,
+      "note": "Second example row, so a test can tell one row from another."
+    }
+  ]
+}

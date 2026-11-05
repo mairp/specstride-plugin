@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride-pass-yield/v1",
+  "title": "yield-artifact",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride-pass-yield/v1",
+  "x-annex": "annex D, §D.6",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Why the pass yields",
+      "x-type-in-words": "Text, not empty",
+      "x-required": "Yes"
+    },
+    "job": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "`launch` or `adopt`",
+          "x-type-in-words": "Member of a closed set",
+          "x-required": "Yes",
+          "enum": [
+            "launch",
+            "adopt"
+          ]
+        },
+        "argv": {
+          "type": "array",
+          "description": "The command the runtime launches",
+          "x-type-in-words": "List of text, not empty",
+          "x-required": "With `launch`"
+        },
+        "pid": {
+          "type": "integer",
+          "description": "The process the runtime adopts",
+          "x-type-in-words": "Whole number above zero",
+          "x-required": "With `adopt`"
+        },
+        "cwd": {
+          "type": "string",
+          "description": "Working directory and log of the job",
+          "x-type-in-words": "Text",
+          "x-required": "No"
+        },
+        "log": {
+          "type": "string",
+          "description": "Working directory and log of the job",
+          "x-type-in-words": "Text",
+          "x-required": "No"
+        }
+      },
+      "required": [
+        "mode"
+      ]
+    },
+    "resume_when": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "`pid`, `exit_code_file`, `file_exists`, `file_stable`, `grep`, `command`, `first_failure`",
+          "x-type-in-words": "Member of a closed set",
+          "x-required": "Yes",
+          "enum": [
+            "pid",
+            "exit_code_file",
+            "file_exists",
+            "file_stable",
+            "grep",
+            "command",
+            "first_failure"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "description": "What the predicate reads",
+          "x-type-in-words": "Text",
+          "x-required": "Where the kind needs them"
+        },
+        "pattern": {
+          "type": "string",
+          "description": "What the predicate reads",
+          "x-type-in-words": "Text",
+          "x-required": "Where the kind needs them"
+        },
+        "stable_sec": {
+          "type": "integer",
+          "description": "For `file_stable`: how long the file must stay unchanged",
+          "x-type-in-words": "Whole number above zero",
+          "x-required": "With `file_stable`"
+        },
+        "pid": {
+          "type": "integer",
+          "description": "For `pid`: the process whose end is awaited",
+          "x-type-in-words": "Whole number above zero",
+          "x-required": "With `pid`"
+        },
+        "argv": {
+          "type": "array",
+          "description": "For `command`: the fixed argument list of the predicate",
+          "x-type-in-words": "List of text, not empty",
+          "x-required": "With `command`"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "on_first_failure": {
+      "type": "string",
+      "description": "`stop` or `continue-and-notify`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "With `first_failure`",
+      "enum": [
+        "stop",
+        "continue-and-notify"
+      ]
+    },
+    "deadline_sec": {
+      "type": "integer",
+      "description": "Deadline of the wait",
+      "x-type-in-words": "Whole number above zero",
+      "x-required": "Yes"
+    },
+    "on_resume": {
+      "type": "string",
+      "description": "What the next pass is told",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    }
+  },
+  "required": [
+    "contract",
+    "reason",
+    "deadline_sec"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

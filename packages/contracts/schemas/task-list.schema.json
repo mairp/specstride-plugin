@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.task-list/1",
+  "title": "task-list",
+  "description": "The content of the record `run:<runId>:task-list` (annex B, §B.5): the task list as read at launch, per phase its tasks (id, markers, text) in order and the canonical record hash of the phase. Delivered by feature 104 through specs/104-spec-input/contracts/deliver.json; the id is feature 100's, annex B §B.20.",
+  "x-schema-id": "specstride.task-list/1",
+  "x-annex": "annex B, §B.20",
+  "x-owner": "104",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "phases": {
+      "type": "array",
+      "description": "The reading of every phase of the run, in document order",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes",
+      "items": {
+        "type": "object",
+        "properties": {
+          "phase": {
+            "type": "integer",
+            "description": "The phase number",
+            "x-type-in-words": "Whole number",
+            "x-required": "Yes"
+          },
+          "tasks": {
+            "type": "array",
+            "description": "The tasks of the phase, in order; ticks and line numbers are not part of a reading",
+            "x-type-in-words": "List of records",
+            "x-required": "Yes",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The task id",
+                  "x-type-in-words": "Text",
+                  "x-required": "Yes"
+                },
+                "markers": {
+                  "type": "array",
+                  "description": "The markers of the task line, in order",
+                  "x-type-in-words": "List of text",
+                  "x-required": "Yes",
+                  "items": { "type": "string" }
+                },
+                "text": {
+                  "type": "string",
+                  "description": "The text of the task",
+                  "x-type-in-words": "Text",
+                  "x-required": "Yes"
+                }
+              },
+              "required": ["id", "markers", "text"],
+              "additionalProperties": true
+            }
+          },
+          "hash": {
+            "type": "string",
+            "description": "The canonical record hash of the phase's reading",
+            "x-type-in-words": "Text",
+            "x-required": "Yes"
+          }
+        },
+        "required": ["phase", "tasks", "hash"],
+        "additionalProperties": true
+      }
+    }
+  },
+  "required": ["schema", "phases"],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

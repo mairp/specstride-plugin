@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.approval-key/1",
+  "title": "approval-key",
+  "description": "The approval key of one feature, written by the runtime where the proposer cannot write. Feature 101 (T002); the field list is the table \"Approval key\" of specs/101-gate-and-verdict/data-model.md, and the specification stands where the two differ.",
+  "x-schema-id": "specstride.approval-key/1",
+  "x-annex": "feature 101, data-model.md, \"Approval key\"",
+  "x-logical-name": "feature:<slug>:approval-key",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "keyId": {
+      "type": "string",
+      "description": "The identity of the key: a hash of the key material",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "When the key was made",
+      "x-type-in-words": "Time",
+      "x-required": "Yes",
+      "format": "date-time"
+    },
+    "feature": {
+      "type": "string",
+      "description": "The feature the key belongs to",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "key": {
+      "type": "string",
+      "description": "The key material. It is never in an event, a log, an export without signature, or an environment (F100-FR-052)",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    }
+  },
+  "required": ["schema", "keyId", "createdAt", "feature", "key"],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

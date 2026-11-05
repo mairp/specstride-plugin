@@ -1,0 +1,4 @@
+# packages/config/src/load
+#
+# This directory of the tree of plan.md is filled by T016, T017, T019, T020, T026, T027 (the ranks, per-phase inheritance, the trust filter, provenance, the aliases, the snapshot classes).
+# It is kept in the tree so that the package layout of plan.md exists as planned.

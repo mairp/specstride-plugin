@@ -1,0 +1,13 @@
+{
+  "requirement": "F122-FR-013",
+  "order": "first matching row",
+  "rows": [
+    {"id": "P1", "when": "no lock exists", "result": "free", "held": false},
+    {"id": "P2", "when": "the provider failed, or the owner record cannot be read or lacks a required field", "result": "unknown", "held": true},
+    {"id": "P3", "when": "host name or pid namespace of the owner record differs from the prober's", "result": "held-foreign", "held": true},
+    {"id": "P4", "when": "boot identity of the owner record equals the present boot and the liveness says the owner lives", "result": "held-live", "held": true},
+    {"id": "P5", "when": "the owner is dead (liveness refused, or the boot identity differs) and an open entry of class owned passes the identity check", "result": "owner-dead-group-alive", "held": true},
+    {"id": "P6", "when": "the owner is dead and no open entry of class owned passes the identity check", "result": "stale-owner-dead", "held": false},
+    {"id": "P7", "when": "anything else", "result": "unknown", "held": true}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "probe": "proposer",
+  "task": "T060",
+  "paid": true,
+  "what": "one proposer pass of `codex exec`, headless, on a login: one pass; store the log",
+  "waits": ["F131-FR-038"],
+  "status": "unverified",
+  "result": "not made",
+  "unverifiedReason": "the probe is paid (one live proposer pass of `codex exec` against the provider, on a login): the owner ruling of 2026-09-30 says this feature never runs and never fakes a paid, live or person-run step; an authorized person runs the scripted procedure in procedure.sh out of band and stores the log here (log.json, harness-version.txt, date.txt). No test waits for the probe (F131-FR-038): every test of this feature runs on the fake binary and the fake endpoint. The hermetic part of the task is done in this feature: the default argument list, the sandbox mode workspace-write with approvals never, the prompt on standard input, the environment allow-list, the process group, the JSONL stream mapping and the usage accounting of the proposer pass are implemented and tested hermetically in packages/adapter-codex/src/arguments.ts, environment.ts, session.ts, mapping.ts and usage.ts against the fake binary of tests/conformance/codex/fake-codex.mjs, and the whole harness port suite runs on the adapter in tests/conformance/codex/suite.test.ts (CT-131-39)",
+  "command": null,
+  "date": null,
+  "harnessVersion": "codex-cli 0.153.4",
+  "harnessVersionSource": "read with `codex --version` (a read-only call, no model) in the phase 1 pass; pin from specs/131-adapter-codex/plan.md",
+  "fixtureFiles": ["procedure.sh", "README.md"],
+  "logFiles": []
+}

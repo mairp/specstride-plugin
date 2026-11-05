@@ -1,0 +1,210 @@
+{
+ "schema": "specstride.table/1",
+ "id": "specstride.router-rules",
+ "version": "1.0.0",
+ "note": "Shipped router rule table of feature 115 (EP-06), as data: translated from specs/115-micro-loop-layer/contracts/router-table.json, whose predicates are given in words; this file is the one the table evaluator of @specstride/kernel loads and every predicate is built from the closed set of nine operators of annex X §X.3 (equal, not equal, less, greater, member of, present, and, or, not). Where this file and the contract in specs/ differ, spec.md stands. Signals the spec gives in prose that the evaluator reads as one value are stated here as boolean signals the caller computes: commandDurationOverLimit (the measured duration exceeds the configured time limit of the command), commandSlowest (the command is the slowest of the set), unresolvedOverCap (unresolvedUnits is not less than the cap), unitCoversPhaseAtFirstUnit (unitTasks equals phaseTasks at the first unit).",
+ "signalSources": "All signals come from the ledger, the check manifest and the read-only view of the phase attempt; none is task prose, output of a check or anything a model wrote (spec.md, 'The shipped router table').",
+ "points": {
+  "tools": {
+   "signals": {
+    "commandFlaky": "boolean",
+    "commandDuration": "number",
+    "commandDurationOverLimit": "boolean",
+    "checkShare": "number",
+    "cycle": "number",
+    "commandSlowest": "boolean"
+   },
+   "choices": ["run", "exclude:flaky", "exclude:slow", "exclude:budget"]
+  },
+  "loop": {
+   "signals": {
+    "integrityKind": "string",
+    "checkError": "string",
+    "cyclesLeft": "number",
+    "unresolvedUnits": "number",
+    "unresolvedOverCap": "boolean",
+    "innerCount": "number",
+    "uncheckedStreak": "number",
+    "phaseTasks": "number",
+    "unitTasks": "number",
+    "unitCoversPhaseAtFirstUnit": "boolean"
+   },
+   "choices": ["stay", "off:micro"]
+  },
+  "escalation": {
+   "signals": {
+    "escalationOn": "boolean",
+    "conditions": "array",
+    "integrityKind": "string",
+    "commandFlaky": "boolean",
+    "signatureRepeated": "boolean",
+    "repairsUsed": "number",
+    "escalationsTask": "number",
+    "escalationsAttempt": "number",
+    "nextTier": "string",
+    "targetIsCriticModel": "boolean",
+    "targetSharesCriticModel": "boolean",
+    "targetQuotaExhausted": "boolean",
+    "budgetAllows": "boolean"
+   },
+   "choices": ["next-tier", "skip:off", "skip:integrity", "skip:flaky", "skip:not-due", "skip:cap", "skip:no-ladder", "skip:critic-collision", "skip:quota", "skip:budget"]
+  }
+ },
+ "rows": {
+  "tools": [
+   {
+    "ruleId": "tools.flaky",
+    "when": { "op": "equal", "signal": "commandFlaky", "value": true },
+    "choice": "exclude:flaky"
+   },
+   {
+    "ruleId": "tools.slow",
+    "when": { "op": "equal", "signal": "commandDurationOverLimit", "value": true },
+    "choice": "exclude:slow"
+   },
+   {
+    "ruleId": "tools.budget",
+    "when": {
+     "op": "and",
+     "of": [
+      { "op": "greater", "signal": "cycle", "value": 2 },
+      { "op": "greater", "signal": "checkShare", "value": 15 },
+      { "op": "equal", "signal": "commandSlowest", "value": true }
+     ]
+    },
+    "choice": "exclude:budget"
+   },
+   {
+    "ruleId": "tools.default",
+    "choice": "run"
+   }
+  ],
+  "loop": [
+   {
+    "ruleId": "loop.integrity",
+    "when": {
+     "op": "and",
+     "of": [
+      { "op": "present", "signal": "integrityKind" },
+      { "op": "not", "of": [{ "op": "equal", "signal": "integrityKind", "value": "changed-during-check" }] }
+     ]
+    },
+    "choice": "off:micro"
+   },
+   {
+    "ruleId": "loop.check-error",
+    "when": { "op": "equal", "signal": "checkError", "value": "cannot-start" },
+    "choice": "off:micro"
+   },
+   {
+    "ruleId": "loop.caps",
+    "when": {
+     "op": "or",
+     "of": [
+      { "op": "equal", "signal": "cyclesLeft", "value": 0 },
+      { "op": "equal", "signal": "unresolvedOverCap", "value": true }
+     ]
+    },
+    "choice": "off:micro"
+   },
+   {
+    "ruleId": "loop.no-check",
+    "when": {
+     "op": "and",
+     "of": [
+      { "op": "equal", "signal": "innerCount", "value": 0 },
+      { "op": "greater", "signal": "uncheckedStreak", "value": 1 }
+     ]
+    },
+    "choice": "off:micro"
+   },
+   {
+    "ruleId": "loop.single-unit",
+    "when": {
+     "op": "or",
+     "of": [
+      { "op": "equal", "signal": "phaseTasks", "value": 1 },
+      { "op": "equal", "signal": "unitCoversPhaseAtFirstUnit", "value": true }
+     ]
+    },
+    "choice": "off:micro"
+   },
+   {
+    "ruleId": "loop.default",
+    "choice": "stay"
+   }
+  ],
+  "escalation": [
+   {
+    "ruleId": "esc.off",
+    "when": { "op": "equal", "signal": "escalationOn", "value": false },
+    "choice": "skip:off"
+   },
+   {
+    "ruleId": "esc.integrity",
+    "when": {
+     "op": "or",
+     "of": [
+      { "op": "member of", "signal": "conditions", "value": ["tainted", "cached"] },
+      { "op": "present", "signal": "integrityKind" }
+     ]
+    },
+    "choice": "skip:integrity"
+   },
+   {
+    "ruleId": "esc.flaky",
+    "when": { "op": "equal", "signal": "commandFlaky", "value": true },
+    "choice": "skip:flaky"
+   },
+   {
+    "ruleId": "esc.not-due",
+    "when": {
+     "op": "or",
+     "of": [
+      { "op": "not", "of": [{ "op": "equal", "signal": "signatureRepeated", "value": true }] },
+      { "op": "not", "of": [{ "op": "equal", "signal": "repairsUsed", "value": 1 }] }
+     ]
+    },
+    "choice": "skip:not-due"
+   },
+   {
+    "ruleId": "esc.cap",
+    "when": {
+     "op": "or",
+     "of": [
+      { "op": "greater", "signal": "escalationsTask", "value": 0 },
+      { "op": "greater", "signal": "escalationsAttempt", "value": 1 }
+     ]
+    },
+    "choice": "skip:cap"
+   },
+   {
+    "ruleId": "esc.no-ladder",
+    "when": { "op": "not", "of": [{ "op": "present", "signal": "nextTier" }] },
+    "choice": "skip:no-ladder"
+   },
+   {
+    "ruleId": "esc.critic-collision",
+    "when": { "op": "equal", "signal": "targetIsCriticModel", "value": true },
+    "choice": "skip:critic-collision"
+   },
+   {
+    "ruleId": "esc.quota",
+    "when": { "op": "equal", "signal": "targetQuotaExhausted", "value": true },
+    "choice": "skip:quota"
+   },
+   {
+    "ruleId": "esc.budget",
+    "when": { "op": "not", "of": [{ "op": "equal", "signal": "budgetAllows", "value": true }] },
+    "choice": "skip:budget"
+   },
+   {
+    "ruleId": "esc.default",
+    "choice": "next-tier"
+   }
+  ]
+ },
+ "invalidTable": {
+  "ruleId": "config-off"
+ }
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "specstride.process-model/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex F, §F.1, §F.2, §F.4",
+  "processes": [
+    {
+      "Process": "CLI command",
+      "Started by": "The consumer or a host",
+      "Lifetime": "Short. `launch` exits after the handshake",
+      "Class in the process registry": "—"
+    },
+    {
+      "Process": "Runtime root",
+      "Started by": "The detach strategy, once per launch",
+      "Lifetime": "The leader of a process session of its own; lives until the run rests or ends",
+      "Class in the process registry": "—"
+    },
+    {
+      "Process": "Stage child (stage kinds `setup`, `command`, `smoke`)",
+      "Started by": "Runtime root",
+      "Lifetime": "One stage attempt",
+      "Class in the process registry": "`owned`"
+    },
+    {
+      "Process": "Engine (stage kind `specstride`, or a run request of kind `engine`)",
+      "Started by": "Runtime root; or the consumer in the foreground",
+      "Lifetime": "One engine start; one at a time per workspace",
+      "Class in the process registry": "`owned`"
+    },
+    {
+      "Process": "Harness process, one per pass or critic-class call",
+      "Started by": "Engine",
+      "Lifetime": "One call; in a process group of its own",
+      "Class in the process registry": "`owned`"
+    },
+    {
+      "Process": "Check command",
+      "Started by": "Engine",
+      "Lifetime": "One command; in a process group of its own",
+      "Class in the process registry": "`owned`"
+    },
+    {
+      "Process": "Detached job of a yield",
+      "Started by": "Engine",
+      "Lifetime": "Outlives the pass; in a process session of its own",
+      "Class in the process registry": "`adoptable`"
+    },
+    {
+      "Process": "Worker pass of a parallel group",
+      "Started by": "Engine",
+      "Lifetime": "One worker pass; in a process group of its own",
+      "Class in the process registry": "`owned`"
+    }
+  ],
+  "runRequests": [
+    {
+      "Kind": "`pipeline`",
+      "What it is": "A promoted launch contract",
+      "Produced by": "The host skill `specstride-run`; `launch`",
+      "Has a launch contract and stages": "Yes"
+    },
+    {
+      "Kind": "`engine`",
+      "What it is": "One engine start with its arguments",
+      "Produced by": "The host skill `specstride-reverse`; `specstride run --detach`",
+      "Has a launch contract and stages": "No"
+    }
+  ],
+  "relaunchOwner": [
+    {
+      "`relaunch.owner`": "`root` (default)",
+      "Behaviour": "After a failed stage the runtime root stays alive and consults the second relaunch classifier table, which has a row for a crashed engine. The inbox accepts `hold-relaunch`. The as-is relaunch line is projected from the root's event",
+      "Where": "Normal runs"
+    },
+    {
+      "`relaunch.owner`": "`supervise`",
+      "Behaviour": "At a failed stage the runtime root exits with the pipeline code. `specstride supervise observe` classifies and relaunches as at the baseline, with every named refusal, and prints the as-is relaunch line",
+      "Where": "The `parity` profile; consumers who want supervision by the host"
+    }
+  ]
+}

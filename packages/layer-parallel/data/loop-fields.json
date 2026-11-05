@@ -1,0 +1,18 @@
+{
+  "loopLine": {
+    "onlyWithOptionOn": true,
+    "fields": [
+      {"key": "parallel", "values": ["on", "off"]},
+      {"key": "workers", "type": "whole number"},
+      {"key": "groups", "type": "whole number"},
+      {"key": "group-failures", "type": "whole number"},
+      {"key": "refused", "type": "whole number"},
+      {"key": "worker-caches", "values": ["profile", "shared"]},
+      {"key": "reason", "from": "fallback-reasons or layer-off-reasons", "when": "parallel=off"},
+      {"key": "wall-hours", "type": "number"},
+      {"key": "agent-hours", "type": "number"}
+    ]
+  },
+  "runRecord": ["loop.parallel.units", "loop.parallel.workers", "loop.parallel.workersMax", "loop.parallel.quota_headroom", "loop.parallel.allow_detect", "loop.parallel.plan_hash", "loop.parallel.protection", "loop.parallel.worker_caches"],
+  "note": "Annex G §G.3 of feature 100, row Loop line, lists all of them: parallel, workers, groups, group-failures, refused, worker-caches, wall-hours, agent-hours and the fallback reason."
+}

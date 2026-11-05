@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.doctor/1",
+  "title": "doctor-findings",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.doctor/1",
+  "x-annex": "annex G, §G.7",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    },
+    "host": {
+      "type": "string",
+      "description": "The calling host: a host id, or `cli`",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "audience": {
+      "type": "string",
+      "description": "`personal` or `distributed`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "personal",
+        "distributed"
+      ]
+    },
+    "exit": {
+      "type": "integer",
+      "description": "The exit code of the doctor",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "summary": {
+      "type": "object",
+      "description": "Counts per severity",
+      "x-type-in-words": "Record of whole numbers",
+      "x-required": "Yes"
+    },
+    "findings": {
+      "type": "array",
+      "description": "Per finding: `id`, `severity`, `lb`, `message`, `fix`, `evidence` (redacted)",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes"
+    },
+    "registry": {
+      "type": "object",
+      "description": "Summary of the resolved harness registry",
+      "x-type-in-words": "Record",
+      "x-required": "No"
+    },
+    "pick": {
+      "type": "object",
+      "description": "The critic the product would pick, and why each other candidate lost",
+      "x-type-in-words": "Record",
+      "x-required": "No"
+    },
+    "sources": {
+      "type": "object",
+      "description": "Summary of where configuration values came from",
+      "x-type-in-words": "Record",
+      "x-required": "No"
+    }
+  },
+  "required": [
+    "schema",
+    "at",
+    "host",
+    "audience",
+    "exit",
+    "summary",
+    "findings"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

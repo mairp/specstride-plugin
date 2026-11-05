@@ -1,0 +1,231 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.check-result/1",
+ "type": "object",
+ "properties": {
+  "schema": {
+   "const": "specstride.check-result/1"
+  },
+  "unitId": {
+   "type": "string"
+  },
+  "ordinal": {
+   "type": "integer"
+  },
+  "treeBefore": {
+   "type": "string"
+  },
+  "treeAfter": {
+   "type": "string"
+  },
+  "protectedBefore": {
+   "type": "string"
+  },
+  "protectedAfter": {
+   "type": "string"
+  },
+  "commands": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "exit": {
+      "type": [
+       "integer",
+       "null"
+      ]
+     },
+     "conditions": {
+      "type": "object",
+      "properties": {
+       "tainted": {
+        "oneOf": [
+         {
+          "const": false
+         },
+         {
+          "type": "object",
+          "properties": {
+           "reason": {
+            "type": [
+             "string",
+             "null"
+            ]
+           }
+          },
+          "required": [
+           "reason"
+          ]
+         }
+        ]
+       },
+       "cached": {
+        "oneOf": [
+         {
+          "const": false
+         },
+         {
+          "type": "object",
+          "properties": {
+           "reason": {
+            "type": [
+             "string",
+             "null"
+            ]
+           }
+          },
+          "required": [
+           "reason"
+          ]
+         }
+        ]
+       },
+       "flaky": {
+        "oneOf": [
+         {
+          "const": false
+         },
+         {
+          "type": "object",
+          "properties": {
+           "reason": {
+            "type": [
+             "string",
+             "null"
+            ]
+           }
+          },
+          "required": [
+           "reason"
+          ]
+         }
+        ]
+       },
+       "interrupted": {
+        "oneOf": [
+         {
+          "const": false
+         },
+         {
+          "type": "object",
+          "properties": {
+           "reason": {
+            "type": [
+             "string",
+             "null"
+            ]
+           }
+          },
+          "required": [
+           "reason"
+          ]
+         }
+        ]
+       },
+       "unchecked": {
+        "oneOf": [
+         {
+          "const": false
+         },
+         {
+          "type": "object",
+          "properties": {
+           "reason": {
+            "type": [
+             "string",
+             "null"
+            ]
+           }
+          },
+          "required": [
+           "reason"
+          ]
+         }
+        ]
+       }
+      },
+      "required": [
+       "tainted",
+       "cached",
+       "flaky",
+       "interrupted",
+       "unchecked"
+      ]
+     },
+     "observed": {
+      "type": "array",
+      "items": {
+       "type": [
+        "integer",
+        "null"
+       ]
+      },
+      "minItems": 2,
+      "maxItems": 2
+     },
+     "durationMs": {
+      "type": "integer"
+     },
+     "outputRef": {
+      "type": "object",
+      "properties": {
+       "name": {
+        "type": "string"
+       },
+       "hash": {
+        "type": "string"
+       },
+       "bytes": {
+        "type": "integer"
+       }
+      },
+      "required": [
+       "name",
+       "hash",
+       "bytes"
+      ]
+     }
+    },
+    "required": [
+     "id",
+     "exit",
+     "conditions"
+    ]
+   }
+  },
+  "excluded": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "reason": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "reason"
+    ]
+   }
+  }
+ },
+ "required": [
+  "schema",
+  "unitId",
+  "ordinal",
+  "treeBefore",
+  "treeAfter",
+  "protectedBefore",
+  "protectedAfter",
+  "commands"
+ ],
+ "additionalProperties": true,
+ "x-unknown-field": "ignored by a reader",
+ "x-different-major": "refused"
+}

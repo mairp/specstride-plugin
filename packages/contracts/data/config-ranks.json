@@ -1,0 +1,69 @@
+{
+  "schema": "specstride.config/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex X, §X.2",
+  "ranks": [
+    {
+      "Rank": "1",
+      "Layer": "Pin of the launch contract",
+      "Note": "Only for keys marked as pinnable. Applies to children of the runtime root only"
+    },
+    {
+      "Rank": "2",
+      "Layer": "Flag",
+      "Note": "The last flag wins. A generic flag reaches every key"
+    },
+    {
+      "Rank": "3",
+      "Layer": "Run snapshot",
+      "Note": "On `resume` only, and only for keys of the class `pinned`"
+    },
+    {
+      "Rank": "4",
+      "Layer": "Environment",
+      "Note": "With the as-is variable names as aliases"
+    },
+    {
+      "Rank": "5",
+      "Layer": "Project configuration",
+      "Note": "Narrowing keys only"
+    },
+    {
+      "Rank": "6",
+      "Layer": "User configuration",
+      "Note": "Takes the role of the as-is file at the install root, which is not read"
+    },
+    {
+      "Rank": "7",
+      "Layer": "Learned value",
+      "Note": "Only under the learning mode `apply`, per knob and per phase"
+    },
+    {
+      "Rank": "8",
+      "Layer": "Default",
+      "Note": "Built in or detected"
+    }
+  ],
+  "trustClasses": [
+    {
+      "Class": "Widening",
+      "Meaning": "The key can widen capability: harness declarations and their command lines, endpoints, secret references, selection of the critic, containment level, permission flags, increases of a budget, commands of a host hook, telemetry endpoints, content capture, the transport of a harness adapter, the plugin allowlist of a harness, a declared write scope of a task, `loop.parallel.allow_detect`, the control root, `profile` (selected at flag, environment or user rank only; a project file cannot select it, F110-FR-013)",
+      "Project configuration": "Ignored, with a launch message and a doctor warning"
+    },
+    {
+      "Class": "Narrowing",
+      "Meaning": "The key limits a run: caps, budgets, modes, time limits",
+      "Project configuration": "Accepted only if stricter than the value from the lower ranks"
+    },
+    {
+      "Class": "Neutral",
+      "Meaning": "Neither",
+      "Project configuration": "Accepted"
+    },
+    {
+      "Class": "Pinnable",
+      "Meaning": "The launch contract may pin it",
+      "Project configuration": "As its other class says"
+    }
+  ]
+}

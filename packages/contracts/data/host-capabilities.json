@@ -1,0 +1,37 @@
+{
+  "schema": "specstride.host/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex H, §H.1",
+  "capabilities": [
+    {
+      "Capability": "`hooks`",
+      "Values": "The host hook events the host offers",
+      "Fallback when absent": "Alerts through `status` and the digest"
+    },
+    {
+      "Capability": "`statusSurface`",
+      "Values": "Where a status line can be shown",
+      "Fallback when absent": "`status --line` on request"
+    },
+    {
+      "Capability": "`background`",
+      "Values": "A primitive that re-invokes the host when a command exits",
+      "Fallback when absent": "The budget of one supervision cycle per cycle"
+    },
+    {
+      "Capability": "`evals`",
+      "Values": "A native driver for skill-trigger evals",
+      "Fallback when absent": "The session-log driver"
+    },
+    {
+      "Capability": "`model`",
+      "Values": "Whether the host has a model",
+      "Fallback when absent": "Judgment delegated to a harness named in user configuration"
+    },
+    {
+      "Capability": "`stateRootWritable`",
+      "Values": "Whether the host's shell and the detached runtime can write the control root",
+      "Fallback when absent": "A control root the host permits, set in user configuration"
+    }
+  ]
+}

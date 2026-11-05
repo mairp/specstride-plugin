@@ -1,0 +1,52 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:internal:108:reverse-verification-commands/1",
+ "title": "specstride.reverse-verification-commands/1",
+ "type": "object",
+ "required": [
+  "schema_version",
+  "discovery",
+  "commands",
+  "phaseTimeouts"
+ ],
+ "properties": {
+  "schema_version": {
+   "const": "1.0.0"
+  },
+  "discovery": {
+   "const": "none"
+  },
+  "commands": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "id",
+     "phase",
+     "executable",
+     "cwd",
+     "args",
+     "timeoutSec"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "pattern": "^(lint|guard)-[0-9]+$"
+     },
+     "timeoutSec": {
+      "enum": [
+       120,
+       300
+      ]
+     }
+    }
+   }
+  },
+  "phaseTimeouts": {
+   "type": "object",
+   "additionalProperties": {
+    "const": 3600
+   }
+  }
+ }
+}

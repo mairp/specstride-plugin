@@ -1,0 +1,551 @@
+{
+ "schema": "specstride.integrity-rules-115/1",
+ "note": "Data of feature 115. spec.md stands where the two differ.",
+ "rules": [
+  {
+   "rule": "IR-01",
+   "subject": "No writer of the phase gate in the layer",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-002"
+   ],
+   "test": "CT-115-101"
+  },
+  {
+   "rule": "IR-02",
+   "subject": "Conditions of an approval",
+   "ownedHere": false,
+   "owner": "No: annex E §E.1, annex B §B.14",
+   "requirements": [
+    "F115-FR-039"
+   ],
+   "test": null
+  },
+  {
+   "rule": "IR-03",
+   "subject": "The verification gate runs every command; no inner result replaces an execution",
+   "ownedHere": false,
+   "owner": "No: annex C §C.8",
+   "requirements": [
+    "F115-FR-028"
+   ],
+   "test": null
+  },
+  {
+   "rule": "IR-04",
+   "subject": "Inner results have a grammar of their own; no nonce while the pass loop runs",
+   "ownedHere": false,
+   "owner": "No: annex E §E.1",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-05",
+   "subject": "An inner result delays and never skips the phase gate",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-028"
+   ],
+   "test": "CT-115-105"
+  },
+  {
+   "rule": "IR-06",
+   "subject": "Inner events change no counter of the outer loop",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-027"
+   ],
+   "test": "CT-115-106"
+  },
+  {
+   "rule": "IR-07",
+   "subject": "No exit code and no stop reason",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-025"
+   ],
+   "test": "CT-115-107"
+  },
+  {
+   "rule": "IR-08",
+   "subject": "Manifest hash verified before every check; exclusions by the runtime only",
+   "ownedHere": true,
+   "owner": "Yes, for the verification and the exclusions; the derivation: annex D §D.8",
+   "requirements": [
+    "F115-FR-014",
+    "F115-FR-023"
+   ],
+   "test": "CT-115-108"
+  },
+  {
+   "rule": "IR-09",
+   "subject": "A checkpoint is a claim",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-009"
+   ],
+   "test": "CT-115-109"
+  },
+  {
+   "rule": "IR-10",
+   "subject": "The runtime runs each check itself",
+   "ownedHere": true,
+   "owner": "Yes, for the result; the runner: annex C §C.8",
+   "requirements": [
+    "F115-FR-015"
+   ],
+   "test": "CT-115-110"
+  },
+  {
+   "rule": "IR-11",
+   "subject": "Two classes, fingerprint at phase entry, tainted",
+   "ownedHere": false,
+   "owner": "No: annex C §C.8 (guarantees of the core), annex C §C.14",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-12",
+   "subject": "Authorisation from the task text at launch",
+   "ownedHere": false,
+   "owner": "No: annex D §D.7 (field protected)",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-13",
+   "subject": "Output of a test the proposer ran is never a result",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-015"
+   ],
+   "test": "CT-115-113"
+  },
+  {
+   "rule": "IR-14",
+   "subject": "Flaky",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-020"
+   ],
+   "test": "CT-115-114"
+  },
+  {
+   "rule": "IR-15",
+   "subject": "unchecked",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-021"
+   ],
+   "test": "CT-115-115"
+  },
+  {
+   "rule": "IR-16",
+   "subject": "Results bound to the fingerprint",
+   "ownedHere": false,
+   "owner": "No: annex D §D.7 (field units)",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-17",
+   "subject": "The fact block is built from the control plane",
+   "ownedHere": false,
+   "owner": "No: annex D §D.7",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-18",
+   "subject": "The same final state gives the same block",
+   "ownedHere": false,
+   "owner": "No: annex D §D.7",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-19",
+   "subject": "Grounding refuses the control plane",
+   "ownedHere": false,
+   "owner": "No: annex B §B.2, F100-FR-037",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-20",
+   "subject": "Marker token on failure blocks",
+   "ownedHere": true,
+   "owner": "Yes, for the token; the removal before the critic: annex D §D.7 owner of the slot",
+   "requirements": [
+    "F115-FR-018"
+   ],
+   "test": "CT-115-120"
+  },
+  {
+   "rule": "IR-21",
+   "subject": "The critic is a fresh session without tools",
+   "ownedHere": false,
+   "owner": "No: annex C §C.1, annex A §A.5",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-22",
+   "subject": "The fact block inside the budget of the critic",
+   "ownedHere": false,
+   "owner": "No: annex D §D.7 owner of the slot",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-23",
+   "subject": "Pass given back; bound on passes",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-027"
+   ],
+   "test": "CT-115-123"
+  },
+  {
+   "rule": "IR-24",
+   "subject": "The no-progress test excludes the outbox",
+   "ownedHere": false,
+   "owner": "No: annex D §D.1 (classic accounting)",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-25",
+   "subject": "The ledger is chained and validated",
+   "ownedHere": true,
+   "owner": "Yes, for the namespace and the effect; the envelope: annex B §B.13",
+   "requirements": [
+    "F115-FR-030",
+    "F115-FR-032"
+   ],
+   "test": "CT-115-125"
+  },
+  {
+   "rule": "IR-26",
+   "subject": "Counts of the layer survive a resume",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-032"
+   ],
+   "test": "CT-115-126"
+  },
+  {
+   "rule": "IR-27",
+   "subject": "Strategy pinned at launch; fallback announced",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-001",
+    "F115-FR-005"
+   ],
+   "test": "CT-115-127"
+  },
+  {
+   "rule": "IR-28",
+   "subject": "Breach of the integrity of the phase gate",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-039"
+   ],
+   "test": "CT-115-128"
+  },
+  {
+   "rule": "IR-29",
+   "subject": "First-failure predicate; partial step runs",
+   "ownedHere": false,
+   "owner": "No: annex D §D.6, annex C §C.8",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-30",
+   "subject": "First-failure predicate; partial step runs",
+   "ownedHere": false,
+   "owner": "No: annex D §D.6, annex C §C.8",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-31",
+   "subject": "Fingerprint before and after",
+   "ownedHere": false,
+   "owner": "No: annex C §C.8, F100-FR-097, F100-FR-098",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-32",
+   "subject": "End the processes of the pass before a check",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-015"
+   ],
+   "test": "CT-115-132"
+  },
+  {
+   "rule": "IR-33",
+   "subject": "Tree at phase entry equals the approved tree",
+   "ownedHere": false,
+   "owner": "No: annex D §D.7, F100-FR-136",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-34",
+   "subject": "The layer only where the verification gate executes",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-004"
+   ],
+   "test": "CT-115-134"
+  },
+  {
+   "rule": "IR-35",
+   "subject": "Scope of the fingerprint",
+   "ownedHere": false,
+   "owner": "No: annex C §C.8, annex C §C.14",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-36",
+   "subject": "Executables, search path, configuration of the toolchain",
+   "ownedHere": false,
+   "owner": "No: annex D §D.8 (pins), annex C §C.14",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-37",
+   "subject": "Caches; cached is not a pass",
+   "ownedHere": false,
+   "owner": "No: annex C §C.8 (condition cached), annex C §C.14",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-38",
+   "subject": "Class A as patterns",
+   "ownedHere": false,
+   "owner": "No: annex C §C.14",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-39",
+   "subject": "Suppression markers",
+   "ownedHere": false,
+   "owner": "No: annex C §C.14, annex D §D.7",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-40",
+   "subject": "Exit result and conditions in separate fields",
+   "ownedHere": false,
+   "owner": "No: annex C §C.8, F100-FR-097",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-41",
+   "subject": "Authorisation covers class A",
+   "ownedHere": false,
+   "owner": "No: annex D §D.7 (field protected)",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-42",
+   "subject": "Integrity events reach the critic",
+   "ownedHere": false,
+   "owner": "No: annex D §D.7 (field integrity)",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-43",
+   "subject": "Results per command and tree",
+   "ownedHere": false,
+   "owner": "No: annex D §D.7",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-44",
+   "subject": "Escaping inside a data boundary",
+   "ownedHere": false,
+   "owner": "No: annex D §D.7, F100-FR-135",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-45",
+   "subject": "Grounding refusals",
+   "ownedHere": false,
+   "owner": "No: F100-FR-037",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-46",
+   "subject": "No fingerprint value per row",
+   "ownedHere": false,
+   "owner": "No: annex D §D.7",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-47",
+   "subject": "The escalation target equals no critic-class call in model and in effort; a rung that shares the model alone raises the critic-diversity warning",
+   "ownedHere": true,
+   "owner": "Yes, for the target and the warning of an escalation; the warning at the phase gate: annex A §A.5, F100-FR-024",
+   "requirements": [
+    "F115-FR-034"
+   ],
+   "test": "CT-115-147"
+  },
+  {
+   "rule": "IR-48",
+   "subject": "Checkpoint passes leave the consecutive breakers",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-027"
+   ],
+   "test": "CT-115-148"
+  },
+  {
+   "rule": "IR-49",
+   "subject": "No stop once phase evidence exists",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-029"
+   ],
+   "test": "CT-115-149"
+  },
+  {
+   "rule": "IR-50",
+   "subject": "Interrupted checks; counts per task id",
+   "ownedHere": true,
+   "owner": "Yes, for (a) and (d); (b) and (c): annex B §B.13",
+   "requirements": [
+    "F115-FR-024",
+    "F115-FR-022"
+   ],
+   "test": "CT-115-150"
+  },
+  {
+   "rule": "IR-51",
+   "subject": "First-failure predicate",
+   "ownedHere": false,
+   "owner": "No: annex D §D.6",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-52",
+   "subject": "Inertness",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-006"
+   ],
+   "test": "CT-115-152"
+  },
+  {
+   "rule": "IR-53",
+   "subject": "Limits of the router; the failure signature",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-019",
+    "F115-FR-036"
+   ],
+   "test": "CT-115-153"
+  },
+  {
+   "rule": "IR-54",
+   "subject": "Manifest compared on a relaunch",
+   "ownedHere": false,
+   "owner": "No: annex D §D.8, row 33 of annex X §X.7",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-55",
+   "subject": "Handling of the checkpoint file",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-010"
+   ],
+   "test": "CT-115-155"
+  },
+  {
+   "rule": "IR-56",
+   "subject": "Task list read at launch",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-012"
+   ],
+   "test": "CT-115-156"
+  },
+  {
+   "rule": "IR-57",
+   "subject": "Separate keys",
+   "ownedHere": false,
+   "owner": "No: annex B §B.13",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-58",
+   "subject": "No difference until engaged",
+   "ownedHere": true,
+   "owner": "Yes",
+   "requirements": [
+    "F115-FR-007"
+   ],
+   "test": "CT-115-158"
+  },
+  {
+   "rule": "IR-59",
+   "subject": "Grounding refuses the event stream",
+   "ownedHere": false,
+   "owner": "No: F100-FR-037",
+   "requirements": [],
+   "test": null
+  },
+  {
+   "rule": "IR-60",
+   "subject": "No commit, no revert",
+   "ownedHere": true,
+   "owner": "Yes, in its old words",
+   "requirements": [
+    "F115-FR-017"
+   ],
+   "test": "CT-115-160"
+  }
+ ]
+}

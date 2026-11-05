@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.registry/1",
+  "title": "resolved-registry",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.registry/1",
+  "x-annex": "annex C, §C.6",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "harnesses": {
+      "type": "array",
+      "description": "Every harness of the registry: id, state, origin, version, hash of the descriptor, resolved path, capabilities with provenance, containment ceiling, source of each value",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes"
+    },
+    "roles": {
+      "type": "array",
+      "description": "The registered roles. Wave 1 registers `proposer` and `critic`; `diagnostician` and `accelerator` run under the critic-class and proposer rules",
+      "x-type-in-words": "List of records: role id, capability level required, independence constraints, budget key",
+      "x-required": "Yes"
+    },
+    "plan": {
+      "type": "object",
+      "description": "Per phase and per role: the ordered list of entries to use, first the primary and then the fallbacks the consumer opted into. Each entry: harness, model, model tier, auth tier, transport, form of the `completion` level, containment level, decision of the terms gate with the row it rests on",
+      "x-type-in-words": "Map",
+      "x-required": "Yes"
+    },
+    "criticPick": {
+      "type": "object",
+      "description": "How the critic was chosen: step of the critic order, state, window and its source, the reason, and whether the critic-diversity warning was raised",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "runnersUp": {
+      "type": "array",
+      "description": "The ranked candidates that were not picked, each with the reason, in the order in which a pass-over takes them",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes (may be empty)"
+    },
+    "announced": {
+      "type": "array",
+      "description": "The lines announced at launch",
+      "x-type-in-words": "List of text",
+      "x-required": "Yes"
+    }
+  },
+  "required": [
+    "schema",
+    "harnesses",
+    "roles",
+    "plan",
+    "criticPick",
+    "runnersUp",
+    "announced"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

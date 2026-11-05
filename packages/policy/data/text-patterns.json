@@ -1,0 +1,12 @@
+{
+  "schema": "specstride.quota-patterns/1",
+  "note": "Data of the default text classifier. Case-insensitive substrings. Every entry is unverified: it rests on documentation or on a summary of a type file (R14 B4, B8, B13) and must be checked against a captured stream by the harness adapter feature.",
+  "groups": {
+    "window": ["session limit", "weekly limit", "usage limit", "opus limit", "sonnet limit", "quota will reset", "try again in", "rate limit reached", "QUOTA:", "RATE_LIMIT:"],
+    "credit": ["credit balance is too low", "insufficient_quota", "insufficient credits", "plan expired", "billing_error", "payment required"],
+    "auth": ["authentication_failed", "invalid api key", "invalid_credential", "not logged in", "unauthorized"],
+    "overload": ["overloaded", "server is busy", "service unavailable"],
+    "context": ["context_window_exceeded", "prompt is too long", "maximum context length"]
+  },
+  "order": ["credit", "auth", "window", "context", "overload"]
+}

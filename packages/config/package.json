@@ -1,0 +1,34 @@
+{
+  "name": "@specstride/config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride config",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./data/*": "./data/*"
+  },
+  "files": [
+    "src/",
+    "data/",
+    "DEPENDENCIES.md"
+  ],
+  "scripts": {
+    "test": "node ../../tests/isolate.ts node --test \"tests/**/*.test.*\"",
+    "typecheck": "tsc -p .",
+    "check:budget": "node tools/token-budget-check.ts"
+  },
+  "dependencies": {
+    "@specstride/contracts": "0.0.0",
+    "@specstride/kernel": "0.0.0",
+    "yaml": "2.9.1"
+  },
+  "specstride": {
+    "skeleton": true,
+    "skeletonNote": "The scaffolding marker stays while CT-100-322 holds."
+  }
+}

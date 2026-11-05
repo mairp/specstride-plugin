@@ -1,0 +1,9 @@
+{
+  "capture": "C",
+  "feature": "125-adapter-claude",
+  "task": "T003",
+  "status": "unverified",
+  "reason": "the paid capture (a real limit event on the CLI stream of the pinned claude CLI 2.1.284, with the retry, overload and credit errors, their reset values and units) is out-of-band under the owner ruling of 2026-09-30: it is never run and never faked inside this feature's runs. This file holds NO real stream events. The operator runs the capture by hand and replaces this file with the recorded NDJSON stream. Until then every row of specs/125-adapter-claude/contracts/classifier-table.md stays unverified and no test replays this file.",
+  "recordedEvents": 0,
+  "source": "specs/125-adapter-claude/contracts/classifier-table.md (documented shapes only, not observations)"
+}

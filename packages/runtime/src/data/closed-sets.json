@@ -1,0 +1,21 @@
+{
+  "feature": "122-detached-runtime",
+  "sets": [
+    {"name": "handshake-outcomes", "row": 17, "members": ["started", "attached", "refused"], "unknown": "refused"},
+    {"name": "inbox-request-types", "row": 21, "members": ["stop", "hold-relaunch", "host-event"], "unknown": "the request is ignored and reported"},
+    {"name": "process-classes", "row": 22, "members": ["owned", "adoptable"], "unknown": "owned; never signalled without the identity check"},
+    {"name": "process-kinds", "row": 22, "members": ["engine", "stage-child", "harness-pass", "critic-call", "check", "detached-job", "worker-pass"], "unknown": "class owned; never signalled without the identity check"},
+    {"name": "probe-results", "row": 23, "members": ["free", "held-live", "held-foreign", "stale-owner-dead", "owner-dead-group-alive", "unknown"], "unknown": "unknown, which counts as held"},
+    {"name": "launch-reasons", "row": 82, "members": ["first", "resume", "relaunch", "manual"], "unknown": "manual"},
+    {"name": "reclaim-results", "row": 209, "members": ["lease", "lost-race"], "unknown": "lost-race"},
+    {"name": "detach-errors", "row": 210, "members": ["unavailable", "not-ready"], "unknown": "not-ready; the launch is refused"},
+    {"name": "detach-survives", "row": 211, "members": ["parent-end", "session-end", "reboot"], "unknown": "ignored"},
+    {"name": "launch-refusals-of-122", "row": 212, "members": ["lock-conflict", "foreign-owner", "owner-dead-group-alive", "lock-unknown", "provider-mismatch", "detach-unavailable", "detach-not-ready", "control-root-not-writable", "unadopted-approvals", "launch-abandoned", "control-root-unsafe"], "unknown": "shown as text; the launch stays refused"},
+    {"name": "registry-end-causes-of-122", "row": 213, "members": ["exited", "signalled", "ended-by-stop", "ended-by-root", "ended-as-survivor", "identity-mismatch", "gone"], "unknown": "shown as text"},
+    {"name": "spike-results", "row": 214, "members": ["survived", "ended", "skipped"], "unknown": "skipped"}
+  ],
+  "open": [
+    {"name": "detach-strategies", "row": 24, "wave1": ["spawn-detached", "foreground"], "unknown": "configuration error (exit 3)"},
+    {"name": "lock-providers", "row": 277, "wave1": ["the shipped provider"], "unknown": "configuration error (exit 3)"}
+  ]
+}

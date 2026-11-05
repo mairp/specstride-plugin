@@ -1,0 +1,115 @@
+{
+  "schema": "specstride.feature-parity-rows/1",
+  "feature": "105-verification",
+  "read": [
+    {
+      "row": 1,
+      "key": "loop.strategy",
+      "underParity": "classic",
+      "requirements": [
+        "F105-FR-020",
+        "F105-FR-033"
+      ]
+    },
+    {
+      "row": 6,
+      "key": "verification.step_runner",
+      "underParity": "off",
+      "readOnly": "decides whether a manifest file is written",
+      "requirements": [
+        "F105-FR-020"
+      ]
+    },
+    {
+      "row": 7,
+      "key": "verification.parallelism",
+      "underParity": 1,
+      "readOnly": "decides whether a manifest file is written",
+      "requirements": [
+        "F105-FR-020"
+      ]
+    },
+    {
+      "row": 31,
+      "key": "integrity.gate_fingerprint",
+      "underParity": "off",
+      "readOnly": "decides whether a manifest file is written",
+      "requirements": [
+        "F105-FR-020"
+      ]
+    },
+    {
+      "row": 15,
+      "key": "staleness.check_points",
+      "underParity": "critic start only",
+      "requirements": [
+        "F105-FR-042"
+      ]
+    },
+    {
+      "row": 33,
+      "key": "integrity.manifest_relaunch",
+      "underParity": "off",
+      "requirements": [
+        "F105-FR-020",
+        "F105-FR-021"
+      ]
+    }
+  ],
+  "owned": [
+    {
+      "row": 123,
+      "status": "confirmed",
+      "key": "verification.mode",
+      "default": "required",
+      "underParity": "as the fixture sets it",
+      "register": "DV-043",
+      "requirement": "F105-FR-001"
+    },
+    {
+      "row": 124,
+      "status": "confirmed",
+      "key": "verification.testPlan",
+      "default": "testautomation/<slug>/TEST_PLAN.md",
+      "underParity": "as the fixture sets it",
+      "register": null,
+      "requirement": "F105-FR-002"
+    },
+    {
+      "row": 124,
+      "status": "confirmed",
+      "key": "verification.commands",
+      "default": null,
+      "underParity": "as the fixture sets it",
+      "register": null,
+      "requirement": "F105-FR-002"
+    },
+    {
+      "row": 124,
+      "status": "confirmed",
+      "key": "verification.generateTests",
+      "default": "testautomation/<slug>/generated",
+      "underParity": "as the fixture sets it",
+      "register": null,
+      "requirement": "F105-FR-002"
+    },
+    {
+      "row": 126,
+      "status": "confirmed",
+      "key": "verification.summary.tailLines",
+      "default": 80,
+      "underParity": 80,
+      "register": null,
+      "requirement": "F105-FR-037"
+    },
+    {
+      "row": 126,
+      "status": "confirmed",
+      "key": "verification.summary.tailErrLines",
+      "default": 40,
+      "underParity": 40,
+      "register": null,
+      "requirement": "F105-FR-037"
+    }
+  ]
+}

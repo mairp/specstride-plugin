@@ -1,0 +1,15 @@
+{
+  "schema": "specstride.feature-cli/1",
+  "command": "verify",
+  "exitCodes": {"0": "success", "3": "any verification error", "10": "the verification gate failed", "11": "a command staged before failed (for information)"},
+  "subCommands": [
+    {"name": "create", "required": ["--workdir", "--specs", "--output", "--json-output"], "optional": ["--format", "--required", "--generate-tests", "--verification-commands"], "prints": "one record: planId, contentHash, markdownPath, canonicalPath, declaredCommands, generated", "codes": [0, 3]},
+    {"name": "validate", "required": ["--plan"], "optional": ["--specs"], "prints": "valid", "codes": [0, 3]},
+    {"name": "slice", "required": ["--plan", "--phase"], "optional": ["--specs", "--prestage-dir"], "prints": "the phase context", "codes": [0, 3]},
+    {"name": "scaffold", "required": ["--plan", "--output"], "optional": ["--specs"], "prints": "the list of scaffolds as a record", "codes": [0, 3]},
+    {"name": "run", "required": ["--plan", "--phase"], "optional": ["--specs", "--evidence-output", "--attempt", "--prestage-dir"], "prints": "the gate summary line", "codes": [0, 3, 10]},
+    {"name": "prestage", "required": ["--plan", "--phase", "--attempt"], "optional": ["--specs", "--evidence-output", "--prestage-dir"], "prints": "the summary line of staged commands", "codes": [0, 3, 11]},
+    {"name": "prestage-report", "required": ["--plan", "--phase"], "optional": ["--attempt", "--specs", "--prestage-dir"], "prints": "the block for a prompt, no line end added", "codes": [0, 3]}
+  ],
+  "note": "Flag names are those of the baseline. The spelling of the sub-commands is reading CQ-155."
+}

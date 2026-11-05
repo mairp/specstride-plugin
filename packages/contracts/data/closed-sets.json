@@ -1,0 +1,4116 @@
+{
+  "schema": "specstride.closed-sets/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex X, §X.6",
+  "closedSets": [
+    {
+      "number": 1,
+      "name": "Run states",
+      "members": "The ten written states of annex E §E.2",
+      "literals": [],
+      "owner": "100",
+      "closedBy": "Design",
+      "unknownValue": "Shown as `unknown` with an attention item; a writer never writes one"
+    },
+    {
+      "number": 2,
+      "name": "Derived run conditions",
+      "members": "`dead`, `stale`, `launch-abandoned`",
+      "literals": [
+        "dead",
+        "stale",
+        "launch-abandoned"
+      ],
+      "owner": "100",
+      "closedBy": "Design",
+      "unknownValue": "Not applicable: readers derive them"
+    },
+    {
+      "number": 3,
+      "name": "Stop reasons",
+      "members": "The 15 members of annex E §E.3",
+      "literals": [],
+      "owner": "100",
+      "closedBy": "Owner decision",
+      "unknownValue": "Treated as not retryable; reported"
+    },
+    {
+      "number": 4,
+      "name": "Blocked reasons",
+      "members": "The six of annex E §E.2",
+      "literals": [],
+      "owner": "100",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text; the run stays blocked"
+    },
+    {
+      "number": 5,
+      "name": "Terminal `cause`; `causedBy`",
+      "members": "`normal`, `crash`, `owner-lost`; `self`, `operator`, `supervisor`, `host`, `crash`",
+      "literals": [
+        "normal",
+        "crash",
+        "owner-lost",
+        "self",
+        "operator",
+        "supervisor",
+        "host",
+        "crash"
+      ],
+      "owner": "101",
+      "closedBy": "Design",
+      "unknownValue": "Read as `crash`"
+    },
+    {
+      "number": 6,
+      "name": "Engine exit codes",
+      "members": "Annex E §E.4",
+      "literals": [],
+      "owner": "100",
+      "closedBy": "Owner decision",
+      "unknownValue": "An exit outside the table is a crash"
+    },
+    {
+      "number": 7,
+      "name": "Exit codes per command",
+      "members": "Annex G §G.4; annex F §F.8",
+      "literals": [],
+      "owner": "100",
+      "closedBy": "Owner decision",
+      "unknownValue": "The supervisor's exit map gives 1"
+    },
+    {
+      "number": 8,
+      "name": "Verdicts",
+      "members": "APPROVED, REJECTED, MALFORMED",
+      "literals": [],
+      "owner": "101",
+      "closedBy": "Owner decision",
+      "unknownValue": "MALFORMED"
+    },
+    {
+      "number": 9,
+      "name": "Kinds of phase attempt",
+      "members": "`plain`, `diagnosed`, `accelerated`, `bumped`",
+      "literals": [
+        "plain",
+        "diagnosed",
+        "accelerated",
+        "bumped"
+      ],
+      "owner": "149",
+      "closedBy": "Design",
+      "unknownValue": "`plain`"
+    },
+    {
+      "number": 10,
+      "name": "Kill reasons and their classes",
+      "members": "Annex E F100-FR-150",
+      "literals": [],
+      "owner": "118",
+      "closedBy": "Design",
+      "unknownValue": "Class `futility`, as at the baseline"
+    },
+    {
+      "number": 11,
+      "name": "Stage reasons, transient and deliberate",
+      "members": "Annex E F100-FR-150",
+      "literals": [],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "Not transient"
+    },
+    {
+      "number": 12,
+      "name": "Pipeline exit reasons",
+      "members": "Annex E F100-FR-150",
+      "literals": [],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "Not transient"
+    },
+    {
+      "number": 13,
+      "name": "Launch-check refusals",
+      "members": "`launcher-not-found`, `launcher-edited`, `learning-decisions-changed`, `stale-sources`, `open-blocker`, `draft-contract`, `invalid-contract`, `unauthorized-root`, `launcher-syntax-error`, `dry-run-failed`, `already-running`",
+      "literals": [
+        "launcher-not-found",
+        "launcher-edited",
+        "learning-decisions-changed",
+        "stale-sources",
+        "open-blocker",
+        "draft-contract",
+        "invalid-contract",
+        "unauthorized-root",
+        "launcher-syntax-error",
+        "dry-run-failed",
+        "already-running"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "Refusal"
+    },
+    {
+      "number": 14,
+      "name": "Relaunch refusals",
+      "members": "Of the table `relaunch-observe`: `relaunch-disabled`, `still-running`, `operator-stop`, `completed`, `deliberate-stop`, `unknown-terminal`, `lock-conflict`, `unknown-launcher-exit`, `signal-stop`, `invalid-contract`, `preflight-blocked`, `stale-sources`, `launcher-exit-<n>`, `state-not-failed`, `unknown-stage`, `postcondition-failure`, `stage-precondition`, `setup-required`, `interrupted`, `stage-did-not-run`, `stage-did-not-fail`, `exec-error`, `stage-reason-not-transient`, `child-exit-not-retryable`, `stop-reason-not-allowed`, `contract-digest-changed`, `learning-decisions-changed`, `launcher-edited`, `budget-exhausted`, `budget-deadline-exceeded`; the approval `classified-transient`. Added by the table `relaunch-root` (table 1 of the supervisor reads rows of both tables; DV-114): `blocked-on-human`, `lease-lost`, `stop-not-retryable`, `relaunch-held`; the approval `classified-crash`",
+      "literals": [
+        "relaunch-observe",
+        "relaunch-disabled",
+        "still-running",
+        "operator-stop",
+        "completed",
+        "deliberate-stop",
+        "unknown-terminal",
+        "lock-conflict",
+        "unknown-launcher-exit",
+        "signal-stop",
+        "invalid-contract",
+        "preflight-blocked",
+        "stale-sources",
+        "launcher-exit-<n>",
+        "state-not-failed",
+        "unknown-stage",
+        "postcondition-failure",
+        "stage-precondition",
+        "setup-required",
+        "interrupted",
+        "stage-did-not-run",
+        "stage-did-not-fail",
+        "exec-error",
+        "stage-reason-not-transient",
+        "child-exit-not-retryable",
+        "stop-reason-not-allowed",
+        "contract-digest-changed",
+        "learning-decisions-changed",
+        "launcher-edited",
+        "budget-exhausted",
+        "budget-deadline-exceeded",
+        "classified-transient",
+        "relaunch-root",
+        "blocked-on-human",
+        "lease-lost",
+        "stop-not-retryable",
+        "relaunch-held",
+        "classified-crash"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "Refusal"
+    },
+    {
+      "number": 15,
+      "name": "Digest states",
+      "members": "`completed`, `failed`, `stopped`, `dry-run`",
+      "literals": [
+        "completed",
+        "failed",
+        "stopped",
+        "dry-run"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "Supervisor outcome unknown-terminal"
+    },
+    {
+      "number": 16,
+      "name": "Supervision outcomes",
+      "members": "The seven of annex G F100-FR-184",
+      "literals": [],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "Exit 1"
+    },
+    {
+      "number": 17,
+      "name": "Handshake outcomes",
+      "members": "`started`, `attached`, `refused`",
+      "literals": [
+        "started",
+        "attached",
+        "refused"
+      ],
+      "owner": "122",
+      "closedBy": "Design",
+      "unknownValue": "`refused`"
+    },
+    {
+      "number": 18,
+      "name": "Kinds of run request",
+      "members": "`pipeline`, `engine`",
+      "literals": [
+        "pipeline",
+        "engine"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "The launch is refused"
+    },
+    {
+      "number": 19,
+      "name": "Engine start modes",
+      "members": "`standalone`, `child`",
+      "literals": [
+        "standalone",
+        "child"
+      ],
+      "owner": "100",
+      "closedBy": "Design",
+      "unknownValue": "The start is refused"
+    },
+    {
+      "number": 20,
+      "name": "`relaunch.owner`",
+      "members": "`root`, `supervise`",
+      "literals": [
+        "root",
+        "supervise"
+      ],
+      "owner": "123",
+      "closedBy": "Owner decision",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 21,
+      "name": "Inbox request types",
+      "members": "`stop`, `hold-relaunch`, `host-event`",
+      "literals": [
+        "stop",
+        "hold-relaunch",
+        "host-event"
+      ],
+      "owner": "122",
+      "closedBy": "Design",
+      "unknownValue": "The request is ignored and reported"
+    },
+    {
+      "number": 22,
+      "name": "Classes of the process registry; kinds of process",
+      "members": "`owned`, `adoptable`; the seven kinds of annex B §B.10",
+      "literals": [
+        "owned",
+        "adoptable"
+      ],
+      "owner": "122",
+      "closedBy": "Design",
+      "unknownValue": "Class `owned`; the entry is never signalled without the identity check"
+    },
+    {
+      "number": 23,
+      "name": "Results of a lock probe",
+      "members": "The six of annex F §F.5",
+      "literals": [],
+      "owner": "122",
+      "closedBy": "Design",
+      "unknownValue": "`unknown`, which counts as held"
+    },
+    {
+      "number": 24,
+      "name": "Detach strategies",
+      "members": "An open registry; Wave 1: `spawn-detached`, `foreground`",
+      "literals": [
+        "spawn-detached",
+        "foreground"
+      ],
+      "owner": "122",
+      "closedBy": "Open",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 25,
+      "name": "Stage kinds; precondition checks",
+      "members": "Open registries; Wave 1: the five and the six of annex F §F.7",
+      "literals": [],
+      "owner": "123",
+      "closedBy": "Open",
+      "unknownValue": "The launch contract is invalid"
+    },
+    {
+      "number": 26,
+      "name": "Containment levels",
+      "members": "C0, C1, C2, C3",
+      "literals": [],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "Read as C0"
+    },
+    {
+      "number": 27,
+      "name": "`protection`",
+      "members": "`prevent`, `detect`",
+      "literals": [
+        "prevent",
+        "detect"
+      ],
+      "owner": "116",
+      "closedBy": "Design",
+      "unknownValue": "Read as `detect`"
+    },
+    {
+      "number": 28,
+      "name": "Forms of the `completion` level",
+      "members": "`tool-less`, `read-only-tools`",
+      "literals": [
+        "tool-less",
+        "read-only-tools"
+      ],
+      "owner": "109",
+      "closedBy": "Owner decision",
+      "unknownValue": "`critic_not_toolless`"
+    },
+    {
+      "number": 29,
+      "name": "Tool-less mechanism of a descriptor",
+      "members": "`structural`, `flag`, `config`, `none`",
+      "literals": [
+        "structural",
+        "flag",
+        "config",
+        "none"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "`none`"
+    },
+    {
+      "number": 30,
+      "name": "Transports of a harness adapter",
+      "members": "`subprocess`, `sdk-in-process`, `direct-call`",
+      "literals": [
+        "subprocess",
+        "sdk-in-process",
+        "direct-call"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "The transport is unavailable"
+    },
+    {
+      "number": 31,
+      "name": "Kinds of descriptor; stream formats",
+      "members": "Open sets, resolved through registries. Kinds of Wave 1: `cli`, `openai-chat`, `anthropic-messages`. Stream formats of Wave 1: `claude` (alias `claude-stream-json`), `prime-v3`, `text`, `jsonl`, `sse-openai`, `sse-anthropic`",
+      "literals": [
+        "cli",
+        "openai-chat",
+        "anthropic-messages",
+        "claude",
+        "claude-stream-json",
+        "prime-v3",
+        "text",
+        "jsonl",
+        "sse-openai",
+        "sse-anthropic"
+      ],
+      "owner": "109 (the kinds); 126 (the registry; the rows `claude`, `text`, `sse-openai`, `sse-anthropic`); 138 (the rows `jsonl`, `prime-v3`)",
+      "closedBy": "Open",
+      "unknownValue": "The descriptor is refused"
+    },
+    {
+      "number": 32,
+      "name": "Placeholders of a descriptor",
+      "members": "The seven of annex C §C.2",
+      "literals": [],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "The descriptor is refused"
+    },
+    {
+      "number": 33,
+      "name": "Provenance of a capability",
+      "members": "`declared`, `probed`, `adapter`, `catalogue`",
+      "literals": [
+        "declared",
+        "probed",
+        "adapter",
+        "catalogue"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "The value is read as null"
+    },
+    {
+      "number": 34,
+      "name": "States of a harness",
+      "members": "`tested`, `locally-verified`, `declared`, `detected`",
+      "literals": [
+        "tested",
+        "locally-verified",
+        "declared",
+        "detected"
+      ],
+      "owner": "146",
+      "closedBy": "Design",
+      "unknownValue": "`detected`"
+    },
+    {
+      "number": 35,
+      "name": "Origin of a descriptor",
+      "members": "`adapter`, `bundled`, `user`, `detected`",
+      "literals": [
+        "adapter",
+        "bundled",
+        "user",
+        "detected"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "The descriptor is refused"
+    },
+    {
+      "number": 36,
+      "name": "Typed failures of the harness port",
+      "members": "The eight of annex C §C.1",
+      "literals": [],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "`agent_failure`"
+    },
+    {
+      "number": 37,
+      "name": "Outcomes of `betweenPasses`",
+      "members": "`continue`; `stop` with 4; `stop` with 7",
+      "literals": [
+        "continue",
+        "stop",
+        "stop"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "`continue`"
+    },
+    {
+      "number": 38,
+      "name": "Kinds of normalized stream record",
+      "members": "`init`, `text`, `tool`, `usage`, `error`, `terminal`",
+      "literals": [
+        "init",
+        "text",
+        "tool",
+        "usage",
+        "error",
+        "terminal"
+      ],
+      "owner": "126",
+      "closedBy": "Design",
+      "unknownValue": "The record is dropped with a diagnostic event"
+    },
+    {
+      "number": 39,
+      "name": "Dialects of the JSONL reader",
+      "members": "The rows of the dialect table; Wave 1: `prime`, `pi`",
+      "literals": [
+        "prime",
+        "pi"
+      ],
+      "owner": "138",
+      "closedBy": "Open by data",
+      "unknownValue": "The stream is refused"
+    },
+    {
+      "number": 40,
+      "name": "Auth tiers",
+      "members": "Tier 1, Tier 2, Tier 3. Tier 3 is never a valid value of configuration or of a descriptor",
+      "literals": [],
+      "owner": "147",
+      "closedBy": "Owner decision",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 41,
+      "name": "Audiences",
+      "members": "`personal`, `distributed`",
+      "literals": [
+        "personal",
+        "distributed"
+      ],
+      "owner": "147",
+      "closedBy": "Owner decision",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 42,
+      "name": "Status of a terms row",
+      "members": "`allowed`, `conditional`, `personal-only`, `refused`",
+      "literals": [
+        "allowed",
+        "conditional",
+        "personal-only",
+        "refused"
+      ],
+      "owner": "147",
+      "closedBy": "Design",
+      "unknownValue": "`refused`"
+    },
+    {
+      "number": 43,
+      "name": "Cost classes",
+      "members": "`subscription`, `metered`, `local`, `unknown`",
+      "literals": [
+        "subscription",
+        "metered",
+        "local",
+        "unknown"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "`unknown`"
+    },
+    {
+      "number": 44,
+      "name": "Secret schemes",
+      "members": "An open registry; Wave 1: `env:`, `file:`, `keychain:`",
+      "literals": [
+        "env:",
+        "file:",
+        "keychain:"
+      ],
+      "owner": "110",
+      "closedBy": "Open",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 45,
+      "name": "Results of `exists` of a secret",
+      "members": "`yes`, `no`, `unprobed`",
+      "literals": [
+        "yes",
+        "no",
+        "unprobed"
+      ],
+      "owner": "110",
+      "closedBy": "Design",
+      "unknownValue": "`unprobed`"
+    },
+    {
+      "number": 46,
+      "name": "Quota classes",
+      "members": "The nine of annex C §C.13",
+      "literals": [],
+      "owner": "127",
+      "closedBy": "Design",
+      "unknownValue": "`provider_other`"
+    },
+    {
+      "number": 47,
+      "name": "Quota confidence",
+      "members": "`structured`, `status`, `text`, `stall`, `host`",
+      "literals": [
+        "structured",
+        "status",
+        "text",
+        "stall",
+        "host"
+      ],
+      "owner": "127",
+      "closedBy": "Design",
+      "unknownValue": "`text`"
+    },
+    {
+      "number": 48,
+      "name": "Alert levels",
+      "members": "`info`, `warn`, `loud`",
+      "literals": [
+        "info",
+        "warn",
+        "loud"
+      ],
+      "owner": "127",
+      "closedBy": "Design",
+      "unknownValue": "`warn`"
+    },
+    {
+      "number": 49,
+      "name": "Spec formats",
+      "members": "An open registry; Wave 1: `native`, `speckit-tasks`, `openspec-change`, alias `openspec`",
+      "literals": [
+        "native",
+        "speckit-tasks",
+        "openspec-change",
+        "openspec"
+      ],
+      "owner": "104",
+      "closedBy": "Open",
+      "unknownValue": "`unknown-format`"
+    },
+    {
+      "number": 50,
+      "name": "Files of the staleness verdict",
+      "members": "`spec`, `plan`, `tasks`",
+      "literals": [
+        "spec",
+        "plan",
+        "tasks"
+      ],
+      "owner": "104",
+      "closedBy": "Owner decision",
+      "unknownValue": "The verdict is stale"
+    },
+    {
+      "number": 51,
+      "name": "`resume` refusals",
+      "members": "`lock-held` (exit 5), `owner-survivors` (exit 5), `nothing-to-resume` (exit 3), `source-changed` (exit 3), `unsupported-record` (exit 3), `settings-invalid` (exit 3)",
+      "literals": [
+        "lock-held",
+        "owner-survivors",
+        "nothing-to-resume",
+        "source-changed",
+        "unsupported-record",
+        "settings-invalid"
+      ],
+      "owner": "102",
+      "closedBy": "Owner decision",
+      "unknownValue": "Not applicable: the CLI writes them"
+    },
+    {
+      "number": 52,
+      "name": "Verification modes",
+      "members": "`required`, `plan`, `off`",
+      "literals": [
+        "required",
+        "plan",
+        "off"
+      ],
+      "owner": "105",
+      "closedBy": "Owner decision",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 53,
+      "name": "Result conditions of a check; reasons of `tainted`; reasons of `unchecked`",
+      "members": "`tainted`, `cached`, `flaky`, `interrupted`, `unchecked`; `changed-during-check`, `protected-set-changed`, `pin-mismatch`; `no-command`, `slow`, `budget`, `flaky-excluded`, `gate-not-executing`, `partial`, `unknown-condition`",
+      "literals": [
+        "tainted",
+        "cached",
+        "flaky",
+        "interrupted",
+        "unchecked",
+        "changed-during-check",
+        "protected-set-changed",
+        "pin-mismatch",
+        "no-command",
+        "slow",
+        "budget",
+        "flaky-excluded",
+        "gate-not-executing",
+        "partial",
+        "unknown-condition"
+      ],
+      "owner": "148",
+      "closedBy": "Design",
+      "unknownValue": "An unknown condition makes the result `unchecked` with the reason `unknown-condition`; an unknown reason is shown as text"
+    },
+    {
+      "number": 54,
+      "name": "Errors of the check runner",
+      "members": "`cannot-start`, `timeout`, `interrupted`",
+      "literals": [
+        "cannot-start",
+        "timeout",
+        "interrupted"
+      ],
+      "owner": "148",
+      "closedBy": "Design",
+      "unknownValue": "`cannot-start`"
+    },
+    {
+      "number": 55,
+      "name": "Loop strategies",
+      "members": "`classic`, `micro`",
+      "literals": [
+        "classic",
+        "micro"
+      ],
+      "owner": "115",
+      "closedBy": "Owner decision",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 56,
+      "name": "Micro levels",
+      "members": "L0, L1, L2, L3; Wave 1 uses L1",
+      "literals": [],
+      "owner": "115",
+      "closedBy": "Design",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 57,
+      "name": "Directives of a loop layer",
+      "members": "The eleven of annex D §D.1",
+      "literals": [],
+      "owner": "103",
+      "closedBy": "Design",
+      "unknownValue": "The layer is refused at registration"
+    },
+    {
+      "number": 58,
+      "name": "Returns of `afterPass`",
+      "members": "`accept`, `refuse`, `none`",
+      "literals": [
+        "accept",
+        "refuse",
+        "none"
+      ],
+      "owner": "103",
+      "closedBy": "Design",
+      "unknownValue": "`none`; the layer is off for the phase attempt"
+    },
+    {
+      "number": 59,
+      "name": "Fallback reasons of the layer `micro`",
+      "members": "`gate-not-executing`, `no-check`, `single-unit`, `harness`, `config`, `tripwire`",
+      "literals": [
+        "gate-not-executing",
+        "no-check",
+        "single-unit",
+        "harness",
+        "config",
+        "tripwire"
+      ],
+      "owner": "115",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text"
+    },
+    {
+      "number": 60,
+      "name": "Fallback reasons of the layer `parallel`",
+      "members": "`classic`, `gate-not-executing`, `not-git`, `submodules`, `git-version`, `harness`, `containment`, `no-group`",
+      "literals": [
+        "classic",
+        "gate-not-executing",
+        "not-git",
+        "submodules",
+        "git-version",
+        "harness",
+        "containment",
+        "no-group"
+      ],
+      "owner": "142",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text; the layer is off"
+    },
+    {
+      "number": 61,
+      "name": "Admission checks of a parallel group",
+      "members": "`marker`, `scope`, `protected`, `resource`, `headroom`, `check`, `links`, `jobs`",
+      "literals": [
+        "marker",
+        "scope",
+        "protected",
+        "resource",
+        "headroom",
+        "check",
+        "links",
+        "jobs"
+      ],
+      "owner": "142",
+      "closedBy": "Design",
+      "unknownValue": "The task is serial"
+    },
+    {
+      "number": 62,
+      "name": "Outcomes of a worker",
+      "members": "`integrated`, `refused`, `killed`, `paused`",
+      "literals": [
+        "integrated",
+        "refused",
+        "killed",
+        "paused"
+      ],
+      "owner": "143",
+      "closedBy": "Design",
+      "unknownValue": "`refused`"
+    },
+    {
+      "number": 63,
+      "name": "Refusal reasons of a delta",
+      "members": "`scope`, `protected`, `overlap`, `path-leak`, `checkpoint`, `yield`, `tree-changed-after-end`, `workspace-changed`",
+      "literals": [
+        "scope",
+        "protected",
+        "overlap",
+        "path-leak",
+        "checkpoint",
+        "yield",
+        "tree-changed-after-end",
+        "workspace-changed"
+      ],
+      "owner": "142",
+      "closedBy": "Design",
+      "unknownValue": "The delta is refused"
+    },
+    {
+      "number": 64,
+      "name": "Operations of the tree store",
+      "members": "The seven of annex D §D.2",
+      "literals": [],
+      "owner": "143",
+      "closedBy": "Design",
+      "unknownValue": "The layer is refused at registration"
+    },
+    {
+      "number": 65,
+      "name": "Integrity kinds that reach the critic",
+      "members": "`ledger-invalid`, `manifest-mismatch`, `pin-mismatch`, `changed-during-check`, `phase-entry-mismatch`, `toolchain-config-changed`, `advisory-marker-removed`, and the two neutral kinds of 142, `tree-changed-outside-pass` and `protected-change-not-applied`",
+      "literals": [
+        "ledger-invalid",
+        "manifest-mismatch",
+        "pin-mismatch",
+        "changed-during-check",
+        "phase-entry-mismatch",
+        "toolchain-config-changed",
+        "advisory-marker-removed",
+        "tree-changed-outside-pass",
+        "protected-change-not-applied"
+      ],
+      "owner": "116",
+      "closedBy": "Design",
+      "unknownValue": "The kind is not shown to the critic; it stays in the event file"
+    },
+    {
+      "number": 66,
+      "name": "Further facts of the fact block",
+      "members": "`manifest-rederived`, `result-of-stopped-job`, `evidence-predates-tree`, `source-change-accepted`, `task-list-changed`",
+      "literals": [
+        "manifest-rederived",
+        "result-of-stopped-job",
+        "evidence-predates-tree",
+        "source-change-accepted",
+        "task-list-changed"
+      ],
+      "owner": "116",
+      "closedBy": "Design",
+      "unknownValue": "Not shown"
+    },
+    {
+      "number": 67,
+      "name": "Decision points of the router and their choice sets",
+      "members": "`tools`: `run`, `exclude:flaky`, `exclude:slow`, `exclude:budget`. `loop`: `stay`, `off:<registered layer>`. `escalation`: `next-tier`, `skip:<skip reason>`. `attempt-tier` (of the attempt planner, owner 149): `bump`, `skip`, `none`. A layer may register a point",
+      "literals": [
+        "tools",
+        "run",
+        "exclude:flaky",
+        "exclude:slow",
+        "exclude:budget",
+        "loop",
+        "stay",
+        "off:<registered layer>",
+        "escalation",
+        "next-tier",
+        "skip:<skip reason>",
+        "attempt-tier",
+        "bump",
+        "skip",
+        "none"
+      ],
+      "owner": "115",
+      "closedBy": "Design",
+      "unknownValue": "The table is invalid"
+    },
+    {
+      "number": 68,
+      "name": "Operators of a table predicate",
+      "members": "The nine of §X.3",
+      "literals": [],
+      "owner": "100",
+      "closedBy": "Design",
+      "unknownValue": "The table is invalid"
+    },
+    {
+      "number": 69,
+      "name": "Predicates of a yield; actions on a first failure",
+      "members": "The seven kinds of annex D §D.6; `stop`, `continue-and-notify`",
+      "literals": [
+        "stop",
+        "continue-and-notify"
+      ],
+      "owner": "118",
+      "closedBy": "Design",
+      "unknownValue": "The yield artifact is refused"
+    },
+    {
+      "number": 70,
+      "name": "Job modes of a yield",
+      "members": "`launch`, `adopt`",
+      "literals": [
+        "launch",
+        "adopt"
+      ],
+      "owner": "118",
+      "closedBy": "Design",
+      "unknownValue": "The yield artifact is refused"
+    },
+    {
+      "number": 71,
+      "name": "Severities of a doctor finding",
+      "members": "`ok`, `info`, `warn`, `fail`",
+      "literals": [
+        "ok",
+        "info",
+        "warn",
+        "fail"
+      ],
+      "owner": "112",
+      "closedBy": "Design",
+      "unknownValue": "`warn`"
+    },
+    {
+      "number": 72,
+      "name": "Event roles",
+      "members": "The role registry, and `supervisor`, `host`",
+      "literals": [
+        "supervisor",
+        "host"
+      ],
+      "owner": "111; 124",
+      "closedBy": "Open",
+      "unknownValue": "Kept as text"
+    },
+    {
+      "number": 73,
+      "name": "Event types",
+      "members": "The catalogue of 111; the prefix `x.` is free",
+      "literals": [
+        "x."
+      ],
+      "owner": "111",
+      "closedBy": "Open by prefix",
+      "unknownValue": "Ignored by readers"
+    },
+    {
+      "number": 74,
+      "name": "`parallel.*` event types",
+      "members": "`parallel.plan`, `parallel.admission`, `parallel.group.started`, `parallel.group.ended`, `parallel.worker.started`, `parallel.worker.ended`, `parallel.integration`",
+      "literals": [
+        "parallel.plan",
+        "parallel.admission",
+        "parallel.group.started",
+        "parallel.group.ended",
+        "parallel.worker.started",
+        "parallel.worker.ended",
+        "parallel.integration"
+      ],
+      "owner": "111",
+      "closedBy": "Design",
+      "unknownValue": "Ignored by readers; they project to nothing"
+    },
+    {
+      "number": 75,
+      "name": "Ranks of configuration",
+      "members": "The eight of §X.2",
+      "literals": [],
+      "owner": "100",
+      "closedBy": "Owner decision",
+      "unknownValue": "Not applicable"
+    },
+    {
+      "number": 76,
+      "name": "Trust classes; key classes of the run snapshot",
+      "members": "Widening, narrowing, neutral, pinnable; `pinned`, `tunable`",
+      "literals": [
+        "pinned",
+        "tunable"
+      ],
+      "owner": "100; 102",
+      "closedBy": "Design",
+      "unknownValue": "A key without a trust class is widening; a key of the run snapshot without a class is read as `pinned`"
+    },
+    {
+      "number": 77,
+      "name": "Learning modes",
+      "members": "`off`, `suggest`, `apply`",
+      "literals": [
+        "off",
+        "suggest",
+        "apply"
+      ],
+      "owner": "106",
+      "closedBy": "Design",
+      "unknownValue": "`off`"
+    },
+    {
+      "number": 78,
+      "name": "Modes of the host skill `specstride-run`",
+      "members": "`run`, `dry-run`",
+      "literals": [
+        "run",
+        "dry-run"
+      ],
+      "owner": "107",
+      "closedBy": "Owner decision",
+      "unknownValue": "The launch is withheld"
+    },
+    {
+      "number": 79,
+      "name": "Status of a launch contract; kinds and dispositions of a coverage obligation; severity and status of a finding",
+      "members": "`draft`, `validated`; the other members are in annex G §G.8",
+      "literals": [
+        "draft",
+        "validated"
+      ],
+      "owner": "107",
+      "closedBy": "Design",
+      "unknownValue": "The launch contract is invalid"
+    },
+    {
+      "number": 80,
+      "name": "Output modes",
+      "members": "Default output, compatibility output",
+      "literals": [],
+      "owner": "100",
+      "closedBy": "Owner decision",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 81,
+      "name": "Labels of output lines",
+      "members": "The families of annex G §G.3",
+      "literals": [],
+      "owner": "100; each line its feature",
+      "closedBy": "Design",
+      "unknownValue": "A parser ignores a line whose label it does not know"
+    },
+    {
+      "number": 82,
+      "name": "Reasons of a launch",
+      "members": "`first`, `resume`, `relaunch`, `manual`",
+      "literals": [
+        "first",
+        "resume",
+        "relaunch",
+        "manual"
+      ],
+      "owner": "122",
+      "closedBy": "Design",
+      "unknownValue": "`manual`"
+    },
+    {
+      "number": 83,
+      "name": "Classes of implementation of an extension point",
+      "members": "Data, first-party code, third-party code",
+      "literals": [],
+      "owner": "100",
+      "closedBy": "Owner decision",
+      "unknownValue": "Refused at registration"
+    },
+    {
+      "number": 84,
+      "name": "Capabilities of a host",
+      "members": "The six of annex H §H.1",
+      "literals": [],
+      "owner": "113",
+      "closedBy": "Design",
+      "unknownValue": "Ignored"
+    },
+    {
+      "number": 85,
+      "name": "Normalization rules",
+      "members": "N-01 to N-29 of §X.8",
+      "literals": [],
+      "owner": "100",
+      "closedBy": "Owner decision",
+      "unknownValue": "A rule is added only with a register row"
+    },
+    {
+      "number": 86,
+      "name": "Results of the comparator",
+      "members": "`equal`, `waived` with its register row, `different`",
+      "literals": [
+        "equal",
+        "waived",
+        "different"
+      ],
+      "owner": "141",
+      "closedBy": "Design",
+      "unknownValue": "`different`"
+    },
+    {
+      "number": 87,
+      "name": "Auth schemes of a descriptor",
+      "members": "`bearer`, `x-api-key`, `none`",
+      "literals": [
+        "bearer",
+        "x-api-key",
+        "none"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "The descriptor is refused"
+    },
+    {
+      "number": 88,
+      "name": "Scopes of an overlay",
+      "members": "`none`, `pass`, `attempt`",
+      "literals": [
+        "none",
+        "pass",
+        "attempt"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "Configuration error (exit 3)"
+    },
+    {
+      "number": 89,
+      "name": "Ingress classes",
+      "members": "`stream-text`, `tool-arguments`, `tool-result`, `diagnostic`, `target`, `check-output`, `critic-reply`, `comment`, `free-text`",
+      "literals": [
+        "stream-text",
+        "tool-arguments",
+        "tool-result",
+        "diagnostic",
+        "target",
+        "check-output",
+        "critic-reply",
+        "comment",
+        "free-text"
+      ],
+      "owner": "111",
+      "closedBy": "Design",
+      "unknownValue": "Treated as `free-text`"
+    },
+    {
+      "number": 90,
+      "name": "Marks of dropped content",
+      "members": "`redactor-unavailable`, `pattern-set-invalid`",
+      "literals": [
+        "redactor-unavailable",
+        "pattern-set-invalid"
+      ],
+      "owner": "111",
+      "closedBy": "Design",
+      "unknownValue": "Read as `redactor-unavailable`"
+    },
+    {
+      "number": 91,
+      "name": "Writer classes of the compatibility projection",
+      "members": "`engine`, `stream-tap`, `critic`, `learning`",
+      "literals": [
+        "engine",
+        "stream-tap",
+        "critic",
+        "learning"
+      ],
+      "owner": "144",
+      "closedBy": "Design",
+      "unknownValue": "`engine`"
+    },
+    {
+      "number": 92,
+      "name": "Row shapes of the compatibility projection",
+      "members": "`bash`, `python`, `learning`, `none`",
+      "literals": [
+        "bash",
+        "python",
+        "learning",
+        "none"
+      ],
+      "owner": "144",
+      "closedBy": "Design",
+      "unknownValue": "The table is invalid"
+    },
+    {
+      "number": 93,
+      "name": "Delivery statuses of a sink",
+      "members": "`attempted`, `accepted`, `failed`, `unknown`",
+      "literals": [
+        "attempted",
+        "accepted",
+        "failed",
+        "unknown"
+      ],
+      "owner": "111",
+      "closedBy": "Design",
+      "unknownValue": "`unknown`"
+    },
+    {
+      "number": 94,
+      "name": "Reasons of a dropped event",
+      "members": "`write-failed`, `invalid`, `too-large`",
+      "literals": [
+        "write-failed",
+        "invalid",
+        "too-large"
+      ],
+      "owner": "111",
+      "closedBy": "Design",
+      "unknownValue": "`write-failed`"
+    },
+    {
+      "number": 95,
+      "name": "Categories of a tool call",
+      "members": "`read`, `edit`, `exec`, `wait`, `search`, `other`",
+      "literals": [
+        "read",
+        "edit",
+        "exec",
+        "wait",
+        "search",
+        "other"
+      ],
+      "owner": "111",
+      "closedBy": "Design",
+      "unknownValue": "`other`"
+    },
+    {
+      "number": 96,
+      "name": "Causes of a synthesized end of a run",
+      "members": "`crash`, `host_exit`, `operator_stop`",
+      "literals": [
+        "crash",
+        "host_exit",
+        "operator_stop"
+      ],
+      "owner": "111",
+      "closedBy": "Design",
+      "unknownValue": "`crash`"
+    },
+    {
+      "number": 97,
+      "name": "Kinds of source of a specification",
+      "members": "`spec`, `plan`, `tasks`, `other`",
+      "literals": [
+        "spec",
+        "plan",
+        "tasks",
+        "other"
+      ],
+      "owner": "104",
+      "closedBy": "Design",
+      "unknownValue": "Read as `other`"
+    },
+    {
+      "number": 98,
+      "name": "States of a source in a staleness verdict",
+      "members": "`unchanged`, `ticks-only`, `changed`, `unreadable`",
+      "literals": [
+        "unchanged",
+        "ticks-only",
+        "changed",
+        "unreadable"
+      ],
+      "owner": "104",
+      "closedBy": "Design",
+      "unknownValue": "Read as `changed`"
+    },
+    {
+      "number": 99,
+      "name": "Errors of a spec-format adapter",
+      "members": "`invalid-spec`, `ambiguous-candidates`, `unknown-format`",
+      "literals": [
+        "invalid-spec",
+        "ambiguous-candidates",
+        "unknown-format"
+      ],
+      "owner": "104",
+      "closedBy": "Design",
+      "unknownValue": "Read as `invalid-spec`"
+    },
+    {
+      "number": 100,
+      "name": "Subcommands of the command `spec`",
+      "members": "`feature-slug`, `detect`, `context`, `render-context`, `validate`, `tick`, `numbers`, `title`, `shape`, `slice`, `first-unapproved`",
+      "literals": [
+        "feature-slug",
+        "detect",
+        "context",
+        "render-context",
+        "validate",
+        "tick",
+        "numbers",
+        "title",
+        "shape",
+        "slice",
+        "first-unapproved"
+      ],
+      "owner": "104",
+      "closedBy": "Design",
+      "unknownValue": "Usage error, exit 2"
+    },
+    {
+      "number": 101,
+      "name": "Resolve refusals",
+      "members": "`launcher-not-found`, `launcher-missing`, `launcher-ambiguous`, `launcher-unreadable`, `launcher-not-generated`",
+      "literals": [
+        "launcher-not-found",
+        "launcher-missing",
+        "launcher-ambiguous",
+        "launcher-unreadable",
+        "launcher-not-generated"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "Refusal"
+    },
+    {
+      "number": 102,
+      "name": "Pipeline states; states of one stage",
+      "members": "`preflight`, `ready`, `running`, `failed`, `stopped`, `completed`; `running`, `completed`, `failed`, `stopped`",
+      "literals": [
+        "preflight",
+        "ready",
+        "running",
+        "failed",
+        "stopped",
+        "completed",
+        "running",
+        "completed",
+        "failed",
+        "stopped"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "The record is read as empty"
+    },
+    {
+      "number": 103,
+      "name": "Launch decisions; launch checks; statuses of a launch check",
+      "members": "`launch`, `refuse`, `attach`; `launcher-intact`, `contract-validated`, `authorized-root`, `launcher-syntax`, `launcher-dry-run`, `run-directory-free`; `pass`, `fail`, `not-evaluated`",
+      "literals": [
+        "launch",
+        "refuse",
+        "attach",
+        "launcher-intact",
+        "contract-validated",
+        "authorized-root",
+        "launcher-syntax",
+        "launcher-dry-run",
+        "run-directory-free",
+        "pass",
+        "fail",
+        "not-evaluated"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "`refuse`"
+    },
+    {
+      "number": 104,
+      "name": "Relaunch decisions",
+      "members": "`relaunch`, `refuse`, `hold`",
+      "literals": [
+        "relaunch",
+        "refuse",
+        "hold"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "`refuse`"
+    },
+    {
+      "number": 105,
+      "name": "Classes of a stage reason",
+      "members": "`transient`, `postcondition`, `stage-precondition`, `setup-required`, `interrupted`, `existing-prerequisite`, `completed`, `exec-error`, `other`",
+      "literals": [
+        "transient",
+        "postcondition",
+        "stage-precondition",
+        "setup-required",
+        "interrupted",
+        "existing-prerequisite",
+        "completed",
+        "exec-error",
+        "other"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "`other`"
+    },
+    {
+      "number": 106,
+      "name": "Observation statuses of supervision",
+      "members": "`running`, `starting`, `lock-conflict`, `completed`, `failed`, `stopped`, `unknown-terminal`",
+      "literals": [
+        "running",
+        "starting",
+        "lock-conflict",
+        "completed",
+        "failed",
+        "stopped",
+        "unknown-terminal"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "`unknown-terminal`"
+    },
+    {
+      "number": 107,
+      "name": "As-is modes of a launch by `supervise`; sources of a mode; sources of a launcher",
+      "members": "`generate`, `run`, `auto`; `token`, `refusal`, `prose`, `default`; `request`, `feature-default`, `generated-marker`",
+      "literals": [
+        "generate",
+        "run",
+        "auto",
+        "token",
+        "refusal",
+        "prose",
+        "default",
+        "request",
+        "feature-default",
+        "generated-marker"
+      ],
+      "owner": "123",
+      "closedBy": "Owner decision",
+      "unknownValue": "The launch is withheld"
+    },
+    {
+      "number": 108,
+      "name": "Timings and results of a precondition check",
+      "members": "`preflight`, `stage`; `pass`, `fail`, `deferred`",
+      "literals": [
+        "preflight",
+        "stage",
+        "pass",
+        "fail",
+        "deferred"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "The check is `fail`"
+    },
+    {
+      "number": 109,
+      "name": "Colour modes of the pipeline entry",
+      "members": "`auto`, `always`, `never`",
+      "literals": [
+        "auto",
+        "always",
+        "never"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "Usage error, exit 2"
+    },
+    {
+      "number": 110,
+      "name": "Relaunch classifier tables",
+      "members": "`relaunch-observe`, `relaunch-root`",
+      "literals": [
+        "relaunch-observe",
+        "relaunch-root"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "The table is invalid"
+    },
+    {
+      "number": 111,
+      "name": "Verbs of `supervise`",
+      "members": "`mode`, `resolve`, `gate`, `launch`, `watch`, `observe`, `auto`, `stop`, `hold`, `release`, and `learning` and `retro` (owner 106)",
+      "literals": [
+        "mode",
+        "resolve",
+        "gate",
+        "launch",
+        "watch",
+        "observe",
+        "auto",
+        "stop",
+        "hold",
+        "release",
+        "learning",
+        "retro"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "Usage error, exit 2"
+    },
+    {
+      "number": 112,
+      "name": "Outcomes of a wait on a yield",
+      "members": "`satisfied`, `timeout`, `stop`, `wall_budget`",
+      "literals": [
+        "satisfied",
+        "timeout",
+        "stop",
+        "wall_budget"
+      ],
+      "owner": "118",
+      "closedBy": "Design",
+      "unknownValue": "Read as `timeout`"
+    },
+    {
+      "number": 113,
+      "name": "Steps of the end of a pass",
+      "members": "`polite`, `terminate`, `kill`",
+      "literals": [
+        "polite",
+        "terminate",
+        "kill"
+      ],
+      "owner": "118",
+      "closedBy": "Design",
+      "unknownValue": "The step is not taken"
+    },
+    {
+      "number": 114,
+      "name": "Results of the evaluation of a yield predicate",
+      "members": "0 satisfied, 1 not yet, 2 cannot be satisfied",
+      "literals": [],
+      "owner": "118",
+      "closedBy": "Design",
+      "unknownValue": "Read as 2"
+    },
+    {
+      "number": 115,
+      "name": "Kinds of presence line of the grounding snapshot",
+      "members": "`file`, `directory`, `missing`, `needs-grounding`, `wildcard`, `binary`, `unreadable`, `refused`, `not-shown`",
+      "literals": [
+        "file",
+        "directory",
+        "missing",
+        "needs-grounding",
+        "wildcard",
+        "binary",
+        "unreadable",
+        "refused",
+        "not-shown"
+      ],
+      "owner": "117",
+      "closedBy": "Design",
+      "unknownValue": "The line is not written; the path counts as `not-shown`"
+    },
+    {
+      "number": 116,
+      "name": "Refused roots of grounding",
+      "members": "`control`, `events`, `outbox`, `carry-over`, `worker-root`, `tree-store`, `repository`",
+      "literals": [
+        "control",
+        "events",
+        "outbox",
+        "carry-over",
+        "worker-root",
+        "tree-store",
+        "repository"
+      ],
+      "owner": "117",
+      "closedBy": "Owner decision",
+      "unknownValue": "Refused"
+    },
+    {
+      "number": 117,
+      "name": "Kinds of excerpt",
+      "members": "`whole`, `anchored`, `head-tail`, `omitted`, `none`",
+      "literals": [
+        "whole",
+        "anchored",
+        "head-tail",
+        "omitted",
+        "none"
+      ],
+      "owner": "117",
+      "closedBy": "Design",
+      "unknownValue": "`omitted`"
+    },
+    {
+      "number": 118,
+      "name": "Blocks of the critic's prompt",
+      "members": "`rules`, `fact-block`, `criteria`, `evidence`, `grounding`, `pins`, `context`, `end`; for the diagnostician also `history`",
+      "literals": [
+        "rules",
+        "fact-block",
+        "criteria",
+        "evidence",
+        "grounding",
+        "pins",
+        "context",
+        "end",
+        "history"
+      ],
+      "owner": "117",
+      "closedBy": "Design",
+      "unknownValue": "The block is left out and recorded"
+    },
+    {
+      "number": 119,
+      "name": "Order of shrinking of the critic's prompt",
+      "members": "`context`, `grounding`, `evidence`",
+      "literals": [
+        "context",
+        "grounding",
+        "evidence"
+      ],
+      "owner": "117",
+      "closedBy": "Design",
+      "unknownValue": "Not applicable"
+    },
+    {
+      "number": 120,
+      "name": "Values of `prompt.critic.overWindow`",
+      "members": "`refuse`, `send`",
+      "literals": [
+        "refuse",
+        "send"
+      ],
+      "owner": "117",
+      "closedBy": "Design",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 121,
+      "name": "Block sets of a prompt (proposer and critic)",
+      "members": "`current`, `as-is`",
+      "literals": [
+        "current",
+        "as-is"
+      ],
+      "owner": "103; 117",
+      "closedBy": "Design",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 122,
+      "name": "Ways a critic call ends, for the return of the hidden files",
+      "members": "`reply`, `failure`, `time-limit`, `kill`, `stop`",
+      "literals": [
+        "reply",
+        "failure",
+        "time-limit",
+        "kill",
+        "stop"
+      ],
+      "owner": "117",
+      "closedBy": "Design",
+      "unknownValue": "The files are returned"
+    },
+    {
+      "number": 123,
+      "name": "Capability levels of the harness port",
+      "members": "`proposer`, `completion`",
+      "literals": [
+        "proposer",
+        "completion"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "The entry is refused at registration"
+    },
+    {
+      "number": 124,
+      "name": "Qualifier forms of a registry entry",
+      "members": "`none`, `optional`, `required`",
+      "literals": [
+        "none",
+        "optional",
+        "required"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "The entry is refused at registration"
+    },
+    {
+      "number": 125,
+      "name": "Modes of `stop` of the harness port",
+      "members": "`polite`, `terminate`, `kill`",
+      "literals": [
+        "polite",
+        "terminate",
+        "kill"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "Read as `terminate`"
+    },
+    {
+      "number": 126,
+      "name": "Session directives",
+      "members": "`fresh`, `continue`",
+      "literals": [
+        "fresh",
+        "continue"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "Read as `fresh`"
+    },
+    {
+      "number": 127,
+      "name": "Ways to hand over a prompt",
+      "members": "`stdin`, `file`, `argument`",
+      "literals": [
+        "stdin",
+        "file",
+        "argument"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "The descriptor is refused"
+    },
+    {
+      "number": 128,
+      "name": "Kinds of proof of the form of a critic",
+      "members": "`initial-record`, `pinned-configuration`, `read-only-sandbox`",
+      "literals": [
+        "initial-record",
+        "pinned-configuration",
+        "read-only-sandbox"
+      ],
+      "owner": "109",
+      "closedBy": "Owner decision (rulings 57, 57a, D1); the member `pinned-configuration` by the owner's answer of CQ-182 (2026-09-30; Principle IX of constitution v3.0.1)",
+      "unknownValue": "`critic_not_toolless`"
+    },
+    {
+      "number": 129,
+      "name": "Scope words of an overlay marker",
+      "members": "`pass`, `attempt`, `critic`",
+      "literals": [
+        "pass",
+        "attempt",
+        "critic"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "The tree is not an overlay of the product and is left alone"
+    },
+    {
+      "number": 130,
+      "name": "Kinds of record of the environment record of an overlay",
+      "members": "`unset`, `set`",
+      "literals": [
+        "unset",
+        "set"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "The pass fails with the result 1"
+    },
+    {
+      "number": 131,
+      "name": "Results of `harness verify`",
+      "members": "`passed`, `failed`",
+      "literals": [
+        "passed",
+        "failed"
+      ],
+      "owner": "109",
+      "closedBy": "Design",
+      "unknownValue": "Read as `failed`"
+    },
+    {
+      "number": 132,
+      "name": "Kinds of record of the ledger namespace `core`",
+      "members": "`attempt-open`, `attempt-closed`, `pass-closed`, `counts-reset`",
+      "literals": [
+        "attempt-open",
+        "attempt-closed",
+        "pass-closed",
+        "counts-reset"
+      ],
+      "owner": "103",
+      "closedBy": "Design",
+      "unknownValue": "The record stays in the check of the chain; its content is ignored"
+    },
+    {
+      "number": 133,
+      "name": "Reasons for a fresh session",
+      "members": "`new-attempt`, `watchdog-kill`, `repeated-failure`, `context-fill`, `age`, `configuration-change`, `relaunch`, `session-unavailable`, `continuation-cap`, `profile-parity`, `group-applied`, `no-continuation`",
+      "literals": [
+        "new-attempt",
+        "watchdog-kill",
+        "repeated-failure",
+        "context-fill",
+        "age",
+        "configuration-change",
+        "relaunch",
+        "session-unavailable",
+        "continuation-cap",
+        "profile-parity",
+        "group-applied",
+        "no-continuation"
+      ],
+      "owner": "103",
+      "closedBy": "Design",
+      "unknownValue": "Read as `new-attempt`"
+    },
+    {
+      "number": 134,
+      "name": "Groups of a doctor check",
+      "members": "`env`, `cli`, `host`, `bin`, `harness`, `auth`, `model`, `critic`, `terms`, `quota`, `budget`, `config`, `secret`, `run`, `sandbox`, `ui`, `telemetry`, `events`, `memory`",
+      "literals": [
+        "env",
+        "cli",
+        "host",
+        "bin",
+        "harness",
+        "auth",
+        "model",
+        "critic",
+        "terms",
+        "quota",
+        "budget",
+        "config",
+        "secret",
+        "run",
+        "sandbox",
+        "ui",
+        "telemetry",
+        "events",
+        "memory"
+      ],
+      "owner": "112",
+      "closedBy": "Design",
+      "unknownValue": "The check is refused at registration"
+    },
+    {
+      "number": 135,
+      "name": "Kinds of accepted change of a source",
+      "members": "`spec`, `plan`, `tasks`",
+      "literals": [
+        "spec",
+        "plan",
+        "tasks"
+      ],
+      "owner": "102",
+      "closedBy": "Design",
+      "unknownValue": "Refused"
+    },
+    {
+      "number": 136,
+      "name": "Outcomes of a unit of work",
+      "members": "`kept`, `repair`, `unresolved`",
+      "literals": [
+        "kept",
+        "repair",
+        "unresolved"
+      ],
+      "owner": "115",
+      "closedBy": "Design",
+      "unknownValue": "Read as `unresolved`"
+    },
+    {
+      "number": 137,
+      "name": "Status of a unit or task without a result",
+      "members": "`unchecked`",
+      "literals": [
+        "unchecked"
+      ],
+      "owner": "115",
+      "closedBy": "Design",
+      "unknownValue": "Read as `unchecked`"
+    },
+    {
+      "number": 138,
+      "name": "Refusal reasons of a checkpoint",
+      "members": "`pass-killed`, `foreign-id`, `yield-in-pass`, `not-regular`, `stale`, `too-large`, `changed-while-read`, `empty`",
+      "literals": [
+        "pass-killed",
+        "foreign-id",
+        "yield-in-pass",
+        "not-regular",
+        "stale",
+        "too-large",
+        "changed-while-read",
+        "empty"
+      ],
+      "owner": "115",
+      "closedBy": "Design",
+      "unknownValue": "The checkpoint is refused"
+    },
+    {
+      "number": 139,
+      "name": "Kinds of record of the ledger namespace `micro`",
+      "members": "`unit-declared`, `check-started`, `check-finished`, `unit-kept`, `unit-repair`, `unit-unresolved`, `command-excluded`, `escalation`, `closing-check`, `disengaged`, `integrity`",
+      "literals": [
+        "unit-declared",
+        "check-started",
+        "check-finished",
+        "unit-kept",
+        "unit-repair",
+        "unit-unresolved",
+        "command-excluded",
+        "escalation",
+        "closing-check",
+        "disengaged",
+        "integrity"
+      ],
+      "owner": "115",
+      "closedBy": "Design",
+      "unknownValue": "The ledger is invalid for the layer; the layer is off for the phase attempt"
+    },
+    {
+      "number": 140,
+      "name": "Skip reasons of an escalation",
+      "members": "`off`, `integrity`, `flaky`, `not-due`, `cap`, `no-ladder`, `critic-collision`, `quota`, `budget`",
+      "literals": [
+        "off",
+        "integrity",
+        "flaky",
+        "not-due",
+        "cap",
+        "no-ladder",
+        "critic-collision",
+        "quota",
+        "budget"
+      ],
+      "owner": "115",
+      "closedBy": "Design",
+      "unknownValue": "Read as a skip; shown as text"
+    },
+    {
+      "number": 141,
+      "name": "Breach kinds of the integrity of the phase gate",
+      "members": "`approval-without-gate`, `outer-counter-changed`, `critic-input-excluded-field`, `false-pass`",
+      "literals": [
+        "approval-without-gate",
+        "outer-counter-changed",
+        "critic-input-excluded-field",
+        "false-pass"
+      ],
+      "owner": "115",
+      "closedBy": "Owner decision",
+      "unknownValue": "Treated as a breach"
+    },
+    {
+      "number": 142,
+      "name": "Classes of the protected set",
+      "members": "A, B",
+      "literals": [],
+      "owner": "116",
+      "closedBy": "Design",
+      "unknownValue": "Read as class A"
+    },
+    {
+      "number": 143,
+      "name": "Freshness of a result",
+      "members": "`current`, `superseded`",
+      "literals": [
+        "current",
+        "superseded"
+      ],
+      "owner": "116",
+      "closedBy": "Design",
+      "unknownValue": "Read as `superseded`"
+    },
+    {
+      "number": 144,
+      "name": "Logical ids of host skills and entries",
+      "members": "`specstride-run`, `specstride-reverse`, `doctor`",
+      "literals": [
+        "specstride-run",
+        "specstride-reverse",
+        "doctor"
+      ],
+      "owner": "113",
+      "closedBy": "Design",
+      "unknownValue": "The build fails"
+    },
+    {
+      "number": 145,
+      "name": "Checks of the context-cost build",
+      "members": "static size, reference closure, golden output, supervision cycle, judgment payload, host cross-check, startup",
+      "literals": [],
+      "owner": "113",
+      "closedBy": "Design",
+      "unknownValue": "The build fails"
+    },
+    {
+      "number": 146,
+      "name": "Finding codes of the reverse lint",
+      "members": "`template.mandatory`, `template.family`, `template.expected`, `placeholder`, `structure.extra`, `structure.contracts`, `structure.required`, `evidence.format`, `evidence.kind`, `evidence.confidence`, `evidence.validation`, `evidence.disproved`, `evidence.citation`, `evidence.contradicts`, `evidence.missing`, `evidence.skipped`, `unknowns.placement`, `spec.fr-format`, `spec.sc-format`, `spec.fr-unique`, `spec.sc-unique`, `spec.story-format`, `spec.story-numbers`, `spec.story-parts`, `spec.clarifications`, `research.decisions`, `data-model.entities`, `checklist.items`, `tasks.grammar`, `tasks.line-format`, `tasks.ids`, `tasks.phase-order`, `tasks.story-labels`, `tasks.story-exists`, `tasks.parallel-files`, `tasks.mode`, `coverage.fr`, `claims.missing`",
+      "literals": [
+        "template.mandatory",
+        "template.family",
+        "template.expected",
+        "placeholder",
+        "structure.extra",
+        "structure.contracts",
+        "structure.required",
+        "evidence.format",
+        "evidence.kind",
+        "evidence.confidence",
+        "evidence.validation",
+        "evidence.disproved",
+        "evidence.citation",
+        "evidence.contradicts",
+        "evidence.missing",
+        "evidence.skipped",
+        "unknowns.placement",
+        "spec.fr-format",
+        "spec.sc-format",
+        "spec.fr-unique",
+        "spec.sc-unique",
+        "spec.story-format",
+        "spec.story-numbers",
+        "spec.story-parts",
+        "spec.clarifications",
+        "research.decisions",
+        "data-model.entities",
+        "checklist.items",
+        "tasks.grammar",
+        "tasks.line-format",
+        "tasks.ids",
+        "tasks.phase-order",
+        "tasks.story-labels",
+        "tasks.story-exists",
+        "tasks.parallel-files",
+        "tasks.mode",
+        "coverage.fr",
+        "claims.missing"
+      ],
+      "owner": "140",
+      "closedBy": "Design",
+      "unknownValue": "Read as an error finding of unknown kind"
+    },
+    {
+      "number": 147,
+      "name": "Severities of a lint finding",
+      "members": "`error`, `warning`",
+      "literals": [
+        "error",
+        "warning"
+      ],
+      "owner": "140",
+      "closedBy": "Design",
+      "unknownValue": "Read as `error`"
+    },
+    {
+      "number": 148,
+      "name": "Levels of the reverse lint",
+      "members": "0, 1, 2, 3, 4, 5",
+      "literals": [],
+      "owner": "140",
+      "closedBy": "Design",
+      "unknownValue": "Exit 3"
+    },
+    {
+      "number": 149,
+      "name": "Evidence kinds; evidence validations",
+      "members": "`observed`, `inferred`, `declared`; `verified`, `unverified`, `disproved`",
+      "literals": [
+        "observed",
+        "inferred",
+        "declared",
+        "verified",
+        "unverified",
+        "disproved"
+      ],
+      "owner": "140",
+      "closedBy": "Design",
+      "unknownValue": "An error finding"
+    },
+    {
+      "number": 150,
+      "name": "Tasks modes of a reverse run",
+      "members": "`done`, `open`",
+      "literals": [
+        "done",
+        "open"
+      ],
+      "owner": "108",
+      "closedBy": "Design",
+      "unknownValue": "Exit 3"
+    },
+    {
+      "number": 151,
+      "name": "Walk modes of the source inventory",
+      "members": "`git`, `walk`",
+      "literals": [
+        "git",
+        "walk"
+      ],
+      "owner": "140",
+      "closedBy": "Design",
+      "unknownValue": "The inventory is refused"
+    },
+    {
+      "number": 152,
+      "name": "Skip reasons of the source inventory",
+      "members": "`binary`, `oversize`, `symlink-escape`",
+      "literals": [
+        "binary",
+        "oversize",
+        "symlink-escape"
+      ],
+      "owner": "140",
+      "closedBy": "Design",
+      "unknownValue": "Read as a skipped entry of unknown reason; still fingerprinted"
+    },
+    {
+      "number": 153,
+      "name": "Roles of a file in the source inventory",
+      "members": "`ci`, `test`, `schema`, `template`, `doc`, `script`, `source`, `config`, `other`",
+      "literals": [
+        "ci",
+        "test",
+        "schema",
+        "template",
+        "doc",
+        "script",
+        "source",
+        "config",
+        "other"
+      ],
+      "owner": "140",
+      "closedBy": "Design",
+      "unknownValue": "`other`"
+    },
+    {
+      "number": 154,
+      "name": "Kinds of entry point",
+      "members": "`bin`, `console-script`, `export`, `container-entrypoint`, `python-main`, `go-main`, `script`",
+      "literals": [
+        "bin",
+        "console-script",
+        "export",
+        "container-entrypoint",
+        "python-main",
+        "go-main",
+        "script"
+      ],
+      "owner": "140",
+      "closedBy": "Design",
+      "unknownValue": "Kept as text"
+    },
+    {
+      "number": 155,
+      "name": "Languages of the source inventory",
+      "members": "An open set by data: the table of names and extensions",
+      "literals": [],
+      "owner": "140",
+      "closedBy": "Open by data",
+      "unknownValue": "`unknown`"
+    },
+    {
+      "number": 156,
+      "name": "Kinds of problem of the reverse guard",
+      "members": "`deleted`, `added`, `changed`, `fingerprint differs`, `git HEAD moved`, `git status`",
+      "literals": [
+        "deleted",
+        "added",
+        "changed",
+        "fingerprint differs",
+        "git HEAD moved",
+        "git status"
+      ],
+      "owner": "108",
+      "closedBy": "Design",
+      "unknownValue": "Not applicable: the guard writes them"
+    },
+    {
+      "number": 157,
+      "name": "Verbs of the front door",
+      "members": "The commands of annex G §G.1",
+      "literals": [],
+      "owner": "119",
+      "closedBy": "Design",
+      "unknownValue": "Exit 1 with the message for an unknown first argument (verb), as F100-FR-182"
+    },
+    {
+      "number": 158,
+      "name": "Reasons of a failure in default output",
+      "members": "`no-state`, `no-feature`, `no-log`, `no-events`, `no-verdicts`, `no-verdict-for-phase`, `no-feedback`, `no-spec`, `spec-invalid`, `usage`, `unknown-subcommand`, `internal`",
+      "literals": [
+        "no-state",
+        "no-feature",
+        "no-log",
+        "no-events",
+        "no-verdicts",
+        "no-verdict-for-phase",
+        "no-feedback",
+        "no-spec",
+        "spec-invalid",
+        "usage",
+        "unknown-subcommand",
+        "internal"
+      ],
+      "owner": "119",
+      "closedBy": "Design",
+      "unknownValue": "`internal`"
+    },
+    {
+      "number": 159,
+      "name": "States of a phase in `phases`",
+      "members": "`pending`, `evidence-written`, `rejected(has-feedback)`, `APPROVED`",
+      "literals": [
+        "pending",
+        "evidence-written",
+        "rejected(has-feedback)",
+        "APPROVED"
+      ],
+      "owner": "119",
+      "closedBy": "Design",
+      "unknownValue": "Not applicable: derived"
+    },
+    {
+      "number": 160,
+      "name": "Presenter modes",
+      "members": "`timeline`, `card`, `plain`",
+      "literals": [
+        "timeline",
+        "card",
+        "plain"
+      ],
+      "owner": "145",
+      "closedBy": "Design",
+      "unknownValue": "Usage error, exit 2"
+    },
+    {
+      "number": 161,
+      "name": "Detail levels of the presenter",
+      "members": "`milestones`, `tools`, `full`",
+      "literals": [
+        "milestones",
+        "tools",
+        "full"
+      ],
+      "owner": "145",
+      "closedBy": "Design",
+      "unknownValue": "From the variable: `tools`; from the flag: usage error, exit 2"
+    },
+    {
+      "number": 162,
+      "name": "Colour depths",
+      "members": "`none`, `16`, `256`, `truecolor`",
+      "literals": [
+        "none",
+        "16",
+        "256",
+        "truecolor"
+      ],
+      "owner": "145",
+      "closedBy": "Design",
+      "unknownValue": "Ignored"
+    },
+    {
+      "number": 163,
+      "name": "Colour arguments",
+      "members": "`always`, `never`, `auto`",
+      "literals": [
+        "always",
+        "never",
+        "auto"
+      ],
+      "owner": "145",
+      "closedBy": "Design",
+      "unknownValue": "Usage error"
+    },
+    {
+      "number": 164,
+      "name": "Backgrounds",
+      "members": "`dark`, `light`",
+      "literals": [
+        "dark",
+        "light"
+      ],
+      "owner": "145",
+      "closedBy": "Design",
+      "unknownValue": "`dark`"
+    },
+    {
+      "number": 165,
+      "name": "Colour roles",
+      "members": "`brand`, `accent`, `approved`, `warn`, `reject`, `muted`",
+      "literals": [
+        "brand",
+        "accent",
+        "approved",
+        "warn",
+        "reject",
+        "muted"
+      ],
+      "owner": "145",
+      "closedBy": "Design",
+      "unknownValue": "Not applicable"
+    },
+    {
+      "number": 166,
+      "name": "Width steps of the banner",
+      "members": "`full`, `compact`, `line`",
+      "literals": [
+        "full",
+        "compact",
+        "line"
+      ],
+      "owner": "145",
+      "closedBy": "Design",
+      "unknownValue": "Not applicable: derived from the size"
+    },
+    {
+      "number": 167,
+      "name": "Rail states",
+      "members": "`A` approved, `R` rejected, `C` current, `P` pending",
+      "literals": [
+        "A",
+        "R",
+        "C",
+        "P"
+      ],
+      "owner": "145",
+      "closedBy": "Design",
+      "unknownValue": "`P`"
+    },
+    {
+      "number": 168,
+      "name": "Live settings",
+      "members": "`auto`, `true`, `false`",
+      "literals": [
+        "auto",
+        "true",
+        "false"
+      ],
+      "owner": "145",
+      "closedBy": "Design",
+      "unknownValue": "`auto`"
+    },
+    {
+      "number": 169,
+      "name": "Observability modes of a pass",
+      "members": "`structured`, `raw-text`, `degraded`",
+      "literals": [
+        "structured",
+        "raw-text",
+        "degraded"
+      ],
+      "owner": "126",
+      "closedBy": "Design",
+      "unknownValue": "`degraded`"
+    },
+    {
+      "number": 170,
+      "name": "Stream signals",
+      "members": "`init`, `text`, `tool`, `evidence`, `result`",
+      "literals": [
+        "init",
+        "text",
+        "tool",
+        "evidence",
+        "result"
+      ],
+      "owner": "126",
+      "closedBy": "Design",
+      "unknownValue": "The registration is refused"
+    },
+    {
+      "number": 171,
+      "name": "Route reasons of a stream",
+      "members": "`structured capture disabled`, `no registered adapter`, `adapter failed to start`; the as-is texts are in the specification of 126",
+      "literals": [
+        "structured capture disabled",
+        "no registered adapter",
+        "adapter failed to start"
+      ],
+      "owner": "126",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text"
+    },
+    {
+      "number": 172,
+      "name": "Diagnostic codes of the stream seam",
+      "members": "`adapter_error`, `malformed_json`, `unsupported_schema`, `absent_schema`, `duplicate_terminal`, `line_too_long`, `line_rate_exceeded`, `unknown_record_kind`",
+      "literals": [
+        "adapter_error",
+        "malformed_json",
+        "unsupported_schema",
+        "absent_schema",
+        "duplicate_terminal",
+        "line_too_long",
+        "line_rate_exceeded",
+        "unknown_record_kind"
+      ],
+      "owner": "126",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text"
+    },
+    {
+      "number": 173,
+      "name": "Invocation statuses",
+      "members": "`success`, `error`, `timeout`, `cancelled`, `degraded`",
+      "literals": [
+        "success",
+        "error",
+        "timeout",
+        "cancelled",
+        "degraded"
+      ],
+      "owner": "126",
+      "closedBy": "Design",
+      "unknownValue": "`error`"
+    },
+    {
+      "number": 174,
+      "name": "Reason codes of an invocation result",
+      "members": "`timeout`, `cancelled`, `launch_failed`, `producer_signaled`, `producer_nonzero`, `status_conflict`, `parser_failed`, `unsupported_schema`, `malformed_stream`, `provider_error`, `missing_terminal`, `success`, and any code the provider reports",
+      "literals": [
+        "timeout",
+        "cancelled",
+        "launch_failed",
+        "producer_signaled",
+        "producer_nonzero",
+        "status_conflict",
+        "parser_failed",
+        "unsupported_schema",
+        "malformed_stream",
+        "provider_error",
+        "missing_terminal",
+        "success"
+      ],
+      "owner": "126",
+      "closedBy": "Open by the provider",
+      "unknownValue": "Shown as text"
+    },
+    {
+      "number": 175,
+      "name": "Finalization decisions",
+      "members": "`cap_halt`, `halt`, `continue`",
+      "literals": [
+        "cap_halt",
+        "halt",
+        "continue"
+      ],
+      "owner": "126",
+      "closedBy": "Design",
+      "unknownValue": "`continue`"
+    },
+    {
+      "number": 176,
+      "name": "Canonical tool names",
+      "members": "`Read`, `Write`, `Edit`, `MultiEdit`, `NotebookEdit`, `Bash`, `Glob`, `Grep`, `Task`, `TodoWrite`, `WebFetch`, `WebSearch`",
+      "literals": [
+        "Read",
+        "Write",
+        "Edit",
+        "MultiEdit",
+        "NotebookEdit",
+        "Bash",
+        "Glob",
+        "Grep",
+        "Task",
+        "TodoWrite",
+        "WebFetch",
+        "WebSearch"
+      ],
+      "owner": "126",
+      "closedBy": "Design",
+      "unknownValue": "The name passes through unchanged"
+    },
+    {
+      "number": 177,
+      "name": "Sources of an invocation result",
+      "members": "`synthesized`, `reconciled`",
+      "literals": [
+        "synthesized",
+        "reconciled"
+      ],
+      "owner": "126",
+      "closedBy": "Design",
+      "unknownValue": "`reconciled`"
+    },
+    {
+      "number": 178,
+      "name": "Sources of discovery",
+      "members": "`harness-adapter`, `binary`, `config-home`, `host`, `endpoint`, `gateway`, `declared`",
+      "literals": [
+        "harness-adapter",
+        "binary",
+        "config-home",
+        "host",
+        "endpoint",
+        "gateway",
+        "declared"
+      ],
+      "owner": "146",
+      "closedBy": "Owner decision",
+      "unknownValue": "The candidate is dropped, with a doctor finding"
+    },
+    {
+      "number": 179,
+      "name": "Steps of the probe ladder",
+      "members": "`presence`, `version-help`, `credential-presence`, `metadata`, `catalogue`",
+      "literals": [
+        "presence",
+        "version-help",
+        "credential-presence",
+        "metadata",
+        "catalogue"
+      ],
+      "owner": "146",
+      "closedBy": "Design",
+      "unknownValue": "The value is read as null"
+    },
+    {
+      "number": 180,
+      "name": "Steps of the critic order",
+      "members": "`configured`, `gateway`, `discovered`, `default-model-tier`",
+      "literals": [
+        "configured",
+        "gateway",
+        "discovered",
+        "default-model-tier"
+      ],
+      "owner": "124",
+      "closedBy": "Owner decision",
+      "unknownValue": "The record is refused"
+    },
+    {
+      "number": 181,
+      "name": "Sources of the proposer",
+      "members": "`flag`, `environment`, `configuration`, `default`",
+      "literals": [
+        "flag",
+        "environment",
+        "configuration",
+        "default"
+      ],
+      "owner": "124",
+      "closedBy": "Owner decision",
+      "unknownValue": "The record is refused"
+    },
+    {
+      "number": 182,
+      "name": "Reasons why a critic candidate does not qualify or is passed over",
+      "members": "`role-unsupported`, `form-unproven`, `unverified-cli`, `memory-not-off`, `window-unknown`, `window-too-small`, `not-diverse`, `credential-absent`, `preflight-failed`, `terms-refused`, `terms-unknown`, `quota-exhausted`, `no-budget`, `no-spend-cap`, `read-denial-unconfirmed`, `worker-root-not-empty`, `first-call-unproven`",
+      "literals": [
+        "role-unsupported",
+        "form-unproven",
+        "unverified-cli",
+        "memory-not-off",
+        "window-unknown",
+        "window-too-small",
+        "not-diverse",
+        "credential-absent",
+        "preflight-failed",
+        "terms-refused",
+        "terms-unknown",
+        "quota-exhausted",
+        "no-budget",
+        "no-spend-cap",
+        "read-denial-unconfirmed",
+        "worker-root-not-empty",
+        "first-call-unproven"
+      ],
+      "owner": "124",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text; the candidate does not qualify"
+    },
+    {
+      "number": 183,
+      "name": "Results of the diversity test",
+      "members": "`diverse`, `same-provider`, `same-model`, `unverified`",
+      "literals": [
+        "diverse",
+        "same-provider",
+        "same-model",
+        "unverified"
+      ],
+      "owner": "124",
+      "closedBy": "Design",
+      "unknownValue": "`unverified`, with the warning"
+    },
+    {
+      "number": 184,
+      "name": "Kinds of record of the ledger namespace `parallel`",
+      "members": "`group_planned`, `group_started`, `worker_started`, `worker_ended`, `group_barrier`, `audit_done`, `merge_done`, `apply_started`, `applied`, `ticks_applied`, `merge_check_started`, `merge_check_finished`, `group_closed`",
+      "literals": [
+        "group_planned",
+        "group_started",
+        "worker_started",
+        "worker_ended",
+        "group_barrier",
+        "audit_done",
+        "merge_done",
+        "apply_started",
+        "applied",
+        "ticks_applied",
+        "merge_check_started",
+        "merge_check_finished",
+        "group_closed"
+      ],
+      "owner": "143",
+      "closedBy": "Design",
+      "unknownValue": "The ledger is invalid inside the group; the layer is off for the phase attempt"
+    },
+    {
+      "number": 185,
+      "name": "Reasons for which the layer `parallel` is switched off inside a run",
+      "members": "For the phase attempt: `group-failures`, `harness-error`, `unchecked`, `missing-object`, `ledger`, `check-budget`. For the run: `plan-hash`, `apply-incomplete`",
+      "literals": [
+        "group-failures",
+        "harness-error",
+        "unchecked",
+        "missing-object",
+        "ledger",
+        "check-budget",
+        "plan-hash",
+        "apply-incomplete"
+      ],
+      "owner": "142",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text; the layer is off for the run"
+    },
+    {
+      "number": 186,
+      "name": "Sources of a write scope",
+      "members": "`consumer`, `task-text`",
+      "literals": [
+        "consumer",
+        "task-text"
+      ],
+      "owner": "142",
+      "closedBy": "Design",
+      "unknownValue": "The scope is read as absent, which is the whole tree"
+    },
+    {
+      "number": 187,
+      "name": "Adjustable knobs of learning",
+      "members": "`proposer_timeout`, `yield_poll_interval`",
+      "literals": [
+        "proposer_timeout",
+        "yield_poll_interval"
+      ],
+      "owner": "106",
+      "closedBy": "Owner decision",
+      "unknownValue": "Refused, exit 2"
+    },
+    {
+      "number": 188,
+      "name": "Actions of a learning decision",
+      "members": "`apply`, `revert`, `evaluate`",
+      "literals": [
+        "apply",
+        "revert",
+        "evaluate"
+      ],
+      "owner": "106",
+      "closedBy": "Design",
+      "unknownValue": "The entry moves no value"
+    },
+    {
+      "number": 189,
+      "name": "Arms of an evaluation",
+      "members": "`applied`, `baseline`",
+      "literals": [
+        "applied",
+        "baseline"
+      ],
+      "owner": "106",
+      "closedBy": "Design",
+      "unknownValue": "`baseline`"
+    },
+    {
+      "number": 190,
+      "name": "Labels of an evaluation",
+      "members": "`helped`, `neutral`, `regressed`, `insufficient`",
+      "literals": [
+        "helped",
+        "neutral",
+        "regressed",
+        "insufficient"
+      ],
+      "owner": "106",
+      "closedBy": "Design",
+      "unknownValue": "`insufficient`"
+    },
+    {
+      "number": 191,
+      "name": "Actions taken by an evaluation",
+      "members": "`evaluated`, `auto_reverted`, `skipped_superseded`",
+      "literals": [
+        "evaluated",
+        "auto_reverted",
+        "skipped_superseded"
+      ],
+      "owner": "106",
+      "closedBy": "Design",
+      "unknownValue": "`evaluated`"
+    },
+    {
+      "number": 192,
+      "name": "Causes of a reset of the baseline of learning",
+      "members": "`shape`, `backend`",
+      "literals": [
+        "shape",
+        "backend"
+      ],
+      "owner": "106",
+      "closedBy": "Design",
+      "unknownValue": "The label is `insufficient`"
+    },
+    {
+      "number": 193,
+      "name": "Guardrails of learning; their states",
+      "members": "`grounding_gap_rate`, `malformed_rate`, `verification`, `diagnostician_grounding_share`, `critic_input_size`, `arbitration_proxy`, `first_attempt_approval`; `ok`, `breach`, `unknown`",
+      "literals": [
+        "grounding_gap_rate",
+        "malformed_rate",
+        "verification",
+        "diagnostician_grounding_share",
+        "critic_input_size",
+        "arbitration_proxy",
+        "first_attempt_approval",
+        "ok",
+        "breach",
+        "unknown"
+      ],
+      "owner": "106",
+      "closedBy": "Design",
+      "unknownValue": "`unknown`"
+    },
+    {
+      "number": 194,
+      "name": "Counterfactuals of the proposer timeout",
+      "members": "`censored`, `shorter_cap_wall_only`, `none`",
+      "literals": [
+        "censored",
+        "shorter_cap_wall_only",
+        "none"
+      ],
+      "owner": "106",
+      "closedBy": "Design",
+      "unknownValue": "`none`"
+    },
+    {
+      "number": 195,
+      "name": "Pass outcomes read by learning",
+      "members": "`budget_kill`, `worker_error`, `open`, `productive`, `clean_no_progress`",
+      "literals": [
+        "budget_kill",
+        "worker_error",
+        "open",
+        "productive",
+        "clean_no_progress"
+      ],
+      "owner": "106",
+      "closedBy": "Design",
+      "unknownValue": "`clean_no_progress`"
+    },
+    {
+      "number": 196,
+      "name": "Statuses of a stage of a retrospective",
+      "members": "`ok`, `unavailable`",
+      "literals": [
+        "ok",
+        "unavailable"
+      ],
+      "owner": "106",
+      "closedBy": "Design",
+      "unknownValue": "`unavailable`"
+    },
+    {
+      "number": 197,
+      "name": "Sink labels of a delivery record",
+      "members": "`loki`, `otel`",
+      "literals": [
+        "loki",
+        "otel"
+      ],
+      "owner": "128",
+      "closedBy": "Design",
+      "unknownValue": "Shown as `unknown`"
+    },
+    {
+      "number": 198,
+      "name": "Receiver states",
+      "members": "`configured`, `reachable`, `request_accepted`, `query_verified`",
+      "literals": [
+        "configured",
+        "reachable",
+        "request_accepted",
+        "query_verified"
+      ],
+      "owner": "128",
+      "closedBy": "Design",
+      "unknownValue": "Read as `configured`"
+    },
+    {
+      "number": 199,
+      "name": "Delivery reasons",
+      "members": "`http_<status>`, `transport_error`, `queue_overflow`, `content_withheld`",
+      "literals": [
+        "http_<status>",
+        "transport_error",
+        "queue_overflow",
+        "content_withheld"
+      ],
+      "owner": "128",
+      "closedBy": "Design",
+      "unknownValue": "Read as `transport_error`"
+    },
+    {
+      "number": 200,
+      "name": "OTLP signals",
+      "members": "`logs`, `metrics`, `traces`",
+      "literals": [
+        "logs",
+        "metrics",
+        "traces"
+      ],
+      "owner": "128",
+      "closedBy": "Design",
+      "unknownValue": "The signal is not sent"
+    },
+    {
+      "number": 201,
+      "name": "Attribute dialects",
+      "members": "`specstride`, `genai`, `openinference`",
+      "literals": [
+        "specstride",
+        "genai",
+        "openinference"
+      ],
+      "owner": "128",
+      "closedBy": "Design",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 202,
+      "name": "Scopes of a span",
+      "members": "`run`, `phase`, `attempt`, `pass`, `verification`, `critic`, `yield`, `long_job`, `check`, `pause`, `blocked`, `stage`, `pipeline`, `diagnosis`, `group`, `worker`",
+      "literals": [
+        "run",
+        "phase",
+        "attempt",
+        "pass",
+        "verification",
+        "critic",
+        "yield",
+        "long_job",
+        "check",
+        "pause",
+        "blocked",
+        "stage",
+        "pipeline",
+        "diagnosis",
+        "group",
+        "worker"
+      ],
+      "owner": "128",
+      "closedBy": "Design",
+      "unknownValue": "The event is a point span"
+    },
+    {
+      "number": 203,
+      "name": "Metric names",
+      "members": "`specstride.cost.usd`, `specstride.tokens`, `specstride.pass.duration`, `specstride.errors`, `specstride.tool.calls`, `specstride.verdict`, `specstride.attempt.outcome`, `specstride.check.duration`, `specstride.pause.duration`, `specstride.blocked.duration`, `specstride.quota.utilization`, `specstride.run.state`; `specstride.context.bytes`, `specstride.context.tokens`, `specstride.context.limit`; as-is: `ralph.iter.duration_ms`, `ralph.cost_usd`, `ralph.tokens`, `ralph.errors`, `ralph.tool_use`, `ralph.gate`",
+      "literals": [
+        "specstride.cost.usd",
+        "specstride.tokens",
+        "specstride.pass.duration",
+        "specstride.errors",
+        "specstride.tool.calls",
+        "specstride.verdict",
+        "specstride.attempt.outcome",
+        "specstride.check.duration",
+        "specstride.pause.duration",
+        "specstride.blocked.duration",
+        "specstride.quota.utilization",
+        "specstride.run.state",
+        "specstride.context.bytes",
+        "specstride.context.tokens",
+        "specstride.context.limit",
+        "ralph.iter.duration_ms",
+        "ralph.cost_usd",
+        "ralph.tokens",
+        "ralph.errors",
+        "ralph.tool_use",
+        "ralph.gate"
+      ],
+      "owner": "128",
+      "closedBy": "Design",
+      "unknownValue": "The metric is not exported"
+    },
+    {
+      "number": 204,
+      "name": "Forms of a telemetry payload",
+      "members": "`as-is`, `new`",
+      "literals": [
+        "as-is",
+        "new"
+      ],
+      "owner": "128",
+      "closedBy": "Design",
+      "unknownValue": "The new form"
+    },
+    {
+      "number": 205,
+      "name": "Alert kinds",
+      "members": "`budget-threshold`, `provider-warning`, `billing-mode-change`, `spend-unmeasurable`, `ledger-unreadable`",
+      "literals": [
+        "budget-threshold",
+        "provider-warning",
+        "billing-mode-change",
+        "spend-unmeasurable",
+        "ledger-unreadable"
+      ],
+      "owner": "127",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text at the level `warn`"
+    },
+    {
+      "number": 206,
+      "name": "Budget dimensions",
+      "members": "`tokens`, `costUsd`, `wallClock`, `phaseAttempts`, `calls`",
+      "literals": [
+        "tokens",
+        "costUsd",
+        "wallClock",
+        "phaseAttempts",
+        "calls"
+      ],
+      "owner": "127",
+      "closedBy": "Design",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 207,
+      "name": "Sources of a reset time",
+      "members": "`structured`, `header`, `parsed_text`",
+      "literals": [
+        "structured",
+        "header",
+        "parsed_text"
+      ],
+      "owner": "127",
+      "closedBy": "Design",
+      "unknownValue": "Read as `parsed_text`"
+    },
+    {
+      "number": 208,
+      "name": "Reasons that skip a fallback entry",
+      "members": "`terms-refused`, `no-cap`, `not-in-plan`, `limited`",
+      "literals": [
+        "terms-refused",
+        "no-cap",
+        "not-in-plan",
+        "limited"
+      ],
+      "owner": "127",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text; the entry is skipped"
+    },
+    {
+      "number": 209,
+      "name": "Results of `reclaim` of a lock",
+      "members": "a lease, `lost-race`",
+      "literals": [
+        "lost-race"
+      ],
+      "owner": "122",
+      "closedBy": "Design",
+      "unknownValue": "`lost-race`"
+    },
+    {
+      "number": 210,
+      "name": "Errors of a detach strategy",
+      "members": "`unavailable`, `not-ready`",
+      "literals": [
+        "unavailable",
+        "not-ready"
+      ],
+      "owner": "122",
+      "closedBy": "Design",
+      "unknownValue": "`not-ready`; the launch is refused"
+    },
+    {
+      "number": 211,
+      "name": "What a detach strategy survives",
+      "members": "`parent-end`, `session-end`, `reboot`",
+      "literals": [
+        "parent-end",
+        "session-end",
+        "reboot"
+      ],
+      "owner": "122",
+      "closedBy": "Design",
+      "unknownValue": "Ignored"
+    },
+    {
+      "number": 212,
+      "name": "Refusals of a launch written by the detached runtime and by `launch`",
+      "members": "`lock-conflict`, `foreign-owner`, `owner-dead-group-alive`, `lock-unknown`, `provider-mismatch`, `detach-unavailable`, `detach-not-ready`, `control-root-not-writable`, `unadopted-approvals`, `launch-abandoned`, `control-root-unsafe`; `unknown-mode`, `comment-changed` (raised by the launch command of the CLI before the handshake, feature 107)",
+      "literals": [
+        "lock-conflict",
+        "foreign-owner",
+        "owner-dead-group-alive",
+        "lock-unknown",
+        "provider-mismatch",
+        "detach-unavailable",
+        "detach-not-ready",
+        "control-root-not-writable",
+        "unadopted-approvals",
+        "launch-abandoned",
+        "control-root-unsafe",
+        "unknown-mode",
+        "comment-changed"
+      ],
+      "owner": "122; the last two 107",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text; the launch stays refused"
+    },
+    {
+      "number": 213,
+      "name": "End causes of an entry of the process registry",
+      "members": "`exited`, `signalled`, `ended-by-stop`, `ended-by-root`, `ended-as-survivor`, `identity-mismatch`, `gone`",
+      "literals": [
+        "exited",
+        "signalled",
+        "ended-by-stop",
+        "ended-by-root",
+        "ended-as-survivor",
+        "identity-mismatch",
+        "gone"
+      ],
+      "owner": "122",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text"
+    },
+    {
+      "number": 214,
+      "name": "Results of a case of the spike",
+      "members": "`survived`, `ended`, `skipped`",
+      "literals": [
+        "survived",
+        "ended",
+        "skipped"
+      ],
+      "owner": "122",
+      "closedBy": "Design",
+      "unknownValue": "`skipped`"
+    },
+    {
+      "number": 215,
+      "name": "Facts of the proof of the critic mode of dsh",
+      "members": "`version-pin`, `tool-coverage`, `patch-hash`, `permission-mode`",
+      "literals": [
+        "version-pin",
+        "tool-coverage",
+        "patch-hash",
+        "permission-mode"
+      ],
+      "owner": "130",
+      "closedBy": "Design",
+      "unknownValue": "The proof fails: `critic_not_toolless`"
+    },
+    {
+      "number": 216,
+      "name": "Values of `harnesses.dsh.critic.proof`",
+      "members": "`strict`, `none`",
+      "literals": [
+        "strict",
+        "none"
+      ],
+      "owner": "130",
+      "closedBy": "Design",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 217,
+      "name": "Causes of a refused plugin request",
+      "members": "`request-not-regular`, `request-link`, `request-too-large`, `request-json`, `request-keys`, `request-contract`, `request-plugins`, `request-duplicate`, `request-reason`, `allowlist-entry`, `not-allowed`, `allowlist-empty`, `install-launch`, `install-timeout`, `install-failed`",
+      "literals": [
+        "request-not-regular",
+        "request-link",
+        "request-too-large",
+        "request-json",
+        "request-keys",
+        "request-contract",
+        "request-plugins",
+        "request-duplicate",
+        "request-reason",
+        "allowlist-entry",
+        "not-allowed",
+        "allowlist-empty",
+        "install-launch",
+        "install-timeout",
+        "install-failed"
+      ],
+      "owner": "130",
+      "closedBy": "Design",
+      "unknownValue": "The request is refused (result 7)"
+    },
+    {
+      "number": 218,
+      "name": "Sources of a fact of the proof of a critic with read-only tools",
+      "members": "`stream-first-record`, `adapter-invocation`",
+      "literals": [
+        "stream-first-record",
+        "adapter-invocation"
+      ],
+      "owner": "131",
+      "closedBy": "Design",
+      "unknownValue": "The proof fails: `critic_not_toolless`"
+    },
+    {
+      "number": 219,
+      "name": "Outcomes of the proof of a critic call of the Claude harness adapter",
+      "members": "`proved`, `refused-tool`, `refused-server`, `refused-session`, `refused-no-record`, `refused-customisation`",
+      "literals": [
+        "proved",
+        "refused-tool",
+        "refused-server",
+        "refused-session",
+        "refused-no-record",
+        "refused-customisation"
+      ],
+      "owner": "125",
+      "closedBy": "Design",
+      "unknownValue": "Read as a refusal, `critic_not_toolless`"
+    },
+    {
+      "number": 220,
+      "name": "Availability of a transport",
+      "members": "`available`, `absent-dependency`, `out-of-range`, `refused-at-tier`, `not-chosen`",
+      "literals": [
+        "available",
+        "absent-dependency",
+        "out-of-range",
+        "refused-at-tier",
+        "not-chosen"
+      ],
+      "owner": "125",
+      "closedBy": "Design",
+      "unknownValue": "The transport is unavailable"
+    },
+    {
+      "number": 221,
+      "name": "Classifier signals of the Claude harness adapter",
+      "members": "limit event rejected, limit event warning, retry event, overload, billing error, credit required, authentication failure, spending cap, prompt too long, limit message, other",
+      "literals": [],
+      "owner": "125",
+      "closedBy": "Design",
+      "unknownValue": "`provider_other`, confidence `text`"
+    },
+    {
+      "number": 222,
+      "name": "Diagnostic codes of the JSONL reader",
+      "members": "`malformed_json`, `absent_schema`, `unsupported_schema`, `unknown_record`, `provider_retry`, `provider_auth`, `provider_error`, `abandoned_tool`",
+      "literals": [
+        "malformed_json",
+        "absent_schema",
+        "unsupported_schema",
+        "unknown_record",
+        "provider_retry",
+        "provider_auth",
+        "provider_error",
+        "abandoned_tool"
+      ],
+      "owner": "138",
+      "closedBy": "Design",
+      "unknownValue": "Kept and treated as a warning"
+    },
+    {
+      "number": 223,
+      "name": "Severities of a diagnostic of the JSONL reader",
+      "members": "`error`, `warning`",
+      "literals": [
+        "error",
+        "warning"
+      ],
+      "owner": "138",
+      "closedBy": "Design",
+      "unknownValue": "Read as `warning`"
+    },
+    {
+      "number": 224,
+      "name": "Reason codes of a terminal written by the JSONL reader",
+      "members": "`unsupported_schema`, `provider_auth`, `provider_error`",
+      "literals": [
+        "unsupported_schema",
+        "provider_auth",
+        "provider_error"
+      ],
+      "owner": "138",
+      "closedBy": "Design",
+      "unknownValue": "Read as `provider_error`"
+    },
+    {
+      "number": 225,
+      "name": "Statuses of a tool record",
+      "members": "`start`, `progress`, `end`",
+      "literals": [
+        "start",
+        "progress",
+        "end"
+      ],
+      "owner": "138",
+      "closedBy": "Design",
+      "unknownValue": "The record is dropped with a diagnostic event"
+    },
+    {
+      "number": 226,
+      "name": "Words of the end of an agent's stream",
+      "members": "Error: `error`, `failed`, `failure`. Success: `success`, `completed`, `complete`, `ok`",
+      "literals": [
+        "error",
+        "failed",
+        "failure",
+        "success",
+        "completed",
+        "complete",
+        "ok"
+      ],
+      "owner": "138",
+      "closedBy": "Design",
+      "unknownValue": "No terminal"
+    },
+    {
+      "number": 227,
+      "name": "Modes of a critic-class call on prime",
+      "members": "`text`, `json`",
+      "literals": [
+        "text",
+        "json"
+      ],
+      "owner": "138",
+      "closedBy": "Design",
+      "unknownValue": "`text`"
+    },
+    {
+      "number": 228,
+      "name": "Stages of a declared verification command",
+      "members": "`gate`, `pre`, `prestage`, `both`",
+      "literals": [
+        "gate",
+        "pre",
+        "prestage",
+        "both"
+      ],
+      "owner": "105",
+      "closedBy": "Design",
+      "unknownValue": "The declaration is refused"
+    },
+    {
+      "number": 229,
+      "name": "Reuse policies of a staged command",
+      "members": "`per-attempt`, `per-phase`, `per-run`",
+      "literals": [
+        "per-attempt",
+        "per-phase",
+        "per-run"
+      ],
+      "owner": "105",
+      "closedBy": "Design",
+      "unknownValue": "The declaration is refused"
+    },
+    {
+      "number": 230,
+      "name": "Values of `discovery` of the verification-commands document",
+      "members": "`none`",
+      "literals": [
+        "none"
+      ],
+      "owner": "105",
+      "closedBy": "Design",
+      "unknownValue": "The document is refused"
+    },
+    {
+      "number": 231,
+      "name": "Kinds and levels of a verification obligation",
+      "members": "`effect-witness` with `integration`; `positive` with `contract`",
+      "literals": [
+        "effect-witness",
+        "integration",
+        "positive",
+        "contract"
+      ],
+      "owner": "105",
+      "closedBy": "Design",
+      "unknownValue": "The plan is refused"
+    },
+    {
+      "number": 232,
+      "name": "Values of `automationStatus`",
+      "members": "`planned`, `manual`",
+      "literals": [
+        "planned",
+        "manual"
+      ],
+      "owner": "105",
+      "closedBy": "Design",
+      "unknownValue": "The plan is refused"
+    },
+    {
+      "number": 233,
+      "name": "Signals of a result that has no exit code",
+      "members": "`TIMEOUT`, `EXEC_ERROR`, `DEADLINE`",
+      "literals": [
+        "TIMEOUT",
+        "EXEC_ERROR",
+        "DEADLINE"
+      ],
+      "owner": "148; `DEADLINE`: 105",
+      "closedBy": "Design",
+      "unknownValue": "The command counts as failed"
+    },
+    {
+      "number": 234,
+      "name": "Sub-commands of the command `verify`",
+      "members": "`create`, `validate`, `slice`, `scaffold`, `run`, `prestage`, `prestage-report`",
+      "literals": [
+        "create",
+        "validate",
+        "slice",
+        "scaffold",
+        "run",
+        "prestage",
+        "prestage-report"
+      ],
+      "owner": "105",
+      "closedBy": "Owner decision",
+      "unknownValue": "Exit 3"
+    },
+    {
+      "number": 235,
+      "name": "State of a run of steps",
+      "members": "`full`, `partial`",
+      "literals": [
+        "full",
+        "partial"
+      ],
+      "owner": "148",
+      "closedBy": "Design",
+      "unknownValue": "`partial`"
+    },
+    {
+      "number": 236,
+      "name": "Reasons of an admission to a batch of verification commands",
+      "members": "`disjoint`; `undeclared`, `reads-written`, `writes-overlap`, `follows-writer`, `exclusive`, `steps`, `demoted`",
+      "literals": [
+        "disjoint",
+        "undeclared",
+        "reads-written",
+        "writes-overlap",
+        "follows-writer",
+        "exclusive",
+        "steps",
+        "demoted"
+      ],
+      "owner": "148",
+      "closedBy": "Design",
+      "unknownValue": "The command runs alone"
+    },
+    {
+      "number": 237,
+      "name": "Errors of a secret resolver",
+      "members": "`missing`, `inline-secret`, `unsafe-file`",
+      "literals": [
+        "missing",
+        "inline-secret",
+        "unsafe-file"
+      ],
+      "owner": "110",
+      "closedBy": "Design",
+      "unknownValue": "`missing`"
+    },
+    {
+      "number": 238,
+      "name": "Check points of staleness",
+      "members": "`launch`, `resume`, `pass-start`, `critic-start`",
+      "literals": [
+        "launch",
+        "resume",
+        "pass-start",
+        "critic-start"
+      ],
+      "owner": "110",
+      "closedBy": "Owner decision",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 239,
+      "name": "Reserved literals of a row of a profile",
+      "members": "`off`, `not used`, `baseline`, `as-is`, `(fixture)`",
+      "literals": [
+        "off",
+        "not used",
+        "baseline",
+        "as-is",
+        "(fixture)"
+      ],
+      "owner": "110",
+      "closedBy": "Design",
+      "unknownValue": "The profile is invalid"
+    },
+    {
+      "number": 240,
+      "name": "Values of `telemetry.content`",
+      "members": "`auto`, `off`",
+      "literals": [
+        "auto",
+        "off"
+      ],
+      "owner": "110",
+      "closedBy": "Design",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 241,
+      "name": "Values of `memory.native.proposer`",
+      "members": "`off`, `on`, `as-is`",
+      "literals": [
+        "off",
+        "on",
+        "as-is"
+      ],
+      "owner": "110",
+      "closedBy": "Design",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 242,
+      "name": "Values of `roles.critic.transport`",
+      "members": "`auto`, `as-is`",
+      "literals": [
+        "auto",
+        "as-is"
+      ],
+      "owner": "110",
+      "closedBy": "Design",
+      "unknownValue": "Configuration error"
+    },
+    {
+      "number": 243,
+      "name": "Lanes of the read model",
+      "members": "`queued`, `proposing`, `verifying`, `reviewing`, `approved`, `blocked`, `paused`, `failed`",
+      "literals": [
+        "queued",
+        "proposing",
+        "verifying",
+        "reviewing",
+        "approved",
+        "blocked",
+        "paused",
+        "failed"
+      ],
+      "owner": "129",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text; the card is not moved"
+    },
+    {
+      "number": 244,
+      "name": "Kinds of attention item",
+      "members": "`blocked-on-human`, `source-changed`, `dead-run`, `launch-abandoned`, `quota-pause`, `budget-alert`, `stale-run`, `orphan-processes`, `unknown-state`",
+      "literals": [
+        "blocked-on-human",
+        "source-changed",
+        "dead-run",
+        "launch-abandoned",
+        "quota-pause",
+        "budget-alert",
+        "stale-run",
+        "orphan-processes",
+        "unknown-state"
+      ],
+      "owner": "129",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text with the next command `status --json`"
+    },
+    {
+      "number": 245,
+      "name": "Budget levels",
+      "members": "`unknown`, `ok`, `info`, `warn`, `loud`, `over`",
+      "literals": [
+        "unknown",
+        "ok",
+        "info",
+        "warn",
+        "loud",
+        "over"
+      ],
+      "owner": "129",
+      "closedBy": "Design",
+      "unknownValue": "Read as `unknown`"
+    },
+    {
+      "number": 246,
+      "name": "Liveness values of the read model",
+      "members": "`alive`, `dead`, `foreign`, `unknown`, `not-applicable`",
+      "literals": [
+        "alive",
+        "dead",
+        "foreign",
+        "unknown",
+        "not-applicable"
+      ],
+      "owner": "129",
+      "closedBy": "Design",
+      "unknownValue": "Read as `unknown`"
+    },
+    {
+      "number": 247,
+      "name": "Reasons of `stale`",
+      "members": "`heartbeat-and-events-old`, `event-major-out-of-range`",
+      "literals": [
+        "heartbeat-and-events-old",
+        "event-major-out-of-range"
+      ],
+      "owner": "129",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text; the view stays `stale`"
+    },
+    {
+      "number": 248,
+      "name": "Keys of the status line",
+      "members": "`run`, `st`, `ph`, `unit`, `rej`, `el`, `next`, `strategy`, `attn`, `cur`, `validUntil`",
+      "literals": [
+        "run",
+        "st",
+        "ph",
+        "unit",
+        "rej",
+        "el",
+        "next",
+        "strategy",
+        "attn",
+        "cur",
+        "validUntil"
+      ],
+      "owner": "129",
+      "closedBy": "Design",
+      "unknownValue": "A parser ignores a key it does not know"
+    },
+    {
+      "number": 249,
+      "name": "Quota states of a budget row",
+      "members": "`ok`, `signalled`, `paused`",
+      "literals": [
+        "ok",
+        "signalled",
+        "paused"
+      ],
+      "owner": "129",
+      "closedBy": "Design",
+      "unknownValue": "Read as `ok`"
+    },
+    {
+      "number": 250,
+      "name": "Rows of the lane table",
+      "members": "L-01 `approved`, L-02 `failed`, L-03 `blocked`, L-04 `paused`, L-05 `reviewing`, L-06 `verifying`, L-07 `proposing`, L-08 `queued` (default)",
+      "literals": [
+        "approved",
+        "failed",
+        "blocked",
+        "paused",
+        "reviewing",
+        "verifying",
+        "proposing",
+        "queued"
+      ],
+      "owner": "129",
+      "closedBy": "Design",
+      "unknownValue": "The default row fires"
+    },
+    {
+      "number": 251,
+      "name": "Details of a MALFORMED verdict",
+      "members": "`nonce-mismatch`, `no-verdict-line`, `multiple-verdict-lines`, `call-failed`",
+      "literals": [
+        "nonce-mismatch",
+        "no-verdict-line",
+        "multiple-verdict-lines",
+        "call-failed"
+      ],
+      "owner": "101",
+      "closedBy": "Design",
+      "unknownValue": "Read as `call-failed`; the verdict stays MALFORMED"
+    },
+    {
+      "number": 252,
+      "name": "Cases of a diagnosis",
+      "members": "`grounding`, `real_gap`, `unknown`",
+      "literals": [
+        "grounding",
+        "real_gap",
+        "unknown"
+      ],
+      "owner": "101",
+      "closedBy": "Design",
+      "unknownValue": "`unknown`"
+    },
+    {
+      "number": 253,
+      "name": "Outcomes of the bump rule",
+      "members": "`bump`, `skip`, `none`",
+      "literals": [
+        "bump",
+        "skip",
+        "none"
+      ],
+      "owner": "149",
+      "closedBy": "Design",
+      "unknownValue": "`none`"
+    },
+    {
+      "number": 254,
+      "name": "Reasons of a skipped bump",
+      "members": "`critic-model`, `quota-exhausted`, `ladder-top`",
+      "literals": [
+        "critic-model",
+        "quota-exhausted",
+        "ladder-top"
+      ],
+      "owner": "149",
+      "closedBy": "Design",
+      "unknownValue": "Shown as text; the bump is skipped"
+    },
+    {
+      "number": 255,
+      "name": "What failed in an approval record",
+      "members": "`schema`, `signature`, `key-unknown`, `verdict`, `evidence-hash`, `verification-hash`, `missing`, `marker-only`",
+      "literals": [
+        "schema",
+        "signature",
+        "key-unknown",
+        "verdict",
+        "evidence-hash",
+        "verification-hash",
+        "missing",
+        "marker-only"
+      ],
+      "owner": "101",
+      "closedBy": "Design",
+      "unknownValue": "The record counts as not approved"
+    },
+    {
+      "number": 256,
+      "name": "Kinds of source of a launch contract",
+      "members": "`constitution`, `spec`, `plan`, `tasks`, `research`, `data-model`, `quickstart`, `verification-commands`, `contract`, `checklist`",
+      "literals": [
+        "constitution",
+        "spec",
+        "plan",
+        "tasks",
+        "research",
+        "data-model",
+        "quickstart",
+        "verification-commands",
+        "contract",
+        "checklist"
+      ],
+      "owner": "107",
+      "closedBy": "Design",
+      "unknownValue": "The source is refused"
+    },
+    {
+      "number": 257,
+      "name": "Timing of a coverage obligation",
+      "members": "`pipeline-start`, `before:<stage>`, `after:<stage>`, `release`, `specstride-phase:<n>`, `unclassified`",
+      "literals": [
+        "pipeline-start",
+        "before:<stage>",
+        "after:<stage>",
+        "release",
+        "specstride-phase:<n>",
+        "unclassified"
+      ],
+      "owner": "107",
+      "closedBy": "Design",
+      "unknownValue": "The launch contract is invalid"
+    },
+    {
+      "number": 258,
+      "name": "Producer of a coverage obligation",
+      "members": "`existing`, `stage:<id>`, `automated-policy`, `external-authority`, `unknown`, `unclassified`",
+      "literals": [
+        "existing",
+        "stage:<id>",
+        "automated-policy",
+        "external-authority",
+        "unknown",
+        "unclassified"
+      ],
+      "owner": "107",
+      "closedBy": "Design",
+      "unknownValue": "The launch contract is invalid"
+    },
+    {
+      "number": 259,
+      "name": "Kinds of judgment item",
+      "members": "`classify-obligation`, `settle-prerequisite`, `map-declared-command`, `resolve-blocker`",
+      "literals": [
+        "classify-obligation",
+        "settle-prerequisite",
+        "map-declared-command",
+        "resolve-blocker"
+      ],
+      "owner": "107",
+      "closedBy": "Design",
+      "unknownValue": "The batch is refused"
+    },
+    {
+      "number": 260,
+      "name": "Route of an answer to a judgment item",
+      "members": "`host-model`, `delegated-harness`",
+      "literals": [
+        "host-model",
+        "delegated-harness"
+      ],
+      "owner": "107",
+      "closedBy": "Design",
+      "unknownValue": "The answer is refused"
+    },
+    {
+      "number": 261,
+      "name": "Source of a declaration of scope, read or write",
+      "members": "`user-config`, `environment`, `flag`",
+      "literals": [
+        "user-config",
+        "environment",
+        "flag"
+      ],
+      "owner": "107",
+      "closedBy": "Design",
+      "unknownValue": "The declaration is refused"
+    },
+    {
+      "number": 262,
+      "name": "Kinds of stub of the oracle",
+      "members": "proposer, critic over HTTP, critic as a CLI, diagnostician, engine, verification command, plugin installer, telemetry sink",
+      "literals": [],
+      "owner": "141",
+      "closedBy": "Design",
+      "unknownValue": "The fixture is refused"
+    },
+    {
+      "number": 263,
+      "name": "Verbs of the proposer stub",
+      "members": "`write`, `evidence`, `stream`, `text`, `sleep`, `exit`, `yield`, `silent`, `repeat`, `nothing`, `plugin-request`",
+      "literals": [
+        "write",
+        "evidence",
+        "stream",
+        "text",
+        "sleep",
+        "exit",
+        "yield",
+        "silent",
+        "repeat",
+        "nothing",
+        "plugin-request"
+      ],
+      "owner": "141",
+      "closedBy": "Design",
+      "unknownValue": "The fixture is refused"
+    },
+    {
+      "number": 264,
+      "name": "Verbs of the critic stub and the diagnostician stub",
+      "members": "`approve`, `reject`, `malformed-none`, `malformed-wrong-nonce`, `malformed-duplicate`, `empty`, `http-error`, `exit`, `hang`, `hint`, `fail`",
+      "literals": [
+        "approve",
+        "reject",
+        "malformed-none",
+        "malformed-wrong-nonce",
+        "malformed-duplicate",
+        "empty",
+        "http-error",
+        "exit",
+        "hang",
+        "hint",
+        "fail"
+      ],
+      "owner": "141",
+      "closedBy": "Design",
+      "unknownValue": "The fixture is refused"
+    },
+    {
+      "number": 265,
+      "name": "Verbs of the engine stub",
+      "members": "`succeed`, `transient`, `fail`, `stop`, `sleep`, `crash`",
+      "literals": [
+        "succeed",
+        "transient",
+        "fail",
+        "stop",
+        "sleep",
+        "crash"
+      ],
+      "owner": "141",
+      "closedBy": "Design",
+      "unknownValue": "The fixture is refused"
+    },
+    {
+      "number": 266,
+      "name": "Verbs of the verification command stubs; of the installer stub",
+      "members": "`pass`, `fail`, `slow`, `write-result`; `install`, `fail`, `hang`. The verbs of the sink stub are in the specification of 141",
+      "literals": [
+        "pass",
+        "fail",
+        "slow",
+        "write-result",
+        "install",
+        "fail",
+        "hang"
+      ],
+      "owner": "141",
+      "closedBy": "Design",
+      "unknownValue": "The fixture is refused"
+    },
+    {
+      "number": 267,
+      "name": "Surfaces of the oracle",
+      "members": "`exit`, `stdout`, `stderr`, `tree`, `state`, `events`, `transcript`, `processes`, `pipeline`, `telemetry`, `repository`, `launcher`, `home`, `events-primary`, `control-records`, `counters` (S-01 to S-16)",
+      "literals": [
+        "exit",
+        "stdout",
+        "stderr",
+        "tree",
+        "state",
+        "events",
+        "transcript",
+        "processes",
+        "pipeline",
+        "telemetry",
+        "repository",
+        "launcher",
+        "home",
+        "events-primary",
+        "control-records",
+        "counters"
+      ],
+      "owner": "141",
+      "closedBy": "Design",
+      "unknownValue": "The test is refused"
+    },
+    {
+      "number": 268,
+      "name": "Handling of a register row in the oracle",
+      "members": "normalization rule, off, mapped, waiver, layer field, not observable, none needed, no differential test",
+      "literals": [],
+      "owner": "141",
+      "closedBy": "Design",
+      "unknownValue": "The suite fails"
+    },
+    {
+      "number": 269,
+      "name": "Variants of a scenario of FX-35 and FX-36",
+      "members": "`@engine-stub`, `@full-stack`",
+      "literals": [
+        "@engine-stub",
+        "@full-stack"
+      ],
+      "owner": "141",
+      "closedBy": "Design",
+      "unknownValue": "The test is refused"
+    },
+    {
+      "number": 270,
+      "name": "Test tiers of the oracle; status of a fixture family",
+      "members": "hermetic, reference, platform; active, retired",
+      "literals": [],
+      "owner": "141",
+      "closedBy": "Design",
+      "unknownValue": "The test is refused; a family is read as retired"
+    },
+    {
+      "number": 271,
+      "name": "End causes of a pass (`pass.ended`, field `endCause`)",
+      "members": "`evidence`, `completed`, `yield`, `no_progress`, `error`, `killed`, `hard_cap`, `quota_pause`, `stopped`, `crash`",
+      "literals": [
+        "evidence",
+        "completed",
+        "yield",
+        "no_progress",
+        "error",
+        "killed",
+        "hard_cap",
+        "quota_pause",
+        "stopped",
+        "crash"
+      ],
+      "owner": "111",
+      "closedBy": "Design",
+      "unknownValue": "Read as `error`"
+    },
+    {
+      "number": 272,
+      "name": "End causes of a phase attempt (`attempt.ended`, field `endCause`)",
+      "members": "`approved`, `rejected`, `malformed`, `verification-failed`, `no-evidence`, `budget`, `blocked`, `stopped`, `error`, `crash`",
+      "literals": [
+        "approved",
+        "rejected",
+        "malformed",
+        "verification-failed",
+        "no-evidence",
+        "budget",
+        "blocked",
+        "stopped",
+        "error",
+        "crash"
+      ],
+      "owner": "111",
+      "closedBy": "Design",
+      "unknownValue": "Read as `error`"
+    },
+    {
+      "number": 273,
+      "name": "Outcomes of a phase (`phase.ended`, field `outcome`)",
+      "members": "`approved`, `halted`, `blocked`, `stopped`, `crash`",
+      "literals": [
+        "approved",
+        "halted",
+        "blocked",
+        "stopped",
+        "crash"
+      ],
+      "owner": "111",
+      "closedBy": "Design",
+      "unknownValue": "Read as `halted`"
+    },
+    {
+      "number": 274,
+      "name": "Error classes of the validation of a launch contract",
+      "members": "`unreadable`, `structure`, `action`, `check`, `verification-commands`, `learning`, `auto`, `open-blocker`, `unchecked-prerequisite`, `not-promoted`",
+      "literals": [
+        "unreadable",
+        "structure",
+        "action",
+        "check",
+        "verification-commands",
+        "learning",
+        "auto",
+        "open-blocker",
+        "unchecked-prerequisite",
+        "not-promoted"
+      ],
+      "owner": "107",
+      "closedBy": "Design",
+      "unknownValue": "The build fails (assumption: CQ-194)"
+    },
+    {
+      "number": 275,
+      "name": "Kinds of dsh-profile customisation",
+      "members": "`plugins`, `host-hooks`, `skills`, `tool-servers`",
+      "literals": [
+        "plugins",
+        "host-hooks",
+        "skills",
+        "tool-servers"
+      ],
+      "owner": "130",
+      "closedBy": "Design",
+      "unknownValue": "Recorded as `not-switchable`"
+    },
+    {
+      "number": 276,
+      "name": "States of a customisation or of native memory of dsh",
+      "members": "`off`, `absent`, `opted-in`, `not-switchable`, `as-is`",
+      "literals": [
+        "off",
+        "absent",
+        "opted-in",
+        "not-switchable",
+        "as-is"
+      ],
+      "owner": "130",
+      "closedBy": "Design",
+      "unknownValue": "Read as `not-switchable`"
+    },
+    {
+      "number": 277,
+      "name": "Providers of lock and liveness",
+      "members": "An open registry: the lock providers and liveness probes registered at EP-13 by their owners; Wave 1 names the providers of feature 122",
+      "literals": [],
+      "owner": "122",
+      "closedBy": "Open",
+      "unknownValue": "An unknown provider id is refused at registration"
+    },
+    {
+      "number": 278,
+      "name": "`outcome` of the record of a phase attempt",
+      "members": "`approved`, `rejected`, `malformed`, `gate-failed`, `config-error`, `no-verdict`",
+      "literals": [
+        "approved",
+        "rejected",
+        "malformed",
+        "gate-failed",
+        "config-error",
+        "no-verdict"
+      ],
+      "owner": "101",
+      "closedBy": "Design",
+      "unknownValue": "Read as `rejected`; the verdict stays one of the three members of row 8"
+    },
+    {
+      "number": 279,
+      "name": "Hold refusals",
+      "members": "`no-live-run`",
+      "literals": [
+        "no-live-run"
+      ],
+      "owner": "123",
+      "closedBy": "Design",
+      "unknownValue": "Refusal"
+    },
+    {
+      "number": 280,
+      "name": "Kill classes read by learning",
+      "members": "`budget`, `futility`, `hang`",
+      "literals": [
+        "budget",
+        "futility",
+        "hang"
+      ],
+      "owner": "106",
+      "closedBy": "Design",
+      "unknownValue": "`unknown`, counted as neither budget nor futility. The as-is kill reasons map onto the classes: hard cap to budget; repeat stall and progress stall to futility; idle timeout to hang"
+    },
+    {
+      "number": 281,
+      "name": "Sources of a selected learning mode",
+      "members": "`token`, `refusal`, `prose`, `default`",
+      "literals": [
+        "token",
+        "refusal",
+        "prose",
+        "default"
+      ],
+      "owner": "106",
+      "closedBy": "Design",
+      "unknownValue": "`default`"
+    },
+    {
+      "number": 282,
+      "name": "Timing of a check of a launch contract",
+      "members": "`preflight`, `stage`",
+      "literals": [
+        "preflight",
+        "stage"
+      ],
+      "owner": "107",
+      "closedBy": "Design",
+      "unknownValue": "The launch contract is invalid. The default is stage, and a postcondition may not have the timing preflight"
+    },
+    {
+      "number": 283,
+      "name": "Options that the consumer's comment may select",
+      "members": "`features`, `relaunch`, `learning`, `mode`",
+      "literals": [
+        "features",
+        "relaunch",
+        "learning",
+        "mode"
+      ],
+      "owner": "107",
+      "closedBy": "Owner decision",
+      "unknownValue": "The call is refused (F107-FR-035)"
+    },
+    {
+      "number": 284,
+      "name": "Reason of the verification mode that derivation sets",
+      "members": "`declared`, `configured`",
+      "literals": [
+        "declared",
+        "configured"
+      ],
+      "owner": "107",
+      "closedBy": "Design",
+      "unknownValue": "The build fails: the reason is computed, never read"
+    },
+    {
+      "number": 285,
+      "name": "Choices of a judgment item",
+      "members": "`mapped`, `optional`, `out-of-scope`, `specstride-phase:<n>`, `accepted`, `keep-blocker`",
+      "literals": [
+        "mapped",
+        "optional",
+        "out-of-scope",
+        "specstride-phase:<n>",
+        "accepted",
+        "keep-blocker"
+      ],
+      "owner": "107",
+      "closedBy": "Design",
+      "unknownValue": "The answer is refused (F107-FR-010)"
+    }
+  ]
+}

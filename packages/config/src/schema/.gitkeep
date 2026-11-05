@@ -1,0 +1,4 @@
+# packages/config/src/schema
+#
+# This directory of the tree of plan.md is filled by T009 (the schema types, the catalogue data and the validators).
+# It is kept in the tree so that the package layout of plan.md exists as planned.

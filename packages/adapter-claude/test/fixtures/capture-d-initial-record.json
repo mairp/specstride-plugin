@@ -1,0 +1,8 @@
+{
+  "capture": "D",
+  "feature": "125-adapter-claude",
+  "task": "T004",
+  "status": "unverified",
+  "reason": "the paid capture (a live headless pass of the pinned claude CLI 2.1.284 with customisations off, whose first system/init line of the stream-json output is the initial record) is out-of-band under the owner ruling of 2026-09-30: it is never run and never faked inside this feature's runs. This file holds NO initial-record line. The operator runs the capture by hand and replaces this file with the recorded line. Until then F125-FR-016 stays unverified and every proof read from an initial record is replayed in tests from a written fixture, never from this file.",
+  "recordedLines": 0
+}

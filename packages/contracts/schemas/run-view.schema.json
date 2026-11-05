@@ -1,0 +1,1405 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.view/1",
+  "title": "run-view",
+  "description": "The UI read model of a run, the content of EP-09. Hand-written by feature 129 from specs/129-run-view-and-status/contracts/run-view.md and the section \"Closed sets\" of its spec.md; feature 100's annex G \u00a7G.6 stands where the two differ. Delivered into @specstride/contracts by the sync script of feature 100 (contracts/deliver.json).",
+  "x-schema-id": "specstride.view/1",
+  "x-annex": "annex G, \u00a7G.6",
+  "x-owner": "129",
+  "x-requirement": "F129-FR-007, F129-FR-035",
+  "x-unknown-field": "ignored by a reader (F129-FR-007)",
+  "x-different-major": "refused with the major found and the major supported (F100-FR-049, F129-FR-007)",
+  "x-additive-inside-the-major": "a field is added only in an additive way inside the major (F129-FR-007)",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "specstride.view/1",
+      "description": "The schema id with its major",
+      "x-type-in-words": "Text",
+      "x-source": "constant",
+      "x-requirement": "F129-FR-007"
+    },
+    "now": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time of the projection; the only wall-clock field of the view",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-source": "obs",
+      "x-requirement": "F129-FR-006"
+    },
+    "runId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Identity: the run id",
+      "x-type-in-words": "Text",
+      "x-source": "file (run record)",
+      "x-requirement": "F129-FR-010"
+    },
+    "workspaceId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Identity: the workspace id",
+      "x-type-in-words": "Text",
+      "x-source": "file (run record)",
+      "x-requirement": "F129-FR-010"
+    },
+    "feature": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Identity: the feature slug",
+      "x-type-in-words": "Text",
+      "x-source": "file (run record)",
+      "x-requirement": "F129-FR-010"
+    },
+    "cursor": {
+      "$ref": "#/$defs/cursor",
+      "description": "File, byte offset and last `seq` after the last complete line read",
+      "x-type-in-words": "Record",
+      "x-source": "event",
+      "x-requirement": "F129-FR-003"
+    },
+    "state": {
+      "$ref": "#/$defs/writtenState",
+      "description": "A written state of annex E \u00a7E.2, or `none`",
+      "x-type-in-words": "Member of a closed set",
+      "x-source": "file (run record)",
+      "x-requirement": "F129-FR-010"
+    },
+    "stateSince": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Time of the last transition",
+      "x-type-in-words": "Timestamp",
+      "x-source": "file",
+      "x-requirement": "F129-FR-010"
+    },
+    "transition": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Number of the last transition",
+      "x-type-in-words": "Text",
+      "x-source": "file",
+      "x-requirement": "F129-FR-010"
+    },
+    "display": {
+      "type": "string",
+      "description": "The `st` value: the written state, or `dead`, `stale`, `launch-abandoned` or `unknown` where a derived condition holds",
+      "x-type-in-words": "Text",
+      "x-source": "derived",
+      "x-requirement": "F129-FR-027"
+    },
+    "liveness": {
+      "$ref": "#/$defs/liveness",
+      "description": "`alive`, `dead`, `foreign`, `unknown`, `not-applicable`",
+      "x-type-in-words": "Member of a closed set",
+      "x-source": "obs (lease)",
+      "x-requirement": "F129-FR-012"
+    },
+    "conditions": {
+      "type": "object",
+      "description": "The three derived conditions; derived by a reader and never written",
+      "x-type-in-words": "Record",
+      "x-source": "derived",
+      "x-requirement": "F129-FR-012, F129-FR-013, F129-FR-014",
+      "properties": {
+        "dead": {
+          "type": "boolean",
+          "description": "The owner is gone",
+          "x-type-in-words": "Truth value",
+          "x-requirement": "F129-FR-012"
+        },
+        "stale": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/staleCondition"
+            }
+          ],
+          "description": "Null, or the reason, with the major found and the range accepted for `event-major-out-of-range`",
+          "x-type-in-words": "Record or null",
+          "x-requirement": "F129-FR-013"
+        },
+        "launchAbandoned": {
+          "type": "boolean",
+          "description": "A launch without an outcome and without a lease past the handshake limit",
+          "x-type-in-words": "Truth value",
+          "x-requirement": "F129-FR-014"
+        }
+      },
+      "required": [
+        "dead",
+        "stale",
+        "launchAbandoned"
+      ],
+      "additionalProperties": true
+    },
+    "launch": {
+      "type": "object",
+      "description": "Launch id, reason, outcome, engine start ordinal",
+      "x-type-in-words": "Record",
+      "x-source": "event, obs",
+      "x-requirement": "F129-FR-014",
+      "properties": {
+        "launchId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "outcome": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "engineStartId": {
+          "type": [
+            "string",
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "launchId",
+        "reason",
+        "outcome",
+        "engineStartId"
+      ],
+      "additionalProperties": true
+    },
+    "progress": {
+      "type": "object",
+      "description": "The position of the run",
+      "x-type-in-words": "Record",
+      "x-source": "event, obs",
+      "x-requirement": "F129-FR-010",
+      "properties": {
+        "phase": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "phases": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "phaseAttempt": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "pass": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "rejects": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "malformed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "units": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "done": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "declared": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "done",
+                "declared"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        },
+        "elapsedSeconds": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "phase",
+        "phases",
+        "phaseAttempt",
+        "pass",
+        "rejects",
+        "malformed",
+        "units",
+        "elapsedSeconds"
+      ],
+      "additionalProperties": true
+    },
+    "strategy": {
+      "type": "object",
+      "description": "`classic` or `micro`, the micro level, the reason a layer is off",
+      "x-type-in-words": "Record",
+      "x-source": "file (run record), event",
+      "x-requirement": "F129-FR-023",
+      "properties": {
+        "strategy": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "classic",
+            "micro",
+            null
+          ]
+        },
+        "microLevel": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "layerOffReason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "strategy",
+        "microLevel",
+        "layerOffReason"
+      ],
+      "additionalProperties": true
+    },
+    "phases": {
+      "type": "array",
+      "description": "Number, title or null, evidence exists, approved, feedback exists",
+      "x-type-in-words": "List of records",
+      "x-source": "event",
+      "x-requirement": "F129-FR-011",
+      "x-bound": "bounded by the phases the events declare; no fixed limit is named by F129-FR-026",
+      "items": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 240
+          },
+          "evidence": {
+            "type": "boolean"
+          },
+          "approved": {
+            "type": "boolean"
+          },
+          "feedback": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "number",
+          "title",
+          "evidence",
+          "approved",
+          "feedback"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "cards": {
+      "type": "array",
+      "description": "Card id, feature, phase, lane, rule id of the lane, flags",
+      "x-type-in-words": "List of records",
+      "x-source": "derived",
+      "x-requirement": "F129-FR-016",
+      "x-bound": "one card per phase; bounded with `phases`",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "feature": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "phase": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "lane": {
+            "$ref": "#/$defs/lane"
+          },
+          "ruleId": {
+            "$ref": "#/$defs/laneTableRow"
+          },
+          "flags": {
+            "type": "object",
+            "properties": {
+              "dead": {
+                "type": "boolean"
+              },
+              "stale": {
+                "type": "boolean"
+              },
+              "yielded": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "dead",
+              "stale",
+              "yielded"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "id",
+          "feature",
+          "phase",
+          "lane",
+          "ruleId",
+          "flags"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "lanes": {
+      "type": "array",
+      "description": "The eight lanes in order, each with the ids of its cards",
+      "x-type-in-words": "List of records",
+      "x-source": "derived",
+      "x-requirement": "F129-FR-016",
+      "maxItems": 8,
+      "x-bound": "8: the members of closed set row 243",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lane": {
+            "$ref": "#/$defs/lane"
+          },
+          "cards": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "lane",
+          "cards"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "laneTable": {
+      "type": "object",
+      "description": "Id and version of the table used",
+      "x-type-in-words": "Record",
+      "x-source": "constant",
+      "x-requirement": "F129-FR-016",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": true
+    },
+    "attention": {
+      "type": "array",
+      "description": "The attention items, in the order of the table of F129-FR-017 and then by `since`",
+      "x-type-in-words": "List of records",
+      "x-source": "derived",
+      "x-requirement": "F129-FR-017",
+      "maxItems": 50,
+      "x-bound": "50 (F129-FR-026); `attentionOmitted` says how many were left out",
+      "items": {
+        "$ref": "#/$defs/attentionItem"
+      }
+    },
+    "attentionOmitted": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "How many attention items were left out of the bound of 50",
+      "x-type-in-words": "Whole number",
+      "x-source": "derived",
+      "x-requirement": "F129-FR-026"
+    },
+    "budget": {
+      "type": "array",
+      "description": "Scope, role, cost class, spent, tokens, cap, fraction, level, notional, quota",
+      "x-type-in-words": "List of records",
+      "x-source": "event, file (run record caps)",
+      "x-requirement": "F129-FR-020",
+      "maxItems": 64,
+      "x-bound": "64 (F129-FR-026); `budgetOmitted` says how many were left out",
+      "items": {
+        "$ref": "#/$defs/budgetRow"
+      }
+    },
+    "budgetOmitted": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "How many budget rows were left out of the bound of 64",
+      "x-type-in-words": "Whole number",
+      "x-source": "derived",
+      "x-requirement": "F129-FR-026"
+    },
+    "processes": {
+      "type": "object",
+      "description": "Holders of the run token: kind, class, process id; count of entries cut",
+      "x-type-in-words": "Record",
+      "x-source": "obs",
+      "x-requirement": "F129-FR-021",
+      "properties": {
+        "holders": {
+          "type": "array",
+          "maxItems": 50,
+          "x-bound": "50 (F129-FR-026)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "class": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "pid": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "kind",
+              "class",
+              "pid"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "omitted": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cut": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "holders",
+        "omitted",
+        "cut"
+      ],
+      "additionalProperties": true
+    },
+    "supervision": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "nextSeconds": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "unchanged": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "relaunchBudget": {
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "nextSeconds",
+            "unchanged",
+            "relaunchBudget"
+          ],
+          "additionalProperties": true
+        }
+      ],
+      "description": "Suggested seconds until the next reading; unchanged count; relaunch budget",
+      "x-type-in-words": "Record or null",
+      "x-source": "obs",
+      "x-requirement": "F129-FR-027"
+    },
+    "activity": {
+      "type": "object",
+      "description": "Latest tool with a summary; observability mode and reason",
+      "x-type-in-words": "Record",
+      "x-source": "event",
+      "x-requirement": "F129-FR-011",
+      "properties": {
+        "latestTool": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "summary": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "maxLength": 240
+                }
+              },
+              "required": [
+                "name",
+                "summary"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        },
+        "observabilityMode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "observabilityReason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 240
+        }
+      },
+      "required": [
+        "latestTool",
+        "observabilityMode",
+        "observabilityReason"
+      ],
+      "additionalProperties": true
+    },
+    "telemetry": {
+      "type": "array",
+      "description": "Sink and delivery state",
+      "x-type-in-words": "List of records",
+      "x-source": "event",
+      "x-requirement": "F129-FR-011",
+      "x-bound": "one row per sink the events name; no fixed limit is named by F129-FR-026",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sink": {
+            "type": "string"
+          },
+          "delivery": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "sink",
+          "delivery"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "description": "The newest rows and the number of rows left out",
+      "x-type-in-words": "Record",
+      "x-source": "event",
+      "x-requirement": "F129-FR-011",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "maxItems": 20,
+          "x-bound": "bounded by `status.timelineRows`, whose default is 20 (F129-FR-026, F129-FR-034)",
+          "x-bound-key": "status.timelineRows",
+          "items": {
+            "type": "object",
+            "properties": {
+              "seq": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "ts": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "text": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 240
+              }
+            },
+            "required": [
+              "seq",
+              "ts",
+              "kind",
+              "text"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "omitted": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "rows",
+        "omitted"
+      ],
+      "additionalProperties": true
+    },
+    "parallel": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "workers": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "groups": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "groupFailures": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "refusals": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "fallbackReason": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 240
+            },
+            "wallHours": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "agentHours": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "required": [
+            "workers",
+            "groups",
+            "groupFailures",
+            "refusals",
+            "fallbackReason"
+          ],
+          "additionalProperties": true
+        }
+      ],
+      "description": "Present only with parallel units on; null where the option is off",
+      "x-type-in-words": "Record or null",
+      "x-source": "file (run record), event",
+      "x-requirement": "F129-FR-022"
+    },
+    "diagnostics": {
+      "type": "object",
+      "description": "Skipped lines, gaps of `seq`, majors seen and accepted, torn last line, fields cut, fields dropped",
+      "x-type-in-words": "Record",
+      "x-source": "event",
+      "x-requirement": "F129-FR-004, F129-FR-005, F129-FR-009",
+      "properties": {
+        "skippedLines": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gaps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "after": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "before": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "after",
+              "before"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "majorsSeen": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "majorsAccepted": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "type": "integer"
+            },
+            "to": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "from",
+            "to"
+          ],
+          "additionalProperties": true
+        },
+        "majorsOutOfRange": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tornLastLine": {
+          "type": "boolean"
+        },
+        "fieldsCut": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fieldsDropped": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "redactorFailed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "skippedLines",
+        "gaps",
+        "majorsSeen",
+        "majorsAccepted",
+        "majorsOutOfRange",
+        "tornLastLine",
+        "fieldsCut",
+        "fieldsDropped",
+        "redactorFailed"
+      ],
+      "additionalProperties": true
+    },
+    "signature": {
+      "type": "object",
+      "description": "The change signature record and its 8-character token",
+      "x-type-in-words": "Record, text",
+      "x-source": "derived",
+      "x-requirement": "F129-FR-030",
+      "properties": {
+        "record": {
+          "type": "object"
+        },
+        "token": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}$"
+        }
+      },
+      "required": [
+        "record",
+        "token"
+      ],
+      "additionalProperties": true
+    },
+    "stream": {
+      "type": "object",
+      "description": "The marks of the fold: the first and the newest event folded, and the times of `run.started` and `run.ended`. The place in the record where `project` keeps what it needs to recompute the age of the newest event (F129-FR-013) and the elapsed time (F129-FR-010) from a view alone, so that folding `reduce` event by event gives the same view as one batch (F129-FR-002).",
+      "x-type-in-words": "Record",
+      "x-source": "event",
+      "x-requirement": "F129-FR-010, F129-FR-013",
+      "properties": {
+        "first": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/streamMark"
+            }
+          ]
+        },
+        "last": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/streamMark"
+            }
+          ]
+        },
+        "runStartedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "runEndedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "first",
+        "last",
+        "runStartedAt",
+        "runEndedAt"
+      ],
+      "additionalProperties": true
+    },
+    "settled": {
+      "type": "object",
+      "description": "The values `project` settled from the state files and the observations that the derivation re-reads. F129-FR-002 requires that such a field be recomputed by `project` at every call and never by `reduce`; `project` settles them once and the derivation reads them back from the record.",
+      "x-type-in-words": "Record",
+      "x-source": "file, obs",
+      "x-requirement": "F129-FR-002, F129-FR-013",
+      "properties": {
+        "heartbeatLate": {
+          "type": "boolean",
+          "description": "The heartbeat of the lease is past its `validUntil` at `now`"
+        },
+        "staleEventSec": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "`status.staleEventSec`: the age after which the newest event counts as old"
+        }
+      },
+      "required": [
+        "heartbeatLate",
+        "staleEventSec"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "schema",
+    "now",
+    "runId",
+    "workspaceId",
+    "feature",
+    "cursor",
+    "state",
+    "stateSince",
+    "transition",
+    "display",
+    "liveness",
+    "conditions",
+    "launch",
+    "progress",
+    "strategy",
+    "phases",
+    "cards",
+    "lanes",
+    "laneTable",
+    "attention",
+    "attentionOmitted",
+    "budget",
+    "budgetOmitted",
+    "processes",
+    "supervision",
+    "activity",
+    "telemetry",
+    "timeline",
+    "parallel",
+    "diagnostics",
+    "signature",
+    "stream",
+    "settled"
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "cursor": {
+      "type": "object",
+      "description": "The cursor the caller holds (F129-FR-003)",
+      "properties": {
+        "file": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The logical name of the event file"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lastSeq": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "file",
+        "offset",
+        "lastSeq"
+      ],
+      "additionalProperties": true
+    },
+    "writtenState": {
+      "description": "A written state of annex E \u00a7E.2, or `none` (row 1 of annex X \u00a7X.6, owner 100)",
+      "type": "string",
+      "x-closed-set-row": 1,
+      "x-closed-set-owner": "100",
+      "x-unknown-value": "shown as `unknown` with the attention item `unknown-state` (F129-FR-035)",
+      "enum": [
+        "created",
+        "starting",
+        "running",
+        "paused-quota",
+        "relaunching",
+        "stopping",
+        "blocked-on-human",
+        "finished",
+        "stopped",
+        "failed",
+        "none",
+        "unknown"
+      ]
+    },
+    "lane": {
+      "description": "Lanes of the view (row 243 of annex X \u00a7X.6, owner 129)",
+      "type": "string",
+      "x-closed-set-row": 243,
+      "x-closed-set-owner": "129",
+      "x-unknown-value": "Shown as text; the card is not moved",
+      "enum": [
+        "queued",
+        "proposing",
+        "verifying",
+        "reviewing",
+        "approved",
+        "blocked",
+        "paused",
+        "failed"
+      ]
+    },
+    "attentionKind": {
+      "description": "Kinds of attention item (row 244 of annex X \u00a7X.6, owner 129), in the order items are listed",
+      "type": "string",
+      "x-closed-set-row": 244,
+      "x-closed-set-owner": "129",
+      "x-unknown-value": "Shown as text with the next command `status --json`",
+      "enum": [
+        "blocked-on-human",
+        "source-changed",
+        "dead-run",
+        "launch-abandoned",
+        "quota-pause",
+        "budget-alert",
+        "stale-run",
+        "orphan-processes",
+        "unknown-state"
+      ]
+    },
+    "budgetLevel": {
+      "description": "Budget levels (row 245 of annex X \u00a7X.6, owner 129)",
+      "type": "string",
+      "x-closed-set-row": 245,
+      "x-closed-set-owner": "129",
+      "x-unknown-value": "Read as `unknown`",
+      "enum": [
+        "unknown",
+        "ok",
+        "info",
+        "warn",
+        "loud",
+        "over"
+      ]
+    },
+    "liveness": {
+      "description": "Liveness values of the view (row 246 of annex X \u00a7X.6, owner 129)",
+      "type": "string",
+      "x-closed-set-row": 246,
+      "x-closed-set-owner": "129",
+      "x-unknown-value": "Read as `unknown`",
+      "enum": [
+        "alive",
+        "dead",
+        "foreign",
+        "unknown",
+        "not-applicable"
+      ]
+    },
+    "staleReason": {
+      "description": "Reasons of `stale` (row 247 of annex X \u00a7X.6, owner 129)",
+      "type": "string",
+      "x-closed-set-row": 247,
+      "x-closed-set-owner": "129",
+      "x-unknown-value": "Shown as text; the view stays `stale`",
+      "enum": [
+        "heartbeat-and-events-old",
+        "event-major-out-of-range"
+      ]
+    },
+    "statusLineKey": {
+      "description": "Keys of the status line (row 248 of annex X \u00a7X.6, owner 129), in the order of F129-FR-027",
+      "type": "string",
+      "x-closed-set-row": 248,
+      "x-closed-set-owner": "129",
+      "x-unknown-value": "A parser ignores a key it does not know",
+      "enum": [
+        "run",
+        "st",
+        "ph",
+        "unit",
+        "rej",
+        "el",
+        "next",
+        "strategy",
+        "attn",
+        "cur",
+        "validUntil"
+      ]
+    },
+    "quotaState": {
+      "description": "Quota states of a budget row (row 249 of annex X \u00a7X.6, owner 129)",
+      "type": "string",
+      "x-closed-set-row": 249,
+      "x-closed-set-owner": "129",
+      "x-unknown-value": "Read as `ok`",
+      "enum": [
+        "ok",
+        "signalled",
+        "paused"
+      ]
+    },
+    "laneTableRow": {
+      "description": "Rows of the lane table (row 250 of annex X \u00a7X.6, owner 129): L-01 to L-08 of F129-FR-016",
+      "type": "string",
+      "x-closed-set-row": 250,
+      "x-closed-set-owner": "129",
+      "x-unknown-value": "The default row L-08 fires",
+      "enum": [
+        "L-01",
+        "L-02",
+        "L-03",
+        "L-04",
+        "L-05",
+        "L-06",
+        "L-07",
+        "L-08"
+      ]
+    },
+    "staleCondition": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "$ref": "#/$defs/staleReason"
+        },
+        "majorFound": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "majorsAccepted": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "type": "integer"
+                },
+                "to": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "from",
+                "to"
+              ],
+              "additionalProperties": true
+            }
+          ]
+        }
+      },
+      "required": [
+        "reason",
+        "majorFound",
+        "majorsAccepted"
+      ],
+      "additionalProperties": true
+    },
+    "attentionItem": {
+      "type": "object",
+      "description": "An attention item: kind, key, since, one-line text, need, next command, and the fields of its kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/attentionKind"
+        },
+        "key": {
+          "type": "string"
+        },
+        "since": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "oneLine": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "need": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 240
+        },
+        "next": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "key",
+        "since",
+        "oneLine",
+        "need",
+        "next",
+        "fields"
+      ],
+      "additionalProperties": true
+    },
+    "budgetRow": {
+      "type": "object",
+      "description": "One budget row of the view",
+      "properties": {
+        "scope": {
+          "type": "string"
+        },
+        "role": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "costClass": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "spent": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "cap": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "fraction": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "level": {
+          "$ref": "#/$defs/budgetLevel"
+        },
+        "notional": {
+          "type": "boolean"
+        },
+        "quota": {
+          "$ref": "#/$defs/quotaState"
+        }
+      },
+      "required": [
+        "scope",
+        "role",
+        "costClass",
+        "spent",
+        "tokens",
+        "cap",
+        "fraction",
+        "level",
+        "notional",
+        "quota"
+      ],
+      "additionalProperties": true
+    },
+    "streamMark": {
+      "type": "object",
+      "description": "One mark of the stream: the `seq`, the time and the type of an event",
+      "properties": {
+        "seq": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ts": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "seq",
+        "ts",
+        "type"
+      ],
+      "additionalProperties": true
+    }
+  }
+}

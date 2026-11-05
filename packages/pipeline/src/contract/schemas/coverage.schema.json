@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:internal:107:coverage/1",
+  "title": "One coverage obligation of the launch contract",
+  "description": "One entry of `coverage` of the launch contract (feature 107). The id is `OBL-` followed by the first 12 hexadecimal characters, upper-cased, of the content hash of the text `<source>:<line>:<task id>:<text>` (F107-FR-004, the content hash of the canonical hasher of @specstride/kernel). The kinds and the dispositions are the members of the closed set of annex X §X.6 row 79 that annex G §G.8 gives (the record schema `launch-contract.schema.json` of @specstride/contracts names them); the members of `timing` are the closed set of row 257 (`timingOfACoverageObligation`) and of `producer` the closed set of row 258 (`producerOfACoverageObligation`), read from @specstride/contracts, never copied by hand. Strict validation refuses the dispositions `unresolved` and `unsupported` and the producers `unknown` and `unclassified` (a rule of validation, F107-FR-004, F107-FR-041).",
+  "x-schema-id": "urn:specstride:schema:internal:107:coverage/1",
+  "x-annex": "feature 107, data-model.md, \"Member names\" (a coverage obligation)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^OBL-[0-9A-F]{12}$",
+      "description": "The id of the obligation: OBL- plus 12 hexadecimal characters, upper-cased (F107-FR-004)"
+    },
+    "source": {
+      "type": "object",
+      "description": "Where the obligation stands: the path, the line and the anchor",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The path of the source, relative to the repository root"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The line of the source"
+        },
+        "anchor": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The id of the task, the id of the prerequisite, the id of the command, or the anchor the line carries"
+        }
+      },
+      "required": ["path", "line", "anchor"],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "kind": {
+      "enum": ["implementation", "prerequisite", "verification", "decision", "operation"],
+      "description": "The kind of the obligation; a member of the closed set of annex X §X.6 row 79, as annex G §G.8 gives it"
+    },
+    "timing": {
+      "anyOf": [
+        {
+          "enum": ["pipeline-start", "release", "unclassified"],
+          "description": "The literal members of the closed set"
+        },
+        {
+          "pattern": "^specstride-phase:[1-9][0-9]*$",
+          "description": "The parameterized member `specstride-phase:<n>` of the closed set, n the number of a phase"
+        },
+        {
+          "pattern": "^before:[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "The parameterized member `before:<stage>` of the closed set, the id of a stage"
+        },
+        {
+          "pattern": "^after:[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "The parameterized member `after:<stage>` of the closed set, the id of a stage"
+        }
+      ],
+      "description": "The timing of the obligation; the closed set of annex X §X.6 row 257 (timingOfACoverageObligation of @specstride/contracts), the literal members as their enum and the parameterized members as their patterns"
+    },
+    "producer": {
+      "anyOf": [
+        {
+          "enum": ["existing", "automated-policy", "external-authority", "unknown", "unclassified"],
+          "description": "The literal members of the closed set"
+        },
+        {
+          "pattern": "^stage:[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "The parameterized member `stage:<id>` of the closed set, the id of a stage"
+        }
+      ],
+      "description": "The producer of the obligation; the closed set of annex X §X.6 row 258 (producerOfACoverageObligation of @specstride/contracts), the literal members as their enum and the parameterized member as its pattern"
+    },
+    "disposition": {
+      "enum": ["mapped", "optional", "out-of-scope", "unresolved", "unsupported"],
+      "description": "The disposition of the obligation; a member of the closed set of annex X §X.6 row 79, as annex G §G.8 gives it"
+    },
+    "stage_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "The ids of the stages that produce the obligation"
+    },
+    "verification_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "The ids of the verification commands that verify the obligation"
+    },
+    "rationale": {
+      "type": "string",
+      "description": "The rationale: the text of the task for an obligation settled by fact, the reason of the answer for one settled by an answer (F107-FR-041)"
+    },
+    "evidence": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "The evidence of the obligation"
+    }
+  },
+  "required": [
+    "id",
+    "source",
+    "kind",
+    "timing",
+    "producer",
+    "disposition",
+    "stage_ids",
+    "verification_ids",
+    "rationale",
+    "evidence"
+  ],
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  }
+}

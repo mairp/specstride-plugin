@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.inbox/1",
+  "title": "inbox-request",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.inbox/1",
+  "x-annex": "annex B, §B.11",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id, request type, time of the request",
+      "x-type-in-words": "Text, member of the closed set, timestamp",
+      "x-required": "Yes, except in the empty stop request",
+      "x-request-type": "all"
+    },
+    "type": {
+      "type": "string",
+      "description": "Schema id, request type, time of the request",
+      "x-type-in-words": "Text, member of the closed set, timestamp",
+      "x-required": "Yes, except in the empty stop request",
+      "x-request-type": "all"
+    },
+    "at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Schema id, request type, time of the request",
+      "x-type-in-words": "Text, member of the closed set, timestamp",
+      "x-required": "Yes, except in the empty stop request",
+      "x-request-type": "all"
+    },
+    "runTokenHash": {
+      "type": "string",
+      "description": "Hash of the run token, when a run was active",
+      "x-type-in-words": "Text",
+      "x-required": "No",
+      "x-request-type": "all"
+    },
+    "now": {
+      "type": "boolean",
+      "description": "End owned processes at once",
+      "x-type-in-words": "Truth value",
+      "x-required": "No, default false",
+      "x-request-type": "stop"
+    },
+    "jobs": {
+      "type": "boolean",
+      "description": "Also end adoptable jobs",
+      "x-type-in-words": "Truth value",
+      "x-required": "No, default false",
+      "x-request-type": "stop"
+    },
+    "causedBy": {
+      "type": "string",
+      "description": "Who asked: `operator` for every request of Wave 1",
+      "x-type-in-words": "Member of the closed set of the terminal record",
+      "x-required": "No, default `operator`",
+      "x-request-type": "stop"
+    },
+    "hold": {
+      "type": "boolean",
+      "description": "True holds every relaunch by the runtime root; false lifts the hold",
+      "x-type-in-words": "Truth value",
+      "x-required": "Yes",
+      "x-request-type": "hold-relaunch"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Why, for the digest",
+      "x-type-in-words": "Text, redacted",
+      "x-required": "No",
+      "x-request-type": "hold-relaunch"
+    },
+    "kind": {
+      "type": "string",
+      "description": "What the host observed, for example a limit of the host",
+      "x-type-in-words": "Text",
+      "x-required": "Yes",
+      "x-request-type": "host-event"
+    },
+    "data": {
+      "type": "object",
+      "description": "Facts of the observation, redacted",
+      "x-type-in-words": "Record",
+      "x-required": "No",
+      "x-request-type": "host-event"
+    }
+  },
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

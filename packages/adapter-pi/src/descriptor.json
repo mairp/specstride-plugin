@@ -1,0 +1,270 @@
+{
+  "descriptorVersion": 1,
+  "id": "pi",
+  "displayName": "pi",
+  "kind": "cli",
+  "origin": "adapter",
+  "provider": {
+    "id": "<from the provider in use at role resolution>",
+    "termsRef": "<the row of the provider, or null>"
+  },
+  "detect": {
+    "executable": "pi",
+    "version": {
+      "args": ["--version"],
+      "expect": "0.80.6"
+    },
+    "helpMustContain": ["--mode", "--no-session", "--session-id", "--tools"],
+    "configHome": "<agent directory of pi; existence only>",
+    "freeOfCharge": {
+      "modelCall": false,
+      "credentialRead": false,
+      "installsVendorsOrDownloads": false
+    }
+  },
+  "auth": {
+    "tiers": [1, 2],
+    "credential": "secret reference, named by the consumer",
+    "scheme": "none",
+    "channel": "environment-only",
+    "preflight": {
+      "skipped": "no endpoint is called before a pass; the key reaches pi by environment only (research.md row 10)",
+      "reportsPresenceOf": "the credential of the role, never its value",
+      "missingFails": "before the first pass, naming what is missing"
+    },
+    "note": "API key by environment from the provider's key variable; never an argument; no auth file read; no login"
+  },
+  "models": {
+    "default": null,
+    "listSource": "probed: the model list of pi, context column",
+    "contextWindow": {
+      "source": "probed or declared; the smaller wins",
+      "unknownModel": "no default"
+    },
+    "select": "model option of pi"
+  },
+  "roles": {
+    "proposer": {
+      "supported": true
+    },
+    "critic": {
+      "supported": true,
+      "toolless": "flag",
+      "readOnlyTools": "not supported",
+      "freshSession": true,
+      "forms": ["tool-less"],
+      "secondForm": "not offered: the read-only tool selection of pi is a tool allow-list, not an operating-system sandbox (annex C §C.3; R9 F8)",
+      "proof": "the initial record of the stream; where it states no tool list, the weaker proof by the exact pin, a passed preflight and the flag set (Principle IX v3.0.1; CQ-182)",
+      "automaticPick": {
+        "testedAdapterOnly": true,
+        "providerRow": "required: the row of the provider in use must allow it; a provider whose terms are unknown is never picked automatically",
+        "metered": "an automatic pick on a metered provider carries the hard spending cap (F100-FR-093)"
+      }
+    }
+  },
+  "invoke": {
+    "proposer": {
+      "args": [
+        "-p",
+        "--mode",
+        "json",
+        "--tools",
+        "{toolAllowList}",
+        "--no-extensions",
+        "--no-skills",
+        "--no-context-files",
+        "--no-prompt-templates",
+        "--no-approve",
+        "--model",
+        "{model}"
+      ],
+      "withSession": ["--session-id", "{sessionId}", "--session-dir", "{sessionDir}"],
+      "withoutSession": ["--no-session"],
+      "prompt": "stdin",
+      "workdir": "{workdir}",
+      "permission": "none: pi has no permission mode",
+      "status": "unverified",
+      "toolAllowList": ["read", "edit", "bash", "grep", "find", "ls"],
+      "toolSelection": "allow-list",
+      "laterVersionDefault": "off until the descriptor lists the tool",
+      "toolStatus": "unverified (tool names read from the documentation of pi; the allow-list, never a deny list, is the rule \u2014 research.md row 3)",
+      "denyList": null,
+      "projectLocalResources": "untrusted for both roles: the approval option is never passed (the argv carries --no-approve), project trust is never set, and the explicit ignore flags --no-extensions, --no-skills, --no-context-files and --no-prompt-templates are passed by default",
+      "projectTrust": "never set"
+    },
+    "critic": {
+      "args": [
+        "-p",
+        "--mode",
+        "json",
+        "--no-tools",
+        "--no-skills",
+        "--no-context-files",
+        "--no-extensions",
+        "--no-prompt-templates",
+        "--no-session",
+        "--no-approve",
+        "--model",
+        "{model}"
+      ],
+      "prompt": "stdin",
+      "workdir": "{emptyTmp}",
+      "status": "unverified by run",
+      "flagSet": [
+        "-p",
+        "--mode",
+        "json",
+        "--no-tools",
+        "--no-skills",
+        "--no-context-files",
+        "--no-extensions",
+        "--no-prompt-templates",
+        "--no-session",
+        "--no-approve"
+      ],
+      "projectLocalResources": "untrusted for both roles: the approval option is never passed, project trust is never set, and the explicit setting that ignores project-local resources is passed; the print-mode default alone is not relied on",
+      "memoryAndContext": "harness-native memory and context files off for EVERY critic call, recorded per call",
+      "session": "never shared with a pass: the identity of the critic call is minted apart from every pass",
+      "contextWindow": {
+        "inUse": "the smaller of the declared and the effective window",
+        "unknownModel": "no default; pi is NOT offered as critic on a model with no known window"
+      },
+      "telemetry": {
+        "PI_TELEMETRY": "0"
+      },
+      "projectTrust": "never set"
+    }
+  },
+  "stream": {
+    "format": "jsonl",
+    "dialect": "pi",
+    "tolerate": []
+  },
+  "continuation": {
+    "supported": true,
+    "provenance": "adapter",
+    "status": "unverified",
+    "how": "exact id by the session-id option; a session directory per phase attempt",
+    "ttlSeconds": 300
+  },
+  "session": {
+    "where": "a directory per phase attempt",
+    "redirect": {
+      "env": "PI_CODING_AGENT_SESSION_DIR",
+      "option": "--session-dir"
+    },
+    "removedAtEnd": "the phase attempt"
+  },
+  "tiers": [],
+  "failures": {
+    "agent_failure": "terminal record with stop reason error and no class matched",
+    "quota_window": "see classifier-entries.pi.json",
+    "auth": "see classifier-entries.pi.json",
+    "context_window_exceeded": "see classifier-entries.pi.json"
+  },
+  "cost": {
+    "class": "unknown",
+    "prices": null
+  },
+  "isolation": {
+    "envAllow": [
+      "PATH",
+      "LANG",
+      "LC_ALL",
+      "HOME",
+      "PI_CODING_AGENT_DIR",
+      "PI_CODING_AGENT_SESSION_DIR",
+      "PI_TELEMETRY",
+      "<the key variable of the provider in use>"
+    ],
+    "envAllowBase": ["PATH", "LANG", "LC_ALL", "HOME"],
+    "envAllowHarness": ["PI_CODING_AGENT_DIR", "PI_CODING_AGENT_SESSION_DIR", "PI_TELEMETRY"],
+    "envAllowByProvider": {
+      "openai": {
+        "keyEnv": "OPENAI_API_KEY"
+      },
+      "anthropic": {
+        "keyEnv": "ANTHROPIC_API_KEY"
+      },
+      "google": {
+        "keyEnv": "GEMINI_API_KEY"
+      },
+      "openrouter": {
+        "keyEnv": "OPENROUTER_API_KEY"
+      },
+      "groq": {
+        "keyEnv": "GROQ_API_KEY"
+      },
+      "mistral": {
+        "keyEnv": "MISTRAL_API_KEY"
+      },
+      "azure": {
+        "keyEnv": "AZURE_OPENAI_API_KEY"
+      },
+      "bedrock": {
+        "keyEnv": "AWS_ACCESS_KEY_ID"
+      },
+      "loopback": {
+        "keyEnv": "PI_TEST_API_KEY"
+      }
+    },
+    "credentialCrossRole": "never: the credentials of the critic are never in the environment of the proposer, and the reverse",
+    "configHome": {
+      "vars": ["PI_CODING_AGENT_DIR", "PI_CODING_AGENT_SESSION_DIR"],
+      "seeds": [],
+      "scope": "attempt"
+    },
+    "home": {
+      "tier1": "the real home, never written by the run",
+      "tier2": "a throwaway home built from the overlay, removed after the call, a killed pass included",
+      "credentialByEnvironmentOnly": "no auth file is copied between homes"
+    }
+  },
+  "containment": {
+    "ceiling": "C0",
+    "provenance": "adapter",
+    "status": "unverified",
+    "optInKey": "sandbox.level",
+    "optInSource": "user-configuration-only",
+    "refusedWithoutOptIn": "the launch of pi as proposer is refused with the reason and a doctor line, and no pass starts",
+    "parallelUnits": {
+      "key": "loop.parallel.allow_detect",
+      "source": "user-configuration-only",
+      "default": "off with the reason stated"
+    }
+  },
+  "memory": {
+    "native": "unverified",
+    "off": "context files and extensions off; whether pi has memory beyond them is a capture-4 side check",
+    "proposerDefault": "off",
+    "optInKey": "harnesses.pi.proposerCustomisations",
+    "optInTrustClass": "widening",
+    "optInAcceptedFrom": "user-configuration-only",
+    "customisations": {
+      "proposerDefault": "off",
+      "offFlags": ["--no-extensions", "--no-skills", "--no-context-files", "--no-prompt-templates"],
+      "optInKey": "harnesses.pi.proposerCustomisations",
+      "optInAcceptedFrom": "user-configuration-only",
+      "recordedPerRun": true
+    }
+  },
+  "telemetry": {
+    "off": {
+      "env": {
+        "PI_TELEMETRY": "0"
+      }
+    },
+    "reliedUponForCorrectness": false
+  },
+  "concurrentSessions": null,
+  "spendLimit": null,
+  "transports": [
+    {
+      "id": "subprocess",
+      "authTier": [1, 2]
+    }
+  ],
+  "versionRange": ">=0.80.6 <0.81",
+  "verifiedOn": "2026-09-29",
+  "x-provisional": true
+}

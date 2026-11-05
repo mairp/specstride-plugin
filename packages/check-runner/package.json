@@ -1,0 +1,28 @@
+{
+  "name": "@specstride/check-runner",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride check-runner",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node ../../tests/isolate.ts node --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@specstride/contracts": "0.0.0",
+    "@specstride/kernel": "0.0.0"
+  },
+  "specstride": {
+    "skeleton": true,
+    "layer": "L1",
+    "owner": "148",
+    "extensionPoint": "EP-05"
+  }
+}

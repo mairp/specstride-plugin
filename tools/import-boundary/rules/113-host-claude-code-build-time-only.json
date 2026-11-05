@@ -1,0 +1,8 @@
+{
+  "rule": "RF-113-01",
+  "owner": "113",
+  "requirement": "F113-FR-030",
+  "from": ["packages/host-claude-code/src/shim/**"],
+  "forbid": ["@specstride/contracts", "@specstride/contracts/**"],
+  "reason": "The package graph lets @specstride/host-claude-code import @specstride/contracts AT BUILD TIME ONLY. mayImport separates packages and cannot express that qualifier, so the module-level half stands here (F149-FR-007): packages/host-claude-code/src/shim/ is the one part of src/ that is rendered into plugin/bin/ and runs on the consumer's machine, and the plugin layer carries no run-time dependency (F113-FR-030, F113-FR-031, threat T-44). The shim inlines the protocol integer and the refusal line of annex H section H.1, and a test of T007 holds them against @specstride/contracts/ep/host."
+}

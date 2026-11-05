@@ -1,0 +1,80 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.retrospective/1",
+ "title": "Retrospective of a pipeline run (annex B section B.20, owner 106; F106-FR-034, F106-FR-035)",
+ "type": "object",
+ "required": ["schema"],
+ "properties": {
+  "schema": {
+   "const": "specstride.retrospective/1"
+  },
+  "pipeline": {
+   "type": "string",
+   "description": "Id of the pipeline the retrospective is about"
+  },
+  "contract_digest": {
+   "type": "string",
+   "description": "The launch contract hash the retrospective was computed against; the retrospective is filed under it (field name as at the baseline)"
+  },
+  "generated_at": {
+   "type": "string",
+   "description": "Local time with offset, to the second, as at the baseline"
+  },
+  "stages": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": ["stage", "status"],
+    "properties": {
+     "stage": {
+      "type": "string"
+     },
+     "status": {
+      "enum": ["ok", "unavailable"]
+     },
+     "reason": {
+      "type": "string",
+      "description": "Present when the status is unavailable; passed through the one ingress (F106-FR-040)"
+     },
+     "workdir": {
+      "type": "string",
+      "description": "Working directory of the located feature"
+     },
+     "feature_dir": {
+      "type": "string",
+      "description": "Directory of the located feature"
+     },
+     "feature": {
+      "type": "string",
+      "description": "Slug of the located feature"
+     },
+     "summary_schema": {
+      "type": ["string", "null"],
+      "description": "Schema id of the summary that learn --summarize returned"
+     },
+     "totals": {
+      "description": "The totals of that summary, copied"
+     },
+     "phases": {
+      "type": "object",
+      "description": "Per phase: title, attempts_total, attempts_to_approval, cost_usd, work_sec_p50, work_sec_p90, work_sec_samples, copied from the summary"
+     },
+     "evaluations": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "description": "The evaluation lines, as the learn command reports them; passed through the one ingress (F106-FR-040)"
+     },
+     "suggestions": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "description": "The suggestion lines; a suggestion is never run"
+     }
+    }
+   }
+  }
+ }
+}

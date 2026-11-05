@@ -1,0 +1,66 @@
+{
+  "schema": "specstride.closed-sets-113/1",
+  "note": "The closed sets of feature 113, from spec.md, section \"Closed sets\". spec.md stands where the two differ. spec.md calls two of the three a \"proposed row\"; annex X section X.6 has since accepted both, as row 144 and row 145, so all three now carry a number and are registered in the map of @specstride/contracts/enums/all-sets (F100-FR-208). Rows 84 and 145 give no literals in the annex and register BY REFERENCE to a table of the package: the members stand here and in src/ep/host.ts (row 84) and src/ep/context-cost.ts (row 145), which hold them against this file at load.",
+  "annex": "annex X, section X.6",
+  "owner": "113",
+  "sets": [
+    {
+      "row": "84",
+      "standing": "accepted",
+      "registration": "by reference",
+      "set": "Capabilities of a host",
+      "setInSpec": "Capabilities of a host (row 84)",
+      "members": "hooks, statusSurface, background, evals, model, stateRootWritable",
+      "literals": [
+        "hooks",
+        "statusSurface",
+        "background",
+        "evals",
+        "model",
+        "stateRootWritable"
+      ],
+      "table": "packages/contracts/src/ep/host.ts",
+      "owner": "113",
+      "closedBy": "Design",
+      "unknownValue": "Ignored"
+    },
+    {
+      "row": "144",
+      "standing": "accepted",
+      "registration": "literals",
+      "set": "Logical ids of host skills and entries",
+      "setInSpec": "Logical ids of host skills and entries (proposed row)",
+      "members": "specstride-run, specstride-reverse, doctor",
+      "literals": [
+        "specstride-run",
+        "specstride-reverse",
+        "doctor"
+      ],
+      "table": "packages/contracts/src/enums/sets-110-119.ts",
+      "owner": "113",
+      "closedBy": "Design",
+      "unknownValue": "The build fails"
+    },
+    {
+      "row": "145",
+      "standing": "accepted",
+      "registration": "by reference",
+      "set": "Checks of the context-cost build",
+      "setInSpec": "Checks of the context-cost CI (proposed row)",
+      "members": "static size, reference closure, golden output, supervision cycle, judgment payload, host cross-check, startup",
+      "literals": [
+        "static size",
+        "reference closure",
+        "golden output",
+        "supervision cycle",
+        "judgment payload",
+        "host cross-check",
+        "startup"
+      ],
+      "table": "packages/contracts/src/ep/context-cost.ts",
+      "owner": "113",
+      "closedBy": "Design",
+      "unknownValue": "The build fails"
+    }
+  ]
+}

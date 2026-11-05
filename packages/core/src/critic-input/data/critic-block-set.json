@@ -1,0 +1,30 @@
+{
+  "as-is": [
+    "rules",
+    "criteria",
+    "evidence",
+    "grounding",
+    "pins",
+    "context",
+    "end"
+  ],
+  "current": [
+    "rules",
+    "fact-block",
+    "criteria",
+    "evidence",
+    "grounding",
+    "pins",
+    "context",
+    "end"
+  ],
+  "protected": [
+    "rules",
+    "fact-block",
+    "criteria",
+    "end"
+  ],
+  "diagnosticianAdds": [
+    "history"
+  ]
+}

@@ -1,0 +1,1068 @@
+{
+  "schema": "specstride.layout/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex B, §B.1, §B.5",
+  "layoutVersion": "1.2",
+  "roots": {
+    "<user-config>": "$XDG_CONFIG_HOME/specstride, default ~/.config/specstride",
+    "<user-state>": "$XDG_STATE_HOME/specstride/user, default ~/.local/state/specstride/user",
+    "<user-cache>": "$XDG_CACHE_HOME/specstride, default ~/.cache/specstride",
+    "<control>": "$XDG_STATE_HOME/specstride/workspaces/<workspaceId>, or the control root the consumer set. Directories 0700, files 0600",
+    "<workspace>": "The root of the working tree",
+    "<workspace-part>": "<workspace>/.specstride",
+    "<worker-root>": "$XDG_CACHE_HOME/specstride/workers. Directories 0700",
+    "<attempt-dir>": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>; found through the record of the pass, the unit or the job",
+    "<temp>": "The temporary directory of the system",
+    "<package>": "The installed package, read only. The build of the published package copies each workspace package's data/ tree into it, so that packages/harness/data/descriptors/<id>.yaml feeds package:harness:<id> and packages/harness/data/catalogue/ feeds package:catalogue, and code reads these files only through their logical names",
+    "<harness-home>": "The configuration home of the harness, from its descriptor",
+    "liveness endpoint": "A short path in the per-user runtime directory; the lock directory holds a reference to it (socket paths are limited to about 104 bytes on macOS, unverified)"
+  },
+  "locations": [
+    {
+      "Location": "User-level state",
+      "Logical root": "`user`",
+      "What it is": "The consumer's configuration, consumer-declared harness descriptors and toolchain profiles, newer terms-gate data, results of harness verification, the tripwire",
+      "Who writes": "The consumer; the CLI on the consumer's request; the runtime for the tripwire only",
+      "Who reads": "CLI, runtime, doctor"
+    },
+    {
+      "Location": "Control plane, one per workspace",
+      "Logical root": "`control`",
+      "What it is": "Everything the runtime decides on. It lies outside the working tree, in the user's state directory, keyed by the workspace id",
+      "Who writes": "The runtime tree. The CLI writes only what the table of §B.5 gives it as writer: inbox requests, launch records with the comment beside them, the supervision record, the run snapshot and the resolved registry at launch, the launch contract with its bundle and retrospective, and the inventory and the verification commands of a reverse run (F100-FR-003, F100-FR-217)",
+      "Who reads": "CLI, doctor, renderers, the builder of the fact block"
+    },
+    {
+      "Location": "Workspace part",
+      "Logical root": "`workspace`",
+      "What it is": "What the proposer produces for the runtime, and the handoff the runtime writes for the proposer. It lies inside the working tree",
+      "Who writes": "The proposer; the runtime for the handoff and the advisory marker",
+      "Who reads": "The proposer, the runtime, grounding (phase evidence only)"
+    },
+    {
+      "Location": "Worker root",
+      "Logical root": "`worker-root`",
+      "What it is": "The trees of the workers of parallel units. It lies outside the workspace and outside the control plane, in the user's cache directory",
+      "Who writes": "The engine creates and removes trees; a worker's harness writes inside its own tree",
+      "Who reads": "The engine"
+    }
+  ],
+  "logicalNames": [
+    {
+      "logicalName": "user:config",
+      "root": "user",
+      "writer": "Consumer",
+      "readers": "CLI, runtime, doctor",
+      "content": "`specstride.config/1`",
+      "path": "<user-config>/config.yaml"
+    },
+    {
+      "logicalName": "user:harness:<id>",
+      "root": "user",
+      "writer": "Consumer",
+      "readers": "CLI, runtime, doctor",
+      "content": "Harness descriptor, `descriptorVersion: 1`",
+      "path": "<user-config>/harnesses/<id>.yaml"
+    },
+    {
+      "logicalName": "user:toolchain:<id>",
+      "root": "user",
+      "writer": "Consumer",
+      "readers": "Runtime, doctor",
+      "content": "`specstride.toolchain/1`",
+      "path": "<user-config>/toolchains/<id>.yaml"
+    },
+    {
+      "logicalName": "user:terms",
+      "root": "user",
+      "writer": "Consumer, CLI on request",
+      "readers": "Runtime, doctor",
+      "content": "`specstride.terms/1`",
+      "path": "<user-state>/terms/terms.json"
+    },
+    {
+      "logicalName": "user:harness-verify:<id>",
+      "root": "user",
+      "writer": "CLI on request",
+      "readers": "Runtime, doctor",
+      "content": "`specstride.harness-verify/1`: harness, version, hash of the descriptor, date, outcome",
+      "path": "<user-state>/harness-verify/<id>.json"
+    },
+    {
+      "logicalName": "user:tripwire",
+      "root": "user",
+      "writer": "Runtime",
+      "readers": "Runtime, doctor, CLI",
+      "content": "`specstride.tripwire/1`",
+      "path": "<user-state>/tripwire.json"
+    },
+    {
+      "logicalName": "user:catalogue",
+      "root": "user (cache)",
+      "writer": "CLI on request",
+      "readers": "Runtime, doctor",
+      "content": "Dated snapshot of a model catalogue",
+      "path": "<user-cache>/catalogue/"
+    },
+    {
+      "logicalName": "project:config",
+      "root": "workspace (the working tree, outside the workspace part)",
+      "writer": "Consumer",
+      "readers": "CLI, runtime, doctor",
+      "content": "`specstride.config/1`, narrowing keys only",
+      "path": "<workspace>/specstride.yaml"
+    },
+    {
+      "logicalName": "workspace:record",
+      "root": "control",
+      "writer": "Runtime root",
+      "readers": "All",
+      "content": "`specstride.layout/1`",
+      "path": "<control>/workspace.json"
+    },
+    {
+      "logicalName": "workspace:lock",
+      "root": "control",
+      "writer": "Lock provider",
+      "readers": "Runtime, CLI, doctor",
+      "content": "EP-13",
+      "path": "<control>/lock/"
+    },
+    {
+      "logicalName": "workspace:current:events",
+      "root": "control",
+      "writer": "— (resolves to `run:<runId>:events` of the current run)",
+      "readers": "CLI",
+      "content": "—",
+      "path": "<control>/current.json -> events"
+    },
+    {
+      "logicalName": "workspace:current:engine-log",
+      "root": "control",
+      "writer": "— (resolves to `run:<runId>:engine-log` of the current run)",
+      "readers": "CLI",
+      "content": "—",
+      "path": "<control>/current.json -> engineLog"
+    },
+    {
+      "logicalName": "workspace:active",
+      "root": "workspace",
+      "writer": "Runtime root",
+      "readers": "CLI at launch",
+      "content": "Advisory marker",
+      "path": "<workspace-part>/active"
+    },
+    {
+      "logicalName": "workspace:layout-version",
+      "root": "workspace",
+      "writer": "Runtime root (the engine at start, mode `standalone`; F122-FR-043)",
+      "readers": "Runtime, doctor",
+      "content": "Layout version",
+      "path": "<workspace-part>/layout-version"
+    },
+    {
+      "logicalName": "inbox:stop",
+      "root": "control",
+      "writer": "CLI",
+      "readers": "Engine, runtime root",
+      "content": "`specstride.inbox/1`, type `stop`",
+      "path": "<control>/inbox/stop.request"
+    },
+    {
+      "logicalName": "inbox:hold-relaunch",
+      "root": "control",
+      "writer": "CLI",
+      "readers": "Runtime root",
+      "content": "`specstride.inbox/1`, type `hold-relaunch`",
+      "path": "<control>/inbox/hold-relaunch.request"
+    },
+    {
+      "logicalName": "inbox:host-events:<launchId>",
+      "root": "control",
+      "writer": "CLI on behalf of a host",
+      "readers": "Engine",
+      "content": "`specstride.inbox/1`, type `host-event`",
+      "path": "<control>/inbox/host-events/<launchId>.jsonl"
+    },
+    {
+      "logicalName": "launch:<launchId>:record",
+      "root": "control",
+      "writer": "CLI",
+      "readers": "Runtime root, CLI, doctor",
+      "content": "`specstride.launch/1`",
+      "path": "<control>/launches/<launchId>/launch.json"
+    },
+    {
+      "logicalName": "launch:<launchId>:supervision",
+      "root": "control",
+      "writer": "CLI",
+      "readers": "CLI, RunView",
+      "content": "`specstride.supervision/1`",
+      "path": "<control>/launches/<launchId>/supervision.json"
+    },
+    {
+      "logicalName": "launch:<launchId>:runtime-log",
+      "root": "control",
+      "writer": "Runtime root",
+      "readers": "CLI",
+      "content": "Text",
+      "path": "<control>/launches/<launchId>/runtime.log"
+    },
+    {
+      "logicalName": "pipeline:<pipelineId>:contract",
+      "root": "control",
+      "writer": "CLI",
+      "readers": "Runtime root, CLI",
+      "content": "`specstride.launch-contract/1`",
+      "path": "<control>/pipelines/<pipelineId>/contract/launch-contract.json"
+    },
+    {
+      "logicalName": "pipeline:<pipelineId>:bundle:<hash>",
+      "root": "control",
+      "writer": "CLI",
+      "readers": "Runtime root",
+      "content": "Launch bundle",
+      "path": "<control>/pipelines/<pipelineId>/bundle/<hash>/"
+    },
+    {
+      "logicalName": "pipeline:<pipelineId>:launcher",
+      "root": "workspace (the working tree, outside the workspace part)",
+      "writer": "CLI",
+      "readers": "Consumer, runtime root",
+      "content": "Launcher",
+      "path": "<workspace>/<path chosen at rendering>"
+    },
+    {
+      "logicalName": "pipeline:<pipelineId>:state",
+      "root": "control",
+      "writer": "Runtime root",
+      "readers": "CLI, supervisor",
+      "content": "Stage state, current only",
+      "path": "<control>/pipelines/<pipelineId>/state.json"
+    },
+    {
+      "logicalName": "pipeline:<pipelineId>:launcher-log",
+      "root": "control",
+      "writer": "Compatibility projection",
+      "readers": "Oracle, CLI",
+      "content": "Compared log",
+      "path": "<control>/pipelines/<pipelineId>/compat/launcher.log"
+    },
+    {
+      "logicalName": "pipeline:<pipelineId>:report-log",
+      "root": "control",
+      "writer": "Compatibility projection",
+      "readers": "Oracle, CLI",
+      "content": "Compared log",
+      "path": "<control>/pipelines/<pipelineId>/compat/harness-report.log"
+    },
+    {
+      "logicalName": "pipeline:<pipelineId>:launch-log",
+      "root": "control",
+      "writer": "Compatibility projection",
+      "readers": "Oracle, CLI",
+      "content": "Compared log",
+      "path": "<control>/pipelines/<pipelineId>/compat/harness-launch.log"
+    },
+    {
+      "logicalName": "pipeline:<pipelineId>:harness-run",
+      "root": "control",
+      "writer": "Compatibility projection",
+      "readers": "Oracle, CLI",
+      "content": "Compared record",
+      "path": "<control>/pipelines/<pipelineId>/compat/harness-run.json"
+    },
+    {
+      "logicalName": "pipeline:<pipelineId>:retrospective:<hash>",
+      "root": "control",
+      "writer": "CLI",
+      "readers": "CLI",
+      "content": "Retrospective",
+      "path": "<control>/pipelines/<pipelineId>/retrospective/<hash>.json"
+    },
+    {
+      "logicalName": "feature:<slug>:learning:decisions",
+      "root": "control",
+      "writer": "Learning (own writer domain)",
+      "readers": "Learning, launch-contract validation",
+      "content": "Decision log, byte format kept",
+      "path": "<control>/features/<slug>/learning/applied.json"
+    },
+    {
+      "logicalName": "feature:<slug>:learning:events",
+      "root": "control",
+      "writer": "Learning (own writer domain)",
+      "readers": "Compatibility projection, CLI",
+      "content": "`specstride.event/1`",
+      "path": "<control>/features/<slug>/learning/events.jsonl"
+    },
+    {
+      "logicalName": "feature:<slug>:learning:events-legacy",
+      "root": "control",
+      "writer": "Compatibility projection",
+      "readers": "Oracle, CLI, consumers",
+      "content": "The as-is event file of the feature, where the baseline's `learn` command appends its lines: the as-is lines of the learning stream, written only with the projection on",
+      "path": "<control>/features/<slug>/compat/learning-events.jsonl"
+    },
+    {
+      "logicalName": "feature:<slug>:approval-key",
+      "root": "control",
+      "writer": "Runtime",
+      "readers": "Runtime",
+      "content": "Key",
+      "path": "<control>/features/<slug>/keys/approval.key"
+    },
+    {
+      "logicalName": "gate:<N>:approved",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, CLI, doctor",
+      "content": "`specstride.approval/1`. Short for `feature:<slug>:gate:<N>:approved`",
+      "path": "<control>/features/<slug>/approvals/phase-<N>.json"
+    },
+    {
+      "logicalName": "gate:<N>:evidence",
+      "root": "workspace",
+      "writer": "Proposer",
+      "readers": "Engine, grounding",
+      "content": "Phase evidence",
+      "path": "<workspace-part>/features/<slug>/evidence/GATE<N>-EVIDENCE.md"
+    },
+    {
+      "logicalName": "feature:<slug>:outbox",
+      "root": "workspace",
+      "writer": "Proposer",
+      "readers": "Engine",
+      "content": "Checkpoints and yield artifacts, as claims",
+      "path": "<workspace-part>/features/<slug>/outbox/"
+    },
+    {
+      "logicalName": "feature:<slug>:notebook",
+      "root": "workspace",
+      "writer": "Proposer",
+      "readers": "Proposer",
+      "content": "The proposer's notebook",
+      "path": "<workspace-part>/features/<slug>/notebook/PROGRESS.md"
+    },
+    {
+      "logicalName": "feature:<slug>:handoff",
+      "root": "workspace",
+      "writer": "Engine",
+      "readers": "Proposer",
+      "content": "Handoff",
+      "path": "<workspace-part>/features/<slug>/handoff.md"
+    },
+    {
+      "logicalName": "run:<runId>:record",
+      "root": "control",
+      "writer": "Runtime root (engine in start mode `standalone`)",
+      "readers": "All",
+      "content": "`specstride.run-state/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/run.json"
+    },
+    {
+      "logicalName": "run:<runId>:terminal",
+      "root": "control",
+      "writer": "Engine (runtime root after a crash of the engine)",
+      "readers": "Runtime root, CLI, RunView",
+      "content": "`specstride.terminal/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/engine.terminal.json"
+    },
+    {
+      "logicalName": "run:<runId>:pause",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "RunView, CLI, doctor",
+      "content": "`specstride.pause/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/pause.record"
+    },
+    {
+      "logicalName": "run:<runId>:snapshot",
+      "root": "control",
+      "writer": "CLI at launch; engine for an accepted change",
+      "readers": "Engine, CLI, doctor",
+      "content": "`specstride.snapshot/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/config.resolved.json"
+    },
+    {
+      "logicalName": "run:<runId>:registry",
+      "root": "control",
+      "writer": "CLI at launch",
+      "readers": "Engine, doctor",
+      "content": "`specstride.registry/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/registry.resolved.json"
+    },
+    {
+      "logicalName": "run:<runId>:lease",
+      "root": "control",
+      "writer": "Runtime root (engine in start mode `standalone`)",
+      "readers": "Engine, CLI, RunView",
+      "content": "`specstride.lease/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/lease.json"
+    },
+    {
+      "logicalName": "run:<runId>:events",
+      "root": "control",
+      "writer": "The one event writer",
+      "readers": "RunView, sinks, CLI",
+      "content": "`specstride.event/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/events.jsonl"
+    },
+    {
+      "logicalName": "run:<runId>:events-legacy",
+      "root": "control",
+      "writer": "Compatibility projection",
+      "readers": "Oracle, consumers",
+      "content": "As-is event vocabulary",
+      "path": "<control>/features/<slug>/runs/<runId>/compat/ -> the file of the newest engine start"
+    },
+    {
+      "logicalName": "run:<runId>:engine-log",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "CLI, oracle",
+      "content": "Compared log",
+      "path": "<control>/features/<slug>/runs/<runId>/compat/ -> the file of the newest engine start"
+    },
+    {
+      "logicalName": "run:<runId>:view",
+      "root": "control",
+      "writer": "Runtime",
+      "readers": "Renderers",
+      "content": "`specstride.view/1`, disposable",
+      "path": "<control>/features/<slug>/runs/<runId>/view.json"
+    },
+    {
+      "logicalName": "run:<runId>:status-line",
+      "root": "control",
+      "writer": "Runtime",
+      "readers": "Host hook shim",
+      "content": "One line, with `validUntil`",
+      "path": "<control>/features/<slug>/runs/<runId>/status.line"
+    },
+    {
+      "logicalName": "run:<runId>:ledger",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, doctor",
+      "content": "`specstride.ledger/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/ledger.jsonl"
+    },
+    {
+      "logicalName": "run:<runId>:ledger-key",
+      "root": "control",
+      "writer": "Runtime",
+      "readers": "Engine",
+      "content": "Key; never the approval key",
+      "path": "<control>/features/<slug>/runs/<runId>/keys/ledger.key"
+    },
+    {
+      "logicalName": "run:<runId>:procs",
+      "root": "control",
+      "writer": "Runtime root, engine (one file per writer)",
+      "readers": "Runtime, CLI, doctor",
+      "content": "`specstride.procs/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/procs/<writer>.jsonl"
+    },
+    {
+      "logicalName": "run:<runId>:verification:plan",
+      "root": "control",
+      "writer": "Engine at launch",
+      "readers": "Engine",
+      "content": "Verification plan with its hash and the pins",
+      "path": "<control>/features/<slug>/runs/<runId>/verification/verification-plan.json"
+    },
+    {
+      "logicalName": "run:<runId>:parallel-plan",
+      "root": "control",
+      "writer": "Engine at launch",
+      "readers": "Engine, doctor, pipeline dry run",
+      "content": "`specstride.parallel-plan/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/parallel-plan.json"
+    },
+    {
+      "logicalName": "tree-store",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine",
+      "content": "Short for `run:<runId>:tree-store`",
+      "path": "<control>/features/<slug>/runs/<runId>/tree-store/"
+    },
+    {
+      "logicalName": "worker-root",
+      "root": "worker-root",
+      "writer": "Engine",
+      "readers": "Engine",
+      "content": "Short for the worker root of the run",
+      "path": "<worker-root>/<workspaceId>/<opaque>/"
+    },
+    {
+      "logicalName": "phase:<N>:manifest",
+      "root": "control",
+      "writer": "Engine at launch",
+      "readers": "Engine, fact block, doctor",
+      "content": "`specstride.manifest/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/manifest.json"
+    },
+    {
+      "logicalName": "phase:<N>:protected-set",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine",
+      "content": "Fingerprints at phase entry",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/protected-set.json"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:record",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, CLI",
+      "content": "Kind, strategy, session directive, outcome",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/attempt.json"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:evidence",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, CLI, oracle",
+      "content": "Phase evidence set aside, with its hash",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/gate/evidence.md"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:verification",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, CLI",
+      "content": "Result of the verification gate",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/gate/verification.json"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:verdict",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, CLI, oracle",
+      "content": "Verdict record",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/critic/verdict.json"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:critic-prompt",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "CLI, oracle",
+      "content": "Prompt of the critic call",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/critic/prompt.txt"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:fact-block",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Critic prompt assembler",
+      "content": "`specstride.fact-block/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/critic/fact-block.json"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:feedback",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, CLI, oracle",
+      "content": "Feedback",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/feedback.md"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:hint",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, CLI",
+      "content": "Hint of the diagnostician",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/hint.md"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:acceleration",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine",
+      "content": "Acceleration note",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/acceleration.md"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:session",
+      "root": "control or a location the sandbox lets the harness write; the run never writes session state into the configuration home of the harness",
+      "writer": "Harness",
+      "readers": "Harness adapter",
+      "content": "Session state; removed when the phase attempt ends. At auth tier 1 no session state is kept in the configuration home by the run; where the harness cannot keep it elsewhere, continuation is off",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/session/"
+    },
+    {
+      "logicalName": "pass:<passId>:prompt",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "CLI, oracle, sinks by reference",
+      "content": "Prompt",
+      "path": "<attempt-dir>/passes/<passId>/prompt.txt"
+    },
+    {
+      "logicalName": "pass:<passId>:stream",
+      "root": "control",
+      "writer": "Stream adapter",
+      "readers": "Engine, CLI",
+      "content": "Raw stream",
+      "path": "<attempt-dir>/passes/<passId>/stream.ndjson"
+    },
+    {
+      "logicalName": "pass:<passId>:invocation",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "CLI, oracle",
+      "content": "Invocation record",
+      "path": "<attempt-dir>/passes/<passId>/invocation.json"
+    },
+    {
+      "logicalName": "pass:<passId>:usage",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "CLI",
+      "content": "Usage",
+      "path": "<attempt-dir>/passes/<passId>/usage.json"
+    },
+    {
+      "logicalName": "pass:<passId>:kill-note",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine",
+      "content": "Kill note",
+      "path": "<attempt-dir>/passes/<passId>/kill-note.md"
+    },
+    {
+      "logicalName": "unit:<unitId>:checkpoint",
+      "root": "control",
+      "writer": "Engine (moved from the outbox when read)",
+      "readers": "Engine",
+      "content": "Checkpoint",
+      "path": "<attempt-dir>/units/<unitId>/checkpoint.json"
+    },
+    {
+      "logicalName": "unit:<unitId>:check:<i>",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, fact block",
+      "content": "Result per command, fingerprints before and after",
+      "path": "<attempt-dir>/units/<unitId>/checks/<i>.json"
+    },
+    {
+      "logicalName": "job:<jobId>:record",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, CLI",
+      "content": "Identity, predicate, step times of a detached job",
+      "path": "<attempt-dir>/jobs/<jobId>/job.json"
+    },
+    {
+      "logicalName": "job:<jobId>:yield",
+      "root": "control",
+      "writer": "Engine (moved from the outbox when read)",
+      "readers": "Engine",
+      "content": "`specstride-pass-yield/v1`",
+      "path": "<attempt-dir>/jobs/<jobId>/yield.json"
+    },
+    {
+      "logicalName": "job:<jobId>:log",
+      "root": "control",
+      "writer": "The job, through the engine",
+      "readers": "Engine, CLI",
+      "content": "Output, process id and exit code of a detached job",
+      "path": "<attempt-dir>/jobs/<jobId>/job.log"
+    },
+    {
+      "logicalName": "feature:<slug>:failure-ledger",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine",
+      "content": "Failure signatures of the jobs of a feature, append-only",
+      "path": "<control>/features/<slug>/failure-ledger.jsonl"
+    },
+    {
+      "logicalName": "feature:<slug>:verification:commands",
+      "root": "control",
+      "writer": "CLI",
+      "readers": "Engine",
+      "content": "The verification-commands document that the derivation of a launch contract wrote",
+      "path": "<control>/features/<slug>/verification/verification-commands.json"
+    },
+    {
+      "logicalName": "feature:<slug>:verification:test-plan",
+      "root": "workspace (the working tree, outside the workspace part)",
+      "writer": "Engine",
+      "readers": "Proposer, consumer",
+      "content": "The verification plan for people",
+      "path": "<workspace>/testautomation/<slug>/TEST_PLAN.md"
+    },
+    {
+      "logicalName": "feature:<slug>:verification:scaffolds",
+      "root": "workspace (the working tree, outside the workspace part)",
+      "writer": "Engine",
+      "readers": "Proposer",
+      "content": "Generated test scaffolds and their list",
+      "path": "<workspace>/testautomation/<slug>/generated/"
+    },
+    {
+      "logicalName": "run:<runId>:verification:release",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, CLI",
+      "content": "Result of release verification",
+      "path": "<control>/features/<slug>/runs/<runId>/verification/release.json"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:prestage",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine",
+      "content": "Result and logs of commands staged before the verification gate",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/gate/prestage/"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:critic-invocation",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "CLI, oracle",
+      "content": "Invocation record of the critic call",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/critic/invocation.json"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:accelerator-snapshot",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine",
+      "content": "State of the tree before and after an accelerated phase attempt",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/accelerator/"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:accelerator-note",
+      "root": "workspace",
+      "writer": "Proposer",
+      "readers": "Engine",
+      "content": "Note of the accelerator, as a claim; taken into the acceleration note and removed",
+      "path": "<workspace-part>/features/<slug>/outbox/accelerator-note.md"
+    },
+    {
+      "logicalName": "phase:<N>:recovery-markers",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine",
+      "content": "The signatures for which a diagnosis and an acceleration were made",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/recovery-markers.json"
+    },
+    {
+      "logicalName": "phase:<N>:approved-archive",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "CLI",
+      "content": "Feedback, hint and acceleration note set aside at approval",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/approved/"
+    },
+    {
+      "logicalName": "phase:<N>:verdict-pins",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Critic prompt assembler",
+      "content": "Verdict pins",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/verdict-pins.json"
+    },
+    {
+      "logicalName": "pass:<passId>:producer-status",
+      "root": "control",
+      "writer": "Stream adapter",
+      "readers": "Engine",
+      "content": "How the process of the harness ended",
+      "path": "<attempt-dir>/passes/<passId>/producer.json"
+    },
+    {
+      "logicalName": "pass:<passId>:provider-terminal",
+      "root": "control",
+      "writer": "Stream adapter",
+      "readers": "Engine",
+      "content": "Terminal record of the stream",
+      "path": "<attempt-dir>/passes/<passId>/provider-terminal.json"
+    },
+    {
+      "logicalName": "pass:<passId>:result",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, CLI, oracle",
+      "content": "Result of the invocation, written once",
+      "path": "<attempt-dir>/passes/<passId>/result.json"
+    },
+    {
+      "logicalName": "pass:<passId>:response",
+      "root": "control",
+      "writer": "Stream adapter",
+      "readers": "CLI",
+      "content": "Reply text; may be pruned",
+      "path": "<attempt-dir>/passes/<passId>/response.txt"
+    },
+    {
+      "logicalName": "run:<runId>:current-pass",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine",
+      "content": "Which pass is in flight",
+      "path": "<control>/features/<slug>/runs/<runId>/current-pass.json"
+    },
+    {
+      "logicalName": "run:<runId>:span-state",
+      "root": "control",
+      "writer": "Exporter",
+      "readers": "Exporter",
+      "content": "Open spans of the run",
+      "path": "<control>/features/<slug>/runs/<runId>/telemetry/span-state.json"
+    },
+    {
+      "logicalName": "feature:<slug>:learning:observation:<N>",
+      "root": "control",
+      "writer": "Learning (own writer domain)",
+      "readers": "Learning",
+      "content": "Observation of an approved phase",
+      "path": "<control>/features/<slug>/learning/phase-<N>.json"
+    },
+    {
+      "logicalName": "feature:<slug>:learning:summary",
+      "root": "control",
+      "writer": "Learning (own writer domain)",
+      "readers": "Learning, CLI",
+      "content": "Summary document",
+      "path": "<control>/features/<slug>/learning/summary.json"
+    },
+    {
+      "logicalName": "reverse:<slug>:inventory",
+      "root": "control",
+      "writer": "CLI",
+      "readers": "Engine, CLI",
+      "content": "Source inventory",
+      "path": "<control>/reverse/<slug>/inventory.json"
+    },
+    {
+      "logicalName": "reverse:<slug>:inventory-summary",
+      "root": "workspace",
+      "writer": "CLI",
+      "readers": "Proposer",
+      "content": "Source inventory for the proposer",
+      "path": "<workspace-part>/reverse/<slug>/INVENTORY.md"
+    },
+    {
+      "logicalName": "reverse:<slug>:driver",
+      "root": "workspace",
+      "writer": "CLI",
+      "readers": "Engine, proposer",
+      "content": "Driver spec",
+      "path": "<workspace-part>/reverse/<slug>/DRIVER.md"
+    },
+    {
+      "logicalName": "reverse:<slug>:verification-commands",
+      "root": "control",
+      "writer": "CLI",
+      "readers": "Engine",
+      "content": "Verification commands of a reverse run",
+      "path": "<control>/reverse/<slug>/verification-commands.json"
+    },
+    {
+      "logicalName": "reverse:<slug>:analysis",
+      "root": "workspace",
+      "writer": "Proposer",
+      "readers": "Consumer",
+      "content": "Analysis report",
+      "path": "<workspace-part>/reverse/<slug>/ANALYSIS.md"
+    },
+    {
+      "logicalName": "reverse:<slug>:output",
+      "root": "workspace (the working tree, outside the workspace part)",
+      "writer": "Proposer",
+      "readers": "Consumer",
+      "content": "The as-is specification that a reverse run writes",
+      "path": "<workspace>/specs/<NNN>-as-is-<slug>/"
+    },
+    {
+      "logicalName": "harness:<id>:plugin-request",
+      "root": "workspace",
+      "writer": "Proposer",
+      "readers": "Harness adapter",
+      "content": "Plugin request of one harness, as a claim",
+      "path": "<workspace-part>/features/<slug>/outbox/plugin-request.<id>.json"
+    },
+    {
+      "logicalName": "harness:<id>:plugin-installs",
+      "root": "control",
+      "writer": "Harness adapter",
+      "readers": "Harness adapter, doctor",
+      "content": "Archived requests and receipts",
+      "path": "<control>/features/<slug>/plugin-installs/<id>/"
+    },
+    {
+      "logicalName": "harness:<id>:install-lock",
+      "root": "harness-home",
+      "writer": "Harness adapter",
+      "readers": "Harness adapter",
+      "content": "Serialises installs",
+      "path": "<harness-home>/<profile>/.specstride-plugin-install.lock"
+    },
+    {
+      "logicalName": "overlay:<id>:tree",
+      "root": "temp",
+      "writer": "Harness layer",
+      "readers": "Harness layer",
+      "content": "Overlay of a configuration home: marker, environment record, variables, seeds (`specstride-overlay/v1`)",
+      "path": "<temp>/specstride-overlay.<id>.<random>/"
+    },
+    {
+      "logicalName": "pass:<passId>:prompt-transfer",
+      "root": "temp",
+      "writer": "Harness adapter",
+      "readers": "Harness",
+      "content": "A prompt handed over as a file",
+      "path": "<temp>/specstride-prompt.<random>"
+    },
+    {
+      "logicalName": "package:templates:<name>",
+      "root": "package",
+      "writer": "—",
+      "readers": "Reverse lint",
+      "content": "Specification templates shipped with the product",
+      "path": "<package>/templates/<name>"
+    },
+    {
+      "logicalName": "run:<runId>:events-legacy:<k>",
+      "root": "control",
+      "writer": "Compatibility projection",
+      "readers": "Oracle, consumers",
+      "content": "The as-is event file of the engine start with the ordinal `<k>`. `run:<runId>:events-legacy` resolves to the file of the newest engine start",
+      "path": "<control>/features/<slug>/runs/<runId>/compat/events.legacy.e<k>.jsonl"
+    },
+    {
+      "logicalName": "run:<runId>:engine-log:<k>",
+      "root": "control",
+      "writer": "Compatibility projection",
+      "readers": "CLI, oracle",
+      "content": "The engine log of the engine start with the ordinal `<k>`, created empty at that start. `run:<runId>:engine-log` resolves to the file of the newest engine start",
+      "path": "<control>/features/<slug>/runs/<runId>/compat/run.e<k>.log"
+    },
+    {
+      "logicalName": "launch:<launchId>:comment",
+      "root": "control",
+      "writer": "CLI",
+      "readers": "Runtime root, digest",
+      "content": "The consumer's comment, verbatim and redacted, beside the launch record",
+      "path": "<control>/launches/<launchId>/comment.txt"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:withheld-paths",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Harness adapter of the critic, CLI",
+      "content": "`specstride.withheld-paths/1`, one record per critic-class call of the second form",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/critic/withheld-paths.json"
+    },
+    {
+      "logicalName": "attempt:<N>:<k>:<n>:hidden-files",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine",
+      "content": "The proposer's files that were moved out for a critic-class call, with the record `specstride.hidden-files/1`",
+      "path": "<control>/features/<slug>/runs/<runId>/phases/<N>/attempts/e<k>-a<n>/critic/hidden/"
+    },
+    {
+      "logicalName": "gate:<N>:proofs",
+      "root": "workspace",
+      "writer": "Proposer",
+      "readers": "Grounding",
+      "content": "Proofs that the proposer puts beside the phase evidence, as claims",
+      "path": "<workspace-part>/features/<slug>/evidence/proofs/"
+    },
+    {
+      "logicalName": "package:harness:<id>",
+      "root": "package",
+      "writer": "—",
+      "readers": "Harness layer, doctor",
+      "content": "A harness descriptor shipped with the product",
+      "path": "<package>/harnesses/<id>.yaml"
+    },
+    {
+      "logicalName": "package:catalogue",
+      "root": "package",
+      "writer": "—",
+      "readers": "Harness layer, doctor",
+      "content": "The dated snapshot of a model catalogue shipped with the product",
+      "path": "<package>/catalogue/"
+    },
+    {
+      "logicalName": "package:context-budget",
+      "root": "package",
+      "writer": "—",
+      "readers": "Exporter, doctor",
+      "content": "The context-budget report of the build",
+      "path": "<package>/context-budget.json"
+    },
+    {
+      "logicalName": "run:<runId>:spend",
+      "root": "control",
+      "writer": "Engine",
+      "readers": "Engine, doctor, digest",
+      "content": "The spend ledger of the run. RunView is not a reader: it takes spend from the event `usage.reported` (F129-FR-001, F129-FR-020) (assumption: CQ-229)",
+      "path": "<control>/features/<slug>/runs/<runId>/spend.jsonl"
+    },
+    {
+      "logicalName": "run:<runId>:task-list",
+      "root": "control",
+      "writer": "Engine at launch",
+      "readers": "Engine, loop layers",
+      "content": "The task list as read at launch, with the record `specstride.task-list/1` (fields: feature 104, annex B §B.20)",
+      "path": "<control>/features/<slug>/runs/<runId>/task-list.json"
+    },
+    {
+      "logicalName": "reverse:<slug>:claims:<unit-key>",
+      "root": "workspace",
+      "writer": "Proposer",
+      "readers": "Reverse lint",
+      "content": "Scratch claims of a reverse run",
+      "path": "<workspace-part>/reverse/<slug>/claims/<unit-key>.md"
+    },
+    {
+      "logicalName": "reverse:<slug>:test-plan",
+      "root": "workspace",
+      "writer": "Engine",
+      "readers": "Proposer",
+      "content": "The verification plan for people of a reverse run",
+      "path": "<workspace-part>/reverse/<slug>/TEST_PLAN.md"
+    },
+    {
+      "logicalName": "reverse:<slug>:scaffolds",
+      "root": "workspace",
+      "writer": "Engine",
+      "readers": "Proposer",
+      "content": "Test scaffolds of a reverse run",
+      "path": "<workspace-part>/reverse/<slug>/generated/"
+    },
+    {
+      "logicalName": "pass:<passId>:critic-patch",
+      "root": "temp",
+      "writer": "Harness adapter",
+      "readers": "Harness",
+      "content": "A file that switches tools off for a critic-class call",
+      "path": "<temp>/specstride-critic-patch.<random>"
+    },
+    {
+      "logicalName": "feature:<slug>:learning:lock",
+      "root": "control",
+      "writer": "Lock provider",
+      "readers": "Learning",
+      "content": "The lock of the writer domain of learning",
+      "path": "<control>/features/<slug>/learning/lock/"
+    },
+    {
+      "logicalName": "workspace:current:status-line",
+      "root": "control",
+      "writer": "Runtime",
+      "readers": "Host hook shim",
+      "content": "A pointer to `run:<runId>:status-line` of the current run, at a place that depends on the workspace only, so that a shell shim finds it without starting the product",
+      "path": "<control>/status.line"
+    }
+  ]
+}

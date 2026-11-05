@@ -1,0 +1,263 @@
+{
+  "schema": "specstride.run-state/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex E, §E.2",
+  "states": [
+    {
+      "State": "`created`",
+      "A process is alive": "The CLI only",
+      "Lock held": "No",
+      "Meaning": "The launch checks passed and the launch record is written"
+    },
+    {
+      "State": "`starting`",
+      "A process is alive": "Runtime root",
+      "Lock held": "Being taken",
+      "Meaning": "The root is up; the handshake is not yet confirmed"
+    },
+    {
+      "State": "`running`",
+      "A process is alive": "Root and engine",
+      "Lock held": "Yes",
+      "Meaning": "The loop is working"
+    },
+    {
+      "State": "`paused-quota`",
+      "A process is alive": "Root and engine, asleep",
+      "Lock held": "Yes",
+      "Meaning": "A quota window is closed. No budget of any kind is spent"
+    },
+    {
+      "State": "`relaunching`",
+      "A process is alive": "Root",
+      "Lock held": "Yes",
+      "Meaning": "The engine ended with a classified transient; the root waits out the backoff"
+    },
+    {
+      "State": "`stopping`",
+      "A process is alive": "Root, perhaps the engine",
+      "Lock held": "Yes",
+      "Meaning": "A stop request was seen"
+    },
+    {
+      "State": "`blocked-on-human`",
+      "A process is alive": "None",
+      "Lock held": "No",
+      "Meaning": "The run cannot go on without the consumer. It rests until `resume`"
+    },
+    {
+      "State": "`finished`",
+      "A process is alive": "None",
+      "Lock held": "No",
+      "Meaning": "Every phase approved, release verification passed, remaining stages complete"
+    },
+    {
+      "State": "`stopped`",
+      "A process is alive": "None",
+      "Lock held": "No",
+      "Meaning": "Stopped on request"
+    },
+    {
+      "State": "`failed`",
+      "A process is alive": "None",
+      "Lock held": "No",
+      "Meaning": "A halt with a stop that is not retryable, or the relaunch budget is spent"
+    },
+    {
+      "State": "`dead` (derived)",
+      "A process is alive": "None",
+      "Lock held": "Stale",
+      "Meaning": "The record shows a live state and the lease has no live owner. Never written"
+    }
+  ],
+  "transitions": [
+    {
+      "#": "T1",
+      "From": "—",
+      "To": "`created`",
+      "Trigger": "`launch` or `resume` passes the launch checks",
+      "Owner": "CLI",
+      "Written": "Launch record"
+    },
+    {
+      "#": "T2",
+      "From": "`created`",
+      "To": "`starting`",
+      "Trigger": "The detach strategy starts the root",
+      "Owner": "CLI",
+      "Written": "—"
+    },
+    {
+      "#": "T3",
+      "From": "`created`",
+      "To": "`blocked-on-human`",
+      "Trigger": "At `resume`, or at a `launch` that continues a run, a source hash differs from the run snapshot",
+      "Owner": "CLI",
+      "Written": "Launch record with the outcome `refused` and the file named. The command exits 3"
+    },
+    {
+      "#": "T4",
+      "From": "`starting`",
+      "To": "`running`",
+      "Trigger": "Lock acquired or reclaimed; lease written with the launch nonce; an earlier launch that died is closed",
+      "Owner": "Root",
+      "Written": "Lease; `run.launched`; a synthesized `run.ended` for a dead predecessor"
+    },
+    {
+      "#": "T5",
+      "From": "`starting`",
+      "To": "`failed`",
+      "Trigger": "Lock conflict, stale sources, invalid launch contract, failed launch check",
+      "Owner": "Root",
+      "Written": "Terminal record; pipeline codes 24, 23, 20, 21"
+    },
+    {
+      "#": "T6",
+      "From": "`running`",
+      "To": "`paused-quota`",
+      "Trigger": "The quota classifier returns `quota_window` with enough confidence",
+      "Owner": "Engine",
+      "Written": "Pause record; `quota.signal`; `run.paused`"
+    },
+    {
+      "#": "T7",
+      "From": "`paused-quota`",
+      "To": "`running`",
+      "Trigger": "`resumeAt` is reached, or a probe succeeds",
+      "Owner": "Engine",
+      "Written": "`run.resumed`; the pause record is removed"
+    },
+    {
+      "#": "T8",
+      "From": "`paused-quota`",
+      "To": "`blocked-on-human`",
+      "Trigger": "The wait ceiling is reached",
+      "Owner": "Engine, then root",
+      "Written": "`blocked`; terminal record with `paused_quota_ceiling`"
+    },
+    {
+      "#": "T9",
+      "From": "`running`",
+      "To": "`blocked-on-human`",
+      "Trigger": "A blocked reason of the table below",
+      "Owner": "Engine, then root",
+      "Written": "`blocked`; `run.ended`; terminal record"
+    },
+    {
+      "#": "T10",
+      "From": "`running`",
+      "To": "`relaunching`",
+      "Trigger": "The engine exits; the relaunch classifier of the root says transient and budget remains; no `hold-relaunch` is in force",
+      "Owner": "Root",
+      "Written": "`supervisor.observed`; `supervisor.relaunch`"
+    },
+    {
+      "#": "T11",
+      "From": "`relaunching`",
+      "To": "`running`",
+      "Trigger": "The backoff is over. The backoff is the one that the failed stage declares, or 0",
+      "Owner": "Root",
+      "Written": "A new `engineStartId`; counts carried"
+    },
+    {
+      "#": "T12",
+      "From": "`relaunching`",
+      "To": "`failed`",
+      "Trigger": "A `hold-relaunch` stays in force to the end of the relaunch window, which is the wall-clock deadline of the relaunch budget, or the budget is spent",
+      "Owner": "Root",
+      "Written": "Terminal record; digest"
+    },
+    {
+      "#": "T13",
+      "From": "`running`, `paused-quota`, `relaunching`",
+      "To": "`stopping`",
+      "Trigger": "A stop request in the inbox, seen at a boundary; `stop --now` also signals the recorded owned process groups",
+      "Owner": "Engine at boundaries; root for `--now`",
+      "Written": "The request is removed when honoured"
+    },
+    {
+      "#": "T14",
+      "From": "`stopping`",
+      "To": "`stopped`",
+      "Trigger": "The engine exits 6",
+      "Owner": "Root",
+      "Written": "`supervisor.stopped`; terminal record"
+    },
+    {
+      "#": "T15",
+      "From": "`running`",
+      "To": "`finished`",
+      "Trigger": "The last stage completes",
+      "Owner": "Root",
+      "Written": "`run.ended` with the outcome `all_approved`; digest"
+    },
+    {
+      "#": "T16",
+      "From": "`running`, `relaunching`",
+      "To": "`failed`",
+      "Trigger": "A stop that is not retryable, or no relaunch budget is left. With `relaunch.owner: supervise`: any failed stage",
+      "Owner": "Root",
+      "Written": "Terminal record; digest"
+    },
+    {
+      "#": "T17",
+      "From": "`blocked-on-human`, `stopped`, `failed`, `dead`",
+      "To": "`created`",
+      "Trigger": "`resume`, by the consumer or by the host skill on the consumer's request",
+      "Owner": "CLI",
+      "Written": "A new launch record"
+    },
+    {
+      "#": "T18",
+      "From": "any live state",
+      "To": "`dead`",
+      "Trigger": "The owner is gone",
+      "Owner": "Nobody",
+      "Written": "Derived"
+    }
+  ],
+  "blockedReasons": [
+    {
+      "Blocked reason": "`declared-block`",
+      "When": "The proposer declared that it needs a human, or a harness asked a question, and the no-progress breaker fired",
+      "Stop reason": "`proposer_no_progress`",
+      "Engine exit": "4",
+      "`retryable`": "No"
+    },
+    {
+      "Blocked reason": "`quota-credit`",
+      "When": "The class `quota_credit`: credit, plan or billing",
+      "Stop reason": "`proposer_consecutive_errors`",
+      "Engine exit": "4",
+      "`retryable`": "No"
+    },
+    {
+      "Blocked reason": "`auth`",
+      "When": "The class `auth`",
+      "Stop reason": "`proposer_consecutive_errors`",
+      "Engine exit": "4",
+      "`retryable`": "No"
+    },
+    {
+      "Blocked reason": "`budget-cap`",
+      "When": "A hard cap of spend was reached",
+      "Stop reason": "`wall_budget`",
+      "Engine exit": "4",
+      "`retryable`": "No"
+    },
+    {
+      "Blocked reason": "`quota-wait-ceiling`",
+      "When": "The wait ceiling of a quota pause was reached",
+      "Stop reason": "`paused_quota_ceiling`",
+      "Engine exit": "4",
+      "`retryable`": "No"
+    },
+    {
+      "Blocked reason": "`source-changed`",
+      "When": "The spec, the plan or the task list changed since launch",
+      "Stop reason": "`critic_config`",
+      "Engine exit": "3",
+      "`retryable`": "No"
+    }
+  ]
+}

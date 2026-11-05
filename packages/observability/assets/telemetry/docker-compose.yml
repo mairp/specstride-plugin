@@ -1,0 +1,60 @@
+# The shipped telemetry stack of feature 128 (F128-FR-042 to F128-FR-045).
+#
+# Optional data files: nothing in the product starts this stack, no run and no
+# check needs it. Copy the `assets/telemetry/` directory out of the package
+# `@specstride/observability` and run:
+#
+#     docker compose up -d
+#
+# The shipped Loki is published on host port 3110 (default), which differs from
+# the exporter's default Loki address `http://localhost:3100` (F128-FR-044,
+# B-2447): pass the address explicitly to reach the shipped stack, e.g.
+# `--loki-url http://localhost:3110`.#
+# Grafana allows anonymous access with the org role `Admin` and the login form
+# disabled (F128-FR-044, B-2449). This is for use on a machine of one person
+# only; do not publish these ports beyond the loopback interface.
+name: specstride-telemetry
+
+services:
+  loki:
+    image: grafana/loki:3.4.2
+    command: -config.file=/etc/loki/loki-config.yaml
+    volumes:
+      - ./loki/loki-config.yaml:/etc/loki/loki-config.yaml:ro
+    ports:
+      - "127.0.0.1:${SPECSTRIDE_LOKI_PORT:-3110}:3100"
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.116.0
+    command: ["--config=/etc/otelcol/collector-config.yaml"]
+    volumes:
+      - ./otel/collector-config.yaml:/etc/otelcol/collector-config.yaml:ro
+    ports:
+      - "127.0.0.1:${SPECSTRIDE_OTEL_PORT:-4318}:4318"
+      # OTLP/gRPC; unused by the exporter, which posts OTLP over HTTP.
+      - "127.0.0.1:${SPECSTRIDE_OTEL_GRPC_PORT:-4317}:4317"
+
+  prometheus:
+    image: prom/prometheus:v3.1.0
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=7d
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "127.0.0.1:${SPECSTRIDE_PROMETHEUS_PORT:-9091}:9090"
+
+  grafana:
+    image: grafana/grafana:11.4.0
+    environment:
+      # Anonymous access with the role `Admin`, no login form (see the comment
+      # at the head of this file).
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_BASIC_ENABLED=false
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+    volumes:
+      - ./provisioning:/etc/grafana/provisioning:ro
+      - ./dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "127.0.0.1:${SPECSTRIDE_GRAFANA_PORT:-3010}:3000"

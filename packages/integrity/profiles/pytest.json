@@ -1,0 +1,15 @@
+{
+  "schema": "specstride.toolchain/1",
+  "id": "pytest",
+  "version": "1",
+  "detect": { "files": ["pytest.ini", "conftest.py"] },
+  "classA": ["pytest.ini", "conftest.py", "setup.cfg", "pyproject.toml"],
+  "testFiles": ["tests/**", "test_*.py", "*_test.py"],
+  "caches": [{ "path": ".pytest_cache", "disableEnv": { "PYTEST_ADDOPTS": "-p no:cacheprovider" } }],
+  "userConfig": ["~/.config/pytest/pytest.ini"],
+  "suppressionMarkers": ["pytest-ignore"],
+  "executables": ["pytest"],
+  "effectiveConfig": null,
+  "workerSeeds": [],
+  "workerEnv": {}
+}

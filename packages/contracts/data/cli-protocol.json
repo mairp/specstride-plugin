@@ -1,0 +1,173 @@
+{
+  "schema": "specstride.cli-protocol/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex G, §G.1, §G.2, §G.5",
+  "protocol": 1,
+  "commands": [
+    {
+      "Command": "`--protocol`",
+      "What it does": "Prints the protocol integer",
+      "Owner": "100"
+    },
+    {
+      "Command": "`run`",
+      "What it does": "Runs the engine in the foreground (start mode `standalone`); with `--detach` it makes a run request of kind `engine`. It continues an unfinished run of the feature and takes `--new-run` and `--reset-counts`, as `launch` does. It takes the ported flags of the baseline, among them `--telemetry`, `--loki-url`, `--otel`, `--otel-url` and `-j`; their keys and the rule that combines them are §K.10 of feature 110",
+      "Owner": "101; detaching: 122; continuation: 102; telemetry flags: 128"
+    },
+    {
+      "Command": "`launch`",
+      "What it does": "Runs the launch checks, writes the launch record, starts the runtime root, waits for the handshake. `--dry-run` withholds the launch. `--new-run` starts a new run",
+      "Owner": "107; the handshake: 122"
+    },
+    {
+      "Command": "`resume`",
+      "What it does": "Continues a run from the records on disk. `--reset-counts` resets counts. `--accept-source-change` accepts an intended change of spec, plan or task list. `--resolve-roles` asks for a new resolution of roles, on `resume` and on `launch`. A run that was launched through the runtime root is continued through the runtime root",
+      "Owner": "102; `--resolve-roles`: 124"
+    },
+    {
+      "Command": "`stop`",
+      "What it does": "Writes the stop request. `--now` ends owned processes. `--jobs` also ends adoptable jobs",
+      "Owner": "102"
+    },
+    {
+      "Command": "`status`",
+      "What it does": "Prints the state of the run from the read model: text, `--line`, `--json`",
+      "Owner": "129; compatibility output: 119"
+    },
+    {
+      "Command": "`wait`",
+      "What it does": "With `--until-change`: prints nothing while nothing changes; prints and takes the cursor",
+      "Owner": "129"
+    },
+    {
+      "Command": "`tail`, `events`, `verdicts`, `feedback`, `phases`, `watch`",
+      "What it does": "Inspection commands, each with a byte cap",
+      "Owner": "119"
+    },
+    {
+      "Command": "`learn`",
+      "What it does": "Learning: show, advise, apply, revert, evaluate",
+      "Owner": "106"
+    },
+    {
+      "Command": "`spec`",
+      "What it does": "The spec module as a public command",
+      "Owner": "104"
+    },
+    {
+      "Command": "`verify`",
+      "What it does": "The verification plan and the verification gate as a public command",
+      "Owner": "105"
+    },
+    {
+      "Command": "`reverse`, with `reverse plan`, `reverse lint`, `reverse guard`, `reverse inventory`",
+      "What it does": "Reverse specification. `--detach` makes a run request of kind `engine`; `--comment` takes the consumer's comment",
+      "Owner": "108; lint and inventory: 140"
+    },
+    {
+      "Command": "The launch-contract commands: derive (with the judgment exchange of §G.9), validate, promote, render",
+      "What it does": "From sources to a promoted launch contract and a launcher. The spelling of the commands is the owner's",
+      "Owner": "107"
+    },
+    {
+      "Command": "`pipeline run`",
+      "What it does": "The pipeline entry in the foreground. `--dry-run` prints the plan",
+      "Owner": "123"
+    },
+    {
+      "Command": "`supervise` with its verbs",
+      "What it does": "Readers of a run, and `relaunch` with `relaunch.owner: supervise`. `supervise hold` and `supervise release` write and lift the inbox request `hold-relaunch`",
+      "Owner": "123"
+    },
+    {
+      "Command": "`host event`",
+      "What it does": "Writes an inbox request of type `host-event` on behalf of a host",
+      "Owner": "113 for the caller; 122 for the inbox"
+    },
+    {
+      "Command": "`doctor`",
+      "What it does": "Runs the registered checks. With the launch checks only, it evaluates them without launching, for a host hook",
+      "Owner": "112"
+    },
+    {
+      "Command": "`state export`, `state import`, `state adopt`",
+      "What it does": "Move or take over the control plane of a feature",
+      "Owner": "122"
+    },
+    {
+      "Command": "`harness verify`",
+      "What it does": "Runs the conformance suite on a harness, on request, inside a budget that is an argument of the command. The command belongs to 109; the state of the harness that results belongs to 146. The registry queries of the baseline are internal operations with result records and are no commands",
+      "Owner": "109"
+    },
+    {
+      "Command": "`config show`, `config schema`",
+      "What it does": "The resolved configuration with its sources; the schema",
+      "Owner": "110"
+    },
+    {
+      "Command": "`tripwire clear`",
+      "What it does": "Clears the tripwire",
+      "Owner": "115"
+    }
+  ],
+  "outputModes": [
+    {
+      "Mode": "Default output",
+      "What it prints": "Terse lines: one line for a success; for a failure the failing items only, each with its fix; nothing for an unchanged state; paths relative to the root of the repository and only once. Renamed product lines carry the prefix `[SPECSTRIDE-`",
+      "When": "Always, unless compatibility output is selected"
+    },
+    {
+      "Mode": "Compatibility output",
+      "What it prints": "The lines of the baselines byte for byte, artefacts of the old languages included, and no other line",
+      "When": "Selected by configuration (`output.compat`); always under the `parity` profile"
+    }
+  ],
+  "budgets": [
+    {
+      "Subject": "Host skill `specstride-run`",
+      "Budget": "8,000 tokens"
+    },
+    {
+      "Subject": "Host skill `specstride-reverse`",
+      "Budget": "7,000 tokens"
+    },
+    {
+      "Subject": "Doctor skill",
+      "Budget": "1,500 tokens"
+    },
+    {
+      "Subject": "One supervision cycle",
+      "Budget": "150 tokens; an unchanged cycle 0"
+    },
+    {
+      "Subject": "Supervision of a whole run",
+      "Budget": "3,000 tokens"
+    },
+    {
+      "Subject": "One batch of the judgment exchange",
+      "Budget": "3,000 tokens"
+    },
+    {
+      "Subject": "Measure in the build",
+      "Budget": "Bytes, at 2.8 bytes per token"
+    }
+  ],
+  "judgmentExchange": [
+    {
+      "Step": "1",
+      "Actor": "CLI",
+      "Act": "Inventories the sources, hashes them, and pages the items that need judgment into batches of at most 3,000 tokens. Each item has an id, a source anchor and a short excerpt"
+    },
+    {
+      "Step": "2",
+      "Actor": "Host model, or a harness named in user configuration for a host without a model",
+      "Act": "Answers each item with one of the choices the item offers"
+    },
+    {
+      "Step": "3",
+      "Actor": "CLI",
+      "Act": "Records each answer with its provenance (who answered, through which harness) in the launch contract and in the digest"
+    }
+  ],
+  "judgmentSchema": "specstride.judgment/1"
+}

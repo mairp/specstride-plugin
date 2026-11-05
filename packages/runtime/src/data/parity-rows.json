@@ -1,0 +1,13 @@
+{
+  "feature": "122-detached-runtime",
+  "note": "Feature 110 owns the spelling of every key (specs/110-config-and-terms/contracts/config-keys.tsv); the keys and the rows of annex X §X.7 are confirmed.",
+  "rows": [
+    {"switch": "Executable of the engine", "key": "engine.executable", "default": "the product's own entry", "parity": "set by the oracle to its engine stub where a fixture needs one", "row": 41, "register": null, "requirement": "F122-FR-004", "status": "confirmed"},
+    {"switch": "Detach strategy", "key": "runtime.detach.strategy", "default": "spawn-detached", "parity": "spawn-detached", "row": 113, "register": "DV-074", "requirement": "F122-FR-002", "status": "confirmed"},
+    {"switch": "Handshake limit", "key": "runtime.handshake.timeoutSec", "default": 30, "parity": "default; not observable", "row": 114, "register": null, "requirement": "F122-FR-005", "status": "confirmed"},
+    {"switch": "Heartbeat interval of the lease", "key": "runtime.lease.heartbeatSec", "default": 10, "parity": "default; not observable", "row": 114, "register": null, "requirement": "F122-FR-014", "status": "confirmed"},
+    {"switch": "Grace of the lease", "key": "runtime.lease.graceSec", "default": 30, "parity": "default; not observable", "row": 114, "register": null, "requirement": "F122-FR-014", "status": "confirmed"},
+    {"switch": "Lock and liveness provider", "key": "runtime.lock.provider", "default": "the shipped provider", "parity": "the shipped provider", "row": 115, "register": "DV-022", "requirement": "F122-FR-019", "status": "confirmed"},
+    {"switch": "Control root", "key": "state.dir", "default": "the user's state directory, keyed by the workspace identity", "parity": "set by the fixture through the as-is variable of the state directory", "row": 116, "register": "DV-006", "requirement": "F122-FR-039", "status": "confirmed"}
+  ]
+}

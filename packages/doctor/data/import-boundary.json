@@ -1,0 +1,19 @@
+{
+  "requirement": "F112-FR-033",
+  "rule": "every row of data/check-catalogue.tsv whose probe is not core has no file of that check in src/checks/",
+  "catalogue": "data/check-catalogue.tsv",
+  "checksDir": "src/checks",
+  "coreSupplierMarker": "core",
+  "coreAllowedMarker": "or core",
+  "allowedDependencies": [
+    "@specstride/config",
+    "@specstride/contracts",
+    "@specstride/kernel",
+    "@specstride/view"
+  ],
+  "notes": [
+    "The code of a check lives in the package of the feature that registers it (F112-FR-033). The doctor holds the registry, the runner, the renderers and the checks whose probe the catalogue marks core.",
+    "A catalogue row whose probe another package supplies keeps its id, severity rule, flag, message and fix as data of this feature; the probe lives in the package that supplies it, and no file of that check is held in src/checks/.",
+    "An owner registers through the registration call of the kernel package (registerDoctorCheck, F100-FR-234, annex G §G.7), so it does not import the doctor, and the doctor does not import the package of an owner."
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.pause/1",
+  "title": "pause-record",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.pause/1",
+  "x-annex": "annex B, §B.17",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "runId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "attemptId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "role": {
+      "type": "string",
+      "description": "The role that waits",
+      "x-type-in-words": "Text, from the role registry",
+      "x-required": "Yes"
+    },
+    "harness": {
+      "type": "string",
+      "description": "Harness of the role",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "class": {
+      "type": "string",
+      "description": "Class of the quota classifier that caused the pause",
+      "x-type-in-words": "Member of the closed set of §C.13",
+      "x-required": "Yes"
+    },
+    "confidence": {
+      "type": "string",
+      "description": "Confidence of the classification",
+      "x-type-in-words": "Member of the closed set of §C.13",
+      "x-required": "Yes"
+    },
+    "since": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start of the pause",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    },
+    "resetsAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "When the provider's window resets, or null",
+      "x-type-in-words": "Timestamp, or null",
+      "x-required": "Yes"
+    },
+    "resumeAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "When the run will try again",
+      "x-type-in-words": "Timestamp, or null",
+      "x-required": "Yes"
+    },
+    "probeIndex": {
+      "type": "integer",
+      "description": "Position in the probe schedule",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "ceilingAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the wait ceiling is reached",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    }
+  },
+  "required": [
+    "schema",
+    "runId",
+    "attemptId",
+    "role",
+    "harness",
+    "class",
+    "confidence",
+    "since",
+    "resetsAt",
+    "resumeAt",
+    "probeIndex",
+    "ceilingAt"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

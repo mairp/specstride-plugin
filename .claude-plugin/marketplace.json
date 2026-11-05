@@ -1,0 +1,17 @@
+{
+  "name": "specstride-marketplace",
+  "owner": {
+    "name": "Specstride"
+  },
+  "metadata": {
+    "description": "Spec-driven development with an independent critic."
+  },
+  "plugins": [
+    {
+      "name": "specstride",
+      "description": "Carries a Spec Kit feature to done, phase by phase, behind an independent critic.",
+      "source": "./plugin",
+      "version": "0.1.0"
+    }
+  ]
+}

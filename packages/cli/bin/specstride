@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+// The executable of the command line of the product (CLI protocol 1). It
+// hands the arguments to the front door — the router of `src/router/route.ts`
+// (F119-FR-001 to F119-FR-011) — which reads the first argument, routes the
+// call to the command that owns it, and ends with that command's code; an
+// error nothing catches ends 70 (F119-FR-011).
+//
+// The import stays LAZY and lands on the router directly: the cold-start
+// budget of F119-FR-015 (150 ms p90) holds for every routed read command, so
+// the module graph of a call must be only what the call needs — the skeleton
+// `src/cli.ts` (which carries `learn.ts`) is loaded only where a command
+// needs it, from inside the router.
+// `import()` is used so that this file runs the same whichever module system
+// Node resolves it as, and the exit code is SET rather than forced, so that
+// whatever a command wrote is flushed before the process ends.
+import("../src/router/route.ts")
+  .then((module) => module.route(process.argv.slice(2)))
+  .then((code) => {
+    process.exitCode = code;
+  })
+  .catch((error) => {
+    process.stderr.write(`specstride: ${(error && error.stack) || String(error)}\n`);
+    process.exitCode = 70;
+  });

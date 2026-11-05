@@ -1,0 +1,11 @@
+# The Prometheus configuration of the shipped telemetry stack (F128-FR-045,
+# B-2459): scrape the job `otel-collector` at `otel-collector:8889` every
+# 15 seconds.
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: otel-collector
+    scrape_interval: 15s
+    static_configs:
+      - targets: ["otel-collector:8889"]

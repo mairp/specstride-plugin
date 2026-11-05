@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.approval/1",
+  "title": "approval-record",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.approval/1",
+  "x-annex": "annex B, §B.14",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "feature": {
+      "type": "string",
+      "description": "Feature slug and phase number",
+      "x-type-in-words": "Text, whole number",
+      "x-required": "Yes"
+    },
+    "phase": {
+      "type": "integer",
+      "description": "Feature slug and phase number",
+      "x-type-in-words": "Text, whole number",
+      "x-required": "Yes"
+    },
+    "runId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "engineStartId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "attemptId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "verdictId": {
+      "type": "string",
+      "description": "The verdict the approval rests on",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "nonceHash": {
+      "type": "string",
+      "description": "Hash of the nonce of the critic call",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "critic": {
+      "type": "object",
+      "description": "Harness, provider, model, form of the `completion` level, result of the tool-less proof",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "evidenceHash": {
+      "type": "string",
+      "description": "Hash of the phase evidence that was judged",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "verification": {
+      "type": "object",
+      "description": "Mode and hash of the result of the verification gate",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "treeFingerprint": {
+      "type": "string",
+      "description": "Fingerprint of the tree at the phase gate",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "approvedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    },
+    "keyId": {
+      "type": "string",
+      "description": "Which approval key signed",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "sig": {
+      "type": "string",
+      "description": "Signature over every field above",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    }
+  },
+  "required": [
+    "schema",
+    "feature",
+    "phase",
+    "runId",
+    "engineStartId",
+    "attemptId",
+    "verdictId",
+    "nonceHash",
+    "critic",
+    "evidenceHash",
+    "verification",
+    "treeFingerprint",
+    "approvedAt",
+    "keyId",
+    "sig"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

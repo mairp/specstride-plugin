@@ -1,0 +1,73 @@
+{
+  "schema": "specstride.identifiers/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex B, §B.3",
+  "identifiers": [
+    {
+      "Identifier": "`workspaceId`",
+      "Scope": "Workspace",
+      "Minted by": "The runtime, derived",
+      "Rule": "A hash of the real path of the workspace root, with a readable prefix. Never read from a file inside the workspace"
+    },
+    {
+      "Identifier": "`pipelineId`",
+      "Scope": "Launch contract",
+      "Minted by": "Derivation of the launch contract",
+      "Rule": "The pipeline id of the as-is launch contract"
+    },
+    {
+      "Identifier": "`runId`",
+      "Scope": "The logical run of one feature",
+      "Minted by": "The CLI at the first launch",
+      "Rule": "Stable across resume and relaunch. It ends when every phase is approved or when the consumer starts a new run"
+    },
+    {
+      "Identifier": "`launchId`",
+      "Scope": "One start of the runtime root",
+      "Minted by": "The CLI at `launch` and `resume`; the runtime root at a relaunch it performs",
+      "Rule": "A new value at every launch, resume and relaunch"
+    },
+    {
+      "Identifier": "`engineStartId`",
+      "Scope": "One start of the engine process",
+      "Minted by": "The runtime root; the engine itself in start mode `standalone`",
+      "Rule": "Carries an ordinal inside the run. It is what the compatibility projection writes as the as-is run id"
+    },
+    {
+      "Identifier": "`attemptId`",
+      "Scope": "One phase attempt",
+      "Minted by": "The engine",
+      "Rule": "Minted once, never reused. The ordinal of the phase attempt is a count in the ledger, not the id"
+    },
+    {
+      "Identifier": "`passId`",
+      "Scope": "One pass",
+      "Minted by": "The engine",
+      "Rule": "Unique per start of a session. A resume after a yield starts a new pass with a new id and the same `attemptId`"
+    },
+    {
+      "Identifier": "`unitId`",
+      "Scope": "One unit of work",
+      "Minted by": "The engine",
+      "Rule": "The id of a unit that came from a parallel group is the hash of its sorted task ids"
+    },
+    {
+      "Identifier": "`jobId`",
+      "Scope": "One detached job",
+      "Minted by": "The engine",
+      "Rule": "—"
+    },
+    {
+      "Identifier": "`verdictId`",
+      "Scope": "One verdict",
+      "Minted by": "The engine",
+      "Rule": "Bound into the approval record"
+    },
+    {
+      "Identifier": "`workerId`, `groupId`",
+      "Scope": "One worker, one parallel group",
+      "Minted by": "The engine",
+      "Rule": "Present only with parallel units on. Neither appears in any input of a critic-class call"
+    }
+  ]
+}

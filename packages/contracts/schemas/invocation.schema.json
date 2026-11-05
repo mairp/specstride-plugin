@@ -1,0 +1,83 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.invocation/1",
+ "title": "Invocation record",
+ "description": "Annex B §B.20; logical name pass:<passId>:invocation. F126-FR-028. The compatibility form carries the as-is literal specstride-invocation/v1 and the as-is field names.",
+ "type": "object",
+ "properties": {
+  "schema": {
+   "const": "specstride.invocation/1"
+  },
+  "runId": {
+   "type": "string",
+   "description": "The logical run (as-is run_id)"
+  },
+  "feature": {
+   "type": "string"
+  },
+  "role": {
+   "type": "string",
+   "description": "A role of the role registry"
+  },
+  "harness": {
+   "type": "string",
+   "description": "The harness label (as-is backend). A value only; never tested in control flow (F126-FR-039)"
+  },
+  "phase": {
+   "type": "integer",
+   "minimum": 0
+  },
+  "attempt": {
+   "type": "integer",
+   "minimum": 1
+  },
+  "iteration": {
+   "type": "integer",
+   "minimum": 0,
+   "description": "At least 1 for a proposer or accelerator, at least 0 for a critic (F126-FR-012)"
+  },
+  "invocationId": {
+   "type": "string"
+  },
+  "observabilityMode": {
+   "enum": [
+    "structured",
+    "raw-text",
+    "degraded"
+   ]
+  },
+  "providerFormat": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "expectedEvidence": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "Absolute path, home expanded, links resolved"
+  },
+  "createdAt": {
+   "type": "string",
+   "format": "date-time"
+  }
+ },
+ "required": [
+  "schema",
+  "runId",
+  "feature",
+  "role",
+  "harness",
+  "phase",
+  "attempt",
+  "iteration",
+  "invocationId",
+  "observabilityMode",
+  "providerFormat",
+  "expectedEvidence",
+  "createdAt"
+ ],
+ "additionalProperties": false
+}

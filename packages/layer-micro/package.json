@@ -1,0 +1,27 @@
+{
+  "name": "@specstride/layer-micro",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride layer-micro: the implementation `micro` of the loop-layer interface EP-04 \u2014 unit of work and checkpoint, inner checks, keep/repair/unresolved, caps, resume, router, tripwire input, experiments",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node ../../tests/isolate.ts node --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@specstride/contracts": "0.0.0",
+    "@specstride/kernel": "0.0.0"
+  },
+  "specstride": {
+    "core": true,
+    "owner": "115",
+    "skeleton": true
+  }
+}

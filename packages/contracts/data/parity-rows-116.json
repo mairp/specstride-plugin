@@ -1,0 +1,16 @@
+{
+ "schema": "specstride.profile-rows-116/1",
+ "note": "Data of feature 116. spec.md stands where the two differ.",
+ "owned": [
+  {
+   "Row": "32",
+   "Switch": "Comparison of the tree at phase entry",
+   "Key": "integrity.phase_entry",
+   "Default": "on",
+   "Under `parity`": "off",
+   "Register row": "DV-077",
+   "Requirement": "F116-FR-012"
+  }
+ ],
+ "proposed": []
+}

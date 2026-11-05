@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.accelerator-snapshot/1",
+  "title": "accelerator-snapshot",
+  "description": "The state of the tree around the pass of an accelerated phase attempt, written by the engine from the fixed-argv calls of the version-control tool through the check-runner port; both halves are empty outside a repository. Feature 101 (T002); the field list is the table \"Accelerator snapshot\" of specs/101-gate-and-verdict/data-model.md, and the specification stands where the two differ.",
+  "x-schema-id": "specstride.accelerator-snapshot/1",
+  "x-annex": "feature 101, data-model.md, \"Accelerator snapshot\"",
+  "x-logical-name": "attempt:<N>:<k>:<n>:accelerator-snapshot",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "attemptId": {
+      "type": "string",
+      "description": "The accelerated phase attempt the state belongs to",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "phase": {
+      "type": "integer",
+      "description": "The phase the accelerated phase attempt belongs to",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "ordinal": {
+      "type": "integer",
+      "description": "The ordinal of the accelerated phase attempt",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "before": {
+      "type": "object",
+      "description": "The state of the tree taken before the pass: the files changed against the last commit, each with its counts of lines added and removed, and the files that are new, sorted. Empty outside a repository",
+      "x-type-in-words": "Record",
+      "x-required": "Yes",
+      "properties": {
+        "changed": {
+          "type": "array",
+          "description": "The files changed against the last commit, sorted by path",
+          "x-type-in-words": "List of records",
+          "x-required": "Yes",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "The path of the file, relative to the working tree",
+                "x-type-in-words": "Text",
+                "x-required": "Yes"
+              },
+              "linesAdded": {
+                "type": "integer",
+                "description": "How many lines were added",
+                "x-type-in-words": "Whole number",
+                "x-required": "Yes"
+              },
+              "linesRemoved": {
+                "type": "integer",
+                "description": "How many lines were removed",
+                "x-type-in-words": "Whole number",
+                "x-required": "Yes"
+              }
+            },
+            "required": ["path", "linesAdded", "linesRemoved"]
+          }
+        },
+        "newFiles": {
+          "type": "array",
+          "description": "The files that are new, sorted by path",
+          "x-type-in-words": "List of text",
+          "x-required": "Yes",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["changed", "newFiles"]
+    },
+    "after": {
+      "type": "object",
+      "description": "The same, taken after the pass. Empty outside a repository",
+      "x-type-in-words": "Record",
+      "x-required": "Yes",
+      "properties": {
+        "changed": {
+          "type": "array",
+          "description": "The files changed against the last commit, sorted by path",
+          "x-type-in-words": "List of records",
+          "x-required": "Yes",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "The path of the file, relative to the working tree",
+                "x-type-in-words": "Text",
+                "x-required": "Yes"
+              },
+              "linesAdded": {
+                "type": "integer",
+                "description": "How many lines were added",
+                "x-type-in-words": "Whole number",
+                "x-required": "Yes"
+              },
+              "linesRemoved": {
+                "type": "integer",
+                "description": "How many lines were removed",
+                "x-type-in-words": "Whole number",
+                "x-required": "Yes"
+              }
+            },
+            "required": ["path", "linesAdded", "linesRemoved"]
+          }
+        },
+        "newFiles": {
+          "type": "array",
+          "description": "The files that are new, sorted by path",
+          "x-type-in-words": "List of text",
+          "x-required": "Yes",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["changed", "newFiles"]
+    },
+    "changedByPass": {
+      "type": "array",
+      "description": "The files whose entry differs between `before` and `after`, sorted; the list that the acceleration note names",
+      "x-type-in-words": "List of text",
+      "x-required": "Yes",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["schema", "attemptId", "phase", "ordinal", "before", "after", "changedByPass"],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.event/1",
+  "title": "event-envelope",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.event/1",
+  "x-annex": "annex X, §X.1",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "The constant `specstride.event`",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "v": {
+      "type": "integer",
+      "description": "Major of the schema; 1",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "seq": {
+      "type": "integer",
+      "description": "Position in the run's stream: rising, without gaps, given by the one writer at the append",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time, UTC, to the millisecond",
+      "x-type-in-words": "Timestamp",
+      "x-required": "Yes"
+    },
+    "type": {
+      "type": "string",
+      "description": "Dotted name of the event, lower case",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "runId": {
+      "type": "string",
+      "description": "The logical run",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "launchId": {
+      "type": "string",
+      "description": "The launch",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "engineStartId": {
+      "type": "string",
+      "description": "The engine start, where an engine wrote or caused the event",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "featureId": {
+      "type": "string",
+      "description": "Feature and phase, where they apply",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "phaseId": {
+      "type": "string",
+      "description": "Feature and phase, where they apply",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "attemptId": {
+      "type": "string",
+      "description": "Id and ordinal of the phase attempt",
+      "x-type-in-words": "Text, whole number",
+      "x-required": "No"
+    },
+    "attempt": {
+      "type": "integer",
+      "description": "Id and ordinal of the phase attempt",
+      "x-type-in-words": "Text, whole number",
+      "x-required": "No"
+    },
+    "passId": {
+      "type": "string",
+      "description": "Id and ordinal of the pass",
+      "x-type-in-words": "Text, whole number",
+      "x-required": "No"
+    },
+    "pass": {
+      "type": "integer",
+      "description": "Id and ordinal of the pass",
+      "x-type-in-words": "Text, whole number",
+      "x-required": "No"
+    },
+    "sessionId": {
+      "type": "string",
+      "description": "Sessions of the harness",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "parentSessionId": {
+      "type": "string",
+      "description": "Sessions of the harness",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "role": {
+      "type": "string",
+      "description": "A role of the role registry, or one of `supervisor`, `host`",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "harness": {
+      "type": "string",
+      "description": "As known, else null",
+      "x-type-in-words": "Text, or null",
+      "x-required": "No"
+    },
+    "provider": {
+      "type": "string",
+      "description": "As known, else null",
+      "x-type-in-words": "Text, or null",
+      "x-required": "No"
+    },
+    "model": {
+      "type": "string",
+      "description": "As known, else null",
+      "x-type-in-words": "Text, or null",
+      "x-required": "No"
+    },
+    "strategy": {
+      "type": "string",
+      "description": "`classic` or `micro`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "On every event of a phase attempt and of a pass",
+      "enum": [
+        "classic",
+        "micro"
+      ]
+    },
+    "traceId": {
+      "type": "string",
+      "description": "Trace identifiers; the trace id is the same for every launch of a run",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "spanId": {
+      "type": "string",
+      "description": "Trace identifiers; the trace id is the same for every launch of a run",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "cause": {
+      "type": "string",
+      "description": "The `seq` or the id of the event that led to this one",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "workerId": {
+      "type": "string",
+      "description": "The worker. Absent on the main line",
+      "x-type-in-words": "Text",
+      "x-required": "No"
+    },
+    "wseq": {
+      "type": "integer",
+      "description": "Position inside the stream of one worker, rising. Absent on the main line",
+      "x-type-in-words": "Whole number",
+      "x-required": "No"
+    },
+    "data": {
+      "type": "object",
+      "description": "Content of the type. It holds no prompt, no reply, no body of a tool argument and no output of a command",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    }
+  },
+  "required": [
+    "schema",
+    "v",
+    "seq",
+    "ts",
+    "type",
+    "runId",
+    "launchId",
+    "data"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

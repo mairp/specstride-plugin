@@ -1,0 +1,27 @@
+{
+  "name": "@specstride/adapter-codex",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride adapter-codex",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node ../../tests/isolate.ts node --test \"test/**/*.test.*\"",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@specstride/contracts": "0.0.0",
+    "@specstride/core": "0.0.0",
+    "@specstride/kernel": "0.0.0",
+    "@specstride/harness": "0.0.0"
+  },
+  "specstride": {
+    "skeleton": true
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride-overlay/v1",
+  "title": "overlay",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride-overlay/v1",
+  "x-annex": "annex C, §C.16",
+  "type": "object",
+  "properties": {
+    "contract": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "key": {
+      "type": "string",
+      "description": "Id of the harness",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "vars": {
+      "type": "array",
+      "description": "The variables that are redirected to the overlay",
+      "x-type-in-words": "List of text",
+      "x-required": "Yes"
+    },
+    "seeds": {
+      "type": "array",
+      "description": "Files placed in the overlay before the call: variable, path, content",
+      "x-type-in-words": "List of records",
+      "x-required": "No"
+    },
+    "unset": {
+      "type": "array",
+      "description": "Derived: base directories that are not themselves overlaid, when the home is overlaid",
+      "x-type-in-words": "List of text",
+      "x-required": "Derived"
+    },
+    "scope": {
+      "type": "string",
+      "description": "`none`, `pass` or `attempt`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "Yes",
+      "enum": [
+        "none",
+        "pass",
+        "attempt"
+      ]
+    },
+    "ownerPid": {
+      "type": "integer",
+      "description": "In the marker of an overlay tree: the process that owns the tree, its start time, and the time of creation",
+      "x-type-in-words": "Whole number, text, timestamp",
+      "x-required": "In the marker"
+    },
+    "ownerStart": {
+      "type": "string",
+      "description": "In the marker of an overlay tree: the process that owns the tree, its start time, and the time of creation",
+      "x-type-in-words": "Whole number, text, timestamp",
+      "x-required": "In the marker"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "In the marker of an overlay tree: the process that owns the tree, its start time, and the time of creation",
+      "x-type-in-words": "Whole number, text, timestamp",
+      "x-required": "In the marker"
+    },
+    "markerScope": {
+      "type": "string",
+      "description": "In the marker only: `pass`, `attempt` or `critic`",
+      "x-type-in-words": "Member of a closed set",
+      "x-required": "In the marker",
+      "enum": [
+        "pass",
+        "attempt",
+        "critic"
+      ]
+    }
+  },
+  "required": [
+    "contract",
+    "key",
+    "vars",
+    "scope"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

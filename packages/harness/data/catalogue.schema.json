@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.catalogue-snapshot/1",
+  "title": "catalogue snapshot",
+  "description": "A dated snapshot of models with context windows, output caps and prices, read offline as `package:catalogue` (bundled) or `user:catalogue` (a newer copy the consumer asked for). Feature 146, F146-FR-013 and F146-FR-016; annex B §B.5. The catalogue of EVENT types is feature 111's and is not this file.",
+  "type": "object",
+  "required": ["schema", "date", "models"],
+  "properties": {
+    "schema": { "type": "string", "const": "specstride.catalogue-snapshot/1" },
+    "date": { "type": "string" },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["model", "contextWindowTokens"],
+        "properties": {
+          "model": { "type": "string" },
+          "contextWindowTokens": { "type": "number", "minimum": 1 },
+          "outputCapTokens": { "type": "number", "minimum": 1 },
+          "usdPerMillionInput": { "type": "number", "minimum": 0 },
+          "usdPerMillionOutput": { "type": "number", "minimum": 0 },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  }
+}

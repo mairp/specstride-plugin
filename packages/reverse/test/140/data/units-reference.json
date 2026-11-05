@@ -1,0 +1,579 @@
+{
+ "cargoDirect": {
+  "note": "`detect_workspaces(src, files, [], ['crates/*'])` of the baseline: the `cargo` kind, which no document can carry while the product bundles no TOML reader (F140-FR-022).",
+  "unitsWithCargo": [
+   {
+    "bytes": 470,
+    "files": 9,
+    "path": "."
+   },
+   {
+    "bytes": 52,
+    "files": 2,
+    "path": "crates/alpha"
+   },
+   {
+    "bytes": 50,
+    "files": 2,
+    "path": "crates/beta"
+   },
+   {
+    "bytes": 47,
+    "files": 2,
+    "path": "deep/leaf"
+   },
+   {
+    "bytes": 49,
+    "files": 2,
+    "path": "extra/widget"
+   },
+   {
+    "bytes": 63,
+    "files": 2,
+    "path": "packages/nested"
+   },
+   {
+    "bytes": 52,
+    "files": 2,
+    "path": "packages/nested/inner"
+   },
+   {
+    "bytes": 198,
+    "files": 4,
+    "path": "packages/one"
+   },
+   {
+    "bytes": 46,
+    "files": 2,
+    "path": "packages/two"
+   }
+  ],
+  "withJsGlobsToo": [
+   {
+    "kind": "js",
+    "name": "@units/leaf",
+    "path": "deep/leaf"
+   },
+   {
+    "kind": "js",
+    "name": "@units/widget",
+    "path": "extra/widget"
+   },
+   {
+    "kind": "js",
+    "name": "@units/nested",
+    "path": "packages/nested"
+   },
+   {
+    "kind": "js",
+    "name": "@units/inner",
+    "path": "packages/nested/inner"
+   },
+   {
+    "kind": "js",
+    "name": "@units/one",
+    "path": "packages/one"
+   },
+   {
+    "kind": "js",
+    "name": "packages/two",
+    "path": "packages/two"
+   },
+   {
+    "kind": "cargo",
+    "name": "crates/alpha",
+    "path": "crates/alpha"
+   },
+   {
+    "kind": "cargo",
+    "name": "crates/beta",
+    "path": "crates/beta"
+   }
+  ],
+  "workspaces": [
+   {
+    "kind": "cargo",
+    "name": "crates/alpha",
+    "path": "crates/alpha"
+   },
+   {
+    "kind": "cargo",
+    "name": "crates/beta",
+    "path": "crates/beta"
+   }
+  ]
+ },
+ "cargoWithToml": {
+  "fingerprint": "35b700e27d350f4c6ae9ca82a63dc66b02802cb5da57dfddc871ac392bf4924d",
+  "note": "What a bundled TOML reader would add to the workspaces tree: the Cargo members become readable and the `cargo` workspaces appear.",
+  "units": [
+   {
+    "bytes": 470,
+    "files": 9,
+    "path": "."
+   },
+   {
+    "bytes": 52,
+    "files": 2,
+    "path": "crates/alpha"
+   },
+   {
+    "bytes": 50,
+    "files": 2,
+    "path": "crates/beta"
+   },
+   {
+    "bytes": 47,
+    "files": 2,
+    "path": "deep/leaf"
+   },
+   {
+    "bytes": 49,
+    "files": 2,
+    "path": "extra/widget"
+   },
+   {
+    "bytes": 63,
+    "files": 2,
+    "path": "packages/nested"
+   },
+   {
+    "bytes": 52,
+    "files": 2,
+    "path": "packages/nested/inner"
+   },
+   {
+    "bytes": 198,
+    "files": 4,
+    "path": "packages/one"
+   },
+   {
+    "bytes": 46,
+    "files": 2,
+    "path": "packages/two"
+   }
+  ],
+  "workspaces": [
+   {
+    "kind": "js",
+    "name": "@units/leaf",
+    "path": "deep/leaf"
+   },
+   {
+    "kind": "js",
+    "name": "@units/widget",
+    "path": "extra/widget"
+   },
+   {
+    "kind": "js",
+    "name": "@units/nested",
+    "path": "packages/nested"
+   },
+   {
+    "kind": "js",
+    "name": "@units/inner",
+    "path": "packages/nested/inner"
+   },
+   {
+    "kind": "js",
+    "name": "@units/one",
+    "path": "packages/one"
+   },
+   {
+    "kind": "js",
+    "name": "packages/two",
+    "path": "packages/two"
+   },
+   {
+    "kind": "cargo",
+    "name": "crates/alpha",
+    "path": "crates/alpha"
+   },
+   {
+    "kind": "cargo",
+    "name": "crates/beta",
+    "path": "crates/beta"
+   }
+  ]
+ },
+ "cases": {
+  "overDefault": {
+   "documentText": "{\n \"excludes\": [],\n \"files\": [\n  {\n   \"bytes\": 52,\n   \"language\": \"dockerfile\",\n   \"lines\": 2,\n   \"path\": \"Dockerfile\",\n   \"role\": \"config\",\n   \"sha256\": \"13f45891f5b789200d484004c81299317b2385209970f4cc00d4b284dedd2061\"\n  },\n  {\n   \"bytes\": 29,\n   \"language\": \"markdown\",\n   \"lines\": 1,\n   \"path\": \"README.md\",\n   \"role\": \"doc\",\n   \"sha256\": \"11bf299719486ab9dd69f175ff3d4a985797b8dbfdebf5ef10eaf30f8bb93d0b\"\n  },\n  {\n   \"bytes\": 41,\n   \"language\": \"javascript\",\n   \"lines\": 2,\n   \"path\": \"bin/tool\",\n   \"role\": \"script\",\n   \"sha256\": \"1c7b2523d763aa26b7720d2c064a754762ce5cde800b237e9e231e8ecfc96a0f\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-00.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-01.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-02.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-03.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-04.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-05.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-06.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-07.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-08.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-09.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-10.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-11.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-12.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-13.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-14.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-15.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-16.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-17.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-18.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-19.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-20.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 60,\n   \"language\": \"go\",\n   \"lines\": 7,\n   \"path\": \"cmd/main.go\",\n   \"role\": \"source\",\n   \"sha256\": \"50fc0f74c936224ffe8561b6a034841b5c45ce27e6e5db7e4f6bdb7dcc7e9233\"\n  },\n  {\n   \"bytes\": 8,\n   \"language\": \"markdown\",\n   \"lines\": 1,\n   \"path\": \"docs/guide.md\",\n   \"role\": \"doc\",\n   \"sha256\": \"bc553ffe57e544498b12a9865dbf3abc2004c474e349c52c378eaa402287424b\"\n  },\n  {\n   \"bytes\": 257,\n   \"language\": \"json\",\n   \"lines\": 17,\n   \"path\": \"package.json\",\n   \"role\": \"config\",\n   \"sha256\": \"a9bf8410e05655e149866bad30b5cd0ffba40393bddfc8c5852e3a8344334655\"\n  },\n  {\n   \"bytes\": 47,\n   \"language\": \"shell\",\n   \"lines\": 3,\n   \"path\": \"scripts/run.sh\",\n   \"role\": \"script\",\n   \"sha256\": \"72a7cf26f5d98a33524a57325852145342ee6125e25c573581e9489f7441ae72\"\n  },\n  {\n   \"bytes\": 132,\n   \"language\": \"ini\",\n   \"lines\": 7,\n   \"path\": \"setup.cfg\",\n   \"role\": \"config\",\n   \"sha256\": \"babfc9eecbb2da173fc415829f4e2190b3fab74edf67496f265bda1f1488721d\"\n  },\n  {\n   \"bytes\": 88,\n   \"language\": \"python\",\n   \"lines\": 9,\n   \"path\": \"src/app.py\",\n   \"role\": \"source\",\n   \"sha256\": \"a6f779499eb94ebf51c1b8fe5a55569e2e533d439d5b2aadaca26bbe82aa4c57\"\n  },\n  {\n   \"bytes\": 24,\n   \"language\": \"typescript\",\n   \"lines\": 1,\n   \"path\": \"src/lib.ts\",\n   \"role\": \"source\",\n   \"sha256\": \"5d8f65d2774e206bc9f7a7a4ad39ca2dc563b5c31e46ab57ef4874961237ce29\"\n  }\n ],\n \"fingerprint\": \"3891631bc27c17614582a68b5b8f25fd7021aff7da0e26ac95b45b5940800c50\",\n \"git_head\": null,\n \"git_status\": null,\n \"limits\": {\n  \"max_file_bytes\": 1048576,\n  \"max_total_bytes\": 20971520\n },\n \"oversize\": true,\n \"project\": {\n  \"entry_points\": [\n   {\n    \"kind\": \"bin\",\n    \"manifest\": \"package.json\",\n    \"name\": \"over-tool\",\n    \"target\": \"bin/tool\"\n   },\n   {\n    \"kind\": \"console-script\",\n    \"manifest\": \"setup.cfg\",\n    \"name\": \"over\",\n    \"target\": \"units.cli:main\"\n   },\n   {\n    \"kind\": \"console-script\",\n    \"manifest\": \"setup.cfg\",\n    \"name\": \"over-two\",\n    \"target\": \"units.cli:other\"\n   },\n   {\n    \"kind\": \"container-entrypoint\",\n    \"manifest\": \"Dockerfile\",\n    \"target\": \"[\\\"node\\\", \\\"bin/tool\\\"]\"\n   },\n   {\n    \"kind\": \"export\",\n    \"manifest\": \"package.json\",\n    \"resolved\": \"src/app.py\",\n    \"target\": \"./src/app.py\"\n   },\n   {\n    \"kind\": \"export\",\n    \"manifest\": \"package.json\",\n    \"resolved\": \"src/lib.ts\",\n    \"target\": \"./src/lib.ts\"\n   },\n   {\n    \"kind\": \"go-main\",\n    \"target\": \"cmd/main.go\"\n   },\n   {\n    \"kind\": \"python-main\",\n    \"target\": \"src/app.py\"\n   },\n   {\n    \"kind\": \"script\",\n    \"target\": \"bin/tool\"\n   },\n   {\n    \"kind\": \"script\",\n    \"target\": \"scripts/run.sh\"\n   }\n  ],\n  \"frameworks\": [\n   \"react\"\n  ],\n  \"languages\": {\n   \"dockerfile\": 1,\n   \"go\": 1,\n   \"ini\": 1,\n   \"javascript\": 1,\n   \"json\": 1,\n   \"markdown\": 2,\n   \"python\": 1,\n   \"shell\": 1,\n   \"text\": 21,\n   \"typescript\": 1\n  },\n  \"manifests\": [\n   {\n    \"entrypoint\": [\n     \"[\\\"node\\\", \\\"bin/tool\\\"]\"\n    ],\n    \"from\": [\n     \"node:22-alpine\"\n    ],\n    \"kind\": \"Dockerfile\",\n    \"manifest\": \"Dockerfile\"\n   },\n   {\n    \"bin\": {\n     \"over-tool\": \"bin/tool\"\n    },\n    \"exports\": [\n     \"./src/app.py\",\n     \"./src/lib.ts\"\n    ],\n    \"kind\": \"package.json\",\n    \"manifest\": \"package.json\",\n    \"name\": \"units-over\",\n    \"scripts\": {\n     \"build\": \"tsc -p .\"\n    }\n   },\n   {\n    \"kind\": \"setup.cfg\",\n    \"manifest\": \"setup.cfg\",\n    \"name\": \"units-over-cfg\",\n    \"scripts\": {\n     \"over\": \"units.cli:main\",\n     \"over-two\": \"units.cli:other\"\n    }\n   }\n  ],\n  \"workspaces\": []\n },\n \"schema_version\": 1,\n \"skipped\": [],\n \"specify\": {\n  \"constitution\": false,\n  \"feature_json\": null,\n  \"present\": false,\n  \"spec_numbers\": [],\n  \"templates\": []\n },\n \"src\": \"<SRC>\",\n \"testautomation\": null,\n \"totals\": {\n  \"files\": 31,\n  \"lines\": 71,\n  \"skipped\": 0,\n  \"text_bytes\": 21000738\n },\n \"units\": [\n  {\n   \"bytes\": 470,\n   \"files\": 4,\n   \"path\": \".\"\n  },\n  {\n   \"bytes\": 41,\n   \"files\": 1,\n   \"path\": \"bin\"\n  },\n  {\n   \"bytes\": 21000000,\n   \"files\": 21,\n   \"path\": \"bulk\"\n  },\n  {\n   \"bytes\": 60,\n   \"files\": 1,\n   \"path\": \"cmd\"\n  },\n  {\n   \"bytes\": 8,\n   \"files\": 1,\n   \"path\": \"docs\"\n  },\n  {\n   \"bytes\": 47,\n   \"files\": 1,\n   \"path\": \"scripts\"\n  },\n  {\n   \"bytes\": 112,\n   \"files\": 2,\n   \"path\": \"src\"\n  }\n ],\n \"walk\": \"walk\"\n}\n",
+   "entry_points": [
+    {
+     "kind": "bin",
+     "manifest": "package.json",
+     "name": "over-tool",
+     "target": "bin/tool"
+    },
+    {
+     "kind": "console-script",
+     "manifest": "setup.cfg",
+     "name": "over",
+     "target": "units.cli:main"
+    },
+    {
+     "kind": "console-script",
+     "manifest": "setup.cfg",
+     "name": "over-two",
+     "target": "units.cli:other"
+    },
+    {
+     "kind": "container-entrypoint",
+     "manifest": "Dockerfile",
+     "target": "[\"node\", \"bin/tool\"]"
+    },
+    {
+     "kind": "export",
+     "manifest": "package.json",
+     "resolved": "src/app.py",
+     "target": "./src/app.py"
+    },
+    {
+     "kind": "export",
+     "manifest": "package.json",
+     "resolved": "src/lib.ts",
+     "target": "./src/lib.ts"
+    },
+    {
+     "kind": "go-main",
+     "target": "cmd/main.go"
+    },
+    {
+     "kind": "python-main",
+     "target": "src/app.py"
+    },
+    {
+     "kind": "script",
+     "target": "bin/tool"
+    },
+    {
+     "kind": "script",
+     "target": "scripts/run.sh"
+    }
+   ],
+   "environ": {},
+   "fingerprint": "3891631bc27c17614582a68b5b8f25fd7021aff7da0e26ac95b45b5940800c50",
+   "languages": {
+    "dockerfile": 1,
+    "go": 1,
+    "ini": 1,
+    "javascript": 1,
+    "json": 1,
+    "markdown": 2,
+    "python": 1,
+    "shell": 1,
+    "text": 21,
+    "typescript": 1
+   },
+   "limits": {
+    "max_file_bytes": 1048576,
+    "max_total_bytes": 20971520
+   },
+   "oversize": true,
+   "summary": "# Inventory — units140-over\n\nDeterministic, LLM-free inventory of `<SRC>` (walk: walk). It is the ground truth for **what exists**. The full record, with every file's hash, is `/UNITS/inventory.json`.\n\n- Files: 31 text (71 lines, 21000738 bytes); 0 skipped\n- Oversize: yes (limit 20971520 bytes of text)\n- git HEAD: not a git work tree\n- Fingerprint: `3891631bc27c17614582a68b5b8f25fd7021aff7da0e26ac95b45b5940800c50`\n- Languages: dockerfile (1), go (1), ini (1), javascript (1), json (1), markdown (2), python (1), shell (1), text (21), typescript (1)\n- Frameworks: react\n- Existing Spec Kit: no; constitution absent; specs none\n\n## Manifests\n\n- `Dockerfile` (Dockerfile): {\"entrypoint\": [\"[\\\"node\\\", \\\"bin/tool\\\"]\"], \"from\": [\"node:22-alpine\"]}\n- `package.json` (package.json): {\"bin\": {\"over-tool\": \"bin/tool\"}, \"exports\": [\"./src/app.py\", \"./src/lib.ts\"], \"name\": \"units-over\", \"scripts\": {\"build\": \"tsc -p .\"}}\n- `setup.cfg` (setup.cfg): {\"name\": \"units-over-cfg\", \"scripts\": {\"over\": \"units.cli:main\", \"over-two\": \"units.cli:other\"}}\n\n## Entry points\n\n- bin: `bin/tool` (package.json)\n- console-script: `units.cli:main` (setup.cfg)\n- console-script: `units.cli:other` (setup.cfg)\n- container-entrypoint: `[\"node\", \"bin/tool\"]` (Dockerfile)\n- export: `./src/app.py` (package.json)\n- export: `./src/lib.ts` (package.json)\n- go-main: `cmd/main.go`\n- python-main: `src/app.py`\n- script: `bin/tool`\n- script: `scripts/run.sh`\n\n## Workspaces and units\n\n- unit `.`: 4 files, 470 bytes\n- unit `bin`: 1 files, 41 bytes\n- unit `bulk`: 21 files, 21000000 bytes\n- unit `cmd`: 1 files, 60 bytes\n- unit `docs`: 1 files, 8 bytes\n- unit `scripts`: 1 files, 47 bytes\n- unit `src`: 2 files, 112 bytes\n\n## Skipped\n\n- none\n\n## Files\n\n| Path | Lines | Language | Role |\n|---|---|---|---|\n| `Dockerfile` | 2 | dockerfile | config |\n| `README.md` | 1 | markdown | doc |\n| `bin/tool` | 2 | javascript | script |\n| `bulk/part-00.txt` | 1 | text | doc |\n| `bulk/part-01.txt` | 1 | text | doc |\n| `bulk/part-02.txt` | 1 | text | doc |\n| `bulk/part-03.txt` | 1 | text | doc |\n| `bulk/part-04.txt` | 1 | text | doc |\n| `bulk/part-05.txt` | 1 | text | doc |\n| `bulk/part-06.txt` | 1 | text | doc |\n| `bulk/part-07.txt` | 1 | text | doc |\n| `bulk/part-08.txt` | 1 | text | doc |\n| `bulk/part-09.txt` | 1 | text | doc |\n| `bulk/part-10.txt` | 1 | text | doc |\n| `bulk/part-11.txt` | 1 | text | doc |\n| `bulk/part-12.txt` | 1 | text | doc |\n| `bulk/part-13.txt` | 1 | text | doc |\n| `bulk/part-14.txt` | 1 | text | doc |\n| `bulk/part-15.txt` | 1 | text | doc |\n| `bulk/part-16.txt` | 1 | text | doc |\n| `bulk/part-17.txt` | 1 | text | doc |\n| `bulk/part-18.txt` | 1 | text | doc |\n| `bulk/part-19.txt` | 1 | text | doc |\n| `bulk/part-20.txt` | 1 | text | doc |\n| `cmd/main.go` | 7 | go | source |\n| `docs/guide.md` | 1 | markdown | doc |\n| `package.json` | 17 | json | config |\n| `scripts/run.sh` | 3 | shell | script |\n| `setup.cfg` | 7 | ini | config |\n| `src/app.py` | 9 | python | source |\n| `src/lib.ts` | 1 | typescript | source |\n",
+   "totals": {
+    "files": 31,
+    "lines": 71,
+    "skipped": 0,
+    "text_bytes": 21000738
+   },
+   "tree": "units140-over",
+   "units": [
+    {
+     "bytes": 470,
+     "files": 4,
+     "path": "."
+    },
+    {
+     "bytes": 41,
+     "files": 1,
+     "path": "bin"
+    },
+    {
+     "bytes": 21000000,
+     "files": 21,
+     "path": "bulk"
+    },
+    {
+     "bytes": 60,
+     "files": 1,
+     "path": "cmd"
+    },
+    {
+     "bytes": 8,
+     "files": 1,
+     "path": "docs"
+    },
+    {
+     "bytes": 47,
+     "files": 1,
+     "path": "scripts"
+    },
+    {
+     "bytes": 112,
+     "files": 2,
+     "path": "src"
+    }
+   ],
+   "walk": "walk",
+   "workspaces": []
+  },
+  "overRaisedLimit": {
+   "documentText": "{\n \"excludes\": [],\n \"files\": [\n  {\n   \"bytes\": 52,\n   \"language\": \"dockerfile\",\n   \"lines\": 2,\n   \"path\": \"Dockerfile\",\n   \"role\": \"config\",\n   \"sha256\": \"13f45891f5b789200d484004c81299317b2385209970f4cc00d4b284dedd2061\"\n  },\n  {\n   \"bytes\": 29,\n   \"language\": \"markdown\",\n   \"lines\": 1,\n   \"path\": \"README.md\",\n   \"role\": \"doc\",\n   \"sha256\": \"11bf299719486ab9dd69f175ff3d4a985797b8dbfdebf5ef10eaf30f8bb93d0b\"\n  },\n  {\n   \"bytes\": 41,\n   \"language\": \"javascript\",\n   \"lines\": 2,\n   \"path\": \"bin/tool\",\n   \"role\": \"script\",\n   \"sha256\": \"1c7b2523d763aa26b7720d2c064a754762ce5cde800b237e9e231e8ecfc96a0f\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-00.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-01.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-02.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-03.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-04.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-05.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-06.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-07.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-08.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-09.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-10.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-11.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-12.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-13.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-14.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-15.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-16.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-17.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-18.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-19.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 1000000,\n   \"language\": \"text\",\n   \"lines\": 1,\n   \"path\": \"bulk/part-20.txt\",\n   \"role\": \"doc\",\n   \"sha256\": \"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0\"\n  },\n  {\n   \"bytes\": 60,\n   \"language\": \"go\",\n   \"lines\": 7,\n   \"path\": \"cmd/main.go\",\n   \"role\": \"source\",\n   \"sha256\": \"50fc0f74c936224ffe8561b6a034841b5c45ce27e6e5db7e4f6bdb7dcc7e9233\"\n  },\n  {\n   \"bytes\": 8,\n   \"language\": \"markdown\",\n   \"lines\": 1,\n   \"path\": \"docs/guide.md\",\n   \"role\": \"doc\",\n   \"sha256\": \"bc553ffe57e544498b12a9865dbf3abc2004c474e349c52c378eaa402287424b\"\n  },\n  {\n   \"bytes\": 257,\n   \"language\": \"json\",\n   \"lines\": 17,\n   \"path\": \"package.json\",\n   \"role\": \"config\",\n   \"sha256\": \"a9bf8410e05655e149866bad30b5cd0ffba40393bddfc8c5852e3a8344334655\"\n  },\n  {\n   \"bytes\": 47,\n   \"language\": \"shell\",\n   \"lines\": 3,\n   \"path\": \"scripts/run.sh\",\n   \"role\": \"script\",\n   \"sha256\": \"72a7cf26f5d98a33524a57325852145342ee6125e25c573581e9489f7441ae72\"\n  },\n  {\n   \"bytes\": 132,\n   \"language\": \"ini\",\n   \"lines\": 7,\n   \"path\": \"setup.cfg\",\n   \"role\": \"config\",\n   \"sha256\": \"babfc9eecbb2da173fc415829f4e2190b3fab74edf67496f265bda1f1488721d\"\n  },\n  {\n   \"bytes\": 88,\n   \"language\": \"python\",\n   \"lines\": 9,\n   \"path\": \"src/app.py\",\n   \"role\": \"source\",\n   \"sha256\": \"a6f779499eb94ebf51c1b8fe5a55569e2e533d439d5b2aadaca26bbe82aa4c57\"\n  },\n  {\n   \"bytes\": 24,\n   \"language\": \"typescript\",\n   \"lines\": 1,\n   \"path\": \"src/lib.ts\",\n   \"role\": \"source\",\n   \"sha256\": \"5d8f65d2774e206bc9f7a7a4ad39ca2dc563b5c31e46ab57ef4874961237ce29\"\n  }\n ],\n \"fingerprint\": \"3891631bc27c17614582a68b5b8f25fd7021aff7da0e26ac95b45b5940800c50\",\n \"git_head\": null,\n \"git_status\": null,\n \"limits\": {\n  \"max_file_bytes\": 1048576,\n  \"max_total_bytes\": 30000000\n },\n \"oversize\": false,\n \"project\": {\n  \"entry_points\": [\n   {\n    \"kind\": \"bin\",\n    \"manifest\": \"package.json\",\n    \"name\": \"over-tool\",\n    \"target\": \"bin/tool\"\n   },\n   {\n    \"kind\": \"console-script\",\n    \"manifest\": \"setup.cfg\",\n    \"name\": \"over\",\n    \"target\": \"units.cli:main\"\n   },\n   {\n    \"kind\": \"console-script\",\n    \"manifest\": \"setup.cfg\",\n    \"name\": \"over-two\",\n    \"target\": \"units.cli:other\"\n   },\n   {\n    \"kind\": \"container-entrypoint\",\n    \"manifest\": \"Dockerfile\",\n    \"target\": \"[\\\"node\\\", \\\"bin/tool\\\"]\"\n   },\n   {\n    \"kind\": \"export\",\n    \"manifest\": \"package.json\",\n    \"resolved\": \"src/app.py\",\n    \"target\": \"./src/app.py\"\n   },\n   {\n    \"kind\": \"export\",\n    \"manifest\": \"package.json\",\n    \"resolved\": \"src/lib.ts\",\n    \"target\": \"./src/lib.ts\"\n   },\n   {\n    \"kind\": \"go-main\",\n    \"target\": \"cmd/main.go\"\n   },\n   {\n    \"kind\": \"python-main\",\n    \"target\": \"src/app.py\"\n   },\n   {\n    \"kind\": \"script\",\n    \"target\": \"bin/tool\"\n   },\n   {\n    \"kind\": \"script\",\n    \"target\": \"scripts/run.sh\"\n   }\n  ],\n  \"frameworks\": [\n   \"react\"\n  ],\n  \"languages\": {\n   \"dockerfile\": 1,\n   \"go\": 1,\n   \"ini\": 1,\n   \"javascript\": 1,\n   \"json\": 1,\n   \"markdown\": 2,\n   \"python\": 1,\n   \"shell\": 1,\n   \"text\": 21,\n   \"typescript\": 1\n  },\n  \"manifests\": [\n   {\n    \"entrypoint\": [\n     \"[\\\"node\\\", \\\"bin/tool\\\"]\"\n    ],\n    \"from\": [\n     \"node:22-alpine\"\n    ],\n    \"kind\": \"Dockerfile\",\n    \"manifest\": \"Dockerfile\"\n   },\n   {\n    \"bin\": {\n     \"over-tool\": \"bin/tool\"\n    },\n    \"exports\": [\n     \"./src/app.py\",\n     \"./src/lib.ts\"\n    ],\n    \"kind\": \"package.json\",\n    \"manifest\": \"package.json\",\n    \"name\": \"units-over\",\n    \"scripts\": {\n     \"build\": \"tsc -p .\"\n    }\n   },\n   {\n    \"kind\": \"setup.cfg\",\n    \"manifest\": \"setup.cfg\",\n    \"name\": \"units-over-cfg\",\n    \"scripts\": {\n     \"over\": \"units.cli:main\",\n     \"over-two\": \"units.cli:other\"\n    }\n   }\n  ],\n  \"workspaces\": []\n },\n \"schema_version\": 1,\n \"skipped\": [],\n \"specify\": {\n  \"constitution\": false,\n  \"feature_json\": null,\n  \"present\": false,\n  \"spec_numbers\": [],\n  \"templates\": []\n },\n \"src\": \"<SRC>\",\n \"testautomation\": null,\n \"totals\": {\n  \"files\": 31,\n  \"lines\": 71,\n  \"skipped\": 0,\n  \"text_bytes\": 21000738\n },\n \"units\": [\n  {\n   \"bytes\": 470,\n   \"files\": 4,\n   \"path\": \".\"\n  },\n  {\n   \"bytes\": 41,\n   \"files\": 1,\n   \"path\": \"bin\"\n  },\n  {\n   \"bytes\": 21000000,\n   \"files\": 21,\n   \"path\": \"bulk\"\n  },\n  {\n   \"bytes\": 60,\n   \"files\": 1,\n   \"path\": \"cmd\"\n  },\n  {\n   \"bytes\": 8,\n   \"files\": 1,\n   \"path\": \"docs\"\n  },\n  {\n   \"bytes\": 47,\n   \"files\": 1,\n   \"path\": \"scripts\"\n  },\n  {\n   \"bytes\": 112,\n   \"files\": 2,\n   \"path\": \"src\"\n  }\n ],\n \"walk\": \"walk\"\n}\n",
+   "entry_points": [
+    {
+     "kind": "bin",
+     "manifest": "package.json",
+     "name": "over-tool",
+     "target": "bin/tool"
+    },
+    {
+     "kind": "console-script",
+     "manifest": "setup.cfg",
+     "name": "over",
+     "target": "units.cli:main"
+    },
+    {
+     "kind": "console-script",
+     "manifest": "setup.cfg",
+     "name": "over-two",
+     "target": "units.cli:other"
+    },
+    {
+     "kind": "container-entrypoint",
+     "manifest": "Dockerfile",
+     "target": "[\"node\", \"bin/tool\"]"
+    },
+    {
+     "kind": "export",
+     "manifest": "package.json",
+     "resolved": "src/app.py",
+     "target": "./src/app.py"
+    },
+    {
+     "kind": "export",
+     "manifest": "package.json",
+     "resolved": "src/lib.ts",
+     "target": "./src/lib.ts"
+    },
+    {
+     "kind": "go-main",
+     "target": "cmd/main.go"
+    },
+    {
+     "kind": "python-main",
+     "target": "src/app.py"
+    },
+    {
+     "kind": "script",
+     "target": "bin/tool"
+    },
+    {
+     "kind": "script",
+     "target": "scripts/run.sh"
+    }
+   ],
+   "environ": {
+    "SPECSTRIDE_REVERSE_MAX_TOTAL_BYTES": "30000000"
+   },
+   "fingerprint": "3891631bc27c17614582a68b5b8f25fd7021aff7da0e26ac95b45b5940800c50",
+   "languages": {
+    "dockerfile": 1,
+    "go": 1,
+    "ini": 1,
+    "javascript": 1,
+    "json": 1,
+    "markdown": 2,
+    "python": 1,
+    "shell": 1,
+    "text": 21,
+    "typescript": 1
+   },
+   "limits": {
+    "max_file_bytes": 1048576,
+    "max_total_bytes": 30000000
+   },
+   "oversize": false,
+   "summary": "# Inventory — units140-over\n\nDeterministic, LLM-free inventory of `<SRC>` (walk: walk). It is the ground truth for **what exists**. The full record, with every file's hash, is `/UNITS/inventory.json`.\n\n- Files: 31 text (71 lines, 21000738 bytes); 0 skipped\n- Oversize: no (limit 30000000 bytes of text)\n- git HEAD: not a git work tree\n- Fingerprint: `3891631bc27c17614582a68b5b8f25fd7021aff7da0e26ac95b45b5940800c50`\n- Languages: dockerfile (1), go (1), ini (1), javascript (1), json (1), markdown (2), python (1), shell (1), text (21), typescript (1)\n- Frameworks: react\n- Existing Spec Kit: no; constitution absent; specs none\n\n## Manifests\n\n- `Dockerfile` (Dockerfile): {\"entrypoint\": [\"[\\\"node\\\", \\\"bin/tool\\\"]\"], \"from\": [\"node:22-alpine\"]}\n- `package.json` (package.json): {\"bin\": {\"over-tool\": \"bin/tool\"}, \"exports\": [\"./src/app.py\", \"./src/lib.ts\"], \"name\": \"units-over\", \"scripts\": {\"build\": \"tsc -p .\"}}\n- `setup.cfg` (setup.cfg): {\"name\": \"units-over-cfg\", \"scripts\": {\"over\": \"units.cli:main\", \"over-two\": \"units.cli:other\"}}\n\n## Entry points\n\n- bin: `bin/tool` (package.json)\n- console-script: `units.cli:main` (setup.cfg)\n- console-script: `units.cli:other` (setup.cfg)\n- container-entrypoint: `[\"node\", \"bin/tool\"]` (Dockerfile)\n- export: `./src/app.py` (package.json)\n- export: `./src/lib.ts` (package.json)\n- go-main: `cmd/main.go`\n- python-main: `src/app.py`\n- script: `bin/tool`\n- script: `scripts/run.sh`\n\n## Workspaces and units\n\n- unit `.`: 4 files, 470 bytes\n- unit `bin`: 1 files, 41 bytes\n- unit `bulk`: 21 files, 21000000 bytes\n- unit `cmd`: 1 files, 60 bytes\n- unit `docs`: 1 files, 8 bytes\n- unit `scripts`: 1 files, 47 bytes\n- unit `src`: 2 files, 112 bytes\n\n## Skipped\n\n- none\n\n## Files\n\n| Path | Lines | Language | Role |\n|---|---|---|---|\n| `Dockerfile` | 2 | dockerfile | config |\n| `README.md` | 1 | markdown | doc |\n| `bin/tool` | 2 | javascript | script |\n| `bulk/part-00.txt` | 1 | text | doc |\n| `bulk/part-01.txt` | 1 | text | doc |\n| `bulk/part-02.txt` | 1 | text | doc |\n| `bulk/part-03.txt` | 1 | text | doc |\n| `bulk/part-04.txt` | 1 | text | doc |\n| `bulk/part-05.txt` | 1 | text | doc |\n| `bulk/part-06.txt` | 1 | text | doc |\n| `bulk/part-07.txt` | 1 | text | doc |\n| `bulk/part-08.txt` | 1 | text | doc |\n| `bulk/part-09.txt` | 1 | text | doc |\n| `bulk/part-10.txt` | 1 | text | doc |\n| `bulk/part-11.txt` | 1 | text | doc |\n| `bulk/part-12.txt` | 1 | text | doc |\n| `bulk/part-13.txt` | 1 | text | doc |\n| `bulk/part-14.txt` | 1 | text | doc |\n| `bulk/part-15.txt` | 1 | text | doc |\n| `bulk/part-16.txt` | 1 | text | doc |\n| `bulk/part-17.txt` | 1 | text | doc |\n| `bulk/part-18.txt` | 1 | text | doc |\n| `bulk/part-19.txt` | 1 | text | doc |\n| `bulk/part-20.txt` | 1 | text | doc |\n| `cmd/main.go` | 7 | go | source |\n| `docs/guide.md` | 1 | markdown | doc |\n| `package.json` | 17 | json | config |\n| `scripts/run.sh` | 3 | shell | script |\n| `setup.cfg` | 7 | ini | config |\n| `src/app.py` | 9 | python | source |\n| `src/lib.ts` | 1 | typescript | source |\n",
+   "totals": {
+    "files": 31,
+    "lines": 71,
+    "skipped": 0,
+    "text_bytes": 21000738
+   },
+   "tree": "units140-over",
+   "units": [
+    {
+     "bytes": 470,
+     "files": 4,
+     "path": "."
+    },
+    {
+     "bytes": 41,
+     "files": 1,
+     "path": "bin"
+    },
+    {
+     "bytes": 21000000,
+     "files": 21,
+     "path": "bulk"
+    },
+    {
+     "bytes": 60,
+     "files": 1,
+     "path": "cmd"
+    },
+    {
+     "bytes": 8,
+     "files": 1,
+     "path": "docs"
+    },
+    {
+     "bytes": 47,
+     "files": 1,
+     "path": "scripts"
+    },
+    {
+     "bytes": 112,
+     "files": 2,
+     "path": "src"
+    }
+   ],
+   "walk": "walk",
+   "workspaces": []
+  },
+  "workspaces": {
+   "documentText": "{\n \"excludes\": [],\n \"files\": [\n  {\n   \"bytes\": 73,\n   \"language\": \"toml\",\n   \"lines\": 5,\n   \"path\": \"Cargo.toml\",\n   \"role\": \"config\",\n   \"sha256\": \"c995bc99a21b4af16748dd4d2b220593f4d15f27c87893edb40f60ae959b470f\"\n  },\n  {\n   \"bytes\": 24,\n   \"language\": \"markdown\",\n   \"lines\": 1,\n   \"path\": \"README.md\",\n   \"role\": \"doc\",\n   \"sha256\": \"704831b00d2934e5146a5085ab317a7e5d2e2f7ddfe02c7e47263772939472a4\"\n  },\n  {\n   \"bytes\": 25,\n   \"language\": \"toml\",\n   \"lines\": 2,\n   \"path\": \"crates/alpha/Cargo.toml\",\n   \"role\": \"config\",\n   \"sha256\": \"13536643c491618b13eedcc9071822bfaf0f76ea9612a0668d861015f3900038\"\n  },\n  {\n   \"bytes\": 27,\n   \"language\": \"rust\",\n   \"lines\": 1,\n   \"path\": \"crates/alpha/src/lib.rs\",\n   \"role\": \"source\",\n   \"sha256\": \"fa2192f4c93341c2a6f658a7e173a0562bd0194231ebfc19c727b8500d7a3c5a\"\n  },\n  {\n   \"bytes\": 24,\n   \"language\": \"toml\",\n   \"lines\": 2,\n   \"path\": \"crates/beta/Cargo.toml\",\n   \"role\": \"config\",\n   \"sha256\": \"403cc143de0b7fc5a3e75518dfb310d06c029c2a749c1357fc1be948d5929399\"\n  },\n  {\n   \"bytes\": 26,\n   \"language\": \"rust\",\n   \"lines\": 1,\n   \"path\": \"crates/beta/src/lib.rs\",\n   \"role\": \"source\",\n   \"sha256\": \"253e772a447796379e8e7b9aeff233e3b753427678397da66e6068967d97bb67\"\n  },\n  {\n   \"bytes\": 20,\n   \"language\": \"javascript\",\n   \"lines\": 1,\n   \"path\": \"deep/leaf/index.js\",\n   \"role\": \"source\",\n   \"sha256\": \"f1942e34fe7b067f84540731e04b46aa33c4d3a328dd69e8d6859c3bcf929933\"\n  },\n  {\n   \"bytes\": 27,\n   \"language\": \"json\",\n   \"lines\": 3,\n   \"path\": \"deep/leaf/package.json\",\n   \"role\": \"config\",\n   \"sha256\": \"5ab974f11d362170cd26561219d61bafbb2e576e54762a7d363d58825200d08b\"\n  },\n  {\n   \"bytes\": 20,\n   \"language\": \"javascript\",\n   \"lines\": 1,\n   \"path\": \"extra/widget/index.js\",\n   \"role\": \"source\",\n   \"sha256\": \"ea6b5510a1b5191d2b533303eaa73ba4c0cc7801f5810e56d8296f498e3bea8b\"\n  },\n  {\n   \"bytes\": 29,\n   \"language\": \"json\",\n   \"lines\": 3,\n   \"path\": \"extra/widget/package.json\",\n   \"role\": \"config\",\n   \"sha256\": \"5cb5be1df8a8f4eca8df2a5e1953dd582280615938999c30aaed2f1abdf8bfe9\"\n  },\n  {\n   \"bytes\": 160,\n   \"language\": \"json\",\n   \"lines\": 11,\n   \"path\": \"package.json\",\n   \"role\": \"config\",\n   \"sha256\": \"0c720934edab2c0eef3c4bd2003a8d8d692e94c97d29ce61b9cc5930f345a826\"\n  },\n  {\n   \"bytes\": 29,\n   \"language\": \"markdown\",\n   \"lines\": 1,\n   \"path\": \"packages/loose/notes.md\",\n   \"role\": \"doc\",\n   \"sha256\": \"ebf970710d7e533c9f3d705b07bbc8d23e379b3f6de233f6a40a73a157215e10\"\n  },\n  {\n   \"bytes\": 28,\n   \"language\": \"json\",\n   \"lines\": 3,\n   \"path\": \"packages/nested/inner/package.json\",\n   \"role\": \"config\",\n   \"sha256\": \"d49d6164f6d3f33527c6a2d86939e95d752c744ffabb523ea2574a731634ffce\"\n  },\n  {\n   \"bytes\": 24,\n   \"language\": \"typescript\",\n   \"lines\": 1,\n   \"path\": \"packages/nested/inner/src/index.ts\",\n   \"role\": \"source\",\n   \"sha256\": \"48d777b66553a61312d62d1ded52864a20e414e56499b8424e15be9dd37e9f54\"\n  },\n  {\n   \"bytes\": 34,\n   \"language\": \"markdown\",\n   \"lines\": 1,\n   \"path\": \"packages/nested/notes.md\",\n   \"role\": \"doc\",\n   \"sha256\": \"6bd06864902987ff1495611fad6be4bcd9cd1c4baec7a089b7d3e5be44d06111\"\n  },\n  {\n   \"bytes\": 29,\n   \"language\": \"json\",\n   \"lines\": 3,\n   \"path\": \"packages/nested/package.json\",\n   \"role\": \"config\",\n   \"sha256\": \"c08bafcecfdf5b0744017e2345f6cde401cc515c4c2cf6058475858a20d4e3c8\"\n  },\n  {\n   \"bytes\": 130,\n   \"language\": \"json\",\n   \"lines\": 10,\n   \"path\": \"packages/one/package.json\",\n   \"role\": \"config\",\n   \"sha256\": \"4fdf7b0b26801980dc8715cb099dd977ddac9cd620ecbac15605086b4b807250\"\n  },\n  {\n   \"bytes\": 40,\n   \"language\": \"python\",\n   \"lines\": 2,\n   \"path\": \"packages/one/src/cli.py\",\n   \"role\": \"source\",\n   \"sha256\": \"8f733edce31e614e8dde1319326273bd5dc17a2b625e51999d7a783caa0ffdc2\"\n  },\n  {\n   \"bytes\": 6,\n   \"language\": \"symlink\",\n   \"lines\": 0,\n   \"path\": \"packages/one/src/linked-cli.py\",\n   \"role\": \"other\",\n   \"sha256\": \"7648f5f4cce4bf01d02de43f8c5f6f2130b787baece0cf6338210496d8bdfcdc\",\n   \"symlink\": true,\n   \"target\": \"cli.py\"\n  },\n  {\n   \"bytes\": 22,\n   \"language\": \"typescript\",\n   \"lines\": 1,\n   \"path\": \"packages/one/src/main.ts\",\n   \"role\": \"source\",\n   \"sha256\": \"da892e4e82bcf839d96015d7782564f860296b3312b1e18d6b2f3622185d2cbf\"\n  },\n  {\n   \"bytes\": 27,\n   \"language\": \"json\",\n   \"lines\": 3,\n   \"path\": \"packages/skip/package.json\",\n   \"role\": \"config\",\n   \"sha256\": \"6fff4961399357241419a7ed74b761f220ae7c9932e2f259cac8ad9dd98987b3\"\n  },\n  {\n   \"bytes\": 23,\n   \"language\": \"typescript\",\n   \"lines\": 1,\n   \"path\": \"packages/skip/src/index.ts\",\n   \"role\": \"source\",\n   \"sha256\": \"158a1734cc18ba59a00dde514aad5a69352d7104f4788e474bc853a1b80a016c\"\n  },\n  {\n   \"bytes\": 24,\n   \"language\": \"json\",\n   \"lines\": 3,\n   \"path\": \"packages/two/package.json\",\n   \"role\": \"config\",\n   \"sha256\": \"3270042f7f3e53fb789f951e69336b502f96abff783da2906639df41c773c38a\"\n  },\n  {\n   \"bytes\": 22,\n   \"language\": \"typescript\",\n   \"lines\": 1,\n   \"path\": \"packages/two/src/index.ts\",\n   \"role\": \"source\",\n   \"sha256\": \"3fab699ca9e644ab4a21122bc7657be71b3e1ee800af110782e77da5fb6bc23b\"\n  },\n  {\n   \"bytes\": 38,\n   \"language\": \"yaml\",\n   \"lines\": 3,\n   \"path\": \"pnpm-workspace.yaml\",\n   \"role\": \"config\",\n   \"sha256\": \"12f4a6b1f45614dfdafb95f7152d80dd2fcddfcf473643117ee7bb71d88dc3f4\"\n  },\n  {\n   \"bytes\": 68,\n   \"language\": \"python\",\n   \"lines\": 3,\n   \"path\": \"scripts/pytool.py\",\n   \"role\": \"script\",\n   \"sha256\": \"e9efa2dc264d6ff1d3769993b61f4d8a97253e1d9c9306b28c2b9b0d1e48c324\"\n  },\n  {\n   \"bytes\": 28,\n   \"language\": \"shell\",\n   \"lines\": 2,\n   \"path\": \"scripts/ws.sh\",\n   \"role\": \"script\",\n   \"sha256\": \"4abaf94d7d8d6276c3aa0cac51a2e5c1644bce4edb99ca966f4c68c4cc34b456\"\n  }\n ],\n \"fingerprint\": \"35b700e27d350f4c6ae9ca82a63dc66b02802cb5da57dfddc871ac392bf4924d\",\n \"git_head\": null,\n \"git_status\": null,\n \"limits\": {\n  \"max_file_bytes\": 1048576,\n  \"max_total_bytes\": 20971520\n },\n \"oversize\": false,\n \"project\": {\n  \"entry_points\": [\n   {\n    \"kind\": \"bin\",\n    \"manifest\": \"packages/one/package.json\",\n    \"name\": \"one\",\n    \"target\": \"bin/one\"\n   },\n   {\n    \"kind\": \"export\",\n    \"manifest\": \"packages/one/package.json\",\n    \"resolved\": \"packages/one/src/main.ts\",\n    \"target\": \"./src/main.ts\"\n   },\n   {\n    \"kind\": \"python-main\",\n    \"target\": \"packages/one/src/cli.py\"\n   },\n   {\n    \"kind\": \"python-main\",\n    \"target\": \"scripts/pytool.py\"\n   },\n   {\n    \"kind\": \"script\",\n    \"target\": \"scripts/ws.sh\"\n   }\n  ],\n  \"frameworks\": [\n   \"express\"\n  ],\n  \"languages\": {\n   \"javascript\": 2,\n   \"json\": 8,\n   \"markdown\": 3,\n   \"python\": 2,\n   \"rust\": 2,\n   \"shell\": 1,\n   \"toml\": 3,\n   \"typescript\": 4,\n   \"yaml\": 1\n  },\n  \"manifests\": [\n   {\n    \"kind\": \"Cargo.toml\",\n    \"manifest\": \"Cargo.toml\"\n   },\n   {\n    \"kind\": \"Cargo.toml\",\n    \"manifest\": \"crates/alpha/Cargo.toml\"\n   },\n   {\n    \"kind\": \"Cargo.toml\",\n    \"manifest\": \"crates/beta/Cargo.toml\"\n   },\n   {\n    \"kind\": \"package.json\",\n    \"manifest\": \"deep/leaf/package.json\",\n    \"name\": \"@units/leaf\"\n   },\n   {\n    \"kind\": \"package.json\",\n    \"manifest\": \"extra/widget/package.json\",\n    \"name\": \"@units/widget\"\n   },\n   {\n    \"kind\": \"package.json\",\n    \"manifest\": \"package.json\",\n    \"name\": \"@units/root\",\n    \"workspaces\": [\n     \"packages/*\",\n     \"!packages/skip\"\n    ]\n   },\n   {\n    \"kind\": \"package.json\",\n    \"manifest\": \"packages/nested/inner/package.json\",\n    \"name\": \"@units/inner\"\n   },\n   {\n    \"kind\": \"package.json\",\n    \"manifest\": \"packages/nested/package.json\",\n    \"name\": \"@units/nested\"\n   },\n   {\n    \"bin\": {\n     \"one\": \"bin/one\"\n    },\n    \"exports\": [\n     \"./src/main.ts\"\n    ],\n    \"kind\": \"package.json\",\n    \"manifest\": \"packages/one/package.json\",\n    \"name\": \"@units/one\"\n   },\n   {\n    \"kind\": \"package.json\",\n    \"manifest\": \"packages/skip/package.json\",\n    \"name\": \"@units/skip\"\n   },\n   {\n    \"kind\": \"package.json\",\n    \"manifest\": \"packages/two/package.json\"\n   },\n   {\n    \"kind\": \"pnpm-workspace\",\n    \"manifest\": \"pnpm-workspace.yaml\",\n    \"workspaces\": [\n     \"extra/*\",\n     \"deep/**\"\n    ]\n   }\n  ],\n  \"workspaces\": [\n   {\n    \"kind\": \"js\",\n    \"name\": \"@units/leaf\",\n    \"path\": \"deep/leaf\"\n   },\n   {\n    \"kind\": \"js\",\n    \"name\": \"@units/widget\",\n    \"path\": \"extra/widget\"\n   },\n   {\n    \"kind\": \"js\",\n    \"name\": \"@units/nested\",\n    \"path\": \"packages/nested\"\n   },\n   {\n    \"kind\": \"js\",\n    \"name\": \"@units/inner\",\n    \"path\": \"packages/nested/inner\"\n   },\n   {\n    \"kind\": \"js\",\n    \"name\": \"@units/one\",\n    \"path\": \"packages/one\"\n   },\n   {\n    \"kind\": \"js\",\n    \"name\": \"packages/two\",\n    \"path\": \"packages/two\"\n   }\n  ]\n },\n \"schema_version\": 1,\n \"skipped\": [],\n \"specify\": {\n  \"constitution\": false,\n  \"feature_json\": null,\n  \"present\": false,\n  \"spec_numbers\": [],\n  \"templates\": []\n },\n \"src\": \"<SRC>\",\n \"testautomation\": null,\n \"totals\": {\n  \"files\": 27,\n  \"lines\": 69,\n  \"skipped\": 0,\n  \"text_bytes\": 1021\n },\n \"units\": [\n  {\n   \"bytes\": 572,\n   \"files\": 13,\n   \"path\": \".\"\n  },\n  {\n   \"bytes\": 47,\n   \"files\": 2,\n   \"path\": \"deep/leaf\"\n  },\n  {\n   \"bytes\": 49,\n   \"files\": 2,\n   \"path\": \"extra/widget\"\n  },\n  {\n   \"bytes\": 63,\n   \"files\": 2,\n   \"path\": \"packages/nested\"\n  },\n  {\n   \"bytes\": 52,\n   \"files\": 2,\n   \"path\": \"packages/nested/inner\"\n  },\n  {\n   \"bytes\": 198,\n   \"files\": 4,\n   \"path\": \"packages/one\"\n  },\n  {\n   \"bytes\": 46,\n   \"files\": 2,\n   \"path\": \"packages/two\"\n  }\n ],\n \"walk\": \"walk\"\n}\n",
+   "entry_points": [
+    {
+     "kind": "bin",
+     "manifest": "packages/one/package.json",
+     "name": "one",
+     "target": "bin/one"
+    },
+    {
+     "kind": "export",
+     "manifest": "packages/one/package.json",
+     "resolved": "packages/one/src/main.ts",
+     "target": "./src/main.ts"
+    },
+    {
+     "kind": "python-main",
+     "target": "packages/one/src/cli.py"
+    },
+    {
+     "kind": "python-main",
+     "target": "scripts/pytool.py"
+    },
+    {
+     "kind": "script",
+     "target": "scripts/ws.sh"
+    }
+   ],
+   "environ": {},
+   "fingerprint": "35b700e27d350f4c6ae9ca82a63dc66b02802cb5da57dfddc871ac392bf4924d",
+   "languages": {
+    "javascript": 2,
+    "json": 8,
+    "markdown": 3,
+    "python": 2,
+    "rust": 2,
+    "shell": 1,
+    "toml": 3,
+    "typescript": 4,
+    "yaml": 1
+   },
+   "limits": {
+    "max_file_bytes": 1048576,
+    "max_total_bytes": 20971520
+   },
+   "oversize": false,
+   "summary": "# Inventory — units140-ws\n\nDeterministic, LLM-free inventory of `<SRC>` (walk: walk). It is the ground truth for **what exists**. The full record, with every file's hash, is `/UNITS/inventory.json`.\n\n- Files: 27 text (69 lines, 1021 bytes); 0 skipped\n- Oversize: no (limit 20971520 bytes of text)\n- git HEAD: not a git work tree\n- Fingerprint: `35b700e27d350f4c6ae9ca82a63dc66b02802cb5da57dfddc871ac392bf4924d`\n- Languages: javascript (2), json (8), markdown (3), python (2), rust (2), shell (1), toml (3), typescript (4), yaml (1)\n- Frameworks: express\n- Existing Spec Kit: no; constitution absent; specs none\n\n## Manifests\n\n- `Cargo.toml` (Cargo.toml): {}\n- `crates/alpha/Cargo.toml` (Cargo.toml): {}\n- `crates/beta/Cargo.toml` (Cargo.toml): {}\n- `deep/leaf/package.json` (package.json): {\"name\": \"@units/leaf\"}\n- `extra/widget/package.json` (package.json): {\"name\": \"@units/widget\"}\n- `package.json` (package.json): {\"name\": \"@units/root\", \"workspaces\": [\"packages/*\", \"!packages/skip\"]}\n- `packages/nested/inner/package.json` (package.json): {\"name\": \"@units/inner\"}\n- `packages/nested/package.json` (package.json): {\"name\": \"@units/nested\"}\n- `packages/one/package.json` (package.json): {\"bin\": {\"one\": \"bin/one\"}, \"exports\": [\"./src/main.ts\"], \"name\": \"@units/one\"}\n- `packages/skip/package.json` (package.json): {\"name\": \"@units/skip\"}\n- `packages/two/package.json` (package.json): {}\n- `pnpm-workspace.yaml` (pnpm-workspace): {\"workspaces\": [\"extra/*\", \"deep/**\"]}\n\n## Entry points\n\n- bin: `bin/one` (packages/one/package.json)\n- export: `./src/main.ts` (packages/one/package.json)\n- python-main: `packages/one/src/cli.py`\n- python-main: `scripts/pytool.py`\n- script: `scripts/ws.sh`\n\n## Workspaces and units\n\n- workspace js: `deep/leaf` (@units/leaf)\n- workspace js: `extra/widget` (@units/widget)\n- workspace js: `packages/nested` (@units/nested)\n- workspace js: `packages/nested/inner` (@units/inner)\n- workspace js: `packages/one` (@units/one)\n- workspace js: `packages/two` (packages/two)\n- unit `.`: 13 files, 572 bytes\n- unit `deep/leaf`: 2 files, 47 bytes\n- unit `extra/widget`: 2 files, 49 bytes\n- unit `packages/nested`: 2 files, 63 bytes\n- unit `packages/nested/inner`: 2 files, 52 bytes\n- unit `packages/one`: 4 files, 198 bytes\n- unit `packages/two`: 2 files, 46 bytes\n\n## Skipped\n\n- none\n\n## Files\n\n| Path | Lines | Language | Role |\n|---|---|---|---|\n| `Cargo.toml` | 5 | toml | config |\n| `README.md` | 1 | markdown | doc |\n| `crates/alpha/Cargo.toml` | 2 | toml | config |\n| `crates/alpha/src/lib.rs` | 1 | rust | source |\n| `crates/beta/Cargo.toml` | 2 | toml | config |\n| `crates/beta/src/lib.rs` | 1 | rust | source |\n| `deep/leaf/index.js` | 1 | javascript | source |\n| `deep/leaf/package.json` | 3 | json | config |\n| `extra/widget/index.js` | 1 | javascript | source |\n| `extra/widget/package.json` | 3 | json | config |\n| `package.json` | 11 | json | config |\n| `packages/loose/notes.md` | 1 | markdown | doc |\n| `packages/nested/inner/package.json` | 3 | json | config |\n| `packages/nested/inner/src/index.ts` | 1 | typescript | source |\n| `packages/nested/notes.md` | 1 | markdown | doc |\n| `packages/nested/package.json` | 3 | json | config |\n| `packages/one/package.json` | 10 | json | config |\n| `packages/one/src/cli.py` | 2 | python | source |\n| `packages/one/src/linked-cli.py` | 0 | symlink | other |\n| `packages/one/src/main.ts` | 1 | typescript | source |\n| `packages/skip/package.json` | 3 | json | config |\n| `packages/skip/src/index.ts` | 1 | typescript | source |\n| `packages/two/package.json` | 3 | json | config |\n| `packages/two/src/index.ts` | 1 | typescript | source |\n| `pnpm-workspace.yaml` | 3 | yaml | config |\n| `scripts/pytool.py` | 3 | python | script |\n| `scripts/ws.sh` | 2 | shell | script |\n",
+   "totals": {
+    "files": 27,
+    "lines": 69,
+    "skipped": 0,
+    "text_bytes": 1021
+   },
+   "tree": "units140-ws",
+   "units": [
+    {
+     "bytes": 572,
+     "files": 13,
+     "path": "."
+    },
+    {
+     "bytes": 47,
+     "files": 2,
+     "path": "deep/leaf"
+    },
+    {
+     "bytes": 49,
+     "files": 2,
+     "path": "extra/widget"
+    },
+    {
+     "bytes": 63,
+     "files": 2,
+     "path": "packages/nested"
+    },
+    {
+     "bytes": 52,
+     "files": 2,
+     "path": "packages/nested/inner"
+    },
+    {
+     "bytes": 198,
+     "files": 4,
+     "path": "packages/one"
+    },
+    {
+     "bytes": 46,
+     "files": 2,
+     "path": "packages/two"
+    }
+   ],
+   "walk": "walk",
+   "workspaces": [
+    {
+     "kind": "js",
+     "name": "@units/leaf",
+     "path": "deep/leaf"
+    },
+    {
+     "kind": "js",
+     "name": "@units/widget",
+     "path": "extra/widget"
+    },
+    {
+     "kind": "js",
+     "name": "@units/nested",
+     "path": "packages/nested"
+    },
+    {
+     "kind": "js",
+     "name": "@units/inner",
+     "path": "packages/nested/inner"
+    },
+    {
+     "kind": "js",
+     "name": "@units/one",
+     "path": "packages/one"
+    },
+    {
+     "kind": "js",
+     "name": "packages/two",
+     "path": "packages/two"
+    }
+   ]
+  }
+ },
+ "generator": ".specstride/features/140-reverse-inventory-and-lint/gates/proofs/phase5-units-golden.py",
+ "note": "Every `documentText` is the baseline's bytes with the absolute source path written `<SRC>`; the baseline has no key `schema`, so the port's document is compared after that key is removed (DV-116). `fingerprint` is raw.",
+ "producedBy": "lib/reverse_inventory.py of the Specstride baseline at 9cab15d",
+ "python": "3.13.5",
+ "summaryJsonPath": "/UNITS/inventory.json",
+ "tomlReader": false,
+ "trees": "packages/reverse/test/140/units-trees.ts, buildOversizeTree() and buildWorkspacesTree()"
+}

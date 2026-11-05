@@ -1,0 +1,118 @@
+{
+  "schema": "specstride.supervise-verbs/1",
+  "verbs": [
+    {
+      "verb": "`mode --request TEXT [--token TOK ...]`",
+      "does": "Prints the mode line; prints the next-step line when the mode is `dry-run`",
+      "exit": "0 always"
+    },
+    {
+      "verb": "`resolve --repo DIR [--feature SLUG] [--launcher PATH]`",
+      "does": "Prints the launcher line, or a refusal",
+      "exit": "0; 4 on refusal"
+    },
+    {
+      "verb": "`gate --launcher PATH [--implement] [--smoke]`",
+      "does": "Runs the six launch checks and prints every check and the decision",
+      "exit": "0 for `launch`; 4 for `refuse` and for `attach`"
+    },
+    {
+      "verb": "`launch --launcher PATH [--mode run or auto] [--implement] [--smoke]`",
+      "does": "Runs the launch checks, then starts the launcher detached, then prints the launch line",
+      "exit": "0; 4 when the decision is not `launch`"
+    },
+    {
+      "verb": "`watch (--launcher or --run-dir) [cadence]`",
+      "does": "Supervises a launched run until it is terminal or supervision expires",
+      "exit": "The exit map"
+    },
+    {
+      "verb": "`observe (--launcher or --run-dir) [cadence] [--json]`",
+      "does": "Takes one reading; when terminal prints the digest and, with `relaunch.owner: supervise`, may relaunch; otherwise prints the next poll interval",
+      "exit": "0, or a refusal code"
+    },
+    {
+      "verb": "`auto --launcher PATH [--mode run or auto] [--implement] [--smoke] [cadence]`",
+      "does": "`launch`, then `watch`, in one call. `--mode` defaults to `auto`",
+      "exit": "The exit map"
+    },
+    {
+      "verb": "`stop (--launcher or --run-dir) [cadence]`",
+      "does": "Records the stop request, signals the process group of the run, prints the stop line, then supervises without relaunch (poll `min(poll, 5)` seconds, at most 120 seconds by default)",
+      "exit": "0 when nothing could be signalled; else the exit map"
+    },
+    {
+      "verb": "`hold`, `release`",
+      "does": "Write the inbox request `hold-relaunch` with `hold` true or false, and an optional reason",
+      "exit": "0 written; 4 refused, `no-live-run`"
+    }
+  ],
+  "defaultLines": [
+    {
+      "line": "`[SPECSTRIDE-MODE]`",
+      "keys": "`mode`, `source`",
+      "printed": "Once, by `supervise mode`"
+    },
+    {
+      "line": "`[SPECSTRIDE-LAUNCHER]`",
+      "keys": "`launcher`",
+      "printed": "Once, by `supervise resolve`"
+    },
+    {
+      "line": "`[SPECSTRIDE-GATE]`",
+      "keys": "`decision`, and for a refusal `check`, `reason`, `next`",
+      "printed": "Once per launch attempt; the passing checks are not listed"
+    },
+    {
+      "line": "`[SPECSTRIDE-SUPERVISE-LAUNCH]`",
+      "keys": "`pipeline`, `state`, `stages`, `relaunch` (remaining and maximum), `stop`",
+      "printed": "Once per launch, by `supervise launch` and `supervise auto`"
+    },
+    {
+      "line": "`[SPECSTRIDE-SUPERVISE-STATE]`",
+      "keys": "`pipeline`, `stage` (`i/n`), `id`, `state`",
+      "printed": "Only when the signature of the observation changed"
+    },
+    {
+      "line": "`[SPECSTRIDE-RELAUNCH]`",
+      "keys": "`pipeline`, `attempt`, `reason`, `stage`",
+      "printed": "Once per relaunch"
+    },
+    {
+      "line": "`[SPECSTRIDE-NEXT]`",
+      "keys": "`poll-in`",
+      "printed": "After a non-terminal reading"
+    },
+    {
+      "line": "`[SPECSTRIDE-REFUSE]`",
+      "keys": "`action`, `reason`, `next`",
+      "printed": "Once per refusal"
+    },
+    {
+      "line": "`[SPECSTRIDE-SUPERVISE-STOP]`",
+      "keys": "`pipeline`, `sent`",
+      "printed": "Once per stop, by `supervise stop`"
+    },
+    {
+      "line": "`[SPECSTRIDE-ANOMALY]`",
+      "keys": "`pipeline`, `detail`",
+      "printed": "Per anomaly"
+    },
+    {
+      "line": "`[SPECSTRIDE-SUPERVISE-DIGEST]`",
+      "keys": "`pipeline`, `state`, `exit`, `last-stage`, `next`",
+      "printed": "Once, when the run is terminal, by `supervise`"
+    },
+    {
+      "line": "`[SPECSTRIDE-DIGEST]`",
+      "keys": "`run`, `comment`, `changed`, `delegated`, `critic`, `fallback`, `alerts` (the keys of annex G §G.3)",
+      "printed": "Once per run, by the runtime, on the line before the digest line; never under the `parity` profile (F123-FR-043)"
+    }
+  ],
+  "limitsBytes": {
+    "cycle": 420,
+    "unchangedCycle": 0,
+    "terminalDigest": 700,
+    "run": 8400
+  }
+}

@@ -1,0 +1,31 @@
+{
+ "note": "Compared byte for byte under the parity profile. Long texts are taken from the reference by the capture of FX-25; the keys below name them. Placeholders {phase}, {ids} and <n>/<path>/<bytes> follow the layout table.",
+ "snapshotHeading": "## Grounding snapshot (verified by the critic, read-only)",
+ "noPaths": [
+  "## Grounding snapshot",
+  "(No file paths cited in the evidence.)"
+ ],
+ "missing": "- `<path>` — **MISSING** (does not exist on disk)",
+ "directory": "- `<path>` — directory, <n> entries",
+ "file": "- `<path>` — exists, <bytes> bytes, mtime <YYYY-MM-DDTHH:MM:SS>",
+ "excerptOmitted": "(content excerpt omitted — grounding byte budget reached; file verified present above)",
+ "wholeFileLabel": "(complete file, line-numbered)",
+ "gapHeading": "## CITED BUT NOT AUTO-GROUNDED — verified PRESENT by direct stat",
+ "gapLine": "- `<token>` — verified on disk (stat)",
+ "probeHeading": "## Deterministic probe results (harness-computed, not LLM)",
+ "transparencyHeading": "## Grounding transparency (machine-generated — read this)",
+ "evidenceTruncated": "… (evidence truncated) …",
+ "headTailJoin": "… (truncated) …",
+ "elision": "… [<label>: <n> bytes elided to fit the critic's context window; this is a BUDGET elision, not missing content] …",
+ "roleLine": "You are the CRITIC (an automated approval gate). Be adversarial, not helpful.",
+ "pinHeading": "PREVIOUSLY CONFIRMED (W9 verdict pins)",
+ "pinWarning": "W9 pin load skipped",
+ "historyNone": "(no prior rejection recorded)",
+ "promptRules": "You are the CRITIC (an automated approval gate). Be adversarial, not helpful.\nA proposer agent claims it has completed Phase {phase} of a spec. Your job is to\ndecide — strictly — whether the EVIDENCE actually satisfies EVERY acceptance\ncriterion in the SPEC below. This is the only thing standing between unverified\nwork and it being marked done, so do not give the benefit of the doubt.\n\nRules:\n- Check each acceptance criterion individually. If ANY criterion is unmet, unclear,\n  or only asserted without support, the verdict is REJECTED.\n- The evidence is the proposer grading its own homework. Trust the GROUNDING\n  SNAPSHOT (verified on-disk state) over the evidence's prose when they conflict.\n  A criterion \"proven\" only by a claim about a file that the snapshot shows is\n  missing or empty is NOT met.\n- A snapshot entry reading \"content excerpt omitted — grounding byte budget\n  reached; file verified present\" is a TOOLING limitation, NOT evidence of absence:\n  the file EXISTS and was verified on disk; only its excerpt was elided for length.\n  You MUST NOT count a criterion unmet solely because that file's excerpt was\n  elided. If you genuinely cannot judge a criterion because the content you need is\n  not in the snapshot, say so explicitly in your feedback as\n  `NEEDS-GROUNDING:<path>` (name the file whose content you need) rather than\n  rejecting it as unimplemented. Criterion-named files are shown with anchored\n  excerpts (±lines around each named symbol, line-numbered) and are never elided.\n- The DESIGN CONTEXT (if present) is background only — never an extra criterion.\n- Do not be talked into approving by confident language. Substance only.\n\nIf REJECTED, first list the specific unmet criteria and exactly what is missing —\nthis text becomes the feedback the proposer must address, so be concrete and\nactionable (name the criterion, name the gap).",
+ "snapshotIntro": "The following is the ACTUAL on-disk state of files the evidence cites.\nClaims about files that do not exist, are empty, or contradict this snapshot are NOT substantiated — weigh them accordingly.",
+ "gapBody": "The critic's path extractor did not include these in the snapshot above, but each DOES exist on disk (confirmed by a direct read-only stat). Their absence from the snapshot is a TOOLING limitation, NOT evidence that the file is missing. Do NOT reject a criterion solely because one of these is 'not in the snapshot':",
+ "needsGrounding": "- `<path>` — **NEEDS-GROUNDING** (declared build export not found on disk; the build likely did not run — treat as a build-output gap, NOT as an unmet criterion; do not reject on this alone)",
+ "notShown": "- … (<n> further cited path(s) omitted: presence-line cap reached — omission here means NOT-SHOWN, it does NOT mean the file is missing from disk)",
+ "designContextFrame": "════════════════════════ DESIGN CONTEXT (read-only background — NOT acceptance criteria) ════════════════════════\nThe following are the feature's design documents. Use them ONLY to understand what\nthe criteria mean and whether the evidence is consistent with the intended design.\nThey are NOT a checklist: do not reject for anything that is not an explicit\nacceptance criterion in the SPEC section above. Context can inform a rejection of a\nreal criterion; it can never become a new one.",
+ "pinBlock": "\n════════════════════════ PREVIOUSLY CONFIRMED (W9 verdict pins) ════════════════════════\nThe following criteria were CONFIRMED in an earlier attempt of THIS phase, and the source files backing them are byte-for-byte UNCHANGED since (verified by content hash):\n    {ids}\nDo NOT re-reject these for thin/absent proof slices or budget-elided excerpts — their implementation was already verified against identical code. Re-examine one ONLY if the CURRENT evidence or grounding snapshot actively CONTRADICTS it (shows the backing code is now wrong or gone). Absence of a fresh proof slice is NOT a contradiction. This exists so a large phase converges instead of rotating which criteria get grounded each attempt.\n"
+}

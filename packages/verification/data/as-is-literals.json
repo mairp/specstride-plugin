@@ -1,0 +1,266 @@
+{
+ "schema": "specstride.feature-literals/1",
+ "note": "Compared byte for byte in compatibility output. <component> is the logical component name of feature 100, annex X, section X.8. The list holds the literals that spec.md names or refers to; it is not every line of the baseline. For a line that is not listed, the baseline at 9cab15d is the reference \u2014 its verification-plan module, its failure-digest module and its orchestrator, under lib/ and the repository root \u2014 and the oracle compares against it. The legacy file names are not spelled out here, because this file is copied into packages/verification/data/ (T004) and no data file of a package carries a legacy name (F100-FR-026).",
+ "literals": [
+  {
+   "requirement": "F105-FR-001",
+   "text": "<component>: --verification must be off, plan, or required (got: <value>)",
+   "item": "B-0112"
+  },
+  {
+   "requirement": "F105-FR-002",
+   "text": "<component>: --verification-commands not found or empty: <path>",
+   "item": "B-0121"
+  },
+  {
+   "requirement": "F105-FR-004",
+   "text": "<component>: verification preflight failed (see <log>)",
+   "item": "B-0122"
+  },
+  {
+   "requirement": "F105-FR-006",
+   "text": "# Phase <N> deterministic verification gate rejected",
+   "item": "B-0182"
+  },
+  {
+   "requirement": "F105-FR-006",
+   "text": "## What actually failed",
+   "item": "B-0182"
+  },
+  {
+   "requirement": "F105-FR-006",
+   "text": "## References",
+   "item": "B-0182"
+  },
+  {
+   "requirement": "F105-FR-006",
+   "text": "The fixed-argv verification gate failed (exit <rc>). The failing command",
+   "item": "B-0182"
+  },
+  {
+   "requirement": "F105-FR-006",
+   "text": "below is the ONLY thing that can clear this gate. Fix the CODE it points",
+   "item": "B-0182"
+  },
+  {
+   "requirement": "F105-FR-006",
+   "text": "at. Re-writing <phase evidence>, regenerating proofs, or",
+   "item": "B-0182"
+  },
+  {
+   "requirement": "F105-FR-006",
+   "text": "restating that the work is done will NOT change this result.",
+   "item": "B-0182"
+  },
+  {
+   "requirement": "F105-FR-006",
+   "text": "- Canonical verification plan: `<plan>`",
+   "item": "B-0182"
+  },
+  {
+   "requirement": "F105-FR-006",
+   "text": "- Verification evidence: `<record>`",
+   "item": "B-0182"
+  },
+  {
+   "requirement": "F105-FR-006",
+   "text": "The phase cannot be approved solely from the proposer or critic claim.",
+   "item": "B-1144"
+  },
+  {
+   "requirement": "F105-FR-006",
+   "text": "(failure digest unavailable — read the evidence document below)",
+   "item": "B-1145"
+  },
+  {
+   "requirement": "F105-FR-007",
+   "text": "----- verification: phase <N> attempt <M> (fixed argv) -----",
+   "item": "B-0222"
+  },
+  {
+   "requirement": "F105-FR-008",
+   "text": "----- verification: release gate (fixed argv) -----",
+   "item": "B-0202"
+  },
+  {
+   "requirement": "F105-FR-008",
+   "text": "# HALT — release verification failed (exit <rc>).",
+   "item": "B-0203"
+  },
+  {
+   "requirement": "F105-FR-008",
+   "text": "#   evidence: <path>",
+   "item": "B-0203"
+  },
+  {
+   "requirement": "F105-FR-012",
+   "text": "unsupported source projection",
+   "item": "B-1113"
+  },
+  {
+   "requirement": "F105-FR-013",
+   "text": "verification plan hash mismatch",
+   "item": "B-1110"
+  },
+  {
+   "requirement": "F105-FR-013",
+   "text": "verification plan source mismatch",
+   "item": "B-1111"
+  },
+  {
+   "requirement": "F105-FR-017",
+   "text": "No safe automated test command was discovered below <workdir>; required verification cannot start until one is configured",
+   "item": "B-1078"
+  },
+  {
+   "requirement": "F105-FR-017",
+   "text": "Phase(s) <phases> have neither a discovered nor a declared verification command; their gates would execute nothing",
+   "item": "B-1105"
+  },
+  {
+   "requirement": "F105-FR-018",
+   "text": "No verification gate exists for <phase>",
+   "item": "B-1131"
+  },
+  {
+   "requirement": "F105-FR-018",
+   "text": "Required gate <id> has no safe executable verification commands",
+   "item": "B-1132"
+  },
+  {
+   "requirement": "F105-FR-019",
+   "text": "required verification is blocked: <ambiguities>",
+   "item": "B-1059"
+  },
+  {
+   "requirement": "F105-FR-022",
+   "text": "<!-- specstride-verification-plan content-hash: <hash> -->",
+   "item": "B-1060"
+  },
+  {
+   "requirement": "F105-FR-023",
+   "text": "verification output escapes the authorized workdir",
+   "item": "B-1061"
+  },
+  {
+   "requirement": "F105-FR-023",
+   "text": "verification output cannot be a symbolic link",
+   "item": "B-1061"
+  },
+  {
+   "requirement": "F105-FR-023",
+   "text": "refusing to overwrite a non-generated or changed artifact",
+   "item": "B-1064"
+  },
+  {
+   "requirement": "F105-FR-025",
+   "text": "## Verification obligations",
+   "item": "B-1072"
+  },
+  {
+   "requirement": "F105-FR-025",
+   "text": "### Commands this phase's gate will execute",
+   "item": "B-1118"
+  },
+  {
+   "requirement": "F105-FR-025",
+   "text": "### Inherited obligations from earlier approved phases (regression context — already gated, not new work; the cumulative gate still re-checks them):",
+   "item": "B-1117"
+  },
+  {
+   "requirement": "F105-FR-032",
+   "text": "Verification gate <id> passed <n> command(s)",
+   "item": "B-1074"
+  },
+  {
+   "requirement": "F105-FR-032",
+   "text": "Verification gate <id> failed: <command ids>",
+   "item": "B-1074"
+  },
+  {
+   "requirement": "F105-FR-034",
+   "text": "Pre-stage phase <N> attempt <M>: <n> command(s), <n> passed, <n> running, <n> failed",
+   "item": "B-1073"
+  },
+  {
+   "requirement": "F105-FR-034",
+   "text": "No pre-stage commands for phase <N>",
+   "item": "B-1076"
+  },
+  {
+   "requirement": "F105-FR-034",
+   "text": "----- prestage: phase <N> attempt <M> (rc <rc>) — <summary> -----",
+   "item": "B-0359"
+  },
+  {
+   "requirement": "F105-FR-037",
+   "text": "Could not read the verification evidence (<error>).",
+   "item": "B-1032"
+  },
+  {
+   "requirement": "F105-FR-037",
+   "text": "### <commandId> — exit <code>",
+   "item": "B-1034"
+  },
+  {
+   "requirement": "F105-FR-037",
+   "text": "Failing assertions / tests:",
+   "item": "B-1036"
+  },
+  {
+   "requirement": "F105-FR-037",
+   "text": "The gate failed but no command was recorded as failing; inspect the",
+   "item": "B-1033"
+  },
+  {
+   "requirement": "F105-FR-037",
+   "text": "evidence document directly.",
+   "item": "B-1033"
+  },
+  {
+   "requirement": "F105-FR-037",
+   "text": "stdout (last <n> lines):",
+   "item": "B-1035"
+  },
+  {
+   "requirement": "F105-FR-037",
+   "text": "stderr (last <n> lines):",
+   "item": "B-1035"
+  },
+  {
+   "requirement": "F105-FR-039",
+   "text": "--phase must be an integer or release",
+   "item": "B-1054"
+  },
+  {
+   "requirement": "F105-FR-039",
+   "text": "valid",
+   "item": "B-1075"
+  },
+  {
+   "requirement": "F105-FR-039",
+   "text": "## Pre-staged verification for this phase (attempt <M>)",
+   "item": "B-1043"
+  },
+  {
+   "requirement": "F105-FR-039",
+   "text": "Specstride ran these declared commands ONCE, before this pass started. Do NOT re-run them and do NOT re-do the work they already did: read their output and cite the files they produced directly.",
+   "item": "B-1043"
+  },
+  {
+   "requirement": "F105-FR-039",
+   "text": "Pre-stage evidence: `<path>`",
+   "item": "B-1043"
+  },
+  {
+   "requirement": "F105-FR-042",
+   "text": "invalid verification plan: <reason>",
+   "item": "B-0803"
+  },
+  {
+   "requirement": "F105-FR-042",
+   "text": "verification plan is stale",
+   "item": "B-1114"
+  }
+ ]
+}

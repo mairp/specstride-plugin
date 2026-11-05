@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.config/1",
+  "title": "config-envelope",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.config/1",
+  "x-annex": "annex X, §X.2",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "integer",
+      "description": "Major of the config schema; 1",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    }
+  },
+  "required": [
+    "schema"
+  ],
+  "x-notes": [
+    {
+      "row": "Keys",
+      "meaning": "The keys of feature 110, as a tree",
+      "required": "No"
+    },
+    {
+      "row": "Keys under `x-`",
+      "meaning": "Free for the consumer; ignored",
+      "required": "No"
+    }
+  ],
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  },
+  "x-unknown-field": "refused, except keys under x-",
+  "x-different-major": "refused (annex B, §B.4)"
+}

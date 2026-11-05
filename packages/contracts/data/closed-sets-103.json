@@ -1,0 +1,65 @@
+{
+ "schema": "specstride.closed-sets-103/1",
+ "note": "The closed sets feature 103 owns, as the section \"Closed sets\" of specs/103-proposer-pass/spec.md states them (F100-FR-208). spec.md stands where the two differ. `row` is the row of annex X §X.6 that holds the set; `addedMembers` names a member this feature's spec states that the row of the annex does not hold yet, with the clarification that added it — the annex stands for the row, and the addition is reported upstream as a correction of §X.6.",
+ "owner": "103",
+ "sets": [
+  {
+   "row": "57",
+   "set": "Directives of a loop layer",
+   "members": "keep, repair, unresolved, layerOffForAttempt, layerOffForRun, giveIterationBack, exemptShortPass, exemptRepeatCounter, requestPass, requestPassGroup, integrateGroup",
+   "membersFrom": "data/loop-layer-tables.json, key `directives` (annex D §D.1)",
+   "closedBy": "Design",
+   "unknownValue": "The layer is refused at registration",
+   "requirement": "F103-FR-025"
+  },
+  {
+   "row": "58",
+   "set": "Returns of `afterPass`",
+   "members": "accept, refuse, none",
+   "closedBy": "Design",
+   "unknownValue": "Read as `none`; the layer is off for the phase attempt",
+   "requirement": "F103-FR-022"
+  },
+  {
+   "row": "132",
+   "set": "Kinds of record of the namespace `core`",
+   "members": "attempt-open, attempt-closed, pass-closed, counts-reset",
+   "closedBy": "Design",
+   "unknownValue": "A reader keeps the record in the check of the chain and ignores its content",
+   "requirement": "F103-FR-039"
+  },
+  {
+   "row": "133",
+   "set": "Reasons for a fresh session",
+   "members": "new-attempt, watchdog-kill, repeated-failure, context-fill, age, configuration-change, relaunch, session-unavailable, continuation-cap, profile-parity, group-applied, no-continuation, layer-requested",
+   "addedMembers": "layer-requested",
+   "addedBy": "clarification U5 of specs/103-proposer-pass/spec.md: a `fresh` that a layer names in `requestPass` (the second repair of a unit of work, an escalation) is recorded with the reason `layer-requested`",
+   "closedBy": "Design",
+   "unknownValue": "Read as `new-attempt`",
+   "requirement": "F103-FR-042, F103-FR-043"
+  },
+  {
+   "row": "121",
+   "set": "Block sets of the proposer's prompt",
+   "members": "current, as-is",
+   "closedBy": "Design",
+   "unknownValue": "Configuration error",
+   "requirement": "F103-FR-031"
+  },
+  {
+   "row": "126",
+   "set": "Values of the session directive",
+   "members": "fresh, continue",
+   "closedBy": "Design (annex C §C.1)",
+   "unknownValue": "Read as `fresh`",
+   "requirement": "F103-FR-042"
+  }
+ ],
+ "openSets": [
+  {
+   "set": "Block ids of a prompt",
+   "openBy": "the registry of providers",
+   "requirement": "F103-FR-030"
+  }
+ ]
+}

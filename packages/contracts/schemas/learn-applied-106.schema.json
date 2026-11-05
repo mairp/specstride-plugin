@@ -1,0 +1,121 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.learn.applied/2",
+ "title": "learn-applied",
+ "description": "An entry of the decision log of learning, one per line, byte format kept (feature 106, T010; the field list is the table 'Decision log entry' of specs/106-learning/data-model.md, and the specification stands where the two differ). As-is id the same; entries of `specstride.learn.applied/1` are read and never match a shape. The bytes of the log are hashed by the binding of the launch contract (F106-FR-027), so the byte format is part of this record: one JSON object per line, `, ` between members, `: ` after a name, non-ASCII as `\\uXXXX` in lower case, one line feed at the end.",
+ "x-schema-id": "specstride.learn.applied/2",
+ "x-annex": "feature 106, data-model.md, 'Decision log entry'",
+ "x-logical-name": "feature:<slug>:learning:decisions",
+ "x-closed-sets": "Row 188 (actions) and row 187 (adjustable knobs) of annex X §X.6, read from @specstride/contracts and not restated here as data.",
+ "type": "object",
+ "properties": {
+  "schema": {
+   "const": "specstride.learn.applied/2",
+   "description": "Schema id; an entry of `specstride.learn.applied/1` is read too"
+  },
+  "action": {
+   "enum": ["apply", "revert", "evaluate"],
+   "description": "The action of the entry (closed set 188). An entry from before the action existed carries none and is a decision"
+  },
+  "run_id": {
+   "type": "string",
+   "pattern": "^learn-[0-9a-f]{12}$",
+   "description": "A decision run id: `learn-` and twelve hexadecimal characters; an `evaluate` entry carries the id of the run it evaluated"
+  },
+  "knob": {
+   "type": "string",
+   "description": "A member of the adjustable-knob allowlist (closed set 187)"
+  },
+  "phase": {
+   "type": "integer",
+   "description": "The phase the decision applies to"
+  },
+  "shape": {
+   "type": ["string", "null"],
+   "description": "The phase shape the decision was learned under; absent or null for the entries recorded before shapes existed, which never match a shape"
+  },
+  "value": {
+   "type": "number",
+   "description": "The value the entry records; a revert records the restored value"
+  },
+  "previous": {
+   "type": "number",
+   "description": "The value that was in force before the entry"
+  },
+  "samples": {
+   "type": ["integer", "null"],
+   "description": "The work-seconds samples behind an apply; null on a revert"
+  },
+  "source_runs": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "The runs the decision was learned from; never in its own applied arm"
+  },
+  "metric": {
+   "type": ["string", "null"],
+   "description": "The metric the value was derived from, e.g. `work_sec_p90`"
+  },
+  "applied_at": {
+   "type": "string",
+   "description": "UTC to the second; the last member of every entry"
+  },
+  "baseline": {
+   "type": ["object", "null"],
+   "description": "Of an apply entry: `backend`, `shape`, `runs`, `cost` and `wall` (lists of [run, value]) and `guardrails`"
+  },
+  "force": {
+   "type": "boolean",
+   "description": "Present only when the value was applied over a quarantine"
+  },
+  "forced_over": {
+   "type": "string",
+   "description": "The run id of the automatic revert that quarantined the value; present only with `force`"
+  },
+  "auto": {
+   "const": true,
+   "description": "Present only on an automatic revert, immediately after `action`"
+  },
+  "reverts_run_id": {
+   "type": "string",
+   "description": "Of a revert: the run id of the apply it undoes"
+  },
+  "quarantined_value": {
+   "type": "number",
+   "description": "Of an automatic revert: the value it quarantined"
+  },
+  "backend": {
+   "type": "string",
+   "description": "Of an automatic revert: the harness label the revert was decided under"
+  },
+  "reverted_ts": {
+   "type": "string",
+   "description": "Of an automatic revert: when it was decided"
+  },
+  "evaluated_from": {
+   "type": "string",
+   "description": "Of an automatic revert: the run whose evaluation breached"
+  },
+  "guardrail": {
+   "type": "string",
+   "description": "Of an automatic revert: the guardrail names joined by commas"
+  },
+  "action_taken": {
+   "enum": ["evaluated", "auto_reverted", "skipped_superseded"],
+   "description": "Of an evaluate entry, where an action was taken (closed set 191)"
+  },
+  "label": {
+   "enum": ["helped", "neutral", "regressed", "insufficient"],
+   "description": "Of an evaluate entry: the combined label (closed set 190)"
+  },
+  "evaluated_at": {
+   "type": "string",
+   "description": "Of an evaluate entry: UTC to the second"
+  }
+ },
+ "required": ["schema", "action"],
+ "additionalProperties": true,
+ "x-unknown-field": "ignored by a reader",
+ "x-different-major": "refused"
+}

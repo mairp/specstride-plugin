@@ -1,0 +1,108 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.learn.summary/7",
+ "title": "learn-summary",
+ "description": "The summary document of learning, whole-written at the logical name `feature:<slug>:learning:summary` (feature 106, T010; the member order is the baseline's `_render`: `schema`, `runs`, `attempts`, `phases`, `totals`, and `inputs` of this layer). The metrics are defined by F106-FR-005 and the baseline; `phases` is keyed by the phase number as text.",
+ "x-schema-id": "specstride.learn.summary/7",
+ "x-annex": "feature 106, data-model.md, 'Summary document'",
+ "x-logical-name": "feature:<slug>:learning:summary",
+ "type": "object",
+ "properties": {
+  "schema": {
+   "const": "specstride.learn.summary/7"
+  },
+  "runs": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "object",
+    "properties": {
+     "feature": { "type": ["string", "null"] },
+     "backend": { "type": ["string", "null"] },
+     "started": { "type": ["number", "null"] },
+     "stopped": { "type": ["number", "null"] },
+     "stop_reason": { "type": ["string", "null"] },
+     "stop_phase": { "type": ["integer", "null"] },
+     "resume_from": { "type": ["string", "null"] },
+     "wall_sec": { "type": ["number", "null"] },
+     "cost_usd": { "type": "number" },
+     "passes": { "type": "integer" },
+     "billed_passes": { "type": "integer" },
+     "unbilled_passes": { "type": "integer" },
+     "kills_by_reason": { "type": "object" },
+     "outcomes": { "type": "object" },
+     "attempts": { "type": "integer" },
+     "approved_phases": { "type": "array", "items": { "type": "integer" } },
+     "cost_per_approved_phase": { "type": ["number", "null"] },
+     "non_approved_cost_usd": { "type": "number" },
+     "non_approved_cost_share": { "type": ["number", "null"] },
+     "tampered": { "type": "boolean" }
+    },
+    "required": ["cost_usd", "attempts", "approved_phases"]
+   }
+  },
+  "attempts": {
+   "type": "array",
+   "items": { "type": "object" },
+   "description": "The attempt records, one per attempt of every run, in stream order (the table 'Attempt record' of data-model.md)"
+  },
+  "phases": {
+   "type": "object",
+   "description": "Keyed by the phase number as text; a phase with no attempt under the requested shape is omitted and its left-out attempts counted in `other_shape_attempts`",
+   "additionalProperties": {
+    "type": "object",
+    "properties": {
+     "title": { "type": "string" },
+     "shape": { "type": ["string", "null"] },
+     "other_shape_attempts": { "type": "integer" },
+     "runs_seen": { "type": "array", "items": { "type": "string" } },
+     "attempts_total": { "type": "integer" },
+     "attempts_to_approval": { "type": ["integer", "null"] },
+     "approved_in_run": { "type": ["string", "null"] },
+     "attempt_number_reset": { "type": "boolean" },
+     "cost_usd": { "type": "number" },
+     "work_sec_p50": { "type": ["number", "null"] },
+     "work_sec_p90": { "type": ["number", "null"] },
+     "work_sec_samples": { "type": "integer" },
+     "kills_by_reason": { "type": "object" },
+     "job_duration_p50": { "type": ["number", "null"] },
+     "job_duration_samples": { "type": "integer" },
+     "wait_share_p50": { "type": ["number", "null"] },
+     "wait_share_samples": { "type": "integer" },
+     "hard_cap_kills_with_wait": { "type": "integer" },
+     "episodes": { "type": "array", "items": { "type": "object" } },
+     "pass_samples": { "type": "array", "items": { "type": "object" } },
+     "caps": { "type": "array", "items": { "type": "object" } },
+     "diagnostician_cases": { "type": "object" }
+    },
+    "required": ["attempts_total", "work_sec_samples", "kills_by_reason"]
+   }
+  },
+  "totals": {
+   "type": "object",
+   "properties": {
+    "runs": { "type": "integer" },
+    "attempts": { "type": "integer" },
+    "passes": { "type": "integer" },
+    "cost_usd": { "type": "number" },
+    "unbilled_passes": { "type": "integer" },
+    "kills_by_reason": { "type": "object" },
+    "outcomes": { "type": "object" },
+    "approved_phases": { "type": "array", "items": { "type": "integer" } },
+    "cost_per_approved_phase": { "type": ["number", "null"] },
+    "non_approved_cost_share": { "type": ["number", "null"] },
+    "wait_call_share": { "type": ["number", "null"] },
+    "sleep_sec_declared": { "type": "number" },
+    "proposer_live_invocations": { "type": "integer" }
+   },
+   "required": ["runs", "attempts", "passes", "cost_usd", "approved_phases"]
+  },
+  "inputs": {
+   "type": "object",
+   "description": "Of this layer: the events read, the auxiliary directories used, and the live invocations cross-checked against run.log"
+  }
+ },
+ "required": ["schema", "runs", "attempts", "phases", "totals"],
+ "additionalProperties": true,
+ "x-unknown-field": "ignored by a reader",
+ "x-different-major": "refused"
+}

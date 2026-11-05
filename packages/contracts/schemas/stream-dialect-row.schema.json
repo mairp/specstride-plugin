@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.stream-dialect/1",
+  "title": "stream-dialect-row",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.stream-dialect/1",
+  "x-annex": "annex C, §C.5",
+  "type": "object",
+  "properties": {
+    "dialect": {
+      "type": "string",
+      "description": "Name of the dialect",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "schemaVersions": {
+      "type": "array",
+      "description": "Versions of the stream's session header that the row accepts",
+      "x-type-in-words": "List of whole numbers",
+      "x-required": "Yes"
+    },
+    "providerFormat": {
+      "type": "string",
+      "description": "The literal by which the stream names its provider format",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "telemetryOff": {
+      "type": "object",
+      "description": "Variables and flags that switch the harness's telemetry off",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "sessionControl": {
+      "type": "object",
+      "description": "Variables and flags that switch sessions off, name a session directory, and continue a session by id",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "extraRecords": {
+      "type": "object",
+      "description": "Record types of this dialect beyond the common ones, each with the normalized kind it maps to, or `ignore`",
+      "x-type-in-words": "Map",
+      "x-required": "Yes (may be empty)"
+    },
+    "usageNames": {
+      "type": "object",
+      "description": "Names under which the dialect reports input, output, cache and reasoning tokens and cost",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "terminalDecides": {
+      "type": "boolean",
+      "description": "Whether success is decided by the terminal record of the stream and not by the exit code",
+      "x-type-in-words": "Truth value",
+      "x-required": "Yes"
+    },
+    "limits": {
+      "type": "object",
+      "description": "The cap on the size of a line and on the rate of lines, where the dialect needs other values than the stream seam",
+      "x-type-in-words": "Record",
+      "x-required": "No"
+    },
+    "endWords": {
+      "type": "object",
+      "description": "The words at the end of an agent's stream that mean an error and those that mean success, where the dialect needs other words than the reader's",
+      "x-type-in-words": "Record of two lists",
+      "x-required": "No"
+    }
+  },
+  "required": [
+    "dialect",
+    "schemaVersions",
+    "providerFormat",
+    "telemetryOff",
+    "sessionControl",
+    "extraRecords",
+    "usageNames",
+    "terminalDecides"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

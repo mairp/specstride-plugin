@@ -1,0 +1,26 @@
+{
+  "note": "Recorded output of `ps` as macOS prints it, for T011. It exercises the macOS BRANCH of the platform readers of T010 and of the process table of the kernel: it proves the PARSING and says nothing about the platform.",
+  "recordedOn": "hand-written from the column formats `ps` is documented to print; no macOS machine ran it",
+  "verification": "unverified",
+  "reason": "no macOS machine exists in this lane, so this fixture was not captured from a macOS host (research D-6, D-8; the owner's out-of-band ruling of 2026-09-30)",
+  "uid": 501,
+  "ps": {
+    "-o lstart= -p 1": "Mon Sep 29 09:14:02 2026",
+    "-o lstart= -p 501": "Tue Sep 30 11:02:17 2026",
+    "-o lstart= -p 502": "Tue Sep 30 11:02:22 2026",
+    "-u 501 -o pid=": "  501\n  502\n",
+    "-o state= -p 501": "S",
+    "-o state= -p 502": "Z",
+    "-E -ww -o command= -p 501": "/usr/local/bin/node engine.js PATH=/usr/bin:/bin SPECSTRIDE_RUN_TOKEN=b7e2d41faa90c355 HOME=/Users/recorded",
+    "-E -ww -o command= -p 502": "/usr/local/bin/node helper.js PATH=/usr/bin:/bin HOME=/Users/recorded"
+  },
+  "expect": {
+    "bootIdentity": "boot-of-pid-1:Mon Sep 29 09:14:02 2026",
+    "startTimeLineOf": { "501": "Tue Sep 30 11:02:17 2026", "502": "Tue Sep 30 11:02:22 2026" },
+    "secondsBetween501And502": 5,
+    "processesOfTheUser": [501, 502],
+    "runToken": "b7e2d41faa90c355",
+    "carriers": [501],
+    "zombie": 502
+  }
+}

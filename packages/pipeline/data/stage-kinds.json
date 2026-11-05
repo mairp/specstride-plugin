@@ -1,0 +1,18 @@
+{
+ "preconditionChecks": [
+  "file_exists",
+  "dir_exists",
+  "env_set",
+  "command_available",
+  "command_success",
+  "json_field_equals"
+ ],
+ "schema": "specstride.stage-kinds-123/1",
+ "stageKinds": [
+  "setup",
+  "decision",
+  "command",
+  "specstride",
+  "smoke"
+ ]
+}

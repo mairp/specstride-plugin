@@ -1,0 +1,248 @@
+{
+  "format": "trigger-suite/1",
+  "note": "The trigger cases of the three skills of this host (F113-FR-038): six positive and six negative cases per skill, with the confusable pair run and reverse among them. A case carries a prompt, a kind (positive, negative, cross-skill) and the expected skill or none. NO file here holds a model id (F113-FR-039): the model of a run comes from the configuration of the run, given by the person who starts it. A run of the suite calls a model and is a paid task: a person starts it, no job of the build starts it, and it is logged (assumption CQ-188). The graders are the free graders of graders.json; no ablation exists.",
+  "threshold": 0.8,
+  "runsPerSkill": 3,
+  "ablation": false,
+  "graders": "graders.json",
+  "suites": {
+    "specstride-run": {
+      "skill": "specstride-run",
+      "cases": [
+        {
+          "id": "run-pos-1",
+          "kind": "positive",
+          "prompt": "Run the specstride pipeline for this feature.",
+          "expected": "specstride-run"
+        },
+        {
+          "id": "run-pos-2",
+          "kind": "positive",
+          "prompt": "Carry out the specstride run for the current specification.",
+          "expected": "specstride-run"
+        },
+        {
+          "id": "run-pos-3",
+          "kind": "positive",
+          "prompt": "Start a specstride run in dry-run mode.",
+          "expected": "specstride-run"
+        },
+        {
+          "id": "run-pos-4",
+          "kind": "positive",
+          "prompt": "Use specstride to execute the feature plan with the comment \"focus on the doctor\".",
+          "expected": "specstride-run"
+        },
+        {
+          "id": "run-pos-5",
+          "kind": "positive",
+          "prompt": "Invoke specstride-run on the spec of this repository.",
+          "expected": "specstride-run"
+        },
+        {
+          "id": "run-pos-6",
+          "kind": "positive",
+          "prompt": "I want a full specstride run of this feature, with the plan carried out and supervised.",
+          "expected": "specstride-run"
+        },
+        {
+          "id": "run-neg-1",
+          "kind": "cross-skill",
+          "confusablePair": "run-reverse",
+          "prompt": "Recover the specification from the implemented code.",
+          "expected": "specstride-reverse"
+        },
+        {
+          "id": "run-neg-2",
+          "kind": "cross-skill",
+          "confusablePair": "run-reverse",
+          "prompt": "Reverse this repository back into a spec document.",
+          "expected": "specstride-reverse"
+        },
+        {
+          "id": "run-neg-3",
+          "kind": "cross-skill",
+          "confusablePair": "run-reverse",
+          "prompt": "Update the spec files so they match what the code now does.",
+          "expected": "specstride-reverse"
+        },
+        {
+          "id": "run-neg-4",
+          "kind": "negative",
+          "prompt": "Why is my specstride installation refusing to start?",
+          "expected": null
+        },
+        {
+          "id": "run-neg-5",
+          "kind": "negative",
+          "prompt": "Write me a poem about continuous integration.",
+          "expected": null
+        },
+        {
+          "id": "run-neg-6",
+          "kind": "negative",
+          "prompt": "What does the specstride doctor check?",
+          "expected": null
+        }
+      ]
+    },
+    "specstride-reverse": {
+      "skill": "specstride-reverse",
+      "cases": [
+        {
+          "id": "rev-pos-1",
+          "kind": "positive",
+          "prompt": "Reverse-engineer the specification of this repository from its sources.",
+          "expected": "specstride-reverse"
+        },
+        {
+          "id": "rev-pos-2",
+          "kind": "positive",
+          "prompt": "Reconstruct the spec of this feature from what the code does.",
+          "expected": "specstride-reverse"
+        },
+        {
+          "id": "rev-pos-3",
+          "kind": "positive",
+          "prompt": "Bring the specification documents back in line with the implemented behaviour.",
+          "expected": "specstride-reverse"
+        },
+        {
+          "id": "rev-pos-4",
+          "kind": "positive",
+          "prompt": "Use specstride-reverse to recover the missing spec of this package.",
+          "expected": "specstride-reverse"
+        },
+        {
+          "id": "rev-pos-5",
+          "kind": "positive",
+          "prompt": "Derive a spec.md from this working copy, read-only.",
+          "expected": "specstride-reverse"
+        },
+        {
+          "id": "rev-pos-6",
+          "kind": "positive",
+          "prompt": "Recover the specification artifacts for this repository and reconcile them with the tree.",
+          "expected": "specstride-reverse"
+        },
+        {
+          "id": "rev-neg-1",
+          "kind": "cross-skill",
+          "confusablePair": "run-reverse",
+          "prompt": "Run the specstride pipeline for this feature.",
+          "expected": "specstride-run"
+        },
+        {
+          "id": "rev-neg-2",
+          "kind": "cross-skill",
+          "confusablePair": "run-reverse",
+          "prompt": "Carry out and supervise a specstride run of the current plan.",
+          "expected": "specstride-run"
+        },
+        {
+          "id": "rev-neg-3",
+          "kind": "cross-skill",
+          "confusablePair": "run-reverse",
+          "prompt": "Execute the feature plan end to end with specstride.",
+          "expected": "specstride-run"
+        },
+        {
+          "id": "rev-neg-4",
+          "kind": "negative",
+          "prompt": "Delete the specs directory and start over.",
+          "expected": null
+        },
+        {
+          "id": "rev-neg-5",
+          "kind": "negative",
+          "prompt": "Summarise this repository in one paragraph for the README.",
+          "expected": null
+        },
+        {
+          "id": "rev-neg-6",
+          "kind": "negative",
+          "prompt": "Diagnose why the specstride CLI is missing.",
+          "expected": null
+        }
+      ]
+    },
+    "doctor": {
+      "skill": "doctor",
+      "cases": [
+        {
+          "id": "doc-pos-1",
+          "kind": "positive",
+          "prompt": "Diagnose my specstride installation.",
+          "expected": "doctor"
+        },
+        {
+          "id": "doc-pos-2",
+          "kind": "positive",
+          "prompt": "Run the specstride doctor.",
+          "expected": "doctor"
+        },
+        {
+          "id": "doc-pos-3",
+          "kind": "positive",
+          "prompt": "Something is wrong with the specstride CLI; check my setup.",
+          "expected": "doctor"
+        },
+        {
+          "id": "doc-pos-4",
+          "kind": "positive",
+          "prompt": "Why does the specstride shim refuse with a protocol mismatch?",
+          "expected": "doctor"
+        },
+        {
+          "id": "doc-pos-5",
+          "kind": "positive",
+          "prompt": "Check whether my host is set up for the specstride plugin.",
+          "expected": "doctor"
+        },
+        {
+          "id": "doc-pos-6",
+          "kind": "positive",
+          "prompt": "The specstride status line shows nothing; diagnose it.",
+          "expected": "doctor"
+        },
+        {
+          "id": "doc-neg-1",
+          "kind": "cross-skill",
+          "confusablePair": "run-reverse",
+          "prompt": "Run the pipeline once you have diagnosed the installation.",
+          "expected": "specstride-run"
+        },
+        {
+          "id": "doc-neg-2",
+          "kind": "negative",
+          "prompt": "Implement the doctor feature of my own product.",
+          "expected": null
+        },
+        {
+          "id": "doc-neg-3",
+          "kind": "negative",
+          "prompt": "Reverse this repository into a spec.",
+          "expected": "specstride-reverse"
+        },
+        {
+          "id": "doc-neg-4",
+          "kind": "negative",
+          "prompt": "What is the specstride doctor? Answer from memory, do not run anything.",
+          "expected": null
+        },
+        {
+          "id": "doc-neg-5",
+          "kind": "negative",
+          "prompt": "Fix this TypeScript compile error.",
+          "expected": null
+        },
+        {
+          "id": "doc-neg-6",
+          "kind": "negative",
+          "prompt": "Plan the migration of this database.",
+          "expected": null
+        }
+      ]
+    }
+  }
+}

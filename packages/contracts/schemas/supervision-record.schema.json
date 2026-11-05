@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.supervision/1",
+  "title": "supervision-record",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.supervision/1",
+  "x-annex": "annex B, §B.16",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "launchId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "pipelineId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "interval": {
+      "type": "integer",
+      "description": "Current polling interval",
+      "x-type-in-words": "Whole number of seconds",
+      "x-required": "Yes"
+    },
+    "unchanged": {
+      "type": "integer",
+      "description": "Count of readings without a change",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "signature": {
+      "type": "string",
+      "description": "Signature of the last observation",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "stopRequested": {
+      "type": "object",
+      "description": "Signal and time of a stop asked through `supervise stop`",
+      "x-type-in-words": "Record",
+      "x-required": "No"
+    },
+    "relaunchBudget": {
+      "type": "object",
+      "description": "Maximum, remaining, wall-clock seconds, deadline, declared pipeline seconds, source",
+      "x-type-in-words": "Record",
+      "x-required": "With `relaunch.owner: supervise`"
+    },
+    "relaunches": {
+      "type": "array",
+      "description": "One entry per relaunch with its justification",
+      "x-type-in-words": "List of records",
+      "x-required": "With `relaunch.owner: supervise`"
+    }
+  },
+  "required": [
+    "schema",
+    "launchId",
+    "pipelineId",
+    "interval",
+    "unchanged",
+    "signature"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

@@ -1,0 +1,55 @@
+{
+ "schema": "specstride.ledger-micro/1",
+ "note": "Data of feature 115. spec.md stands where the two differ.",
+ "namespace": "micro",
+ "kinds": [
+  "unit-declared",
+  "check-started",
+  "check-finished",
+  "unit-kept",
+  "unit-repair",
+  "unit-unresolved",
+  "command-excluded",
+  "escalation",
+  "closing-check",
+  "disengaged",
+  "integrity"
+ ],
+ "writeAhead": true,
+ "counters": [
+  "cyclesUsed",
+  "repairsByTask",
+  "escalationsByTask",
+  "escalationsOfAttempt",
+  "unresolvedUnits",
+  "uncheckedStreak",
+  "closingReturns"
+ ],
+ "resumeStates": [
+  {
+   "last": null,
+   "state": "a pass was running",
+   "onResume": "the pass is lost as in the classic loop; no cycle is counted"
+  },
+  {
+   "last": "unit-declared",
+   "state": "checkpoint accepted, check not started",
+   "onResume": "run the check on the current tree; a differing fingerprint marks the declaration superseded"
+  },
+  {
+   "last": "check-started",
+   "state": "a check was running",
+   "onResume": "run it again; the interrupted run is recorded as interrupted"
+  },
+  {
+   "last": "check-finished",
+   "state": "result not delivered",
+   "onResume": "deliver it when the fingerprint matches; otherwise run the check again"
+  },
+  {
+   "last": "disengaged",
+   "state": "the layer is off for the phase attempt",
+   "onResume": "it stays off"
+  }
+ ]
+}

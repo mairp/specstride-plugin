@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.spec-format/1:model",
+  "title": "canonical-spec-model",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.spec-format/1:model",
+  "x-annex": "annex C, §C.7",
+  "type": "object",
+  "properties": {
+    "format": {
+      "type": "string",
+      "description": "Id of the format",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "feature": {
+      "type": "string",
+      "description": "Feature slug",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "sources": {
+      "type": "array",
+      "description": "The source files with kind (`spec`, `plan`, `tasks`, other) and hashes",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes"
+    },
+    "phases": {
+      "type": "array",
+      "description": "Per phase: number, title, section, acceptance criteria",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "description": "Per task: id, markers (for example `[P]` and story tags), text, whether ticked, line",
+            "x-type-in-words": "List of records",
+            "x-required": "Yes (may be empty)"
+          }
+        },
+        "required": [
+          "tasks"
+        ]
+      }
+    }
+  },
+  "required": [
+    "format",
+    "feature",
+    "sources",
+    "phases"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

@@ -1,0 +1,36 @@
+{
+  "format": "free-graders/1",
+  "note": "The free graders of the trigger suite (F113-FR-038): every grader is deterministic and reads the recorded behaviour of a case only. No grader uses a model judge (F113-FR-039), so none carries a model id. The tools of a run are restricted by `tool-restriction` below, so that no run can launch anything.",
+  "toolRestriction": {
+    "allowedTools": [],
+    "deniedTools": ["Bash", "Write", "Edit", "WebFetch", "WebSearch"],
+    "launchImpossible": true,
+    "reason": "the suite restricts tools so that no run can launch (F113-FR-038)"
+  },
+  "threshold": 0.8,
+  "runsPerSkill": 3,
+  "ablation": false,
+  "graders": {
+    "invoked-skill": {
+      "kind": "free",
+      "method": "exact-match",
+      "reads": "the skill the host invoked for the case",
+      "passes": "the invoked skill is exactly the expected skill of the case",
+      "modelJudge": false
+    },
+    "no-skill-invoked": {
+      "kind": "free",
+      "method": "exact-match",
+      "reads": "the skill the host invoked for the case",
+      "passes": "no skill of this plugin was invoked at all",
+      "modelJudge": false
+    },
+    "no-launch": {
+      "kind": "free",
+      "method": "exact-match",
+      "reads": "the recorded tool calls of the case",
+      "passes": "no launch and no shell call is among the recorded tool calls",
+      "modelJudge": false
+    }
+  }
+}

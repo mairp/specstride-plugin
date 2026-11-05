@@ -1,0 +1,13 @@
+# The Loki datasource (F128-FR-043, B-2461): uid `loki`, the default
+# datasource, the in-stack address, at most 2000 lines per query.
+apiVersion: 1
+
+datasources:
+  - name: Loki
+    uid: loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    isDefault: true
+    jsonData:
+      maxLines: 2000

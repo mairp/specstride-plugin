@@ -1,0 +1,91 @@
+{
+  "schema": "specstride.fixture-harnesses/1",
+  "feature": "124",
+  "annex": "100, annex C §C.6, field `harnesses`",
+  "note": "T002 — known and unknown terms. A harness whose terms are unknown and that the consumer did not name is never a default and never an automatic pick (F100-FR-093); it fails Q7 with `terms-unknown`.",
+  "harnesses": [
+    {
+      "id": "terms-known",
+      "state": "tested",
+      "origin": "user",
+      "version": "1.4.2",
+      "descriptorHash": "sha256:1234123412341234123412341234123412341234123412341234123412341234",
+      "resolvedPath": "https://127.0.0.1:0/v1",
+      "kind": "openai-chat",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "subscription", "provenance": "declared" },
+      "contextWindow": { "tokens": 128000, "source": "declared" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "allowed",
+        "row": "provider:fixture-provider#subscription",
+        "provenance": "terms gate"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "verified:adapter",
+        "version": "descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "descriptor",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "descriptor",
+        "terms": "terms gate"
+      }
+    },
+    {
+      "id": "terms-known-refused",
+      "state": "tested",
+      "origin": "user",
+      "version": "1.4.2",
+      "descriptorHash": "sha256:5678567856785678567856785678567856785678567856785678567856785678",
+      "resolvedPath": "https://127.0.0.1:0/v1",
+      "kind": "openai-chat",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "metered", "provenance": "declared" },
+      "contextWindow": { "tokens": 128000, "source": "declared" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": {
+        "decision": "refused",
+        "row": "provider:fixture-provider#metered",
+        "provenance": "terms gate"
+      },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "verified:adapter",
+        "version": "descriptor",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "descriptor",
+        "completionForm": "descriptor",
+        "costClass": "descriptor",
+        "contextWindow": "descriptor",
+        "terms": "terms gate"
+      }
+    },
+    {
+      "id": "terms-unknown",
+      "state": "declared",
+      "origin": "discovered",
+      "version": "2.0.1",
+      "descriptorHash": "sha256:9abc9abc9abc9abc9abc9abc9abc9abc9abc9abc9abc9abc9abc9abc9abc9abc",
+      "resolvedPath": "https://127.0.0.1:0/v1",
+      "kind": "openai-chat",
+      "completionForm": { "value": "tool-less", "provenance": "declared" },
+      "costClass": { "value": "unknown", "provenance": "absent" },
+      "contextWindow": { "tokens": 128000, "source": "declared" },
+      "memory": { "native": false, "provenance": "declared" },
+      "terms": { "decision": "unknown", "row": null, "provenance": "no row of the terms matrix" },
+      "containmentCeiling": "C2",
+      "sources": {
+        "state": "descriptor",
+        "version": "probe",
+        "descriptorHash": "computed at registration",
+        "resolvedPath": "descriptor",
+        "completionForm": "descriptor",
+        "costClass": "not declared",
+        "contextWindow": "descriptor",
+        "terms": "no row of the terms matrix"
+      }
+    }
+  ]
+}

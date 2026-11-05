@@ -1,0 +1,288 @@
+{
+  "pin": {
+    "cli": "2.1.284",
+    "floor": "2.1.259",
+    "verifiedOn": "2026-09-29"
+  },
+  "stdinFileVariable": "SPECSTRIDE_STDIN_FILE",
+  "promptFilePattern": "specstride-prompt.XXXXXX",
+  "placeholders": [
+    "{model}",
+    "{effort}",
+    "{sessionId}",
+    "{allowedTools}",
+    "{budget}",
+    "{settings}",
+    "{systemPromptFile}"
+  ],
+  "profiles": {
+    "parity": {
+      "profile": "parity",
+      "entries": [
+        {
+          "argv": ["-p"],
+          "when": "always"
+        },
+        {
+          "argv": ["--dangerously-skip-permissions"],
+          "when": "always"
+        },
+        {
+          "argv": ["--verbose"],
+          "when": "always"
+        },
+        {
+          "argv": ["--disable-slash-commands"],
+          "when": "skillsOff"
+        },
+        {
+          "argv": ["--output-format", "stream-json"],
+          "when": "streamOn"
+        },
+        {
+          "argv": ["--model", "{model}"],
+          "when": "modelSet"
+        }
+      ],
+      "envAllow": ["PATH", "LANG", "LC_ALL", "HOME", "SPECSTRIDE_STDIN_FILE"],
+      "sessionArgv": null,
+      "memoryEnv": null,
+      "note": "the as-is list of F125-FR-009; nothing about memory, session, sandbox, overlay or trace parent"
+    },
+    "default": {
+      "proposer": {
+        "tier1": [
+          {
+            "argv": ["-p"],
+            "when": "always"
+          },
+          {
+            "argv": ["--output-format", "stream-json"],
+            "when": "always"
+          },
+          {
+            "argv": ["--verbose"],
+            "when": "always"
+          },
+          {
+            "argv": ["--disable-slash-commands"],
+            "when": "skillsOff"
+          },
+          {
+            "argv": ["--model", "{model}"],
+            "when": "modelSet"
+          },
+          {
+            "argv": ["--effort", "{effort}"],
+            "when": "effortSet"
+          },
+          {
+            "argv": ["--permission-mode", "acceptEdits"],
+            "when": "always"
+          },
+          {
+            "argv": ["--allowedTools", "{allowedTools}"],
+            "when": "always"
+          },
+          {
+            "argv": ["--permission-prompts", "none"],
+            "when": "always"
+          },
+          {
+            "argv": ["--safe-mode"],
+            "when": "versionFloorMet"
+          },
+          {
+            "argv": ["--strict-mcp-config"],
+            "when": "always"
+          },
+          {
+            "argv": ["--session-id", "{sessionId}"],
+            "when": "sessionFresh"
+          },
+          {
+            "argv": ["--no-session-persistence"],
+            "when": "sessionFresh"
+          },
+          {
+            "argv": ["--settings", "{settings}"],
+            "when": "containmentC2",
+            "value": "{\"sandbox\": {\"enabled\": true, \"allowUnsandboxedCommands\": false, \"failIfUnavailable\": true}}"
+          },
+          {
+            "argv": ["--dangerously-skip-permissions"],
+            "when": "consumerBypassWithPrecondition"
+          }
+        ],
+        "tier2": [
+          {
+            "argv": ["-p"],
+            "when": "always"
+          },
+          {
+            "argv": ["--output-format", "stream-json"],
+            "when": "always"
+          },
+          {
+            "argv": ["--verbose"],
+            "when": "always"
+          },
+          {
+            "argv": ["--disable-slash-commands"],
+            "when": "skillsOff"
+          },
+          {
+            "argv": ["--model", "{model}"],
+            "when": "modelSet"
+          },
+          {
+            "argv": ["--effort", "{effort}"],
+            "when": "effortSet"
+          },
+          {
+            "argv": ["--permission-mode", "acceptEdits"],
+            "when": "always"
+          },
+          {
+            "argv": ["--allowedTools", "{allowedTools}"],
+            "when": "always"
+          },
+          {
+            "argv": ["--permission-prompts", "none"],
+            "when": "always"
+          },
+          {
+            "argv": ["--safe-mode"],
+            "when": "versionFloorMet"
+          },
+          {
+            "argv": ["--strict-mcp-config"],
+            "when": "always"
+          },
+          {
+            "argv": ["--session-id", "{sessionId}"],
+            "when": "sessionFresh"
+          },
+          {
+            "argv": ["--resume", "{sessionId}"],
+            "when": "sessionContinue"
+          },
+          {
+            "argv": ["--settings", "{settings}"],
+            "when": "containmentC2",
+            "value": "{\"sandbox\": {\"enabled\": true, \"allowUnsandboxedCommands\": false, \"failIfUnavailable\": true}}"
+          },
+          {
+            "argv": ["--dangerously-skip-permissions"],
+            "when": "consumerBypassWithPrecondition"
+          }
+        ],
+        "note": "continuation is in force at auth tier 2 only (F125-FR-014); the prompt goes on standard input (F125-FR-007)"
+      },
+      "critic": {
+        "tier1": [
+          {
+            "argv": ["-p"],
+            "when": "always"
+          },
+          {
+            "argv": ["--output-format", "stream-json"],
+            "when": "always"
+          },
+          {
+            "argv": ["--verbose"],
+            "when": "always"
+          },
+          {
+            "argv": ["--model", "{model}"],
+            "when": "modelSet"
+          },
+          {
+            "argv": ["--effort", "{effort}"],
+            "when": "effortSet"
+          },
+          {
+            "argv": ["--tools", ""],
+            "when": "always"
+          },
+          {
+            "argv": ["--disallowedTools", "mcp__*"],
+            "when": "always"
+          },
+          {
+            "argv": ["--strict-mcp-config"],
+            "when": "always"
+          },
+          {
+            "argv": ["--safe-mode"],
+            "when": "versionFloorMet"
+          },
+          {
+            "argv": ["--disable-slash-commands"],
+            "when": "skillsOff"
+          },
+          {
+            "argv": ["--session-id", "{sessionId}"],
+            "when": "sessionFresh"
+          },
+          {
+            "argv": ["--no-session-persistence"],
+            "when": "sessionFresh"
+          },
+          {
+            "argv": ["--max-budget-usd", "{budget}"],
+            "when": "budgetSet"
+          },
+          {
+            "argv": ["--max-turns", "1"],
+            "when": "versionFloorMet"
+          },
+          {
+            "argv": ["--permission-mode", "dontAsk"],
+            "when": "always"
+          },
+          {
+            "argv": ["--permission-prompts", "none"],
+            "when": "always"
+          },
+          {
+            "argv": ["--system-prompt-file", "{systemPromptFile}"],
+            "when": "criticSystemPrompt"
+          }
+        ],
+        "criticNever": [
+          "--resume",
+          "--continue",
+          "--fork-session",
+          "--bare",
+          "--dangerously-skip-permissions",
+          "--fallback-model"
+        ],
+        "note": "one turn, no tool, a mode that denies and never asks, and a minted session id (F125-FR-023)"
+      }
+    }
+  },
+  "envAdditions": [
+    {
+      "name": "CLAUDE_CODE_DISABLE_AUTO_MEMORY",
+      "value": "1",
+      "switch": "memory.native off (F125-FR-018)"
+    },
+    {
+      "name": "CLAUDE_CODE_SUBPROCESS_ENV_SCRUB",
+      "value": "1",
+      "switch": "harnesses.claude.subprocessEnvScrub (F125-FR-020)"
+    },
+    {
+      "name": "TRACEPARENT",
+      "value": "{traceparent}",
+      "switch": "always, except under parity (F125-FR-020)"
+    },
+    {
+      "name": "CLAUDE_CONFIG_DIR",
+      "value": "{throwawayHome}",
+      "switch": "auth tier 2 only; never at auth tier 1 (F125-FR-017)"
+    }
+  ],
+  "never": ["--continue", "--fork-session", "--bare", "--fallback-model"]
+}

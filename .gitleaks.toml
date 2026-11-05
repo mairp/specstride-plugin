@@ -1,0 +1,5 @@
+# Test fixtures hold planted, fake credentials on purpose: that is how the redaction is tested.
+[extend]
+useDefault = true
+[allowlist]
+paths = ['''packages/.*/tests?/.*''']

@@ -1,0 +1,231 @@
+{
+  "descriptorVersion": 1,
+  "id": "codex",
+  "displayName": "Codex",
+  "kind": "cli",
+  "provider": {
+    "id": "openai",
+    "termsRef": "packages/adapter-codex/data/terms-rows.json",
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "auth": {
+    "tiers": [1, 2],
+    "scheme": "bearer",
+    "keyReference": "OPENAI_API_KEY",
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "endpoint": {
+    "kind": "openai-chat",
+    "baseUrl": "https://api.openai.com/v1",
+    "chatPath": "/chat/completions",
+    "baseUrlAlias": "OPENAI_BASE_URL",
+    "toolless": "by construction: the request carries no tool of any kind",
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "models": {
+    "default": "gpt-5",
+    "criticModelAlias": "SPECSTRIDE_CODEX_CRITIC_MODEL",
+    "windowTable": "packages/adapter-codex/data/window-table.json",
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "detect": {
+    "versionCommand": ["--version"],
+    "loginCheckCommand": ["login", "status"],
+    "configHome": "CODEX_HOME, else `.codex` under the home",
+    "unverifiedFlags": [
+      "approval policy override",
+      "sandbox mode override on resume",
+      "network setting of read-only mode",
+      "--skip-git-repo-check need"
+    ],
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "roles": {
+    "proposer": {
+      "levels": ["proposer"],
+      "transport": "subprocess",
+      "sandboxDefault": "workspace-write",
+      "approvals": "never",
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4"
+    },
+    "critic": {
+      "levels": ["completion"],
+      "transports": ["subprocess", "direct-call"],
+      "toolless": "none",
+      "readOnlyTools": true,
+      "forms": {
+        "readonly-sandbox": {
+          "sandboxMode": "read-only",
+          "ephemeral": true,
+          "exception": "a stated exception to Principles III and IX, limited to reading project files",
+          "residualRisk": "repository text reaches this critic without passing the grounding snapshot",
+          "ruling": "57a",
+          "threat": "T-48",
+          "verifiedOn": "2026-09-29",
+          "pin": "codex-cli 0.153.4"
+        },
+        "direct-call": {
+          "endpoint": "openai-chat",
+          "address": "https://api.openai.com/v1",
+          "addressAlias": "OPENAI_BASE_URL",
+          "chatPath": "/chat/completions",
+          "keyReference": "OPENAI_API_KEY",
+          "modelDefault": "gpt-5",
+          "modelAlias": "SPECSTRIDE_CODEX_CRITIC_MODEL",
+          "outputLimitUnderParity": false,
+          "toolless": "by construction (F131-FR-025)",
+          "verifiedOn": "2026-09-29",
+          "pin": "codex-cli 0.153.4"
+        }
+      },
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4"
+    }
+  },
+  "invoke": {
+    "proposer-parity": {
+      "args": ["exec", "--dangerously-bypass-approvals-and-sandbox", "{prompt}"],
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4"
+    },
+    "proposer-default": {
+      "args": [
+        "exec",
+        "--json",
+        "-s",
+        "workspace-write",
+        "-C",
+        "{workdir}",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "--ephemeral",
+        "-"
+      ],
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4"
+    },
+    "proposer-continued": {
+      "args": [
+        "exec",
+        "resume",
+        "{sessionId}",
+        "--json",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "-"
+      ],
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4"
+    },
+    "critic-readonly": {
+      "args": [
+        "exec",
+        "--json",
+        "-s",
+        "read-only",
+        "--ephemeral",
+        "--ignore-user-config",
+        "--ignore-rules",
+        "-C",
+        "{workdir}",
+        "-m",
+        "{model}",
+        "-"
+      ],
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4"
+    }
+  },
+  "stream": {
+    "format": "jsonl",
+    "mapping": "data/stream-mapping.json",
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "continuation": {
+    "supported": true,
+    "by": "sessionId",
+    "source": "the first record of the stream, never the latest session",
+    "provenance": "adapter",
+    "status": "unverified until capture 4 at auth tier 1",
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "session": {
+    "statePer": "phase attempt",
+    "memorySwitch": "memory.native.proposer",
+    "customisationsSwitch": "harnesses.codex.proposerCustomisations",
+    "customisationsDefault": "off",
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "failures": {
+    "classifier": "specs/131-adapter-codex/contracts/classifier-entries.json",
+    "structuredEvent": "none until capture 1",
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "cost": {
+    "classes": {
+      "1": "subscription",
+      "2": "metered",
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4"
+    },
+    "criticPrices": {
+      "currency": "USD",
+      "unit": "per 1,000,000 tokens",
+      "input": 1.25,
+      "output": 10,
+      "asOf": "2026-09-29",
+      "model": "gpt-5",
+      "status": "unverified: documentation only, not probed",
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4"
+    },
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "isolation": {
+    "envAllow": ["CODEX_HOME"],
+    "processGroup": true,
+    "telemetrySwitch": null,
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "containment": {
+    "ceiling": "C2",
+    "modes": ["read-only", "workspace-write"],
+    "provenance": "adapter",
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "memory": {
+    "native": {
+      "proposer": true,
+      "status": "unverified until capture 4",
+      "verifiedOn": "2026-09-29",
+      "pin": "codex-cli 0.153.4"
+    },
+    "switchOff": "memory.native.proposer=off",
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "telemetry": {
+    "switch": null,
+    "note": "no documented switch; the null is the record, not a guess",
+    "verifiedOn": "2026-09-29",
+    "pin": "codex-cli 0.153.4"
+  },
+  "concurrentSessions": null,
+  "spendLimit": null,
+  "transports": ["subprocess", "direct-call"],
+  "versionRange": ">=0.153.4 <0.154",
+  "verifiedOn": "2026-09-29"
+}

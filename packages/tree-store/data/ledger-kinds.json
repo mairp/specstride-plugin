@@ -1,0 +1,19 @@
+{
+  "namespace": "parallel",
+  "schema": "specstride.ledger/1",
+  "kinds": [
+    {"kind": "group_planned", "worker": false},
+    {"kind": "group_started", "worker": false},
+    {"kind": "worker_started", "worker": true},
+    {"kind": "worker_ended", "worker": true},
+    {"kind": "group_barrier", "worker": false},
+    {"kind": "audit_done", "worker": false},
+    {"kind": "merge_done", "worker": false},
+    {"kind": "apply_started", "worker": false},
+    {"kind": "applied", "worker": false},
+    {"kind": "ticks_applied", "worker": false},
+    {"kind": "merge_check_started", "worker": false},
+    {"kind": "merge_check_finished", "worker": false},
+    {"kind": "group_closed", "worker": false}
+  ]
+}

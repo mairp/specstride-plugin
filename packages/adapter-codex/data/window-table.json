@@ -1,0 +1,16 @@
+{
+  "schema": "specstride.window-table/1",
+  "provenance": "adapter",
+  "source": "the table of the baseline `lib/critic.py` at 9cab15d (B-0910), as `specs/131-adapter-codex/contracts/window-table.json` states it",
+  "status": "unverified: documentation only",
+  "verifiedOn": "2026-09-29",
+  "pin": "codex-cli 0.153.4",
+  "models": {
+    "gpt-5": 400000,
+    "gpt-5.5": 1000000,
+    "gpt-5.4": 1050000,
+    "gpt-5.4-pro": 1050000
+  },
+  "parityFallback": 128000,
+  "outsideParity": "no fallback; a model with no known window does not qualify and gets no default window (F131-FR-030, DV-106)"
+}

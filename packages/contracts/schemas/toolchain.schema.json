@@ -1,0 +1,98 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.toolchain/1",
+ "type": "object",
+ "properties": {
+  "schema": {
+   "const": "specstride.toolchain/1"
+  },
+  "id": {
+   "type": "string"
+  },
+  "version": {
+   "type": "string"
+  },
+  "detect": {
+   "type": "object",
+   "description": "File names and patterns whose presence detects the toolchain"
+  },
+  "classA": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "Path patterns of files by which a check is defined"
+  },
+  "testFiles": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "Path patterns of test files (class B)"
+  },
+  "caches": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "path": {
+      "type": "string"
+     },
+     "disableEnv": {
+      "type": "object"
+     }
+    }
+   }
+  },
+  "userConfig": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "User-level configuration files of the toolchain"
+  },
+  "suppressionMarkers": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "Patterns of suppression markers"
+  },
+  "executables": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "Executables to pin"
+  },
+  "effectiveConfig": {
+   "type": [
+    "array",
+    "null"
+   ],
+   "items": {
+    "type": "string"
+   },
+   "description": "One fixed argument list of a pinned executable that prints the effective configuration, or null (CQ-085)"
+  },
+  "workerSeeds": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "workerEnv": {
+   "type": "object"
+  }
+ },
+ "required": [
+  "schema",
+  "id",
+  "version",
+  "detect",
+  "classA"
+ ],
+ "additionalProperties": true,
+ "x-unknown-field": "ignored by a reader",
+ "x-different-major": "refused"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@specstride/harness",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride harness",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "test": "node ../../tests/isolate.ts node --test \"test/**/*.test.*\" \"tests/**/*.test.*\""
+  },
+  "dependencies": {
+    "@specstride/contracts": "0.0.0",
+    "@specstride/kernel": "0.0.0"
+  },
+  "specstride": {
+    "skeleton": true
+  }
+}

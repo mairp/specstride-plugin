@@ -1,0 +1,79 @@
+{
+  "schema": "specstride.internal/fresh-session-reasons",
+  "note": "F103-FR-042. Ten drop rules of R24 F-6 and the eleventh of R29 PU-33. Thresholds are starting values with low confidence (R22:212). CQ-068 closed on 2026-09-30: the lifetime is continuation.cacheTtlSec of annex C section C.2.",
+  "reasons": [
+    {
+      "id": "new-attempt",
+      "rule": "A new phase attempt; a critic-class call; a change of role",
+      "parameter": null
+    },
+    {
+      "id": "watchdog-kill",
+      "rule": "The previous pass was ended by a watchdog",
+      "parameter": null
+    },
+    {
+      "id": "repeated-failure",
+      "rule": "Two consecutive passes without phase evidence and without a kept unit",
+      "parameter": null
+    },
+    {
+      "id": "context-fill",
+      "rule": "The last observed context exceeds the smaller of carry.contextFillTokens and carry.contextFillShare (per cent) of the known window; a harness that reports no usage falls back to at most 2 continued passes",
+      "parameter": {
+        "carry.contextFillTokens": 150000,
+        "carry.contextFillShare": 50,
+        "fallbackPasses": 2
+      }
+    },
+    {
+      "id": "age",
+      "rule": "The time since the last request exceeds continuation.cacheTtlSec of the harness descriptor (annex C section C.2); carry.ageFallbackSec where the descriptor declares none",
+      "parameter": {
+        "carry.ageFallbackSec": 300
+      }
+    },
+    {
+      "id": "configuration-change",
+      "rule": "The model, the effort, the tool set, the plugin set or the system prompt must change",
+      "parameter": null
+    },
+    {
+      "id": "relaunch",
+      "rule": "The engine was started again inside the phase attempt",
+      "parameter": null
+    },
+    {
+      "id": "session-unavailable",
+      "rule": "A resume error, a missing transcript, or a harness upgraded between passes; announced by an event",
+      "parameter": null
+    },
+    {
+      "id": "continuation-cap",
+      "rule": "At most carry.maxContinuedPasses continued passes in a phase attempt",
+      "parameter": {
+        "carry.maxContinuedPasses": 3
+      }
+    },
+    {
+      "id": "profile-parity",
+      "rule": "The profile parity is selected (row 10 of annex X section X.7: carry.continuation off)",
+      "parameter": null
+    },
+    {
+      "id": "group-applied",
+      "rule": "The first pass of the main line after a parallel group was applied",
+      "parameter": null
+    }
+  ],
+  "alwaysFresh": [
+    "second repair of a unit of work (layer-requested)",
+    "escalation (layer-requested)",
+    "harness without continuation (no-continuation, F103-FR-043)"
+  ],
+  "unknownValue": "Read as new-attempt",
+  "layerRequested": {
+    "id": "layer-requested",
+    "rule": "A fresh that a layer named in requestPass; recorded with this reason (F103-FR-042)"
+  }
+}

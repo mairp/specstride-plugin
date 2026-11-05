@@ -1,0 +1,17 @@
+{
+  "capture": 1,
+  "task": "T001",
+  "paid": true,
+  "what": "record and exit code at a login limit",
+  "waits": ["F131-FR-032", "F131-FR-034", "F131-FR-037"],
+  "status": "unverified",
+  "result": "not made",
+  "unverifiedReason": "the capture is paid (a run of `codex exec` against the provider, on a login): the owner ruling of 2026-09-30 says this feature never runs and never fakes a paid, live or person-run step; an authorized person runs the scripted procedure in procedure.sh out of band and logs date, command, harness version, stream and exit code here",
+  "command": null,
+  "date": null,
+  "harnessVersion": "codex-cli 0.153.4",
+  "harnessVersionSource": "read with `codex --version` (a read-only call, no model) in the phase 1 pass; pin from specs/131-adapter-codex/plan.md",
+  "fixtureFiles": ["procedure.sh", "README.md"],
+  "streamFixture": null,
+  "exitCodeFixture": null
+}

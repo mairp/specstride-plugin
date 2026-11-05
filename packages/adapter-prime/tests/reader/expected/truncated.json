@@ -1,0 +1,34 @@
+{
+  "events": [
+    [
+      "agent_init",
+      {
+        "cwd": "/work/project",
+        "schema_version": 3,
+        "session_id": "fixture-session-truncated"
+      }
+    ],
+    [
+      "agent_diagnostic",
+      {
+        "code": "malformed_json",
+        "message": "Malformed Prime JSON: Invalid control character at: line 1 column 125 (char 124)",
+        "original_bytes": 80,
+        "redacted": false,
+        "retained_bytes": 80,
+        "severity": "error",
+        "truncated": false
+      }
+    ]
+  ],
+  "evidence_tools": [],
+  "output": [
+    "  · init prime-v3 session=fixture-session-truncated",
+    "  ! malformed_json: Malformed Prime JSON: Invalid control character at: line 1 column 125 (char 124)"
+  ],
+  "schema_version": 3,
+  "stream": "truncated.jsonl",
+  "terminal": null,
+  "turns": 0,
+  "usage": {}
+}

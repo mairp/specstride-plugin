@@ -1,0 +1,68 @@
+{
+  "schema": "specstride.classifier-fixture-manifest/1-of-T083",
+  "task": "T083",
+  "proves": "F127-FR-002",
+  "capturesRecord": "packages/policy/test/captures.md",
+  "rule": "A classifier fixture may be built only from a limit signal that really exists. A tested harness whose limit signal has not been captured is marked `unverified` here and has no fixture. The test beside this file looks at the five adapter packages, so the marking cannot drift from the facts: when a capture lands, the test fails and asks for the fixture.",
+  "testedHarnesses": [
+    {
+      "harness": "Claude CLI stream",
+      "adapterFeature": "125",
+      "adapterPackage": "packages/adapter-claude",
+      "capture": "Capture C",
+      "status": "unverified",
+      "fixture": null,
+      "reason": "no capture exists; capture C is a paid, live, person-run step on a real subscription, which this feature never runs and never fakes"
+    },
+    {
+      "harness": "dsh",
+      "adapterFeature": "130",
+      "adapterPackage": "packages/adapter-dsh",
+      "capture": "Capture 5",
+      "status": "unverified",
+      "fixture": null,
+      "reason": "no capture exists; capture 5 of F130-FR-042 is paid and run by feature 130, not here"
+    },
+    {
+      "harness": "Codex",
+      "adapterFeature": "131",
+      "adapterPackage": "packages/adapter-codex",
+      "capture": "Capture 1",
+      "status": "unverified",
+      "fixture": null,
+      "reason": "no capture exists; F131-FR-037 states the capture is paid and that feature 131 runs none of them"
+    },
+    {
+      "harness": "pi",
+      "adapterFeature": "134",
+      "adapterPackage": "packages/adapter-pi",
+      "capture": "Capture 2",
+      "status": "unverified",
+      "fixture": null,
+      "reason": "no capture exists; capture 2 of F134-FR-027 is paid and run by feature 134"
+    },
+    {
+      "harness": "prime",
+      "adapterFeature": "138",
+      "adapterPackage": "packages/adapter-prime",
+      "capture": "Capture 2",
+      "status": "unverified",
+      "fixture": null,
+      "reason": "no capture exists; F138-FR-042 states feature 138 runs none itself"
+    }
+  ],
+  "fixtures": [
+    {
+      "harness": "fake-limit-harness",
+      "file": "fake-limit-harness.fixture.json",
+      "harnessState": "declared",
+      "signalSource": "declared",
+      "capture": null,
+      "note": "The only limit signal that exists today: the one DECLARED AS DATA by the fake-harness descriptor of T082. It is no provider capture and claims no provider fact, so the harness state is `declared` and never `tested`."
+    }
+  ],
+  "countOfTestedHarnesses": 5,
+  "countOfTestedHarnessesWithACapture": 0,
+  "countOfFixturesFromACapture": 0,
+  "countOfFixtures": 1
+}

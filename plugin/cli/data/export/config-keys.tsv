@@ -1,0 +1,20 @@
+key	default	under_parity	trust_class	as_is_alias	annex_x7_row	spec	status
+telemetry.enabled	false	fixture sets it	widening	SPECSTRIDE_TELEMETRY_ENABLED; --telemetry; -j and --stream-json (F128-FR-005)	97	F128-FR-001	confirmed
+telemetry.loki.url	http://localhost:3100	same	widening	SPECSTRIDE_LOKI_URL; RALPH_LOKI_URL; --loki-url	97	F128-FR-002	confirmed
+telemetry.otel.enabled	false	fixture sets it	widening	SPECSTRIDE_OTEL_ENABLED; --otel	98	F128-FR-001	confirmed
+telemetry.otel.url	http://localhost:4318	same	widening	SPECSTRIDE_OTEL_URL; RALPH_OTEL_URL; --otel-url	98	F128-FR-002	confirmed
+telemetry.otel.traces	true	true	neutral	SPECSTRIDE_OTEL_TRACES	99	F128-FR-017	confirmed
+telemetry.content	auto	off	widening	-	16	F128-FR-036	confirmed
+telemetry.contentMaxPromptBytes	262144	not used	narrowing	-	101	F128-FR-038	confirmed
+telemetry.contentMaxReplyBytes	16384	not used	narrowing	-	101	F128-FR-038	confirmed
+telemetry.otel.legacyMetricNames	false	false	neutral	-	42	F128-FR-032	confirmed
+telemetry.otel.dialects	[]	[]	neutral	-	100	F128-FR-033	confirmed
+telemetry.loki.timeoutMs	2500	2500	narrowing	RALPH_LOKI_TIMEOUT (seconds)	102	F128-FR-010	confirmed
+telemetry.otel.timeoutMs	2500	2500	narrowing	RALPH_OTEL_TIMEOUT (seconds)	102	F128-FR-010	confirmed
+telemetry.loki.maxBatchBytes	3145728	3145728	narrowing	RALPH_LOKI_MAX_BATCH_BYTES	103	F128-FR-010	confirmed
+telemetry.otel.maxBatchBytes	3145728	3145728	narrowing	RALPH_OTEL_MAX_BATCH_BYTES	103	F128-FR-010	confirmed
+telemetry.flush.intervalMs	2000	0	narrowing	-	104	F128-FR-010	confirmed
+telemetry.queueMaxEvents	10000	not used	narrowing	-	105	F128-FR-008	confirmed
+telemetry.loki.auth	unset	unset	widening	-	106	F128-FR-040	confirmed
+telemetry.otel.auth	unset	unset	widening	-	106	F128-FR-040	confirmed
+telemetry.sinkTimeoutMs	2000	not used	narrowing	-	46	F128-FR-008	confirmed

@@ -1,0 +1,50 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.tamperings-116/1",
+ "title": "Feature 116 seeded tamperings",
+ "type": "object",
+ "properties": {
+  "schema": {
+   "const": "specstride.tamperings-116/1"
+  },
+  "note": {
+   "type": "string"
+  },
+  "never": {
+   "const": "pass"
+  },
+  "tamperings": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+     },
+     "act": {
+      "type": "string",
+      "minLength": 1
+     },
+     "expected": {
+      "type": "string",
+      "minLength": 1
+     }
+    },
+    "required": [
+     "id",
+     "act",
+     "expected"
+    ],
+    "additionalProperties": false
+   }
+  }
+ },
+ "required": [
+  "schema",
+  "never",
+  "tamperings"
+ ],
+ "additionalProperties": false
+}

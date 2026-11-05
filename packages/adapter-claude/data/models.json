@@ -1,0 +1,50 @@
+{
+  "pin": { "cli": "2.1.284", "floor": "2.1.259", "verifiedOn": "2026-09-29" },
+  "ladder": [
+    {
+      "model": "claude-sonnet-4-5",
+      "effort": "medium",
+      "order": 1,
+      "status": "unverified",
+      "note": "lower tier; whether the consumer's plan includes the rung is unknown to the adapter and reported as unknown (F125-FR-033)"
+    },
+    {
+      "model": "claude-opus-4-5",
+      "effort": "medium",
+      "order": 2,
+      "status": "unverified",
+      "note": "higher proposer tier (F125-FR-033)"
+    },
+    {
+      "model": "claude-opus-4-8",
+      "effort": "medium",
+      "order": 3,
+      "status": "unverified",
+      "note": "highest tier; the default critic model of the as-is critic data (B-0830), so that the critic's model tier differs from the proposer's (F125-FR-026)"
+    }
+  ],
+  "effortLevels": ["low", "medium", "high", "xhigh", "max"],
+  "contextWindows": {
+    "windows": {
+      "claude-opus-4-8": 1000000,
+      "claude-opus-4-5": 1000000,
+      "claude-sonnet-4-5": 1000000,
+      "claude-fable-1": 1000000,
+      "claude-mythos-1": 1000000,
+      "claude-haiku-4-5": 200000
+    },
+    "parityFallbackTokens": 200000,
+    "overrideVariable": "SPECSTRIDE_CRITIC_CONTEXT_TOKENS",
+    "status": "unverified",
+    "note": "the table of the as-is critic (F125-FR-027, B-0911): 1,000,000 for the listed Opus, Sonnet, Fable and Mythos ids, 200,000 for the Haiku id. The consumer's explicit window (roles.critic.contextTokens, as-is variable SPECSTRIDE_CRITIC_CONTEXT_TOKENS) always wins. Outside the parity profile there is NO default window: an unlisted model without a declared window does not qualify as critic. Source: provider documentation only (R8v), re-read every 30 days."
+  },
+  "budgetCaps": {
+    "perCallUsd": null,
+    "maxTokens": 2048,
+    "oneTurn": 1,
+    "promptSizeTokens": 200000,
+    "note": "the caps of a critic call (F125-FR-023, F125-FR-027): where no per-call cap is set the doctor warns, and the single turn and the prompt-size budget bound the call. The per-call cap stays null until capture probes confirm the cap holds under a subscription login; null is never guessed."
+  },
+  "defaultCriticModel": "claude-opus-4-8",
+  "rule": "the role plan names the model and the effort of a call; the adapter never chooses one (F125-FR-026). A fallback-model argument is never passed (F125-FR-033)."
+}

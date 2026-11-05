@@ -1,0 +1,45 @@
+{
+  "schema": "specstride.table/1",
+  "id": "critic-ranking",
+  "version": "1",
+  "note": "Keys are compared in order; the first difference decides. Requirement F124-FR-040.",
+  "keys": [
+    {
+      "ruleId": "R1-form",
+      "signal": "form",
+      "order": ["tool-less", "read-only-tools"]
+    },
+    {
+      "ruleId": "R2-state",
+      "signal": "state",
+      "order": ["tested", "locally-verified", "declared", "detected"]
+    },
+    {
+      "ruleId": "R3-cost",
+      "signal": "costClass",
+      "order": [["local", "subscription"], "metered", "unknown"],
+      "within": {
+        "metered": "rising price of output"
+      }
+    },
+    {
+      "ruleId": "R4-quota",
+      "signal": "limitSignalSeen",
+      "order": [false, true]
+    },
+    {
+      "ruleId": "R5-window",
+      "signal": "windowTokens",
+      "order": "larger first"
+    },
+    {
+      "ruleId": "R6-id",
+      "signal": ["harnessId", "modelId"],
+      "order": "byte order"
+    }
+  ],
+  "default": {
+    "ruleId": "R0-equal",
+    "choice": "keep the order of the registry"
+  }
+}

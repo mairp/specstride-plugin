@@ -1,0 +1,352 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "graphTooltip": 0,
+  "refresh": "30s",
+  "schemaVersion": 39,
+  "tags": [
+    "specstride",
+    "telemetry"
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "task",
+        "label": "task",
+        "type": "query",
+        "datasource": {
+          "type": "loki",
+          "uid": "loki"
+        },
+        "query": {
+          "label": "task",
+          "stream": "",
+          "refId": "task"
+        },
+        "definition": "task"
+      },
+      {
+        "name": "backend",
+        "label": "backend",
+        "type": "query",
+        "datasource": {
+          "type": "loki",
+          "uid": "loki"
+        },
+        "query": {
+          "label": "backend",
+          "stream": "",
+          "refId": "backend"
+        },
+        "definition": "backend"
+      },
+      {
+        "name": "role",
+        "label": "role",
+        "type": "query",
+        "datasource": {
+          "type": "loki",
+          "uid": "loki"
+        },
+        "query": {
+          "label": "role",
+          "stream": "",
+          "refId": "role"
+        },
+        "definition": "role"
+      },
+      {
+        "name": "run",
+        "label": "run",
+        "type": "textbox",
+        "query": ".*",
+        "current": {
+          "text": ".*",
+          "value": ".*"
+        }
+      },
+      {
+        "name": "invocation",
+        "label": "invocation",
+        "type": "textbox",
+        "query": ".*",
+        "current": {
+          "text": ".*",
+          "value": ".*"
+        }
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timezone": "browser",
+  "title": "Ralph Loops",
+  "uid": "ralph-loops",
+  "version": 1,
+  "panels": [
+    {
+      "id": 1,
+      "title": "Runs",
+      "type": "stat",
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(count_over_time({job=\"ralph\", event=~\"run_start\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" [$__interval]))",
+          "refId": "A",
+          "legendFormat": "runs"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Iterations",
+      "type": "stat",
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(count_over_time({job=\"ralph\", event=~\"iter_start\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" [$__interval]))",
+          "refId": "A",
+          "legendFormat": "iterations"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Errors",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(count_over_time({job=\"ralph\", event=~\"api_request\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" [$__interval]))",
+          "refId": "A",
+          "legendFormat": "api_request is_error"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(count_over_time({job=\"ralph\", event=~\"agent_result\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" [$__interval]))",
+          "refId": "B",
+          "legendFormat": "agent_result status=error"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Cost (USD)",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 6
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(sum(sum_over_time({job=\"ralph\", event=~\"api_request|agent_result\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | unwrap cost_usd [$__interval])))",
+          "refId": "A",
+          "legendFormat": "cost_usd"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Input tokens",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(sum(sum_over_time({job=\"ralph\", event=~\"api_request|agent_result\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | unwrap input_tokens [$__interval])))",
+          "refId": "A",
+          "legendFormat": "tokens"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Output tokens",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 14
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(sum(sum_over_time({job=\"ralph\", event=~\"api_request|agent_result\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | unwrap output_tokens [$__interval])))",
+          "refId": "A",
+          "legendFormat": "tokens"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Cache tokens",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 16
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(sum(sum_over_time({job=\"ralph\", event=~\"api_request|agent_result\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | unwrap cache_read_tokens [$__interval])))",
+          "refId": "A",
+          "legendFormat": "tokens read"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(sum(sum_over_time({job=\"ralph\", event=~\"api_request|agent_result\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | unwrap cache_creation_tokens [$__interval])))",
+          "refId": "Z",
+          "legendFormat": "tokens creation"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Duration (ms)",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 22
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(avg(sum_over_time({job=\"ralph\", event=~\"api_request|agent_result\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | unwrap duration_ms [$__interval])))",
+          "refId": "A",
+          "legendFormat": "duration_ms"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Requests",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 24
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum(count_over_time({job=\"ralph\", event=~\"api_request|agent_result\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" [$__interval]))",
+          "refId": "A",
+          "legendFormat": "requests"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Tool calls",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 30
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum by (tool) (count_over_time({job=\"ralph\", event=~\"tool_use|agent_tool\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | tool `~` `.*` [$__interval]))",
+          "refId": "A",
+          "legendFormat": "{{tool}}"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Verdicts",
+      "type": "piechart",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 32
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "sum by (result) (count_over_time({job=\"ralph\", event=~\"gate\", task=~\"$task\", backend=~\"$backend\", role=~\"$role\"} | logfmt | run_id =~ \"$run\" | invocation_id =~ \"$invocation\" | result `~` `.*` [$__interval]))",
+          "refId": "A",
+          "legendFormat": "{{result}}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "schema": "specstride.line-grammar/1",
+  "note": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "annex": "annex G, §G.3",
+  "form": "opening square bracket, label, closing square bracket, one space, body, end of line",
+  "label": "^[A-Z0-9-]+$",
+  "families": [
+    {
+      "Family": "Runtime lines",
+      "Label": "`WARN`, `STALE`, `INVALID`, `DRY-RUN`, `PREFLIGHT`, `SKIP`, `CHECK`, `PLAN`, `BLOCKED`, `READY`, `RUN`, `PASS`, `ERROR`, `RECOVER`, `FAIL`, `RESUME`",
+      "Body": "A message",
+      "Printed by": "The pipeline entry and the runtime root",
+      "Stream": "Standard output; `WARN`, `STALE`, `INVALID` on standard error"
+    },
+    {
+      "Family": "Digest",
+      "Label": "`DIGEST`",
+      "Body": "`state=<state> exit=<whole number> last-stage=<id or none>`, then `child-exit=<code>` only on a failed or stopped stage, then `evidence=<digest evidence path or none>`",
+      "Printed by": "The pipeline entry and the runtime root",
+      "Stream": "Standard output; with `STALE` or `INVALID` on standard error. It is the final line of every run"
+    },
+    {
+      "Family": "Supervisor lines",
+      "Label": "`MOL-MODE`, `MOL-LEARNING`, `MOL-LAUNCHER`, `MOL-GATE`, `MOL-LAUNCH`, `MOL-STATE`, `MOL-HOLD`, `MOL-RELAUNCH`, `MOL-DIGEST`, `MOL-REFUSE`, `MOL-ANOMALY`, `MOL-NEXT`, `MOL-STOP`, `MOL-RETRO`",
+      "Body": "Pairs `key=value` separated by one space. A text value is quoted as in JSON",
+      "Printed by": "`supervise`; with `relaunch.owner: root` the compatibility projection of the root's events",
+      "Stream": "Standard output"
+    },
+    {
+      "Family": "Loop line",
+      "Label": "`LOOP`",
+      "Body": "Pairs `key=value` separated by one space. With the layer on: `strategy`, `level`, `containment`, `protection`, `units`, `pass`, `fail`, `unchecked`, `tainted`, `cycles`, `disengaged`, `escalations`, `failfast-stops`, `fallback`. The value of `protection` is `prevent`, `detect`, or `detect,basic` where only the basic protection holds. With the layer off: `strategy=classic reason=<reason>`. Only with parallel units on, also: `parallel`, `workers`, `groups`, `group-failures`, `refused`, `worker-caches`, `wall-hours`, `agent-hours`, and the fallback reason",
+      "Printed by": "The engine, before the digest",
+      "Stream": "Standard output, default output only"
+    },
+    {
+      "Family": "Product lines",
+      "Label": "A label that starts with `SPECSTRIDE-`",
+      "Body": "Pairs `key=value` separated by one space. A text value is quoted as in JSON",
+      "Printed by": "Any command, in default output",
+      "Stream": "Standard output"
+    },
+    {
+      "Family": "Status line",
+      "Label": "None",
+      "Body": "Pairs `key=value` separated by one space, starting with `run=` and `st=`; with `validUntil=` where it is precomputed",
+      "Printed by": "`status --line`; the host hook shim",
+      "Stream": "Standard output"
+    },
+    {
+      "Family": "Engine and front-door lines",
+      "Label": "As at the Specstride baseline",
+      "Body": "As at the baseline. A prefix that named an implementation file is replaced by a logical component name",
+      "Printed by": "The engine, the front door",
+      "Stream": "As at the baseline"
+    }
+  ],
+  "supervisorLines": [
+    {
+      "Line": "`[MOL-MODE]`",
+      "Keys": "`mode`, `source`, `evidence`, `flags`"
+    },
+    {
+      "Line": "`[MOL-LEARNING]`",
+      "Keys": "`mode`, `source`, `evidence`"
+    },
+    {
+      "Line": "`[MOL-LAUNCHER]`",
+      "Keys": "`launcher`, `source`"
+    },
+    {
+      "Line": "`[MOL-GATE]` with `check=`",
+      "Keys": "`check`, `status` (`pass`, `fail`, `not-evaluated`), optional `reason`, `detail`"
+    },
+    {
+      "Line": "`[MOL-GATE]` with `decision=`",
+      "Keys": "`decision` (`launch`, `refuse`, `attach`), optional `reason`, `detail`, `next`"
+    },
+    {
+      "Line": "`[MOL-LAUNCH]`",
+      "Keys": "`pipeline`, `mode`, `launcher`, `run-dir`, `stages`, `flags`, `relaunch-budget`, `wall-clock-ceiling`, `pid`, `stop`"
+    },
+    {
+      "Line": "`[MOL-STATE]`",
+      "Keys": "`pipeline`, `stage`, `id`, `state`, `stage-elapsed`, `total-elapsed`, optional `detail`"
+    },
+    {
+      "Line": "`[MOL-HOLD]`",
+      "Keys": "`pipeline`, `unchanged`, `stage`, `id`, `state`, `total-elapsed`"
+    },
+    {
+      "Line": "`[MOL-RELAUNCH]`",
+      "Keys": "`pipeline`, `attempt`, `reason`, `exit`, `child-exit`, `stage`, `stop-reason`, `budget-remaining`, `detail`"
+    },
+    {
+      "Line": "`[MOL-DIGEST]`",
+      "Keys": "`pipeline`, `state`, `exit`, `child-exit`, `last-stage`, `evidence`, `state-path`, `next`"
+    },
+    {
+      "Line": "`[MOL-REFUSE]`",
+      "Keys": "`action`, `reason`, `detail`, optional `next`"
+    },
+    {
+      "Line": "`[MOL-ANOMALY]`",
+      "Keys": "`pipeline`, `detail` or `launch-log`"
+    },
+    {
+      "Line": "`[MOL-NEXT]`",
+      "Keys": "`next`, or `poll-in`; after a retrospective, the free text `suggestion (not run): <command>` in place of the pairs"
+    },
+    {
+      "Line": "`[MOL-STOP]`",
+      "Keys": "`pipeline`, `sent`, and further keys of the owner"
+    },
+    {
+      "Line": "`[MOL-RETRO]`",
+      "Keys": "Per stage: `pipeline`, `stage`, `status`, `detail`, `path`; when no stage can be read: `status`, `reason`, and `pipeline` and `path` where known; a copied evaluation line: the label, three spaces, and the line as `learn` printed it"
+    }
+  ],
+  "productLines": [
+    {
+      "Line": "`[SPECSTRIDE-LAUNCH]`",
+      "Keys": "`run`, `state`",
+      "Printed by": "`launch` (122)"
+    },
+    {
+      "Line": "`[SPECSTRIDE-DIGEST]`",
+      "Keys": "`run`, `comment`, `changed`, `delegated`, `critic`, `fallback`, `alerts`",
+      "Printed by": "The runtime (123)"
+    },
+    {
+      "Line": "`[SPECSTRIDE-STOP]`",
+      "Keys": "`request`, `now`, `ended`, `next`",
+      "Printed by": "`stop` (102)"
+    },
+    {
+      "Line": "`[SPECSTRIDE-CONTINUE]`",
+      "Keys": "`run`, `counts`",
+      "Printed by": "`launch`, `run`, `resume` (102)"
+    },
+    {
+      "Line": "`[SPECSTRIDE-REFUSE]`",
+      "Keys": "`action`, `reason`, optional `file`, `next`",
+      "Printed by": "Any command that refuses"
+    },
+    {
+      "Line": "`[SPECSTRIDE-STATE]`",
+      "Keys": "`action`, `feature`, `approvals`, and where the command has one, `out` or `from`",
+      "Printed by": "`state export`, `state import`, `state adopt` (122)"
+    }
+  ],
+  "digestStates": [
+    "completed",
+    "failed",
+    "stopped",
+    "dry-run"
+  ]
+}

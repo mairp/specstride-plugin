@@ -1,0 +1,39 @@
+{
+  "events": [
+    [
+      "agent_init",
+      {
+        "cwd": "/work/project",
+        "schema_version": 3,
+        "session_id": "fixture-session-unknown"
+      }
+    ],
+    [
+      "agent_diagnostic",
+      {
+        "code": "unknown_record",
+        "message": "Unknown Prime record type: fixture_future_record",
+        "original_bytes": 48,
+        "provider_record_type": "fixture_future_record",
+        "redacted": false,
+        "retained_bytes": 48,
+        "severity": "warning",
+        "truncated": false
+      }
+    ]
+  ],
+  "evidence_tools": [],
+  "output": [
+    "  · init prime-v3 session=fixture-session-unknown",
+    "  ! unknown_record: Unknown Prime record type: fixture_future_record"
+  ],
+  "schema_version": 3,
+  "stream": "unknown-record.jsonl",
+  "terminal": {
+    "model": null,
+    "status": "success",
+    "stop_reason": "end_turn"
+  },
+  "turns": 0,
+  "usage": {}
+}

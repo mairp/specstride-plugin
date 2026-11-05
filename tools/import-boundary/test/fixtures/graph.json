@@ -1,0 +1,46 @@
+{
+  "schema": "specstride.package-graph/1",
+  "note": "The graph of the fixture workspace (test/fixtures/workspace): the same shape as packages/contracts/data/package-graph.json, the entries of annex A §A.1–§A.3 for the fixture packages only.",
+  "packages": [
+    {
+      "name": "@specstride/contracts",
+      "layer": "all",
+      "owner": "100",
+      "mayImport": [],
+      "external": ["a schema validator"],
+      "nodeBuiltins": false
+    },
+    {
+      "name": "@specstride/kernel",
+      "layer": "all",
+      "owner": "100 (table evaluator, atomic write)",
+      "mayImport": ["@specstride/contracts"]
+    },
+    {
+      "name": "@specstride/spec-formats",
+      "layer": "L1",
+      "owner": "104",
+      "mayImport": ["@specstride/contracts", "@specstride/kernel"]
+    },
+    {
+      "name": "@specstride/view",
+      "layer": "L6",
+      "owner": "129",
+      "mayImport": ["@specstride/contracts"],
+      "nodeBuiltins": false
+    },
+    {
+      "name": "@specstride/host-claude-code",
+      "layer": "L7",
+      "owner": "113",
+      "mayImport": ["@specstride/contracts (at build time only)"],
+      "note": "Listed above @specstride/reverse: the prose of the reverse entry names it, and the layer rule of LR-1 must still refuse the import (a layer imports only from layers below it)."
+    },
+    {
+      "name": "@specstride/reverse",
+      "layer": "L6",
+      "owner": "108",
+      "mayImport": ["every package above"]
+    }
+  ]
+}

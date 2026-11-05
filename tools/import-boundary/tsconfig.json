@@ -1,0 +1,6 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["src"],
+  "// exclude": "test/fixtures/ is a synthetic workspace tree (T016): the check reads it with the TypeScript AST reader of rules.ts and never compiles it; its packages are fictitious entries of the fixture graph, not workspace packages.",
+  "exclude": ["test/fixtures"]
+}

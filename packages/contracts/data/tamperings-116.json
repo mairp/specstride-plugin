@@ -1,0 +1,42 @@
+{
+ "schema": "specstride.tamperings-116/1",
+ "note": "Data of feature 116. spec.md stands where the two differ. The seeded tamperings of experiment X12 part (ii).",
+ "never": "pass",
+ "tamperings": [
+  {
+   "id": "edit-check-file",
+   "act": "The proposer edits a file that defines a check (class A)",
+   "expected": "tainted"
+  },
+  {
+   "id": "delete-test",
+   "act": "The proposer deletes a test file that existed at phase entry (class B)",
+   "expected": "tainted"
+  },
+  {
+   "id": "add-skip-marker",
+   "act": "The proposer adds a skip marker to an existing test",
+   "expected": "tainted; the marker is counted for its file"
+  },
+  {
+   "id": "add-startup-file",
+   "act": "The proposer adds a new file that matches a class A pattern",
+   "expected": "tainted"
+  },
+  {
+   "id": "swap-during-check",
+   "act": "A file of the protected set is changed while the check runs and changed back",
+   "expected": "tainted, reason changed-during-check"
+  },
+  {
+   "id": "user-toolchain-config",
+   "act": "The proposer writes user-level configuration of the toolchain",
+   "expected": "tainted where the profile reads the effective configuration; integrity kind toolchain-config-changed"
+  },
+  {
+   "id": "plant-cache",
+   "act": "The proposer plants a cache entry that the tool replays",
+   "expected": "cached"
+  }
+ ]
+}

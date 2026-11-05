@@ -1,0 +1,46 @@
+n	id	group	probe supplied by	severity rule	lb	message template	fix hint
+1	env.node	env	core	fail below the floor; warn if not a long-term-support line	no	node 22.23.2 ok (needs >=22)	install Node 22 or later
+2	env.os	env	core	ok on Linux and macOS; warn on Windows or WSL; info per platform tool probed (git is check 3)	no	linux ok; ps, pgrep present; keychain tool present	run on Linux or macOS for supported behaviour
+3	env.git	env	core	warn when git is missing	no	git missing: checkpoints disabled	install git
+4	env.stateDirPerms	env	core	warn when a state directory or file is readable by others	no	state directory is group or world readable	remove group and world access to the directory
+5	env.tmpWritable	env	core	fail when the control root is not writable; warn under 1 GiB free	no	state directory not writable	fix the permissions or set another control root in user configuration
+6	cli.version	cli	core	fail on a protocol mismatch with the calling host package; warn when the engine starts of a run carry different product versions	no	plugin expects protocol 1, cli has 2	install the version the host package names (printed, never run)
+7	host.plugin	host	host package	info	no	host claude-code 2.1.284, plugin 0.1.0	none
+8	host.claudeFloor	host	host package	warn below the floor of the host version for the features used	no	host 2.1.260 lacks userConfig options (needs 2.1.271)	update the host
+9	host.managedSettings	host	host package	info when managed settings exist; warn when a policy hook could run in an auth tier 1 child	no	managed settings present: a policy hook may run in auth tier 1 children	review the policy; the harness adapter asserts the initial record
+10	host.bgIsolation	host	host package	warn when the host isolates background work in a way that binds the run to the checkout	no	background isolation on: run is bound to the project checkout	disable it for this project
+11	bin.<id>	bin	harness adapter or core (from the registry)	fail when a configured role needs the harness and it is absent; info when merely absent	yes	codex not found (critic role)	install it, or change the harness of the role
+12	harness.discovered	harness	core	info	no	claude tested; dsh tested; example-agent unverified (declared)	none
+13	harness.state.<id>	harness	core	info for tested; warn when an unverified harness is selected for a role	no	example-agent unverified: no version pin, capabilities declared	run the opt-in verification of the harness
+14	harness.version.<id>	harness	harness adapter	warn outside the tested range; info inside; info when verified-on is older than doctor.staleAfterDays	no	codex 0.154.0 outside >=0.153.4 <0.154 (verified 2026-09-29)	pin or downgrade; run the conformance suite
+15	harness.caps.<id>	harness	harness adapter	warn when a declared and a probed capability differ	no	window declared 200k, effective 98k	set the window in configuration
+16	harness.denylist.<id>	harness	harness adapter	warn when the harness exposes tools the critic disable list does not cover (registered by the adapter that has such a list)	no	2 plugin ids not in the critic disable list	update the product or restrict the harness
+17	auth.<id>.<role>	auth	harness adapter or core	fail when the credential of a used role is missing; info unprobed	yes	claude: logged in (subscription)	log in yourself, or set a secret reference for the role
+18	auth.tier.<role>	auth	core	info; warn (loud) when an API key is in effect	no	proposer: tier 2 API key, cap $25	none
+19	model.reach.<role>	model	core	fail when the configured model is not served; info when unprobed; skipped by --quick and --offline	yes	example-model not in the model list	choose a listed model
+20	model.window.<role>	model	core	warn when the window is unknown and the harness could be a critic candidate	no	window unknown: harness cannot be auto-picked as critic	declare the window in the harness entry
+21	critic.diversity	critic	core	warn for the results same-model and unverified of the diversity test; info for same-provider; ok for diverse; a shared model tier gives no finding of its own; never fail	no	critic = proposer model (critic-diversity warning: same-model)	configure a second harness, or accept
+22	critic.independence	critic	core	warn when the critic can call tools; fail when the critic path carries a flag that allows all tools	yes	critic can call tools (read-only sandbox form)	use a tool-less critic
+23	critic.autopick	critic	core	info	no	would pick: example/model (step 3, declared, window 1048576)	set or disable automatic pick
+24	terms.gate	terms	core	fail when refused; warn when conditional or unknown; info when allowed	yes	tier 1 audience=distributed: refused by default	switch tier, or set the audience in user configuration
+25	terms.stale	terms	core	warn when the terms data is older than 30 days	no	terms data checked 2026-09-29, 45 days old	update the product
+26	terms.audience	terms	core	info	no	audience personal (user configuration)	none
+27	quota.state.<role>	quota	core	info; warn near a threshold or in a pause; fail when blocked on credit	no	proposer paused-quota until 15:45	wait, or configure a fallback
+28	budget.caps	budget	core	info; warn for an API key without a cap; fail for an automatically picked metered critic without a cap	yes (only for an automatically picked metered critic)	run cap 25, critic cap 2; spend of one harness not measurable	set the cap of the critic
+29	quota.shared	quota	core	info when a detached run and the host session share one auth tier 1 window	no	detached run and this session share the window	none
+30	config.schema	config	core	fail when a layer does not validate against the schema or holds an unknown key	yes	specstride.yaml: roles.critc unknown key (did you mean roles.critic?)	correct the key
+31	config.precedence	config	core	info; warn when an environment value is shadowed by a pin of the launch contract	no	SPECSTRIDE_LEARNING ignored: contract pins it	remove the variable or derive the contract again
+32	config.projectWiden	config	core	warn when project configuration sets a widening key (the key is ignored)	no	specstride.yaml: harnesses ignored (user scope only)	move it to user configuration
+33	config.legacy	config	core	info for input of the three as-is systems that is not read	no	ignored: old state tree in the workspace	none
+34	secret.inline	secret	core	fail for an inline secret in any layer	yes	user config: critic key is inline; use a reference	replace it with an env: reference
+35	secret.file	secret	core	fail when a file: target lies inside the workspace; warn when readable by others	yes	file: target inside the workspace	move it and restrict its mode
+36	secret.envLeak	secret	core	info	no	children get only their declared credential variables	none
+37	run.lock	run	core	info for a live owner; warn for a stale one; fail when the lock cannot be parsed	no	lock held by pid 4242 (alive)	resume reclaims a stale lock
+38	run.stale	run	core	warn when a run reads as running with no live owner, or a run has an approval record that does not verify	no	run says running, last event 2h ago	status, then resume
+39	sandbox.level	sandbox	core	warn at C0 or C1 by the consumer's choice; fail when a bypass flag is configured that the harness would refuse; says protection=detect where a process of the pass cannot be guaranteed gone	no	proposer containment C2	see the containment levels
+40	sandbox.critic	sandbox	core	fail when the critic path carries a flag that allows all tools or holds tools outside the two forms	yes	critic path allows all tools	remove the flag
+41	ui.endpoint	ui	core	info while no viewer exists (the state until a viewer is built); fail if a listener is bound outside loopback; warn for a recorded dead process	no	ui not running	none
+42	telemetry.endpoint	telemetry	core	info; warn when content capture is on; never fail	no	collector reachable; content capture off	switch content capture off
+43	events.schema	events	core	warn when a reader or a record meets a major outside its range (events and the records of the control plane)	no	reader accepts event v1, run wrote v2	upgrade
+44	memory.native	memory	core	warn for the critic; info for the proposer	no	critic: native memory on	switch it off
+45	events.gateIntegrity	events	core	fail when an invariant of the integrity of the phase gate does not hold on the event log of a run; info when the log holds none of the events an invariant needs	no	invariant broken: approval without a verification gate result	see the run's integrity event; clear the tripwire only after the cause is found

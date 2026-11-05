@@ -1,0 +1,26 @@
+{
+  "name": "@specstride/adapter-prime",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride adapter-prime",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node ../../tests/isolate.ts node --test \"tests/**/*.test.*\"",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@specstride/contracts": "0.0.0",
+    "@specstride/kernel": "0.0.0",
+    "@specstride/harness": "0.0.0"
+  },
+  "specstride": {
+    "skeleton": true
+  }
+}

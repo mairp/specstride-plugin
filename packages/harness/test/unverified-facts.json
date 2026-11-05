@@ -1,0 +1,40 @@
+{
+  "schema": "specstride.unverified-facts/1",
+  "feature": "109-harness-seam",
+  "note": "The three inherited facts of this feature: facts the specification carries as `status: unverified` and that wait for a capture. Each entry names the requirement that carries the fact, the statement the capture must check, the feature that captures it (this feature runs no probe and no paid step), and the status field of the specification that the capture closes. While a fact stays unverified, the seam must not guess: the capability stays null or marked `unverified` (F109-FR-004) and the proof rests on the forms of F109-FR-037 to F109-FR-039.",
+  "facts": [
+    {
+      "id": "UF-109-01",
+      "requirement": "F109-FR-004",
+      "statement": "Several headless processes of one harness run at once under one configuration home and one login, with separate session stores.",
+      "closes": "the `status: unverified` field of F109-FR-004 in specs/109-harness-seam/spec.md",
+      "capturedBy": "the features of the five harness adapters: 125, 130, 131, 134 and 138 (one fixture capture per harness adapter; the pin is the harness versions of the capture)",
+      "check": "a fixture capture per harness adapter (specs/109-harness-seam/research.md, the table of what waits for a capture)",
+      "status": "unverified",
+      "verified-on": null,
+      "reason": "The capture needs live headless processes of a real harness under one login; no capture has run, and this feature runs no probe."
+    },
+    {
+      "id": "UF-109-02",
+      "requirement": "F109-FR-038",
+      "statement": "One live critic call per tested harness shows an initial record with an empty tool list.",
+      "closes": "the `status: unverified` field of F109-FR-038 in specs/109-harness-seam/spec.md (assumption CQ-182)",
+      "capturedBy": "the features of the harness adapters: 125, 130, 131, 134 and 138 (a paid probe, logged there; this feature must not run it, per specs/109-harness-seam/spec.md, the notes of tasks.md and the owner's out-of-band policy)",
+      "check": "one paid, logged probe per tested harness adapter",
+      "status": "unverified",
+      "verified-on": null,
+      "reason": "The probe is paid: it calls the live harness. The owner's ruling of 2026-09-30 forbids an unattended run to start a paid step. The tests of this feature prove the proof on fake binaries instead."
+    },
+    {
+      "id": "UF-109-03",
+      "requirement": "F109-FR-039",
+      "statement": "The read-only sandbox of the first harness of the second form denies reads of the withheld paths inside and outside the working tree.",
+      "closes": "the `status: unverified` field of F109-FR-039 in specs/109-harness-seam/spec.md",
+      "capturedBy": "feature 131 (the first harness of the second form; specs/109-harness-seam/research.md names 131 for this capture, and the pin is the version of that harness at the capture)",
+      "check": "a fixture capture of the harness adapter's feature",
+      "status": "unverified",
+      "verified-on": null,
+      "reason": "The capture needs the live harness with its read-only sandbox; this feature runs no probe, and its tests use the fake binary and the fake endpoint of the conformance kit."
+    }
+  ]
+}

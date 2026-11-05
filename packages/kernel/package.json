@@ -1,0 +1,30 @@
+{
+  "name": "@specstride/kernel",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Specstride kernel: the table evaluator, the atomic write, the notebook sweep, the stable read, the redactor and the canonical hasher (features 100, 104, 111, 122)",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./atomic-write": "./src/atomic-write/index.ts",
+    "./hasher": "./src/hasher/index.ts",
+    "./redactor": "./src/redactor/index.ts",
+    "./redactor/patterns": "./src/redactor/patterns.ts",
+    "./redactor/rules": "./src/redactor/rules.ts",
+    "./redactor/redactor": "./src/redactor/redactor.ts",
+    "./redactor/register": "./src/redactor/register.ts",
+    "./redactor/scan": "./src/redactor/scan.ts",
+    "./data/*": "./data/*"
+  },
+  "scripts": {
+    "test": "node ../../tests/isolate.ts node --test \"test/**/*.test.*\"",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@specstride/contracts": "0.0.0"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.withheld-paths/1",
+  "title": "withheld-paths",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.withheld-paths/1",
+  "x-annex": "annex C, §C.4",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "deny": {
+      "type": "array",
+      "description": "Real paths the sandbox must deny for reading: the workspace part, the control plane, the event stream, the worker root, the tree store",
+      "x-type-in-words": "List of records of logical root and real path",
+      "x-required": "Yes"
+    },
+    "moved": {
+      "type": "array",
+      "description": "The proposer's files moved out of the working tree for the call: notebook, handoff, outbox, each with where it was and where it is kept",
+      "x-type-in-words": "List of records",
+      "x-required": "Yes"
+    },
+    "confirmed": {
+      "type": "boolean",
+      "description": "Whether the harness adapter confirmed the denial before the call",
+      "x-type-in-words": "Truth value",
+      "x-required": "Yes"
+    }
+  },
+  "required": [
+    "schema",
+    "deny",
+    "moved",
+    "confirmed"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:specstride.lease/1",
+  "title": "lease",
+  "description": "Generated from the annexes of specs/100-specstride by contracts/tools/generate.py. The annex stands where the two differ.",
+  "x-schema-id": "specstride.lease/1",
+  "x-annex": "annex B, §B.8",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "Schema id",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "runId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "launchId": {
+      "type": "string",
+      "description": "Identifiers",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "launchNonce": {
+      "type": "string",
+      "description": "The nonce of the launch record",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "owner": {
+      "type": "object",
+      "description": "The owner record of §B.9",
+      "x-type-in-words": "Record",
+      "x-required": "Yes"
+    },
+    "lockProvider": {
+      "type": "string",
+      "description": "Id of the lock provider",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    },
+    "heartbeatAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time of the last heartbeat",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    },
+    "heartbeatEverySeconds": {
+      "type": "integer",
+      "description": "Interval of the heartbeat",
+      "x-type-in-words": "Whole number",
+      "x-required": "Yes"
+    },
+    "validUntil": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Heartbeat plus grace; after it a precomputed status line is stale",
+      "x-type-in-words": "Timestamp, UTC",
+      "x-required": "Yes"
+    },
+    "leaseTokenHash": {
+      "type": "string",
+      "description": "Hash of the token handed down to the engine",
+      "x-type-in-words": "Text",
+      "x-required": "Yes"
+    }
+  },
+  "required": [
+    "schema",
+    "runId",
+    "launchId",
+    "launchNonce",
+    "owner",
+    "lockProvider",
+    "heartbeatAt",
+    "heartbeatEverySeconds",
+    "validUntil",
+    "leaseTokenHash"
+  ],
+  "additionalProperties": true,
+  "x-unknown-field": "ignored by a reader (annex B, §B.4)",
+  "x-different-major": "refused (annex B, §B.4)"
+}

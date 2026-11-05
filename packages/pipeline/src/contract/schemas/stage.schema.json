@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:specstride:schema:internal:107:stage/1",
+  "title": "One stage of the launch contract, with its action, its checks and its recovery",
+  "description": "One entry of `stages` of the launch contract (feature 107), written by the completion of the draft (F107-FR-041), one of kind `specstride` per feature. The record schema `launch-contract.schema.json` of @specstride/contracts gives the words of `action` and `recovery`; this item schema joins to it by reference so that one composed schema is the validator (T005). The kinds of a stage and the types of a check are ids of the registries of feature 123 (EP-19): the schema lists what is registered (the registries are open; membership is a rule of validation), and the timing of a check is a member of the closed set of annex X §X.6 row 282 (timingOfACheckOfALaunchContract of @specstride/contracts). The reasons of `recovery` are the stop reasons of the terminal record that allow a retry, transient members of annex E §E.3 (a rule of validation). The optional list `writes` is validated and unused: only parallel units and verification may read it (F107-FR-037).",
+  "x-schema-id": "urn:specstride:schema:internal:107:stage/1",
+  "x-annex": "feature 107, data-model.md, \"Member names\" (a stage)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The id of the stage; unique in the graph (a rule of validation)"
+    },
+    "kind": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The kind of the stage: an id of the registry of stage kinds of feature 123 (EP-19); `specstride` for the one stage of a feature"
+    },
+    "depends_on": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "The ids of the stages this stage depends on (a rule of validation: the ordering has no cycle)"
+    },
+    "cwd": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The working directory of the stage, relative to the repository root"
+    },
+    "action": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "The argument list the stage runs (T062: an argv, not an object)"
+    },
+    "resume": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "The argument list a resumed run of the stage passes"
+    },
+    "preconditions": {
+      "type": "array",
+      "description": "The preconditions of the stage: checks of the registry of precondition checks of feature 123 (EP-19), each with its timing",
+      "items": {
+        "$ref": "#/$defs/check"
+      }
+    },
+    "postconditions": {
+      "type": "array",
+      "description": "The postconditions of the stage: checks of the registry of precondition checks of feature 123 (EP-19), each with its timing",
+      "items": {
+        "$ref": "#/$defs/check"
+      }
+    },
+    "recovery": {
+      "type": "object",
+      "description": "The recovery of the stage: the maximum of attempts, the exit codes to retry, the backoff, the total time limit, and the reason rule (the record schema of @specstride/contracts gives the words)",
+      "properties": {
+        "max_attempts": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The maximum of attempts of the stage; the default 1"
+        },
+        "retry_exit_codes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer"
+          },
+          "description": "The exit codes that retry the stage"
+        },
+        "backoff_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "description": "The backoff in seconds between attempts"
+        },
+        "total_timeout_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "The total time limit in seconds of the attempts"
+        },
+        "reason": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "The stop reasons of the terminal record that allow a retry: transient members of annex E §E.3 (a rule of validation)"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "The evidence of the stage"
+    },
+    "writes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "The optional declared writes of the stage; validated and unused — only parallel units and verification may read it (F107-FR-037)"
+    }
+  },
+  "required": ["id", "kind", "depends_on", "cwd", "preconditions", "postconditions", "evidence"],
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {}
+  },
+  "$defs": {
+    "check": {
+      "type": "object",
+      "description": "A check of the registry of precondition checks of feature 123 (EP-19), with its type, its fields and its timing",
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The id of the check in the registry (EP-19)"
+        },
+        "timing": {
+          "enum": ["preflight", "stage"],
+          "description": "The timing of the check; the closed set of annex X §X.6 row 282 (timingOfACheckOfALaunchContract of @specstride/contracts)"
+        },
+        "check": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The id of the check in the registry (EP-19); the port's member name for the record's `type`"
+        }
+      },
+      "required": ["check"],
+      "additionalProperties": true,
+      "patternProperties": {
+        "^x-": {}
+      }
+    }
+  }
+}

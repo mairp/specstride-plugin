@@ -1,0 +1,98 @@
+{
+  "schema": "specstride.redaction/1",
+  "version": "specstride-redaction/baseline-1+a7e8dceac3367665",
+  "keyNames": [
+    {
+      "name": "api_key",
+      "pattern": "^api_key$",
+      "flags": "i",
+      "match": "exact"
+    },
+    {
+      "name": "apikey",
+      "pattern": "^apikey$",
+      "flags": "i",
+      "match": "exact"
+    },
+    {
+      "name": "authorization",
+      "pattern": "^authorization$",
+      "flags": "i",
+      "match": "exact"
+    },
+    {
+      "name": "cookie",
+      "pattern": "^cookie$",
+      "flags": "i",
+      "match": "exact"
+    },
+    {
+      "name": "credential",
+      "pattern": "^credential$",
+      "flags": "i",
+      "match": "exact"
+    },
+    {
+      "name": "password",
+      "pattern": "^password$",
+      "flags": "i",
+      "match": "exact"
+    },
+    {
+      "name": "secret",
+      "pattern": "^secret$",
+      "flags": "i",
+      "match": "exact"
+    },
+    {
+      "name": "token",
+      "pattern": "^token$",
+      "flags": "i",
+      "match": "exact"
+    },
+    {
+      "name": "access_token",
+      "pattern": "^access_token$",
+      "flags": "i",
+      "match": "exact"
+    },
+    {
+      "name": "refresh_token",
+      "pattern": "^refresh_token$",
+      "flags": "i",
+      "match": "exact"
+    },
+    {
+      "name": "client_secret",
+      "pattern": "^client_secret$",
+      "flags": "i",
+      "match": "exact"
+    }
+  ],
+  "values": [
+    {
+      "name": "bearer",
+      "pattern": "\\bbearer\\s+[A-Za-z0-9._~+/=-]{8,}",
+      "flags": "i",
+      "covers": "signed tokens"
+    },
+    {
+      "name": "sk-prefix",
+      "pattern": "\\bsk-[A-Za-z0-9_-]{8,}",
+      "flags": "",
+      "covers": "prefixes of provider keys"
+    },
+    {
+      "name": "github-prefix",
+      "pattern": "\\bgh[pousr]_[A-Za-z0-9]{8,}",
+      "flags": "",
+      "covers": "prefixes of provider keys"
+    },
+    {
+      "name": "key-name-then-value",
+      "pattern": "\\b(?:api[_-]?key|token|secret|password)\\s*[=:]\\s*[^\\s,;]+",
+      "flags": "i",
+      "covers": "prefixes of provider keys"
+    }
+  ]
+}

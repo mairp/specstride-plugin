@@ -1,0 +1,196 @@
+{
+  "schema": "specstride.classifier-fixture/1-of-T083",
+  "harness": "fake-limit-harness",
+  "harnessState": "declared",
+  "signalSource": "declared",
+  "declaredBy": "packages/testkit/src/samples/EP-12/fake-harness.descriptor.json",
+  "capture": null,
+  "note": "The one harness whose limit signal really exists today, because it is DECLARED AS DATA in the test tree by T082 rather than captured from a provider. The fixture therefore claims no provider fact: `harnessState` is `declared`, not `tested`, and `capture` is null. Every case runs the DEFAULT classifier of the product over what the harness port handed it, and names every field F127-FR-002 requires.",
+  "cases": [
+    {
+      "id": "FX-127-083-01",
+      "title": "a structured limit record outranks a status and a text, and its reset time outranks a header and a time read from text (§Q.2)",
+      "seen": {
+        "structuredClass": "quota_window",
+        "status": { "code": 429, "headers": { "retry-after": "2026-10-03T06:00:00.000Z" } },
+        "errorText": "usage limit reached; it resets at 2026-10-03T07:00:00.000Z",
+        "resetsAt": {
+          "structured": "2026-10-03T05:00:00.000Z",
+          "header": "2026-10-03T06:00:00.000Z",
+          "parsedText": "2026-10-03T07:00:00.000Z"
+        },
+        "rateLimitType": "requests-per-window",
+        "utilization": 0.97
+      },
+      "expect": {
+        "quotaClass": "quota_window",
+        "confidence": "structured",
+        "ruleId": "Q-01-quota_window",
+        "resetsAt": "2026-10-03T05:00:00.000Z",
+        "resetsAtSource": "structured",
+        "retryable": true,
+        "rateLimitType": "requests-per-window",
+        "utilization": 0.97,
+        "evidenceIsCarried": true
+      }
+    },
+    {
+      "id": "FX-127-083-02",
+      "title": "a status with no structured record classifies by status, and the reset time comes from the header, never from the text",
+      "seen": {
+        "status": { "code": 402, "headers": {} },
+        "errorText": "payment required; it resets at 2026-10-03T07:00:00.000Z",
+        "resetsAt": {
+          "header": "2026-10-03T06:00:00.000Z",
+          "parsedText": "2026-10-03T07:00:00.000Z"
+        }
+      },
+      "expect": {
+        "quotaClass": "quota_credit",
+        "confidence": "status",
+        "ruleId": "Q-02",
+        "resetsAt": "2026-10-03T06:00:00.000Z",
+        "resetsAtSource": "header",
+        "retryable": false,
+        "rateLimitType": null,
+        "utilization": null,
+        "evidenceIsCarried": true
+      }
+    },
+    {
+      "id": "FX-127-083-03",
+      "title": "a time read from text is used only where no structured and no header value exists (F127-FR-002)",
+      "seen": {
+        "errorText": "your session limit has been reached; it resets at 2026-10-03T07:00:00.000Z",
+        "resetsAt": { "parsedText": "2026-10-03T07:00:00.000Z" }
+      },
+      "expect": {
+        "quotaClass": "quota_window",
+        "confidence": "text",
+        "ruleId": "Q-06",
+        "resetsAt": "2026-10-03T07:00:00.000Z",
+        "resetsAtSource": "parsed_text",
+        "retryable": true,
+        "rateLimitType": null,
+        "utilization": null,
+        "evidenceIsCarried": true
+      }
+    },
+    {
+      "id": "FX-127-083-04",
+      "title": "the stall watchdog alone is the weakest evidence of §Q.2, and carries no reset time",
+      "seen": { "stalled": true },
+      "expect": {
+        "quotaClass": "quota_window",
+        "confidence": "stall",
+        "ruleId": "Q-11",
+        "resetsAt": null,
+        "resetsAtSource": null,
+        "retryable": true,
+        "rateLimitType": null,
+        "utilization": null,
+        "evidenceIsCarried": false
+      }
+    },
+    {
+      "id": "FX-127-083-05",
+      "title": "an input that matches no entry is the default row, `provider_other` with the confidence `text` (F127-FR-001)",
+      "seen": {},
+      "expect": {
+        "quotaClass": "provider_other",
+        "confidence": "text",
+        "ruleId": "Q-99",
+        "resetsAt": null,
+        "resetsAtSource": null,
+        "retryable": true,
+        "rateLimitType": null,
+        "utilization": null,
+        "evidenceIsCarried": false
+      }
+    },
+    {
+      "id": "FX-127-083-06",
+      "title": "the evidence fragment has passed the redactor, so a key-looking token never reaches the classification",
+      "seen": {
+        "errorText": "credit balance is too low for the key sk-ABC123DEF456",
+        "utilization": 1
+      },
+      "expect": {
+        "quotaClass": "quota_credit",
+        "confidence": "text",
+        "ruleId": "Q-07",
+        "resetsAt": null,
+        "resetsAtSource": null,
+        "retryable": false,
+        "rateLimitType": null,
+        "utilization": 1,
+        "evidenceIsCarried": true,
+        "evidenceMustNotHold": "sk-ABC123DEF456"
+      }
+    },
+    {
+      "id": "FX-127-083-07",
+      "title": "an auth status is `auth`, which is never retryable",
+      "seen": { "status": { "code": 401, "headers": {} } },
+      "expect": {
+        "quotaClass": "auth",
+        "confidence": "status",
+        "ruleId": "Q-03",
+        "resetsAt": null,
+        "resetsAtSource": null,
+        "retryable": false,
+        "rateLimitType": null,
+        "utilization": null,
+        "evidenceIsCarried": false
+      }
+    },
+    {
+      "id": "FX-127-083-08",
+      "title": "an overload status is `overload`, with the rate-limit type the harness named",
+      "seen": { "status": { "code": 529, "headers": {} }, "rateLimitType": "concurrency" },
+      "expect": {
+        "quotaClass": "overload",
+        "confidence": "status",
+        "ruleId": "Q-04",
+        "resetsAt": null,
+        "resetsAtSource": null,
+        "retryable": true,
+        "rateLimitType": "concurrency",
+        "utilization": null,
+        "evidenceIsCarried": false
+      }
+    },
+    {
+      "id": "FX-127-083-09",
+      "title": "a bare 429 with no limit text is the transient rate limit, not a window",
+      "seen": { "status": { "code": 429, "headers": {} }, "utilization": 0.5 },
+      "expect": {
+        "quotaClass": "rate_limit_transient",
+        "confidence": "status",
+        "ruleId": "Q-05",
+        "resetsAt": null,
+        "resetsAtSource": null,
+        "retryable": true,
+        "rateLimitType": null,
+        "utilization": 0.5,
+        "evidenceIsCarried": false
+      }
+    },
+    {
+      "id": "FX-127-083-10",
+      "title": "a context message is `context_window`, which is not retryable",
+      "seen": { "errorText": "the prompt is too long for this model" },
+      "expect": {
+        "quotaClass": "context_window",
+        "confidence": "text",
+        "ruleId": "Q-10",
+        "resetsAt": null,
+        "resetsAtSource": null,
+        "retryable": false,
+        "rateLimitType": null,
+        "utilization": null,
+        "evidenceIsCarried": true
+      }
+    }
+  ]
+}

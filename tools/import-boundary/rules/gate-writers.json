@@ -1,0 +1,8 @@
+{
+  "rule": "gate-writers",
+  "owner": "101",
+  "requirement": "F101-FR-028",
+  "from": ["packages/layer-micro/src/**", "packages/layer-parallel/src/**"],
+  "forbid": ["packages/core/src/gate/writers.ts", "packages/core/src/approval/record.ts"],
+  "reason": "Only packages/core/src/gate/writers.ts and packages/core/src/approval/record.ts write records of the phase gate; no package of a loop layer imports them"
+}

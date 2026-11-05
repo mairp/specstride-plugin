@@ -1,0 +1,12 @@
+# The dashboard provisioning of the shipped stack (F128-FR-043, B-2460): both
+# dashboards are provisioned from the directory of dashboards into the folder
+# `Specstride`.
+apiVersion: 1
+
+providers:
+  - name: Specstride
+    folder: Specstride
+    type: file
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: false

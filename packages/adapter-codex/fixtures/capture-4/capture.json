@@ -1,0 +1,16 @@
+{
+  "capture": 4,
+  "task": "T004",
+  "paid": true,
+  "what": "session files outside the home while the login stays; what the harness writes to its home without persisting sessions",
+  "waits": ["F131-FR-013", "F131-FR-037"],
+  "status": "unverified",
+  "result": "not made",
+  "unverifiedReason": "the capture is paid (one small run of `codex exec` with a session): the owner ruling of 2026-09-30 says this feature never runs and never fakes a paid, live or person-run step; an authorized person runs the scripted procedure in procedure.sh out of band and logs what the run writes where here",
+  "command": null,
+  "date": null,
+  "harnessVersion": "codex-cli 0.153.4",
+  "harnessVersionSource": "read with `codex --version` (a read-only call, no model) in the phase 1 pass; pin from specs/131-adapter-codex/plan.md",
+  "fixtureFiles": ["procedure.sh", "README.md"],
+  "sessionLayoutFixture": null
+}

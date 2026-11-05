@@ -1,0 +1,16 @@
+{
+  "probe": "critic form (a)",
+  "task": "T044",
+  "paid": true,
+  "what": "one critic call under the read-only sandbox with a seeded write, a seeded network attempt and a seeded read of a planted file at a withheld location",
+  "waits": ["F131-FR-017", "F131-FR-038"],
+  "status": "unverified",
+  "result": "not made",
+  "unverifiedReason": "the probe is paid (one live call of `codex exec` against the provider, on a login): the owner ruling of 2026-09-30 says this feature never runs and never fakes a paid, live or person-run step; an authorized person runs the scripted procedure in procedure.sh out of band and stores the log here (log.json, seeded-attempts.txt, harness-version.txt, date.txt). The hermetic part of the task is done in this feature: the invocation, the withheld-paths check, the read-denial probe and the proof of form (a) are implemented and tested hermetically in packages/adapter-codex/src/critic-readonly.ts and its tests; the refusals the mode provides are shown there against the fake binary",
+  "command": null,
+  "date": null,
+  "harnessVersion": "codex-cli 0.153.4",
+  "harnessVersionSource": "read with `codex --version` (a read-only call, no model) in the phase 1 pass; pin from specs/131-adapter-codex/plan.md",
+  "fixtureFiles": ["procedure.sh", "README.md"],
+  "logFiles": []
+}

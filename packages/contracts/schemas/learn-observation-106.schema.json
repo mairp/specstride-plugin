@@ -1,0 +1,39 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "urn:specstride:schema:specstride.learn.observation/1",
+ "title": "learn-observation",
+ "description": "One observation of a phase, whole-overwritten after each approved phase while the mode is not `off`, at the logical name `feature:<slug>:learning:observation:<N>` (F106-FR-006, feature 106 T010). A phase with no telemetry is no error: the observation member is null.",
+ "x-schema-id": "specstride.learn.observation/1",
+ "x-annex": "feature 106, data-model.md, 'Observation document'",
+ "x-logical-name": "feature:<slug>:learning:observation:<N>",
+ "type": "object",
+ "properties": {
+  "schema": {
+   "const": "specstride.learn.observation/1"
+  },
+  "phase": {
+   "type": "integer",
+   "description": "The phase number observed"
+  },
+  "shape": {
+   "type": ["string", "null"],
+   "description": "The phase shape the observation was taken under"
+  },
+  "generated_at": {
+   "type": "string",
+   "description": "UTC to the second of the write"
+  },
+  "observation": {
+   "type": ["object", "null"],
+   "description": "The per-phase figures, the members of a `phases` entry of specstride.learn.summary/7; null when the phase has no telemetry"
+  },
+  "inputs": {
+   "type": "object",
+   "description": "The events read and the phase shapes used"
+  }
+ },
+ "required": ["schema", "phase", "shape", "generated_at", "observation", "inputs"],
+ "additionalProperties": true,
+ "x-unknown-field": "ignored by a reader",
+ "x-different-major": "refused"
+}
