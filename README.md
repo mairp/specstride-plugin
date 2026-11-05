@@ -72,6 +72,17 @@ SPECSTRIDE_CRITIC=dsh:<provider>/<model>
 
 The loop stays the same whichever you choose: same gates, same records, same commits.
 
+## Where your code goes
+
+Specstride runs on your machine and has no service of its own: nothing is sent to its authors.
+
+- **To the model providers you choose.** The implementer receives the feature's spec, plan, tasks and the reviewer's
+  feedback; the reviewer receives the tasks, the test output and the change. By default both go through your Claude Code
+  login; with `dsh`, to the provider you set. Each provider's own data policy applies.
+- **Credentials held back.** Credentials are redacted from what the reviewer reads.
+- **Records stay local.** Run records, approvals and logs stay in `~/.specstride/` on your machine. Telemetry export is off
+  by default and, when you turn it on, goes only to endpoints you configure.
+
 ## How it works
 
 1. The implementer works through the phase's tasks.
