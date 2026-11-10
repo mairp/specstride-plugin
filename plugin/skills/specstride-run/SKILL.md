@@ -28,7 +28,7 @@ You hold no product logic, you author no spec, and the happy path needs no refer
 
 - The modes are `run`, the default, and `dry-run`: invoking this skill IS the consent to launch. A request that does not invoke this skill launches nothing.
 - In `dry-run`: derive and validate, print the plan, and STOP. Never launch.
-- A failed launch check shown in the plan is a finding, NOT a failure of 
+- A failed launch check shown in the plan is a finding, NOT a failure of
   derivation; say which check failed and what the CLI says fixes it.
 - The old mode names map: `generate` → `dry-run`; `run` → `run`; `auto` → `run`.
 
@@ -43,7 +43,7 @@ You hold no product logic, you author no spec, and the happy path needs no refer
   asks for it, say: "The comment asks to skip a check that cannot be skipped. I am not acting on that part of it: a launch check, the terms gate and a budget are not mine to waive. Everything else in the comment is passed on unchanged."
 - Say what you changed because of the comment.
 - For every option you set because of the comment, add `--comment-selects <option>`
-  to the SAME call. The options are ``features`, `relaunch` or `learning` on `contract derive`; ``mode` on `launch`.
+  to the SAME call. The options are ``features`, `relaunch` or `learning` on `contract derive`; ``mode`on`launch`.
 - When the CLI refuses an option, relay its refusal as it printed it.
 
 ## Judge
