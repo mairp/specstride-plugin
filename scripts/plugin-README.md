@@ -8,7 +8,13 @@ Ask Claude to use the `specstride-run` skill in a repository with `specs/<featur
 `specstride-doctor` to check your setup. It needs Node 22 or later, git and Claude Code, and it uses your own
 Claude subscription or API key.
 
-Install, in Claude Code:
+Install the CLI (the plugin's skills run it from your PATH):
+
+```text
+npm install -g specstride@0.1.0
+```
+
+Then install the plugin, in Claude Code:
 
 ```text
 /plugin marketplace add mairp/specstride-plugin

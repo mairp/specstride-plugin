@@ -11,7 +11,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  chmodSync,
   existsSync,
   mkdirSync,
   mkdtempSync,
@@ -44,7 +43,10 @@ import { HOOK_CONFIG_PATH } from "../src/hooks.ts";
 function aPluginTree(): string {
   const dir = mkdtempSync(join(tmpdir(), "specstride-plugin-"));
   const written = writePluginPackaging(dir);
-  assert.equal(written.length >= 3 + 1 + 2, true);
+  // Three skills (run, reverse, doctor) + two manifests: the directory policy
+  // of 2026-11-10 removed the shim, the hooks configuration and the bundled
+  // CLI from what ships.
+  assert.equal(written.length, 5);
   return dir;
 }
 
@@ -82,10 +84,15 @@ test("the whole plugin directory builds, and the strict validation passes on it 
       findings.every((f) => f.ok),
       true,
     );
-    // The plugin holds the four things F113-FR-031 names, read from disk.
+    // The plugin holds its manifest, and ships NO executable part: no hooks
+    // configuration, no shim, no `bin/`, no `hooks/`, no bundled `cli/`
+    // (directory policy 2026-11-10).
     assert.equal(existsSync(join(dir, PLUGIN_MANIFEST_PATH)), true);
-    assert.equal(existsSync(join(dir, HOOK_CONFIG_PATH)), true);
-    assert.equal(existsSync(join(dir, SHIM_PATH)), true);
+    assert.equal(existsSync(join(dir, HOOK_CONFIG_PATH)), false);
+    assert.equal(existsSync(join(dir, SHIM_PATH)), false);
+    assert.equal(existsSync(join(dir, "bin")), false);
+    assert.equal(existsSync(join(dir, "hooks")), false);
+    assert.equal(existsSync(join(dir, "cli")), false);
     // Every file the build wrote exists on disk, including the three SKILL.md files.
     for (const path of writePluginPackaging(dir).map((f) => f.path)) {
       assert.equal(existsSync(join(dir, path)), true, `${path} is missing`);
@@ -166,11 +173,19 @@ test("the validation fails a plugin that declares a server of the model context 
   }
 });
 
-test("the validation fails a non-executable or missing shim", () => {
+test("the validation fails a plugin that ships a bin/ directory, a #! file or a disallowed type", () => {
   const dir = aPluginTree();
   try {
-    chmodSync(join(dir, SHIM_PATH), 0o644);
-    assert.equal(validatePlugin(dir).find((f) => f.check === "one-shim-executable")?.ok, false);
+    mkdirSync(join(dir, "bin"), { recursive: true });
+    writeFileSync(join(dir, "bin", "specstride.mjs"), "#!/usr/bin/env node\n", "utf8");
+    assert.equal(validatePlugin(dir).find((f) => f.check === "no-bin-directory")?.ok, false);
+    assert.equal(validatePlugin(dir).find((f) => f.check === "directory-policy-files")?.ok, false);
+    rmSync(join(dir, "bin"), { recursive: true, force: true });
+    writeFileSync(join(dir, "run.sh"), "#!/bin/sh\n", "utf8");
+    assert.equal(validatePlugin(dir).find((f) => f.check === "directory-policy-files")?.ok, false);
+    rmSync(join(dir, "run.sh"), { force: true });
+    writeFileSync(join(dir, "skills", "specstride-run", "note.md"), "a\0b", "utf8");
+    assert.equal(validatePlugin(dir).find((f) => f.check === "directory-policy-files")?.ok, false);
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }

@@ -1,10 +1,9 @@
 /**
  * Builds the installable plugin: `<out>/.claude-plugin/marketplace.json` and
- * `<out>/plugin/`, with the packed CLI inside it, so that installing the plugin
- * is the whole install. Usage: node scripts/build-plugin.ts <out>
+ * `<out>/plugin/` — skills and docs only, with the CLI resolved from the
+ * consumer's PATH. Usage: node scripts/build-plugin.ts <out>
  */
-import { execFileSync } from "node:child_process";
-import { copyFileSync, cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -15,7 +14,6 @@ import {
   writePluginPackaging,
 } from "../packages/host-claude-code/src/packaging.ts";
 import {
-  RELEASE_VERSION,
   releaseManifest,
   releaseMarketplace,
 } from "../packages/host-claude-code/src/release-build.ts";
@@ -46,22 +44,22 @@ rmSync(join(plugin, "skills", "specstride-reverse"), { recursive: true, force: t
 writeFileSync(join(plugin, PLUGIN_MANIFEST_PATH), json(releaseManifest()));
 writeFileSync(join(out, ".claude-plugin", "marketplace.json"), json(releaseMarketplace()));
 
-// One version everywhere.
-for (const file of ["bin/specstride.mjs", "skills/specstride-doctor/SKILL.md"]) {
+// One version everywhere (the shim is gone: the directory policy of
+// 2026-11-10 refuses a `bin/` folder from an organization that is not Verified).
+// The install line names the CLI's own release — 0.1.0, the pinned core the
+// registry publishes — not the plugin release (0.1.1).
+for (const file of ["skills/specstride-doctor/SKILL.md"]) {
   const path = join(plugin, file);
-  writeFileSync(path, readFileSync(path, "utf8").replaceAll("0.0.0", RELEASE_VERSION));
+  writeFileSync(path, readFileSync(path, "utf8").replaceAll("0.0.0", "0.1.0"));
 }
 
 // The release ships no host hooks (owner ruling 2026-11-05): no run depends on
 // them (`noRunDependsOnAHostHook`), and the directory will accept command hooks
-// only from verified organizations.
+// only from verified organizations. No bundled CLI either (directory policy
+// 2026-11-10): the CLI is whatever `specstride` the consumer has on PATH, and
+// the skills carry the install line for when it is missing.
 rmSync(join(plugin, "hooks"), { recursive: true, force: true });
-
-execFileSync("npm", ["run", "-s", "pack:cli", "-w", "packages/cli"], {
-  cwd: root,
-  stdio: "ignore",
-});
-cpSync(join(root, "packages", "cli", ".build", "pack"), join(plugin, "cli"), { recursive: true });
+rmSync(join(plugin, "bin"), { recursive: true, force: true });
 
 for (const file of ["LICENSE", "NOTICE"]) copyFileSync(join(root, file), join(plugin, file));
 copyFileSync(join(here, "plugin-README.md"), join(plugin, "README.md"));

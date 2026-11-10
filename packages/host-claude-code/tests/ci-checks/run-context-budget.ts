@@ -29,18 +29,10 @@
  */
 import { spawnSync } from "node:child_process";
 import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
-import { performance } from "node:perf_hooks";
 import { tmpdir } from "node:os";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import {
-  STARTUP_LIMIT_MS,
-  STARTUP_PERCENTILE,
-  STARTUP_RUNS,
-  allChecksPass,
-  percentile90,
-  runAllChecks,
-} from "./checks.ts";
+import { STARTUP_LIMIT_MS, STARTUP_PERCENTILE, allChecksPass, runAllChecks } from "./checks.ts";
 import { contextCostReport } from "./report.ts";
 import { strictPluginValidation, writePluginPackaging } from "../../src/packaging.ts";
 
@@ -48,34 +40,6 @@ const HERE = resolve(dirname(fileURLToPath(import.meta.url)));
 const PACKAGE = resolve(HERE, "../..");
 /** The file T031 records, relative to the package root. */
 export const CONTEXT_BUDGET_FILE = "tests/ci-checks/context-budget.json" as const;
-
-/**
- * One startup measurement: the time of one `status` run — the status shim of
- * the BUILT package printing the precomputed status line, which starts no
- * runtime and reads nothing but the line's file (F113-FR-022, first clause) —
- * in milliseconds. No host CLI and no model is started.
- */
-export function measureStatusOnce(statusShim: string): number {
-  const started = performance.now();
-  const run = spawnSync("/bin/sh", [statusShim], {
-    encoding: "utf8",
-    timeout: 30_000,
-  });
-  const elapsed = performance.now() - started;
-  if (run.status !== 0) {
-    throw new Error(`the status shim failed (exit ${run.status}): ${run.stderr}`);
-  }
-  return elapsed;
-}
-
-/** `STARTUP_RUNS` timings of `status`, in milliseconds, in run order. */
-export function measureStatus(statusShim: string): number[] {
-  const timings: number[] = [];
-  for (let index = 0; index < STARTUP_RUNS; index += 1) {
-    timings.push(measureStatusOnce(statusShim));
-  }
-  return timings;
-}
 
 /** The details output of the host CLI, or `null` where it is absent. */
 function hostDetailsOf(pluginDirectory: string): string | null {
@@ -101,7 +65,7 @@ export type ContextBudgetRecord = {
     readonly runner: string;
     readonly runs: number;
     readonly percentile: number;
-    readonly measuredP90Ms: number;
+    readonly measuredP90Ms: number | null;
     readonly limitMs: number;
     readonly verdict: "pass" | "fail" | "skip";
   };
@@ -126,13 +90,13 @@ export function runContextBudget(): ContextBudgetRecord {
     if (failed.length > 0) {
       throw new Error(`the built package failed strict validation: ${JSON.stringify(failed)}`);
     }
-    // `status`: the status shim of the built package, which prints the
-    // precomputed status line (F113-FR-022).
-    const statusShim = join(build, "hooks", "session-start.sh");
-    const timings = measureStatus(statusShim);
-    const p90 = percentile90(timings);
-    // The seven checks on the built package; the startup check is the MEASURED
-    // one, the host cross-check against the host CLI where present.
+    // `status`: nothing executable ships any more (directory policy
+    // 2026-11-10 removed the hooks shim and the bundled CLI), so there is no
+    // startup to measure on this machine; the check SKIPS with its warning —
+    // a declared skip, never a fake pass.
+    const timings = undefined;
+    // The seven checks on the built package; the host cross-check runs
+    // against the host CLI where present.
     const outcomes = runAllChecks({
       hostDetails: hostDetailsOf(build),
       statusTimings: timings,
@@ -150,11 +114,12 @@ export function runContextBudget(): ContextBudgetRecord {
       report: contextCostReport(outcomes),
       startup: {
         runner:
-          "the status shim of the built package (hooks/session-start.sh) printing the " +
-          "precomputed status line; no host CLI, no model",
-        runs: timings.length,
+          "not run: the plugin ships no executable since directory policy 2026-11-10 (the " +
+          "hooks status shim and the bundled CLI are gone), so there is no startup to " +
+          "measure; the check is a declared skip with its warning",
+        runs: 0,
         percentile: STARTUP_PERCENTILE,
-        measuredP90Ms: Math.round(p90 * 1000) / 1000,
+        measuredP90Ms: null,
         limitMs: STARTUP_LIMIT_MS,
         verdict: startupLine.verdict,
       },

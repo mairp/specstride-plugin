@@ -3,19 +3,20 @@
   "note": "The golden output of the context-cost CI (F113-FR-037): the sha256 of the rendered skill of each logical id, and of the rendered entry of the doctor. A rendering that drifts from this file fails the golden output check; a deliberate edit of a skill regenerates this file by the build step of the CI, never by hand.",
   "units": {
     "skills/specstride-run/SKILL.md": {
-      "sha256": "a1cbfd2c389beb5f99ef2f2085445b8f28c2d6780659678702c73beaa074cdf5",
-      "bytes": 7285
+      "sha256": "724067467207558d1e3ddcfa3ba5fe82a83dee436c9c02d1231544b93cb31d91",
+      "bytes": 7553
     },
     "skills/specstride-reverse/SKILL.md": {
-      "sha256": "37c2b6f1d96bc4d6bf0f5bdba2c2a009028f83edbd5d03d48bbffcf171cb51b9",
-      "bytes": 5687
+      "sha256": "e93cf722d02900032f44016a17ff78a5551694400f9d92b26ff33b3e21e16bc6",
+      "bytes": 5720
     },
     "skills/specstride-doctor/SKILL.md": {
-      "sha256": "bd9f890ded56f8aba3e00a67f892b62fff0bdda1a260af6c0b90972ff401329a",
-      "bytes": 2021
+      "sha256": "5c94792fa3e91e444d009963622d5953675d14459c0085d377691772d18c482f",
+      "bytes": 2127
     },
     "entry/doctor": {
-      "sha256": "ba4633754601a60b7c42b841894bc01c0d1f69fbb223a5d3a10f2e2733d0de0c"
+      "sha256": "ba4633754601a60b7c42b841894bc01c0d1f69fbb223a5d3a10f2e2733d0de0c",
+      "bytes": 17
     }
   }
 }

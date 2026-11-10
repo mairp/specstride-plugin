@@ -107,12 +107,11 @@ test("T007: every constant the shim inlines is the one of annex H §H.1", () => 
   assert.equal(INSTALLS_OR_UPDATES, INSTALLS_OR_UPDATES_THE_CLI);
   assert.equal(INSTALLS_OR_UPDATES, false);
   // The install command names the exact package and the exact version, no
-  // range (F113-FR-042), and the version is the package's own (F113-FR-030).
-  const manifest = JSON.parse(readFileSync(join(PKG, "package.json"), "utf8")) as {
-    version: string;
-  };
-  assert.equal(PLUGIN_VERSION, manifest.version);
+  // range (F113-FR-042). Directory policy 2026-11-10: the plugin no longer
+  // bundles the CLI, so the version is the CLI's own release (0.1.0), not the
+  // package version of the plugin.
   assert.equal(INSTALL_COMMAND, `npm install -g ${PUBLISHED_PACKAGE}@${PLUGIN_VERSION}`);
+  assert.equal(PLUGIN_VERSION, "0.1.0");
   assert.equal(/[\^~><*]|\bx\b/.test(INSTALL_COMMAND), false, "no range");
 });
 

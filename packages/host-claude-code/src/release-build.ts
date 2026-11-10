@@ -10,7 +10,7 @@
  * whole install. The reverse skill does not ship: `reverse` is not in this build.
  */
 /** The version of the release: one value for the plugin and the CLI it carries. */
-export const RELEASE_VERSION = "0.1.0" as const;
+export const RELEASE_VERSION = "0.1.1" as const;
 
 /** The description of the shipped skill, which is what makes the host pick it. */
 export const RELEASE_RUN_DESCRIPTION: string =
