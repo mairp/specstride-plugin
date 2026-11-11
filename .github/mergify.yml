@@ -19,7 +19,16 @@ queue_rules:
 
 pull_request_rules:
   - name: Queue a pull request that is ready
-    conditions: []
+    # An empty condition list never matches, so the queue action never ran;
+    # these are the same gates the queue itself re-checks.
+    conditions:
+      - base=main
+      - -draft
+      - or:
+          - "#approved-reviews-by>=1"
+          - label=automerge
+          - and:
+              - author=dependabot[bot]
     actions:
       queue:
         name: default
