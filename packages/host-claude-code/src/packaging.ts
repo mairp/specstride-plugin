@@ -5,10 +5,12 @@
  * F113-FR-030: one published package holds the plugin directory, with an
  * EXPLICIT plugin version equal to the package version, a marketplace entry,
  * no install script and nothing that compiles at install; the build validates
- * the plugin strictly. F113-FR-031: the plugin holds the skills, the host hook
- * configuration, one shim and its manifest, and holds NO server of the model
- * context protocol in Wave 1; the `evals` directory MUST NOT ship to
- * consumers.
+ * the plugin strictly. F113-FR-031: the plugin holds the skills and its
+ * manifest, and holds NO server of the model context protocol in Wave 1; the
+ * `evals` directory MUST NOT ship to consumers. Directory policy (2026-11-10)
+ * adds: NO `bin/` folder, NO hooks, NO `#!` file, no file outside the allowed
+ * types, and only the allowed manifest fields — an organization that is not
+ * Verified is refused for each.
  *
  * The bundling of the plugin directory INTO the one published package is task
  * T064 of feature 119 (`specs/119-front-door-and-presenter/tasks.md`, review
@@ -23,8 +25,7 @@ import { readFileSync, statSync, chmodSync, mkdirSync, readdirSync, writeFileSyn
 import { createHash } from "node:crypto";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { renderShim, SHIM_PATH } from "./render/index.ts";
-import { renderHooks, HOOK_CONFIG_PATH } from "./hooks.ts";
+import { renderShim } from "./render/index.ts";
 import { renderPluginSkills } from "./skills.ts";
 
 /** The directory of the plugin inside the package, as plan.md draws it. */
@@ -178,12 +179,17 @@ export function writePluginShim(pluginDirectory: string): WrittenPackagingFile {
   return writeArtifact(pluginDirectory, { ...artifact, mode: 0o755 });
 }
 
-/** Everything the packaging build step writes, with the skills and the hooks. */
+/** Everything the packaging build step writes: the skills and the manifests.
+ *
+ * The plugin ships NO executable and NO hooks (directory policy 2026-11-10):
+ * the registry accepts a `bin/` folder, a `#!` file and a hooks configuration
+ * only from Verified organizations, so the build writes none of them. The CLI
+ * is whatever `specstride` the consumer has on the search path; the skills
+ * carry the resolution order and the install line.
+ */
 export function writePluginPackaging(pluginDirectory: string): readonly WrittenPackagingFile[] {
   return Object.freeze([
     ...renderPluginSkills().map((artifact) => writeArtifact(pluginDirectory, artifact)),
-    ...renderHooks().map((artifact) => writeArtifact(pluginDirectory, artifact)),
-    writePluginShim(pluginDirectory),
     ...renderPackagingArtifacts().map((artifact) => writeArtifact(pluginDirectory, artifact)),
   ]);
 }
@@ -208,8 +214,9 @@ export const VALIDATION_CHECKS: readonly string[] = Object.freeze([
   "plugin-version-explicit-and-equal",
   "marketplace-entry-names-the-exact-version",
   "skills-present",
-  "host-hook-configuration-present",
-  "one-shim-executable",
+  "no-bin-directory",
+  "no-hooks-directory",
+  "directory-policy-files",
   "no-install-script",
   "nothing-compiles-at-install",
   "no-mcp-server",
@@ -320,25 +327,75 @@ export function validatePlugin(pluginDirectory: string): readonly ValidationFind
       : `a skill is missing of ${skills.join(", ")}`,
   });
 
-  // host-hook-configuration-present
-  const hooksOk = has(HOOK_CONFIG_PATH);
+  // no-bin-directory (directory policy 2026-11-10: bin/ only for Verified)
+  const binOk = !listRelative(".").includes("bin");
   findings.push({
-    check: "host-hook-configuration-present",
-    ok: hooksOk,
-    detail: hooksOk ? HOOK_CONFIG_PATH : `${HOOK_CONFIG_PATH} is missing`,
+    check: "no-bin-directory",
+    ok: binOk,
+    detail: binOk ? "no `bin/` directory in the plugin" : "the plugin ships a `bin/` directory",
   });
 
-  // one-shim-executable
-  let shimOk = has(SHIM_PATH);
-  try {
-    if (shimOk) shimOk = (statSync(join(root, SHIM_PATH)).mode & 0o111) !== 0;
-  } catch {
-    shimOk = false;
-  }
+  // no-hooks-directory (directory policy: command hooks only for Verified)
+  const hooksDirOk = !listRelative(".").includes("hooks");
   findings.push({
-    check: "one-shim-executable",
-    ok: shimOk,
-    detail: shimOk ? SHIM_PATH : `${SHIM_PATH} is missing or not executable`,
+    check: "no-hooks-directory",
+    ok: hooksDirOk,
+    detail: hooksDirOk
+      ? "no `hooks/` directory in the plugin"
+      : "the plugin ships a `hooks/` directory",
+  });
+
+  // no-executable-and-allowed-types-only (directory policy: no `#!` file, no
+  // file outside Markdown, text, JSON, YAML, PNG, JPEG, GIF, WebP, ICO; every
+  // text file UTF-8 with no NUL byte)
+  const ALLOWED_EXTENSIONS = new Set([
+    ".md",
+    ".txt",
+    ".json",
+    ".yaml",
+    ".yml",
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".gif",
+    ".webp",
+    ".ico",
+  ]);
+  const policyOffenders: string[] = [];
+  const walk = (dir: string): void => {
+    for (const entry of readdirSync(join(root, dir), { withFileTypes: true })) {
+      const rel = dir === "." ? entry.name : `${dir}/${entry.name}`;
+      if (entry.isDirectory()) {
+        walk(rel);
+        continue;
+      }
+      if (!ALLOWED_EXTENSIONS.has(entry.name.slice(entry.name.lastIndexOf(".")).toLowerCase())) {
+        policyOffenders.push(`${rel}: extension outside the allowed types`);
+        continue;
+      }
+      const bytes = readFileSync(join(root, rel));
+      if (bytes.includes(0)) {
+        policyOffenders.push(`${rel}: a NUL byte`);
+        continue;
+      }
+      if (/\.(md|txt|json|yaml|yml)$/.test(rel)) {
+        try {
+          const text = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+          if (text.startsWith("#!")) policyOffenders.push(`${rel}: starts with \`#!\``);
+        } catch {
+          policyOffenders.push(`${rel}: not valid UTF-8`);
+        }
+      }
+    }
+  };
+  walk(".");
+  findings.push({
+    check: "directory-policy-files",
+    ok: policyOffenders.length === 0,
+    detail:
+      policyOffenders.length === 0
+        ? "every file is an allowed type, UTF-8 with no NUL byte, and no file starts with `#!`"
+        : policyOffenders.slice(0, 5).join("; "),
   });
 
   // no-install-script, nothing-compiles-at-install

@@ -97,11 +97,12 @@ export function doctorSkillBody(): string {
   const lines: string[] = [
     "# Check Specstride on this machine",
     "",
-    "A thin layer over the Specstride CLI.",
+    "A thin layer over the Specstride CLI. Find the CLI: `SPECSTRIDE_BIN` if the consumer set " +
+      "it, otherwise `specstride` on the search path.",
     "",
     "## Order",
     "",
-    `1. Run \`${DOCTOR_COMMAND}\` through the shim.`,
+    `1. Run \`${DOCTOR_COMMAND}\` through the CLI you found.`,
     `2. Print every finding TERSE: one line each, \`<severity> <check> — <fix>\`. The`,
     `   severities are \`${FINDING_SEVERITIES.join("`, `")}\`; a finding without a fix is`,
     "   printed with the fix the CLI gave, and never with one of your own.",
@@ -111,7 +112,7 @@ export function doctorSkillBody(): string {
     "## A missing or mismatched CLI",
     "",
     `- No CLI: print the command to run, \`${MISSING_CLI_COMMAND}\`, and stop. Never run it.`,
-    `- Protocol mismatch: print the shim's one line, which starts \`${MISMATCH_LINE}\`, names ` +
+    `- Protocol mismatch: print the CLI's one line, which starts \`${MISMATCH_LINE}\`, names ` +
       `this skill and carries both integers, and exit ${MISMATCH_EXIT_CODE}. The protocol this ` +
       `plugin supports is ${SUPPORTED_PROTOCOL_RANGE}.`,
     "- A plugin version and a CLI version that differ while the protocol matches are a " +

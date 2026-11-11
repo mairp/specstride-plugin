@@ -5,11 +5,11 @@ description: "Check this machine for Specstride: run the doctor, list each findi
 
 # Check Specstride on this machine
 
-A thin layer over the Specstride CLI.
+A thin layer over the Specstride CLI. Find the CLI: `SPECSTRIDE_BIN` if the consumer set it, otherwise `specstride` on the search path.
 
 ## Order
 
-1. Run `doctor` through the shim.
+1. Run `doctor` through the CLI you found.
 2. Print every finding TERSE: one line each, `<severity> <check> — <fix>`. The
    severities are `ok`, `info`, `warn`, `fail`; a finding without a fix is
    printed with the fix the CLI gave, and never with one of your own.
@@ -22,7 +22,7 @@ A thin layer over the Specstride CLI.
 ## A missing or mismatched CLI
 
 - No CLI: print the command to run, `npm install -g specstride@0.1.0`, and stop. Never run it.
-- Protocol mismatch: print the shim's one line, which starts `[SPECSTRIDE-REFUSE] action=protocol reason=protocol-mismatch`, names this skill and carries both integers, and exit 4. The protocol this plugin supports is 1.
+- Protocol mismatch: print the CLI's one line, which starts `[SPECSTRIDE-REFUSE] action=protocol reason=protocol-mismatch`, names this skill and carries both integers, and exit 4. The protocol this plugin supports is 1.
 - A plugin version and a CLI version that differ while the protocol matches are a difference to SHOW, not a reason to refuse.
 
 ## Never

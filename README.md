@@ -8,6 +8,14 @@ Provider-agnostic. Open source. Runs on your machine. Your models, your keys.
 
 ## Install
 
+Install the CLI (the plugin's skills run it from your PATH):
+
+```
+npm install -g specstride@0.1.0
+```
+
+Then install the plugin, in Claude Code:
+
 ```
 /plugin marketplace add mairp/specstride-plugin
 /plugin install specstride@specstride-marketplace
@@ -25,7 +33,7 @@ To try it on a ready-made feature first, clone [mairp/specstride-example](https:
 
 - **Kill the engine mid-run and nothing of it survives.** SIGKILL the engine in the middle of a phase and no engine process is left running. Start it again and the run picks up where it stopped.
 - **Approved means committed.** Every approved phase becomes its own commit. If a commit is blocked, the run never reports success: the engine exits 1 and says so.
-- **A clean stop.** The `stop` verb of the `specstride` CLI that the plugin bundles ends the run at the next safe boundary: the workers finish their pass, the merge check runs, the record closes whole, no survivor.
+- **A clean stop.** The `stop` verb of the `specstride` CLI ends the run at the next safe boundary: the workers finish their pass, the merge check runs, the record closes whole, no survivor.
 - **Stuck phases get unstuck.** A rejection that names new unmet tasks is diagnosed first, in a separate session, and the next attempt is narrowed to those tasks with the diagnosis as its first instruction. The reviewer judges it like any other.
 - **The reviewer can come from any provider your DeepSeek Harness (`dsh`) reaches.**
 - **Secrets held back.** Credentials are redacted from what the reviewer reads, and a credential in the change blocks the commit.

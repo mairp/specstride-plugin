@@ -62,14 +62,16 @@ test("T031: the seven checks are run on the built package and all pass", () => {
   }
 });
 
-test("T031: the startup check is a MEASUREMENT of 30 runs of status on this machine", () => {
+test("T031: the startup check is a DECLARED SKIP: nothing executable ships", () => {
+  // Directory policy 2026-11-10: the plugin ships no hooks shim and no CLI,
+  // so there is no startup to measure on this machine; the check skips with
+  // its warning and never fakes a pass.
   const record = runContextBudget();
-  assert.equal(record.startup.runs, 30);
+  assert.equal(record.startup.runs, 0);
   assert.equal(record.startup.percentile, 90);
   assert.equal(record.startup.limitMs, 150);
-  assert.equal(record.startup.verdict, "pass", "the measured startup is over the limit");
-  assert.ok(record.startup.measuredP90Ms <= record.startup.limitMs);
-  assert.match(record.platform, /^linux/, "the hermetic run is measured on Linux");
+  assert.equal(record.startup.verdict, "skip");
+  assert.match(record.startup.runner, /directory policy 2026-11-10/);
 });
 
 test("T031: the host cross-check is the declared skip with its warning, never a fake pass", () => {
@@ -99,6 +101,7 @@ test("T031: the committed record matches what the runner measures", () => {
     allChecksPass: boolean;
     startup: { runs: number; percentile: number; limitMs: number; verdict: string };
     report: { lines: { check: string; verdict: string }[] };
+    macosRunner: { task: string; status: string; reason: string };
   };
   const fresh = runContextBudget();
   assert.equal(committed.format, fresh.format);
@@ -108,7 +111,8 @@ test("T031: the committed record matches what the runner measures", () => {
   assert.equal(committed.startup.runs, fresh.startup.runs);
   assert.equal(committed.startup.percentile, fresh.startup.percentile);
   assert.equal(committed.startup.limitMs, fresh.startup.limitMs);
-  assert.equal(committed.startup.verdict, "pass");
+  assert.equal(committed.startup.verdict, fresh.startup.verdict);
+  assert.equal(committed.macosRunner.task, fresh.macosRunner.task);
   assert.equal(committed.report.lines.length, fresh.report.lines.length);
 });
 

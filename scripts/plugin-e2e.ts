@@ -1,7 +1,11 @@
 /**
  * The gate that was missing: the BUILT plugin, in an empty repository, with a
  * stub `claude`. A verb of the usage must answer, a command a shipped skill names
- * must exist, and the plugin's own CLI must carry a feature to an approved commit.
+ * must exist, and the `specstride` CLI the consumer has on PATH must carry a
+ * feature to an approved commit. Directory policy 2026-11-10: the plugin ships
+ * no executable, so the CLI here is the workspace's own `packages/cli` packed
+ * to a scratch directory and put on PATH — exactly what `npm install -g
+ * specstride` gives a consumer.
  */
 import assert from "node:assert/strict";
 import { execFileSync, spawnSync } from "node:child_process";
@@ -22,11 +26,23 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const scratch = mkdtempSync(join(tmpdir(), "specstride-e2e-"));
 const built = join(scratch, "built");
 execFileSync(process.execPath, [join(root, "scripts/build-plugin.ts"), built], { stdio: "ignore" });
-const shim = join(built, "plugin", "bin", "specstride.mjs");
+
+// The CLI of the consumer: the workspace CLI packed to the scratch dir, with a
+// `specstride` launcher on PATH. Never inside the plugin.
+execFileSync("npm", ["run", "-s", "pack:cli", "-w", "packages/cli"], {
+  cwd: root,
+  stdio: "ignore",
+});
+const packedCli = join(root, "packages", "cli", ".build", "pack", "bin", "specstride");
 
 const bin = join(scratch, "bin");
 const work = join(scratch, "work");
 mkdirSync(bin);
+writeFileSync(
+  join(bin, "specstride"),
+  `#!/bin/sh\nexec "${process.execPath}" "${packedCli}" "$@"\n`,
+);
+chmodSync(join(bin, "specstride"), 0o755);
 mkdirSync(join(work, "specs", "001-one"), { recursive: true });
 writeFileSync(
   join(bin, "claude"),
@@ -80,21 +96,7 @@ for (const argv of [
 ]) {
   inWork("git", argv);
 }
-const cli = (...argv: string[]) => inWork(process.execPath, [shim, ...argv]);
-
-// A plugin committed to the repository is what a user installs: it must run as committed.
-const committed = join(root, "plugin", "bin", "specstride.mjs");
-if (existsSync(committed)) {
-  const tracked = execFileSync(
-    "git",
-    ["-C", root, "ls-files", "plugin/cli/dist/cli/specstride.mjs"],
-    {
-      encoding: "utf8",
-    },
-  );
-  assert.notEqual(tracked.trim(), "", "the committed plugin must hold its CLI bundle");
-  assert.equal(inWork(process.execPath, [committed, "--protocol"]).stdout.trim(), "1");
-}
+const cli = (...argv: string[]) => inWork("specstride", argv);
 
 try {
   const help = cli("--help").stdout;
@@ -109,8 +111,12 @@ try {
     );
   }
 
-  // The release ships no host hooks (owner ruling 2026-11-05).
+  // The release ships no host hooks (owner ruling 2026-11-05) and no
+  // executable at all (directory policy 2026-11-10).
   assert.ok(!existsSync(join(built, "plugin", "hooks")), "the plugin ships no hooks");
+  assert.ok(!existsSync(join(built, "plugin", "bin")), "the plugin ships no bin/ directory");
+  assert.ok(!existsSync(join(built, "plugin", "cli")), "the plugin ships no bundled cli/");
+  assert.equal(inWork("specstride", ["--protocol"]).stdout.trim(), "1");
 
   const skills = readFileSync(
     join(built, "plugin", "skills", "specstride-run", "SKILL.md"),
