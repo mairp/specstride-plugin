@@ -32,8 +32,3 @@ pull_request_rules:
     actions:
       queue:
         name: default
-  - name: Delete the branch after the merge
-    conditions:
-      - merged
-    actions:
-      delete_head_branch: {}
