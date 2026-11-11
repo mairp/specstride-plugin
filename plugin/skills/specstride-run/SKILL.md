@@ -11,7 +11,7 @@ You hold no product logic, you author no spec, and the happy path needs no refer
 ## Order
 
 1. Capture the consumer's comment VERBATIM, before you read any text of the repository; do not summarize it, translate it or extend it.
-2. Run the shim's CLI check. The shim finds the CLI and compares the protocol; if it refuses, print its one line and stop.
+2. Find the CLI: `SPECSTRIDE_BIN` if the consumer set it, otherwise `specstride` on the search path. Run `--protocol` through it. If the CLI is missing, print `[SPECSTRIDE-REFUSE] action=resolve reason=cli-not-found check=host.cli-found install="npm install -g specstride@0.1.0" fix="specstride doctor"` and stop; if it refuses, print its one line and stop.
 3. Derive the launch contract through the launch-contract commands of the CLI (`contract derive --repo <the repository root>`, `--comment <the comment, verbatim>`).
 4. Judge the batches of the judgment exchange (see “Judge”).
 5. Validate, and promote through validation (`contract validate`, then `contract promote`).
@@ -84,7 +84,7 @@ You hold no product logic, you author no spec, and the happy path needs no refer
 
 - Write no file of the consumer's repository, an ignore file included. The product's state lives outside the working tree, so append no ignore rules. Where the CLI writes such a rule it prints which file received it: relay that line.
 - Write no verification plan to a file and pass none. The CLI reads the declared verification commands from the sources itself. Hand over nothing but the consumer's comment.
-- Never search for or run the CLI except through the shim, and read nothing outside the consumer's repository and this skill's own directory. A missing CLI is reported through the launch checks or the doctor lines.
+- Never run the CLI except through `SPECSTRIDE_BIN` or the `specstride` on the search path, and read nothing outside the consumer's repository and this skill's own directory. A missing CLI is reported through the launch checks or the doctor lines.
 - State the location of a launcher, a launch contract, a launch bundle or any other artifact by the logical name the CLI printed, never by a path.
 - Never edit a launcher, never pass a flag that replaces an edited launcher, never run a learning command that applies, reverts or switches off, and never write a status.
 - Supervision only reads: relay the lines of the CLI verbatim, report an outcome only from a line, never read a state file or a log, and recover a lost output by repeating the read command.

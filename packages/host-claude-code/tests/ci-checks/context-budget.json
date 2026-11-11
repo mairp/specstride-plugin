@@ -15,9 +15,9 @@
       {
         "check": "static size",
         "subject": "specstride-run: body bytes",
-        "measuredBytes": 6907,
-        "measuredTokens": 2467,
-        "limit": 7000,
+        "measuredBytes": 7251,
+        "measuredTokens": 2590,
+        "limit": 7280,
         "unit": "bytes",
         "verdict": "pass",
         "bytesPerToken": 2.8
@@ -25,7 +25,7 @@
       {
         "check": "static size",
         "subject": "specstride-run: body lines",
-        "measuredTokens": 90,
+        "measuredTokens": 86,
         "limit": 500,
         "unit": "count",
         "verdict": "pass",
@@ -34,8 +34,8 @@
       {
         "check": "static size",
         "subject": "specstride-reverse: body bytes",
-        "measuredBytes": 5191,
-        "measuredTokens": 1854,
+        "measuredBytes": 5414,
+        "measuredTokens": 1934,
         "limit": 5600,
         "unit": "bytes",
         "verdict": "pass",
@@ -53,8 +53,8 @@
       {
         "check": "static size",
         "subject": "doctor: body bytes",
-        "measuredBytes": 1772,
-        "measuredTokens": 633,
+        "measuredBytes": 1878,
+        "measuredTokens": 671,
         "limit": 2240,
         "unit": "bytes",
         "verdict": "pass",
@@ -99,24 +99,24 @@
       {
         "check": "golden output",
         "subject": "skills/specstride-run/SKILL.md",
-        "measuredBytes": 7209,
-        "measuredTokens": 2575,
+        "measuredBytes": 7553,
+        "measuredTokens": 2698,
         "verdict": "pass",
         "bytesPerToken": 2.8
       },
       {
         "check": "golden output",
         "subject": "skills/specstride-reverse/SKILL.md",
-        "measuredBytes": 5497,
-        "measuredTokens": 1963,
+        "measuredBytes": 5720,
+        "measuredTokens": 2043,
         "verdict": "pass",
         "bytesPerToken": 2.8
       },
       {
         "check": "golden output",
         "subject": "skills/specstride-doctor/SKILL.md",
-        "measuredBytes": 2021,
-        "measuredTokens": 722,
+        "measuredBytes": 2127,
+        "measuredTokens": 760,
         "verdict": "pass",
         "bytesPerToken": 2.8
       },
@@ -193,22 +193,20 @@
       },
       {
         "check": "startup",
-        "subject": "status p90 of 30 runs",
-        "measuredTokens": 28,
-        "limit": 150,
+        "subject": "status p90",
         "unit": "ms",
-        "verdict": "pass",
+        "verdict": "skip",
         "bytesPerToken": 2.8
       }
     ]
   },
   "startup": {
-    "runner": "the status shim of the built package (hooks/session-start.sh) printing the precomputed status line; no host CLI, no model",
-    "runs": 30,
+    "runner": "not run: the plugin ships no executable since directory policy 2026-11-10 (the hooks status shim and the bundled CLI are gone), so there is no startup to measure; the check is a declared skip with its warning",
+    "runs": 0,
     "percentile": 90,
-    "measuredP90Ms": 27.535,
+    "measuredP90Ms": null,
     "limitMs": 150,
-    "verdict": "pass"
+    "verdict": "skip"
   },
   "macosRunner": {
     "task": "T032",

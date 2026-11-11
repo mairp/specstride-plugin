@@ -69,15 +69,15 @@ export const EXECUTABLE_NAME = "specstride";
 export const PUBLISHED_PACKAGE = "specstride";
 
 /**
- * The version of the plugin, which equals the version of the package
- * (F113-FR-030). The install command names the exact package and the exact
- * version, and no range (F113-FR-042); `test/shim.test.ts` holds this string
- * against the `version` of `packages/host-claude-code/package.json`.
+ * The version of the CLI the install command names. Directory policy
+ * 2026-11-10: the plugin no longer bundles the CLI, so the CLI's release on
+ * the registry (0.1.0, the pinned core) no longer tracks the plugin's own
+ * release — the plugin is 0.1.1 and runs the CLI it finds.
  */
-export const PLUGIN_VERSION = "0.0.0";
+export const PLUGIN_VERSION = "0.1.0";
 
 /** The install command the shim PRINTS and never runs (F113-FR-018, T-46). */
-export const INSTALL_COMMAND = "npm install -g specstride@0.0.0";
+export const INSTALL_COMMAND = "npm install -g specstride@0.1.0";
 
 /** The doctor command every refusal of the shim names (F113-FR-019, F113-FR-018). */
 export const DOCTOR_COMMAND = "specstride doctor";

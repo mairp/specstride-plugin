@@ -1,6 +1,6 @@
 {
   "name": "specstride",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Carries a Spec Kit feature to done, phase by phase, behind an independent critic, with the tests run by the engine and each approved phase committed.",
   "author": {
     "name": "Specstride"

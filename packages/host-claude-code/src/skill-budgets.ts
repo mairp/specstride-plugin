@@ -19,14 +19,17 @@ export { BYTES_PER_TOKEN, BYTE_BUDGETS, bytesForTokens };
 
 /** The token figures of the design point, per skill of this host. */
 export const BODY_TOKEN_LIMITS: Readonly<Record<string, number>> = Object.freeze({
-  [HOST_SKILL_AND_ENTRY_IDS[0]]: 2_500,
+  [HOST_SKILL_AND_ENTRY_IDS[0]]: 2_600,
   [HOST_SKILL_AND_ENTRY_IDS[1]]: 2_000,
   [HOST_SKILL_AND_ENTRY_IDS[2]]: 800,
 });
 
 /** The byte figures the design point PRINTS beside them. */
 export const PRINTED_BODY_BYTE_LIMITS: Readonly<Record<string, number>> = Object.freeze({
-  [HOST_SKILL_AND_ENTRY_IDS[0]]: 7_000,
+  // Directory policy 2026-11-10: the plugin ships no shim, so the run skill
+  // spells the CLI resolution order and the install line itself; its body
+  // design point moves from 2,500 to 2,600 tokens to carry that text.
+  [HOST_SKILL_AND_ENTRY_IDS[0]]: 7_280,
   [HOST_SKILL_AND_ENTRY_IDS[1]]: 5_600,
   [HOST_SKILL_AND_ENTRY_IDS[2]]: 2_240,
 });

@@ -46,7 +46,7 @@ export const RUN_SKILL_ID = HOST_SKILL_IDS[0];
 
 /**
  * The ten steps F113-FR-002 fixes, in the requirement's own order: (1) capture
- * the consumer's comment verbatim; (2) run the shim's CLI check; (3) derive the
+ * the consumer's comment verbatim; (2) run the CLI check; (3) derive the
  * launch contract through the launch-contract commands of the CLI; (4) judge the
  * batches of the judgment exchange; (5) validate, and promote through
  * validation; (6) render; (7) launch; (8) print the outcome line; (9) supervise;
@@ -60,7 +60,10 @@ export const RUN_STEPS: readonly SkillStep[] = steps([
   ],
   [
     "cli-check",
-    "Run the shim's CLI check. The shim finds the CLI and compares the protocol; if it " +
+    "Find the CLI: `SPECSTRIDE_BIN` if the consumer set it, otherwise `specstride` on the " +
+      "search path. Run `--protocol` through it. If the CLI is missing, print " +
+      "`[SPECSTRIDE-REFUSE] action=resolve reason=cli-not-found check=host.cli-found " +
+      'install="npm install -g specstride@0.1.0" fix="specstride doctor"` and stop; if it ' +
       "refuses, print its one line and stop.",
   ],
   [

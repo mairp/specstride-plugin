@@ -123,7 +123,8 @@ export const PROHIBITIONS: readonly Prohibition[] = Object.freeze([
     "no-cli-search",
     "F113-FR-011",
     "B-2663",
-    "Never search for or run the CLI except through the shim, and read nothing outside the " +
+    "Never run the CLI except through `SPECSTRIDE_BIN` or the `specstride` on the search " +
+      "path, and read nothing outside the " +
       "consumer's repository and this skill's own directory. A missing CLI is reported " +
       "through the launch checks or the doctor lines.",
   ),
