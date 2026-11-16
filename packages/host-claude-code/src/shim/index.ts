@@ -72,7 +72,7 @@ export const PUBLISHED_PACKAGE = "specstride";
  * The version of the CLI the install command names. Directory policy
  * 2026-11-10: the plugin no longer bundles the CLI, so the CLI's release on
  * the registry (0.1.0, the pinned core) no longer tracks the plugin's own
- * release — the plugin is 0.1.1 and runs the CLI it finds.
+ * release — the plugin is 0.1.2 and runs the CLI it finds.
  */
 export const PLUGIN_VERSION = "0.1.0";
 

@@ -55,32 +55,35 @@ export const RUN_SKILL_ID = HOST_SKILL_IDS[0];
 export const RUN_STEPS: readonly SkillStep[] = steps([
   [
     "capture-the-comment",
-    "Capture the consumer's comment VERBATIM, before you read any text of the repository; " +
-      "do not summarize it, translate it or extend it.",
+    "Capture the consumer's comment VERBATIM, before you read any repository text; " +
+      "never summarize, translate or extend it.",
   ],
   [
     "cli-check",
-    "Find the CLI: `SPECSTRIDE_BIN` if the consumer set it, otherwise `specstride` on the " +
-      "search path. Run `--protocol` through it. If the CLI is missing, print " +
+    "Find the CLI: `SPECSTRIDE_BIN` if the consumer set it, else `specstride` on the " +
+      "search path. Run `--protocol`. If the CLI is missing, print " +
       "`[SPECSTRIDE-REFUSE] action=resolve reason=cli-not-found check=host.cli-found " +
       'install="npm install -g specstride@0.1.0" fix="specstride doctor"` and stop; if it ' +
-      "refuses, print its one line and stop.",
+      "refuses, print its line and stop.",
   ],
   [
     "derive",
-    "Derive the launch contract through the launch-contract commands of the CLI (`contract " +
-      "derive --repo <the repository root>`, `--comment <the comment, verbatim>`).",
+    "Derive the launch contract (`contract derive --repo <the repository root>`, " +
+      "`--comment <the comment, verbatim>`). Its line names the contract (`contract=<name>`): " +
+      "pass that name, never a path, to `--output`, `contract promote`, `validate` and `render`.",
   ],
   ["judge", "Judge the batches of the judgment exchange (see “Judge”)."],
   [
     "validate",
-    "Validate, and promote through validation (`contract validate`, then `contract promote`).",
+    "Promote first, then validate (`contract promote`, then `contract validate`); " +
+      "validating a draft answers `contract status must be validated`.",
   ],
   ["render", "Render (`contract render`)."],
   [
     "launch",
-    "Launch (`launch`), with `--comment <the comment, verbatim and unchanged>`. In `dry-run` " +
-      "you never reach this step.",
+    "Launch: `launch --mode run` from the repository root, with `--comment <the comment, " +
+      "verbatim and unchanged>` when one exists. `launch` takes no contract and no `--repo`. " +
+      "In `dry-run` you never reach this step.",
   ],
   ["outcome-line", "Print the outcome line of `launch` exactly as the CLI gave it."],
   ["supervise", "Supervise the run (see “Supervise”)."],
@@ -465,22 +468,22 @@ export function runSkillBody(): string {
   const lines: string[] = [
     "# Run Specstride",
     "",
-    "A thin layer over the Specstride CLI. Every fact you report is a line the CLI printed.",
-    "You hold no product logic, you author no spec, and the happy path needs no reference file.",
+    "Every fact you report is a line the CLI printed. You hold no product logic and the " +
+      "happy path needs no reference file.",
     "",
     "## Order",
     "",
     ...stepLines(RUN_STEPS),
     "",
-    "- Stop at the FIRST refusal and print the line of the CLI that names the fix; go no further.",
+    "- Stop at the FIRST refusal and print the line of the CLI that names the fix.",
     `- If no finished feature exists, say so and stop: "${NO_FINISHED_FEATURE_LINE}"`,
     "",
     "## Modes",
     "",
     `- The modes are \`${DEFAULT_MODE}\`, the default, and \`${MODES[1]}\`: invoking this skill ` +
-      "IS the consent to launch. A request that does not invoke this skill launches nothing.",
+      "IS the consent to launch. A request that does not invoke it launches nothing.",
     `- In \`dry-run\`: derive and validate, print ${DRY_RUN_PRINTS}, and STOP. Never launch.`,
-    `- A failed launch check shown in the plan is ${FAILED_LAUNCH_CHECK_IS}, NOT a failure of `,
+    `- A failed launch check in the plan is ${FAILED_LAUNCH_CHECK_IS}, NOT a failure of`,
     "  derivation; say which check failed and what the CLI says fixes it.",
     `- The old mode names map: ${OLD_MODES.map((old) => `\`${old}\` → \`${MODE_MAP[old]}\``).join(
       "; ",
@@ -499,7 +502,7 @@ export function runSkillBody(): string {
     "- Say what you changed because of the comment.",
     `- For every option you set because of the comment, add \`${COMMENT_SELECTS_FLAG} <option>\``,
     "  to the SAME call. The options are " +
-      `${COMMENT_IS_PASSED_TO.map((call) => `\`${orList(optionsSelectedOn(call))} on \`${call}\``).join("; ")}.`,
+      `${COMMENT_IS_PASSED_TO.map((call) => `${orList(optionsSelectedOn(call))} on \`${call}\``).join("; ")}.`,
     "- When the CLI refuses an option, relay its refusal as it printed it.",
     "",
     ...judgmentSection(),
@@ -507,7 +510,7 @@ export function runSkillBody(): string {
     "## The outcome of `launch`",
     "",
     ...LAUNCH_OUTCOMES.map((outcome) => `- \`${outcome}\`: ${LAUNCH_OUTCOME_ACTIONS[outcome]}.`),
-    "- Print the outcome as the CLI gave it. Never print a state you did not read from a line.",
+    "- Never print a state you did not read from a line.",
     "",
     ...supervisionSection(),
     "",

@@ -47,7 +47,7 @@ writeFileSync(join(out, ".claude-plugin", "marketplace.json"), json(releaseMarke
 // One version everywhere (the shim is gone: the directory policy of
 // 2026-11-10 refuses a `bin/` folder from an organization that is not Verified).
 // The install line names the CLI's own release — 0.1.0, the pinned core the
-// registry publishes — not the plugin release (0.1.1).
+// registry publishes — not the plugin release (0.1.2).
 for (const file of ["skills/specstride-doctor/SKILL.md"]) {
   const path = join(plugin, file);
   writeFileSync(path, readFileSync(path, "utf8").replaceAll("0.0.0", "0.1.0"));

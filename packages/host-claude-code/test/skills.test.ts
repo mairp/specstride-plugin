@@ -148,6 +148,26 @@ test("T008-T010: every skill is inside its budgets (F113-FR-036 and plan.md)", (
   }
 });
 
+test("T008: the rendered run skill spells the launch form and the supervision time limit", () => {
+  // The real sessions of 2026-11-15 (plugin 0.1.1): the model wrote the draft
+  // contract to a path of its own and `launch --mode run` was passed as a form
+  // the skill never named, and a `wait --until-change` with no time limit held
+  // the session for 600 s and reported a run that had ended eleven minutes
+  // earlier. The skill text is the fix, so the fix is pinned in the text.
+  const body = runSkillBody();
+  assert.match(body, /`launch --mode run`/);
+  assert.match(body, /from the repository root/);
+  assert.match(body, /`launch` takes no contract and no `--repo`/);
+  assert.match(body, /`--timeout 60`/);
+  assert.match(body, /NOT the end of the run/);
+  assert.match(body, /until the `DIGEST` line/);
+  // The order that makes the launch form usable: the contract is a name the
+  // derive line prints, and promotion goes before validation.
+  assert.match(body, /`contract=<name>`/);
+  assert.match(body, /never a path/);
+  assert.match(body, /`contract promote`, then `contract validate`/);
+});
+
 test("T008-T010: each source carries the logical id of row 144 and its own budget", () => {
   assert.deepEqual(
     [runSkillSource(), reverseSkillSource(), doctorSkillSource()].map((s) => s.logicalId),
