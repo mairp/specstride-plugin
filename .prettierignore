@@ -154,3 +154,11 @@ vendor/
 
 # Captured fixtures stay as captured
 tests/fixtures/
+
+# The installable plugin tree is BUILD OUTPUT (scripts/build-plugin.ts writes
+# it from the skill sources), and the committed copy must stay byte for byte
+# identical to a fresh build, so the golden hashes and the format gate cannot
+# disagree with it (2026-11-16; PR #9 had instead formatted the committed copy,
+# which is what made a rebuild show two formatting drifts).
+plugin/
+

@@ -15,8 +15,8 @@
       {
         "check": "static size",
         "subject": "specstride-run: body bytes",
-        "measuredBytes": 7251,
-        "measuredTokens": 2590,
+        "measuredBytes": 7216,
+        "measuredTokens": 2577,
         "limit": 7280,
         "unit": "bytes",
         "verdict": "pass",
@@ -25,7 +25,7 @@
       {
         "check": "static size",
         "subject": "specstride-run: body lines",
-        "measuredTokens": 86,
+        "measuredTokens": 85,
         "limit": 500,
         "unit": "count",
         "verdict": "pass",
@@ -34,8 +34,8 @@
       {
         "check": "static size",
         "subject": "specstride-reverse: body bytes",
-        "measuredBytes": 5414,
-        "measuredTokens": 1934,
+        "measuredBytes": 5304,
+        "measuredTokens": 1894,
         "limit": 5600,
         "unit": "bytes",
         "verdict": "pass",
@@ -53,8 +53,8 @@
       {
         "check": "static size",
         "subject": "doctor: body bytes",
-        "measuredBytes": 1878,
-        "measuredTokens": 671,
+        "measuredBytes": 1865,
+        "measuredTokens": 666,
         "limit": 2240,
         "unit": "bytes",
         "verdict": "pass",
@@ -99,24 +99,24 @@
       {
         "check": "golden output",
         "subject": "skills/specstride-run/SKILL.md",
-        "measuredBytes": 7553,
-        "measuredTokens": 2698,
+        "measuredBytes": 7518,
+        "measuredTokens": 2685,
         "verdict": "pass",
         "bytesPerToken": 2.8
       },
       {
         "check": "golden output",
         "subject": "skills/specstride-reverse/SKILL.md",
-        "measuredBytes": 5720,
-        "measuredTokens": 2043,
+        "measuredBytes": 5610,
+        "measuredTokens": 2004,
         "verdict": "pass",
         "bytesPerToken": 2.8
       },
       {
         "check": "golden output",
         "subject": "skills/specstride-doctor/SKILL.md",
-        "measuredBytes": 2127,
-        "measuredTokens": 760,
+        "measuredBytes": 2114,
+        "measuredTokens": 755,
         "verdict": "pass",
         "bytesPerToken": 2.8
       },
@@ -129,8 +129,8 @@
       {
         "check": "supervision cycle",
         "subject": "specstride-run: one cycle",
-        "measuredBytes": 357,
-        "measuredTokens": 128,
+        "measuredBytes": 274,
+        "measuredTokens": 98,
         "limit": 420,
         "unit": "bytes",
         "verdict": "pass",
@@ -139,8 +139,8 @@
       {
         "check": "supervision cycle",
         "subject": "specstride-run: whole run",
-        "measuredBytes": 586,
-        "measuredTokens": 209,
+        "measuredBytes": 568,
+        "measuredTokens": 203,
         "limit": 8400,
         "unit": "bytes",
         "verdict": "pass",
@@ -149,8 +149,8 @@
       {
         "check": "supervision cycle",
         "subject": "specstride-reverse: one cycle",
-        "measuredBytes": 357,
-        "measuredTokens": 128,
+        "measuredBytes": 274,
+        "measuredTokens": 98,
         "limit": 420,
         "unit": "bytes",
         "verdict": "pass",
@@ -159,8 +159,8 @@
       {
         "check": "supervision cycle",
         "subject": "specstride-reverse: whole run",
-        "measuredBytes": 586,
-        "measuredTokens": 209,
+        "measuredBytes": 568,
+        "measuredTokens": 203,
         "limit": 8400,
         "unit": "bytes",
         "verdict": "pass",
